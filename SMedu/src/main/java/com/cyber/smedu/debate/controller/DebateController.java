@@ -1,5 +1,5 @@
 package com.cyber.smedu.debate.controller;
 
-public class ExamController {
+public class DebateController {
 
 }
