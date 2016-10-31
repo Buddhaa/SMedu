@@ -28,7 +28,7 @@
 			<p>Copyright &copy; 2016 - All Rights Reserved - <a href="#">buddha.cafe24.com</a></p>
 		</div>
 	<div class="two_third" align="center">
-		<a href=""><img alt="" src="resources/images/demo/backgrounds/logo2.jpg"></a>
+		<a href=""><img alt="" src="/resources/smedu/images/demo/backgrounds/logo2.jpg"></a>
 	</div>
   </div>
 </div>

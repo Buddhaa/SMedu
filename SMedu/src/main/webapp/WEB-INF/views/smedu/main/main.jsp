@@ -4,15 +4,15 @@
 <html>
 <head>
 <title>시커먼스</title>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="/resources/smedu/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- JAVASCRIPTS -->
-<script src="layout/scripts/jquery.min.js"></script>
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/jquery.flexslider-min.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.min.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.backtotop.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.mobilemenu.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.flexslider-min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
@@ -34,17 +34,17 @@
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         <div class="item active">
-          <img src="resources/images/demo/backgrounds/bnr_bestSystem.jpg" alt="...">
+          <img src="/resources/smedu/images/demo/backgrounds/bnr_bestSystem.jpg" alt="...">
           <div class="carousel-caption">
           </div>
         </div>
         <div class="item">
-          <img src="resources/images/demo/backgrounds/bnr_bestSystem1.jpg" alt="...">
+          <img src="/resources/smedu/images/demo/backgrounds/bnr_bestSystem1.jpg" alt="...">
           <div class="carousel-caption">
           </div>
         </div>
         <div class="item">
-          <img src="resources/images/demo/backgrounds/bnr_bestSystem2.png" alt="...">
+          <img src="/resources/smedu/images/demo/backgrounds/bnr_bestSystem2.png" alt="...">
           <div class="carousel-caption">
           </div>
         </div>
@@ -91,7 +91,7 @@
 										<tbody>
 											<tr id="tr_0">
 												<td valign="top" align="left">
-													<img alt="" src="resources/images/demo/backgrounds/ico_notice.gif">공지사항
+													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
 												</td>
 												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
 											</tr>
@@ -152,7 +152,7 @@
 				</div>
 			</div>
 			<div class="two_third ">
-				<a href=""><img alt="" src="resources/images/demo/backgrounds/n_main_sub_01.png"></a>
+				<a href=""><img alt="" src="/resources/smedu/images/demo/backgrounds/n_main_sub_01.png"></a>
 			</div>
 		</div>
 	</div>
@@ -214,33 +214,33 @@
       <div class="group btmspace-50 demo">
         <div class="one_quarter first">
         <span>
-         	<img src="resources/images/demo/gallery/lec_security_a.jpg" 
-			onmouseover="this.src='resources/images/demo/gallery/lec_security_a.jpg'"
-			onmouseout="this.src='resources/images/demo/gallery/lec_security_a.jpg'" border="0">
+         	<img src="//resources/smedu/smedu/images/demo/gallery/lec_security_a.jpg" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'" border="0">
 			</span>
 		</div>
          <div class="two_quarter">
          	<span>
-         	<img src="resources/images/demo/gallery/lec_comtuper_b.jpg" 
-			onmouseover="this.src='resources/images/demo/gallery/lec_comtuper_a.JPG'"
-			onmouseout="this.src='resources/images/demo/gallery/lec_comtuper_b.jpg'" border="0">
+         	<img src="/resources/smedu/images/demo/gallery/lec_comtuper_b.jpg" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_comtuper_a.JPG'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_comtuper_b.jpg'" border="0">
 			</span>
 			<span>
-         	<img src="resources/images/demo/gallery/lec_communication_b.png" 
-			onmouseover="this.src='resources/images/demo/gallery/lec_communication_a.gif'"
-			onmouseout="this.src='resources/images/demo/gallery/lec_communication_b.png'" border="0">
+         	<img src="/resources/smedu/images/demo/gallery/lec_communication_b.png" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_communication_a.gif'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_communication_b.png'" border="0">
 			</span>
 			<span>
-         	<img src="resources/images/demo/gallery/lec_security_a.jpg" 
-			onmouseover="this.src='resources/images/demo/gallery/lec_security_a.jpg'"
-			onmouseout="this.src='resources/images/demo/gallery/lec_security_b.jpg'" border="0">
+         	<img src="/resources/smedu/images/demo/gallery/lec_security_a.jpg" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_b.jpg'" border="0">
 			</span>
 		</div>
         <div class="one_quarter">
         <span>
-        <img src="resources/images/demo/gallery/lec_security_a.jpg" 
-			onmouseover="this.src='resources/images/demo/gallery/lec_security_a.jpg'"
-			onmouseout="this.src='resources/images/demo/gallery/lec_security_b.jpg'" border="0">
+        <img src="/resources/smedu/images/demo/gallery/lec_security_a.jpg" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_b.jpg'" border="0">
 		</span>
 		</div> 
       </div>

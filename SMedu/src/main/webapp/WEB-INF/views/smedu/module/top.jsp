@@ -6,13 +6,13 @@
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="/resources/smedu/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- JAVASCRIPTS -->
-<script src="resources/layout/scripts/jquery.min.js"></script>
-<script src="resources/layout/scripts/jquery.backtotop.js"></script>
-<script src="resources/layout/scripts/jquery.mobilemenu.js"></script>
-<script src="resources/layout/scripts/jquery.flexslider-min.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.min.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.backtotop.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.mobilemenu.js"></script>
+<script src="/resources/smedu/layout/scripts/jquery.flexslider-min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
@@ -22,7 +22,7 @@
   <div id="topbar" class="hoc clear"> 
     <div class="fl_left" >
       <ul>
-        <li><img alt="" src="resources/images/demo/backgrounds/logo.jpg"><img alt="" src="resources/images/demo/backgrounds/banner_mest.png"></li>
+        <li><img alt="" src="/resources/smedu/images/demo/backgrounds/logo.jpg"><img alt="" src="/resources/smedu/images/demo/backgrounds/banner_mest.png"></li>
       </ul>
     </div>
     <div class="fl_right">
