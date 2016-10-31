@@ -1,5 +1,5 @@
 package com.cyber.smedu.evaluation.service;
 
-public class EvaluationServiceImpl {
+public class EvaluationServiceImpl implements EvaluationService {
 
 }
