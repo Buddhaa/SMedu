@@ -2,4 +2,40 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.UserMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.UserMapper">
+	<select id="login" parameterType="java.util.Map" resultType="com.cyber.smedu.user.domain.UserDomain">
+	SELECT
+		user_code as userCode,
+		department_code as departmentCode,
+		user_id as userId,
+		user_pw as userPw,
+		user_name as userName,
+		user_level as userLevel,
+		user_state as userState
+	FROM user
+	WHERE
+		user_id = #{userId} and user_pw = #{userPw}
+	</select>
+	<select id="loginProfessor" parameterType="String" resultType="com.cyber.smedu.user.domain.ProfessorDomain">
+	SELECT
+		professor_code as professorCode,
+	FROM professor
+	WHERE
+		user_code = #{userCode}
+	</select>
+	<select id="loginPlanner" parameterType="String" resultType="com.cyber.smedu.user.domain.PlannerDomain">
+	SELECT
+		planner_code as plannerCode,
+	FROM planner
+	WHERE
+		user_code = #{userCode}
+	</select>
+	<select id="loginStudent" parameterType="String" resultType="com.cyber.smedu.user.domain.StudentDomain">
+	SELECT
+		student_code as studentCode,
+		cardinal_code as cardinalCode
+	FROM student
+	WHERE
+		user_code = #{userCode}
+	</select>
+</mapper>
