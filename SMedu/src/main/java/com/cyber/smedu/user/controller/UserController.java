@@ -12,10 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.cyber.smedu.user.service.UserService;
 
 @Controller
+@SessionAttributes({"userInfo", "userPlusInfo"})
 public class UserController {
 	@Autowired UserService userService;
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -49,5 +52,17 @@ public class UserController {
 			model.addAttribute("loginFalseMessage", map.get("loginFalse"));
 		}
 		return "smedu/main/main";
+	}
+	//관리자 메인 페이지 맵핑
+	@RequestMapping(value = "/admin/main/main", method = RequestMethod.GET)
+	public String adminMain() {
+		return "admin/main/main";
+	}
+	
+	//관리자 로그아웃 맵핑
+	@RequestMapping(value = "/admin/logout", method = RequestMethod.GET)
+	public String adminLogout(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "redirect:/admin/login/loginForm";
 	}
 }
