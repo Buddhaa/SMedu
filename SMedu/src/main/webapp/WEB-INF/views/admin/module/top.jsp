@@ -42,7 +42,16 @@
   <script src="/resources/admin/dist/js/pages/dashboard2.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="/resources/admin/dist/js/demo.js"></script>
-  
+  <script>
+  	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
+ 	$(document).ready(function(){
+ 		//로그인 안하고 관리자 페이지 이동 못하게 방지 (세션값 확인)
+ 		if(userInfo==''){
+ 		alert('비정상적인 접근입니다.');
+ 		$(location).attr('href', '/admin/login/loginForm');
+ 		}
+ 	});
+  </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -50,7 +59,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/admin/main/main" class="logo">
+    <a href="/admin/main/main" class="logo" id="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -263,7 +272,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/resources/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">${userInfo.userName}</span>
+              <span class="hidden-xs" id="nameCheck">${userInfo.userName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -296,7 +305,8 @@
                   <a href="#" class="btn btn-default btn-flat">프로필</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/admin/logout" class="btn btn-default btn-flat">로그아웃</a>
+                <!-- 로그아웃 -->
+                  <a href="/admin/logout" class="btn btn-default btn-flat" id="logOut">로그아웃</a>
                 </div>
               </li>
             </ul>

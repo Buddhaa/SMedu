@@ -25,17 +25,10 @@ public class UserServiceImpl implements UserService {
 		map.put("userPw", userPw);
 		UserDomain userDomain = userDao.login(map);
 		if(userDomain != null) {
-			if(userDomain.getUserState().equals("정상")) {
-				if(userDomain.getUserLevel().equals("관리자")) {
-					map.put("userInfo", userDomain);
-				} else {
-					map.put("loginFalse", "권한이 없습니다.");
-				}
-				return map;
-			} else if(userDomain.getUserState().equals("승인대기")) {
-				map.put("loginFalse", "승인 대기중인 회원입니다.");
-			} else if(userDomain.getUserState().equals("탈퇴")) {
-				map.put("loginFalse", "탈퇴된 계정입니다.");
+			if(userDomain.getUserLevel().equals("관리자")) {
+				map.put("userInfo", userDomain);
+			} else {
+				map.put("loginFalse", "권한이 없습니다.");
 			}
 			return map;
 		} else {

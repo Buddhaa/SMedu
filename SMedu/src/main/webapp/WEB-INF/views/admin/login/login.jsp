@@ -26,12 +26,16 @@
 <!-- iCheck -->
 <script src="/resources/admin/plugins/iCheck/icheck.min.js"></script>
 <script>
+  var loginFalseMessage = '<c:out value='${loginFalseMessage}'/>';
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' // optional
     });
+    if(loginFalseMessage!='') {
+      alert(loginFalseMessage);
+    }
   });
 </script>
 <script>
