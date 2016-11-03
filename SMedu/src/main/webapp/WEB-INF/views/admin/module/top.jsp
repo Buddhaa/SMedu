@@ -59,7 +59,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/admin/main/main" class="logo" id="logo">
+    <a href="/admin/main/main" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -272,7 +272,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/resources/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs" id="nameCheck">${userInfo.userName}</span>
+              <span class="hidden-xs">${userInfo.userName}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -306,7 +306,7 @@
                 </div>
                 <div class="pull-right">
                 <!-- 로그아웃 -->
-                  <a href="/admin/logout" class="btn btn-default btn-flat" id="logOut">로그아웃</a>
+                  <a href="/admin/logout" class="btn btn-default btn-flat">로그아웃</a>
                 </div>
               </li>
             </ul>

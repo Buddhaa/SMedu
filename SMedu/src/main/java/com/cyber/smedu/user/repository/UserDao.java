@@ -17,4 +17,12 @@ public interface UserDao {
 	public PlannerDomain loginPlanner(String userCode);
 
 	public StudentDomain loginStudent(String userCode);
+	
+	public int insertUser(UserDomain user);
+	
+	public int insertStudent(StudentDomain student);
+	
+	public int insertProfessor(ProfessorDomain professor);
+	
+	public int insertPlanner(PlannerDomain planner);
 }

@@ -4,22 +4,10 @@
 <html>
 <head>
 <title>시커먼스</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="/resources/smedu/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- JAVASCRIPTS -->
-<script src="/resources/smedu/layout/scripts/jquery.min.js"></script>
-<script src="/resources/smedu/layout/scripts/jquery.backtotop.js"></script>
-<script src="/resources/smedu/layout/scripts/jquery.mobilemenu.js"></script>
-<script src="/resources/smedu/layout/scripts/jquery.flexslider-min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body id="top">
 <!-- bady -->
 <jsp:include page="../module/top.jsp" />
-
 <div class="bgded overlay">
   <div id="pageintro" class="hoc clear"> 
 <section class="section-white">
@@ -49,19 +37,10 @@
           </div>
         </div>
       </div>
-      <!-- Controls -->
-      <!-- <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a> -->
     </div>
 </section>
 </div>
 </div>
-
-
 
 <div class="wrapper row3">
   <div class="hoc container clear"> 
@@ -163,39 +142,39 @@
 		<div class="col-md-12">
                 <div id="Carousel" class="carousel slide">
                  
-                <!-- <ol class="carousel-indicators">
+                <!--  <ol class="carousel-indicators">
                     <li data-target="#Carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#Carousel" data-slide-to="1"></li>
                     <li data-target="#Carousel" data-slide-to="2"></li>
-                </ol>
-                  -->
+                </ol> -->
+                  
                 <!-- Carousel items -->
                 <div class="carousel-inner">
                     
                 <div class="item active">
                 	<div class="row">
-                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
+                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                	  <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
                 	</div><!--.row-->
                 </div><!--.item-->
                  
                 <div class="item">
                 	<div class="row">
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
                 	</div><!--.row-->
                 </div><!--.item-->
                  
                 <div class="item">
                 	<div class="row">
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
-                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/150x150" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
+                		<div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
                 	</div><!--.row-->
                 </div><!--.item-->
                  
@@ -203,7 +182,6 @@
                   <a data-slide="prev" href="#Carousel" class="left carousel-control"></a>
                   <a data-slide="next" href="#Carousel" class="right carousel-control"></a>
                 </div><!--.Carousel-->
-                 
 		</div>
 	</div>
 </div><!--.container-->
@@ -213,11 +191,7 @@
     <div class="posts">
       <div class="group btmspace-50 demo">
         <div class="one_quarter first">
-        <span>
-         	<img src="//resources/smedu/smedu/images/demo/gallery/lec_security_a.jpg" 
-			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'"
-			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'" border="0">
-			</span>
+        
 		</div>
          <div class="two_quarter">
          	<span>
@@ -237,16 +211,13 @@
 			</span>
 		</div>
         <div class="one_quarter">
-        <span>
-        <img src="/resources/smedu/images/demo/gallery/lec_security_a.jpg" 
-			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'"
-			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_b.jpg'" border="0">
-		</span>
-		</div> 
+        
+		</div>
       </div>
     </div>
   </div>
 </div>
+<%-- <jsp:include page="../module/sidebar.jsp" /> --%>
 <jsp:include page="../module/foot.jsp" />
 </body>
 </html>

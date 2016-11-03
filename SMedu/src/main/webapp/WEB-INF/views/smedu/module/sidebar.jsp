@@ -11,14 +11,18 @@
 <body id="top">
 	<div class="wrapper row3">
 		<div class="hoc container clear">
-			<!-- main body -->
-			<!-- ################################################################################################ -->
 			<div class="sidebar one_quarter first">
-				<!-- ################################################################################################ -->
-				<h6>Lorem ipsum dolor</h6>
 				<nav class="sdb_holder">
 					<ul>
-						<li><a href="#">Navigation - Level 1</a></li>
+						<li><a href="#">학점은행제소개</a>
+							<ul>
+								<li><a href="#">학점은행제란?</a></li>
+								<li><a href="#">학점인정절차</a></li>
+								<li><a href="#">학습자등록</a></li>
+								<li><a href="#">학점인정신청</a></li>
+								<li><a href="#">학위수여</a></li>	
+							</ul>
+						</li>
 						<li><a href="#">Navigation - Level 1</a>
 							<ul>
 								<li><a href="#">Navigation - Level 2</a></li>

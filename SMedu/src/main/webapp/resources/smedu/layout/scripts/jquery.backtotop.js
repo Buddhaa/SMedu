@@ -8,7 +8,7 @@ File: Back to Top JS
 */
 
 jQuery("#backtotop").click(function () {
-    jQuery("bady,html").animate({
+    jQuery("body,html").animate({
         scrollTop: 0
     }, 600);
 });
@@ -18,10 +18,4 @@ jQuery(window).scroll(function () {
     } else {
         jQuery("#backtotop").removeClass("visible");
     }
-});
-
-$(document).ready(function() {
-    $('#myCarousel').carousel({
-	    interval: 10000
-	})
 });

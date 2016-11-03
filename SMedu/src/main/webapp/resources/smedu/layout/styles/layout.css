@@ -26,7 +26,7 @@ File: Layout CSS
 --------------------------------------------------------------------------------------------------------------- */
 #topbar{padding:15px 0; font-size:.8rem; text-transform:uppercase;}
 
-#topbar *{margin:0; padding:0; list-style:none;}
+#topbar *{margin:0; padding:0; list-style:none; font-size:small;}
 #topbar ul li{display:inline-block; margin-right:10px; padding-right:15px; border-right:1px solid;}
 #topbar ul li:last-child{margin-right:0; padding-right:0; border-right:none;}
 #topbar i{margin:0 5px 0 0; line-height:normal;}
@@ -266,7 +266,6 @@ td{border-width:0 1px;}
 
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */
-body{color:#CBCBCB; background-color:#1A1A1A;}
 a{color:#05B3F2;}
 a:active, a:focus{background:transparent;}/* IE10 + 11 Bugfix - prevents grey background */
 hr, .borderedbox{border-color:#D7D7D7;}

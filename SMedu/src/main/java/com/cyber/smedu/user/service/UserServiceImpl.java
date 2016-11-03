@@ -18,6 +18,7 @@ import com.cyber.smedu.user.repository.UserDaoImpl;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired UserDao userDao;
+	//관리자 페이지 로그인 처리
 	@Override
 	public Map<String, Object> adminLogin(String userId, String userPw) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService {
 			return map;
 		}
 	}
+	//메인페이지 로그인 처리
 	@Override
 	public Map<String, Object> login(String userId, String userPw) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -69,5 +71,35 @@ public class UserServiceImpl implements UserService {
 			map.put("loginFalse", "아이디와 비밀번호를 확인해주세요.");
 			return map;
 		}
+	}
+	//학생 입력
+	@Override
+	public int addStudent(UserDomain user, StudentDomain student) {
+		if(user.getUserLevel().equals("학생")){
+			userDao.insertUser(user);
+			userDao.insertStudent(student);	
+			return 1;
+		} 
+		return 0;
+	}
+
+	@Override
+	public int addProfessor(UserDomain user, ProfessorDomain professor) {
+		if(user.getUserLevel().equals("교수")){
+			userDao.insertUser(user);
+			userDao.insertProfessor(professor);	
+			return 1;
+		}
+		return 0;
+	}
+
+	@Override
+	public int addPlanner(UserDomain user, PlannerDomain planner) {
+		if(user.getUserLevel().equals("플래너")){
+			userDao.insertUser(user);
+			userDao.insertPlanner(planner);	
+			return 1;
+		}
+		return 0;
 	}
 }
