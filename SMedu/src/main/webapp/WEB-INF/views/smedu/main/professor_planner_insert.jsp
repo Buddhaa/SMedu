@@ -11,20 +11,9 @@
 
 <div class="wrapper row3">
 	<div class="hoc container clear">
-		<div class="sidebar one_quarter first">
-			<h3>회원 서비스</h3><hr>
-			<nav class="sdb_holder">
-				<ul>
-					<li><a href="/smedu/main/loginForm">로그인</a></li>
-        			<li><a href="/smedu/main/signUpUser"><strong>회원가입</strong></a></li>
-					<li><a href="#">개인정보취급방침</a></li>
-					<li><a href="#">이용약관</a></li>
-					<li><a href="#">이력서등록</a></li>
-				</ul>
-			</nav>
-		</div>
+		<jsp:include page="../module/main_sidebar.jsp" />
 	<div class="content three_quarter">
-		<legend>회원가입</legend>
+		<h1>회원가입</h1><hr>
 			<div id="content">
 				<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
 					<li class="active col-xs-6"><a href="#professor" data-toggle="tab">교수</a></li>

@@ -15,6 +15,9 @@ public class BoardArticleDomain {
 	private int boardReplySeq;
 	private int boardArticleReadCount;
 	private Date boardArticleDate;
+	private String commentContent;
+	private String userName;
+	private Date commentDate;
 	
 	public String getBoardArticleCode() {
 		return boardArticleCode;
@@ -82,6 +85,24 @@ public class BoardArticleDomain {
 	public void setBoardArticleDate(Date boardArticleDate) {
 		this.boardArticleDate = boardArticleDate;
 	}
+	public String getCommentContent() {
+		return commentContent;
+	}
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public Date getCommentDate() {
+		return commentDate;
+	}
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
+	}
 	
 	@Override
 	public String toString() {
@@ -89,9 +110,10 @@ public class BoardArticleDomain {
 				+ boardCode + ", boardArticleTitle=" + boardArticleTitle + ", boardArticleWriter=" + boardArticleWriter
 				+ ", boardArticleContent=" + boardArticleContent + ", boardReplyGroup=" + boardReplyGroup
 				+ ", boardReplyLevel=" + boardReplyLevel + ", boardReplySeq=" + boardReplySeq
-				+ ", boardArticleReadCount=" + boardArticleReadCount + ", boardArticleDate=" + boardArticleDate + "]";
+				+ ", boardArticleReadCount=" + boardArticleReadCount + ", boardArticleDate=" + boardArticleDate
+				+ ", commentContent=" + commentContent + ", userName=" + userName + ", commentDate=" + commentDate
+				+ "]";
 	}
-	
 	
 	
 }

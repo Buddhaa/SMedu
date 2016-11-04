@@ -2,4 +2,86 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.GradeMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.GradeMapper">
+
+<!-- 교수 담당과목을 select하는 쿼리 -->
+	<select id="professorSubjectSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+
+	SELECT
+		open_subject_code AS openSubjectCode,
+		subject_code AS subjectCode,
+		cardinal_code AS cardinalCode,
+		subject_name AS subjectName
+	FROM
+		open_subject
+	WHERE
+		professor_code=#{professorCode}
+
+	</select>
+
+<!-- 교수 담당과목을 수강하는 학생의 정보를 select 하는 쿼리 -->
+	<select id="professorStudentInfoSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.user.domain.UserDomain">
+	
+	SELECT
+		s.user_code AS userCode,
+		u.user_name AS userName,
+		u.user_phone AS userPhone,
+		u.user_address AS userAddress
+	FROM
+		class_registration c
+	INNER JOIN
+		student s
+	ON
+		c.student_code = s.student_code
+	INNER JOIN
+		user u
+	ON
+		s.user_code = u.user_code
+	WHERE
+		open_subject_code = #{openSubjectCode}
+	AND 
+		pay_state = 
+		(
+		SELECT DISTINCT 
+			c.pay_state 
+		FROM
+			open_subject o
+		INNER JOIN
+			class_registration c
+		ON
+			o.open_subject_code = c.open_subject_code
+		)
+
+	</select>
+
+	<select id="professorStudentGradeSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.grade.domain.GradeDomain">
+		
+	SELECT 
+		grade_evaluation_category AS gradeEvaluationCategory,
+		grade_score AS gradeScore,
+		participation_state AS participationState
+	FROM
+		grade
+	WHERE
+		student_code = 
+		(
+		SELECT DISTINCT 
+			g.student_code 
+		FROM
+			student s
+		INNER JOIN
+			grade g
+		ON
+			s.student_code = g.student_code
+		WHERE 
+			user_code = #{userCode}
+		)
+	
+	</select>
+</mapper>

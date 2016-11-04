@@ -387,7 +387,7 @@ table a, #comments a{background-color:inherit;}
 
 /* Mobile Devices
 --------------------------------------------------------------------------------------------------------------- */
-@media screen and (max-width:900px){
+@media screen and (max-width:200px){
 	.hoc{max-width:90%;}
 
 	#topbar{}

@@ -11,17 +11,7 @@
 	
 <div class="wrapper row3">
 	<div class="hoc container clear">
-		<div class="sidebar one_quarter first">
-			<nav class="sdb_holder">
-				<h3>프로젝트소개</h3><hr>
-				<ul>
-					<li><a href="/smedu/introduction/introductionProject">프로젝트소개</a></li>
-		        	<li><a href="/smedu/introduction/introductionAcademy">교육원 소개</a></li>
-		        	<li><a href="/smedu/introduction/roadMap">찾아오시는 길</a></li>
-		        	<li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
-				</ul>
-			</nav>
-		</div>
+			<jsp:include page="../module/introduction_sidebar.jsp" />
 		<div class="content three_quarter">
 			
 		</div>

@@ -42,6 +42,8 @@
   <script src="/resources/admin/dist/js/pages/dashboard2.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="/resources/admin/dist/js/demo.js"></script>
+  <!-- AdminLTE App -->
+<script src="/resources/admin/dist/js/app.min.js"></script>
   <script>
   	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
  	$(document).ready(function(){

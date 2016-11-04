@@ -11,6 +11,9 @@ public class CardinalDomain {
 	private Date recruitEndDay;
 	private Date classStartDay;
 	private Date classEndDay;
+	private String openSubjectCode;
+	private String subjectName;
+	
 	public String getCardinalCode() {
 		return cardinalCode;
 	}
@@ -59,11 +62,24 @@ public class CardinalDomain {
 	public void setClassEndDay(Date classEndDay) {
 		this.classEndDay = classEndDay;
 	}
-
+	public String getOpenSubjectCode() {
+		return openSubjectCode;
+	}
+	public void setOpenSubjectCode(String openSubjectCode) {
+		this.openSubjectCode = openSubjectCode;
+	}
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	
 	@Override
 	public String toString() {
 		return "CardinalDomain [cardinalCode=" + cardinalCode + ", year=" + year + ", semester=" + semester
 				+ ", cardinal=" + cardinal + ", recruitStartDay=" + recruitStartDay + ", recruitEndDay=" + recruitEndDay
-				+ ", classStartDay=" + classStartDay + ", classEndDay=" + classEndDay + "]";
-	}	
+				+ ", classStartDay=" + classStartDay + ", classEndDay=" + classEndDay + ", openSubjectCode="
+				+ openSubjectCode + ", subjectName=" + subjectName + "]";
+	}
 }

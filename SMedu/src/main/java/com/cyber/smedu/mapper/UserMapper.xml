@@ -124,5 +124,309 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{plannerKakao}
 		)
 	</insert>
+	<!-- 관리자 회원 리스트 출력 -->
+	<select id="selectAdminUserList" resultType="com.cyber.smedu.user.domain.UserDomain">
+	SELECT
+		user_code as userCode,
+		department_code as departmentCode,
+		user_name as userName,
+		user_level as userLevel,
+		user_join_date as userJoinDate,
+		user_state as userState
+	FROM
+		user
+	</select>
+	<!-- 관리자 학생 상세보기 -->
+	<select id="selectAdminStudent" resultType="com.cyber.smedu.user.domain.StudentDomain">
+	SELECT
+		user_code as userCode,
+		department_code as departmentCode,
+		user_name as userName,
+		user_level as userLevel,
+		user_join_date as userJoinDate,
+		user_state as userState
+	FROM
+		user
+	</select>
+	<!-- 한명의 학생 회원정보 -->
+	<select id="studentSelectOne" 
+			parameterType="String" 
+			resultType="com.cyber.smedu.user.domain.StudentDomain">
+		SELECT	
+			u.user_code AS userCode,
+			u.department_code AS departmentCode,
+			d.department_name AS departmentName,
+			u.user_id AS userId,
+			u.user_pw AS userPw,
+			u.user_name AS userName,
+			u.user_birth AS userBirth,
+			u.user_gender AS userGender,
+			u.user_address AS userAddress,
+			u.user_phone AS userPhone,
+			u.user_email AS userEmail,
+			u.user_educational AS userEducational,
+			u.user_state AS userState,
+			s.student_code AS studentCode,
+			s.cardinal_code AS cardinalCode,
+			s.student_path AS studentPath,
+			s.student_goal AS studentGoal
+		FROM 
+			user u 
+		INNER JOIN
+			student s
+		ON 
+			u.user_code = s.user_code
+		INNER JOIN 
+			department d
+		ON 
+			u.department_code = d.department_code
+		WHERE 
+			u.user_code = #{userCode}
+	</select>
+	
+	
+	<!-- 한명의 학생 기수조회 -->
+	<select id="cardinalSelectOne"
+			parameterType="String"
+			resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	SELECT 	
+		cardinal_code AS cardinalCode,
+		year AS year,
+		semester AS semester,
+		cardinal AS cardinal,
+		recruit_start_day AS recruitStartDay,
+		recruit_end_day AS recruitEndDay,
+		class_start_day AS classStartDay,
+		class_end_day AS classEndDay	
+	FROM cardinal 
+	WHERE cardinal_code = #{cardinalCode}	
+	</select>
+	
+	<update id="studentUpdate"
+			parameterType="com.cyber.smedu.user.domain.StudentDomain">
+	UPDATE student as s INNER JOIN user as u
+	ON s.user_code = u.user_code
+	
+	SET
+		u.user_address = #{userAddress},
+		u.user_phone = #{userPhone},
+		u.user_email = #{userEmail},
+		u.user_educational = #{userEducational},
+		s.student_path = #{studentPath},
+		s.student_goal = #{studentGoal}
+	
+	WHERE s.user_code = #{userCode};	
+	</update>
+	
+	<select id="finalResultGrade"
+			parameterType="String"
+			resultType="com.cyber.smedu.user.domain.StudentDomain">
+	select 
+		p.student_code AS studentCode,
+		p.cardinal_code AS cardinalCode,
+		f.open_subject_code AS openSubjectCode,
+		f.final_result AS finalResult,
+		f.complete_confirmation AS completeConfirmation,
+		o.subject_name AS subjectName,
+		c.year AS year,
+		c.semester AS semester,
+		c.cardinal AS cardinal
+	from 
+		pay AS p 
+	INNER JOIN 
+		final_result_complete_confirmaition AS f
+	ON 
+		p.student_code = f.student_code AND p.cardinal_code = f.cardinal_code
+	INNER JOIN
+		open_subject AS o
+	ON
+		f.open_subject_code = o.open_subject_code	
+	INNER JOIN
+		cardinal AS c
+	ON
+		f.cardinal_code = c.cardinal_code		
+	WHERE 
+		p.student_code = #{studentCode};	
+	</select>
+	
+	<select id="consultingHistory"
+			parameterType="String"
+			resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
+	select 
+		board_article_code AS boardArticleCode,
+		board_article_title AS boardArticleTitle,
+		board_article_writer AS boardArticleWriter,
+		board_article_date AS boardArticleDate
+	from board_article
+	where user_code = #{userCode} AND board_code = "board_code5"			
+	</select>
+	
+	
+	<select id="consultingHistoryDetail"
+			parameterType="String"
+			resultType="com.cyber.smedu.board.domain.BoardArticleDomain">	
+	select 
+		b.board_article_title AS boardArticleTitle,
+		b.board_article_writer AS boardArticleWriter,
+		b.board_article_content AS boardArticleContent,
+		c.comment_content AS commentContent,
+		c.comment_date AS commentDate,
+		u.user_name AS userName		
+	FROM 
+		board_article AS b		
+	LEFT OUTER JOIN
+		comment AS c	
+	ON 
+		b.board_article_code = c.board_article_code		
+	LEFT OUTER JOIN
+		user AS u
+	ON
+		c.user_code = u.user_code		
+	WHERE
+		b.board_article_code = #{boardArticleCode}	
+	</select>
+	
+	<select id="classroomAcademicaCtivity"
+			parameterType="String"
+			resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	select 
+		c.year AS year,
+		c.semester AS semester,
+		c.cardinal AS cardinal,
+		c.class_start_day AS classStartDay,
+		c.class_end_day AS classEndDay,
+		o.open_subject_code AS openSubjectCode,
+		o.subject_name AS subjectName	
+	FROM 
+		cardinal AS c
+	INNER JOIN
+		open_subject AS o
+	ON 
+		c.cardinal_code = o.cardinal_code	
+	WHERE
+		c.cardinal_code = (
+								select	
+									student.cardinal_code
+								FROM
+									student
+								WHERE
+									student.user_code = #{userCode}	
+								)
+	</select>
+	
+	<select id="lectureList"
+			parameterType="String"
+			resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
+	select 
+		l.lecture_code AS lectureCode,
+		l.lecture_subject AS lectureSubject,
+		l.lecture_content AS lectureContent,
+		l.lecture_link AS lectureLink,
+		l.lecture_time AS lectureTime,
+		o.professor_name AS professorName,
+		o.book_name AS bookName	,
+		o.cardinal_code AS cardinalCode,
+		a.weekly_schedule AS weeklySchedule,
+		a.academic_calendar_start_day AS academicCalendarStartDay,
+		a.academic_calendar_end_day AS academicCalendarEndDay
+		
+	FROM 
+		lecture AS l
+	INNER JOIN 
+		open_subject AS o
+	ON
+		l.open_subject_code = o.open_subject_code	
+	INNER JOIN
+		academic_calendar AS a
+	ON
+		l.academic_calendar_code = a.academic_calendar_code
+	
+	WHERE
+		l.open_subject_code =  #{openSubjectCode}	
+	</select>
+	
+	<select id="openSubjectAttendList"
+			parameterType="com.cyber.smedu.attend.domain.AttendDomain"
+			resultType="com.cyber.smedu.attend.domain.AttendDomain">
+	select 
+		lecture_code AS lectureCode,
+		attend_complete_confirmation AS attendCompleteConfirmation
+	FROM
+		attend
+	WHERE 
+		open_subject_code = #{openSubjectCode} AND student_code = #{studentCode}	
+	</select>
+	<!-- 한명의 교수 회원 정보를 select하는 쿼리 -->
+	<select id="professorSelectOne" 
+		parameterType="String"
+		resultType="com.cyber.smedu.user.domain.ProfessorDomain">
+
+		SELECT
+			u.user_code AS userCode,
+			p.professor_code AS professorCode,
+			u.department_code AS departmentCode,
+			d.department_name AS departmentName,
+			u.user_id AS userId,
+			u.user_pw AS userPw,
+			u.user_name AS userName,
+			u.user_birth AS userBirth,
+			u.user_gender AS userGender,
+			u.user_address AS userAddress,
+			u.user_phone AS userPhone,
+			u.user_email AS userEmail,
+			u.user_educational AS userEducational,
+			u.user_state AS userState,
+			p.professor_bachelor AS professorBachelor,
+			p.professor_master AS professorMaster,
+			p.professor_doctor AS professorDoctor,
+			p.professor_career AS professorCareer
+		FROM 
+			user u 
+		INNER JOIN
+			professor p
+		ON 
+			u.user_code = p.user_code
+		INNER JOIN 
+			department d
+		ON 
+			u.department_code = d.department_code
+		WHERE 
+			u.user_code = #{userCode}
+
+	</select>
+
+	<!-- 교수 정보를 update 하는 쿼리 -->	
+	<update id="professorUpdate"
+		parameterType="com.cyber.smedu.user.domain.ProfessorDomain">
+	UPDATE 
+		user u 
+	INNER JOIN 
+		professor p 
+	ON 
+		u.user_code = p.user_code
+	SET 
+		u.user_address = #{userAddress},
+		u.user_phone = #{userPhone},
+		u.user_email = #{userEmail},
+		u.user_educational = #{userEducational},
+		p.professor_career = #{professorCareer}
+	WHERE 
+		u.user_code = #{userCode}
+	
+	</update>
+
+	<!-- 회원 탈퇴 시 user 테이블에 상태와 탈퇴날짜가 update 되는 쿼리 -->
+	<update id="userStateUpdate"
+		parameterType="String">
+	
+	UPDATE 
+		user
+	SET 
+		user_state='탈퇴',
+		user_out_date=NOW()
+	WHERE
+		user_code=#{userCode};
+	
+	</update>
 	
 </mapper>

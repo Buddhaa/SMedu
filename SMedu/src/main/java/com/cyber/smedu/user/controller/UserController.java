@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.cyber.smedu.attend.domain.AttendDomain;
+import com.cyber.smedu.board.domain.BoardArticleDomain;
 import com.cyber.smedu.user.domain.PlannerDomain;
 import com.cyber.smedu.user.domain.ProfessorDomain;
 import com.cyber.smedu.user.domain.StudentDomain;
@@ -38,8 +40,6 @@ public class UserController {
 								@RequestParam(value="userId") String userId,
 								@RequestParam(value="userPw") String userPw) {
 		Map<String, Object> map = userService.adminLogin(userId, userPw);
-		System.out.println(map.get("userInfo"));
-		System.out.println(map.get("loginFalse"));
 		if(map.get("userInfo")!=null) {
 			model.addAttribute("userInfo", map.get("userInfo"));
 		} else {
@@ -76,6 +76,13 @@ public class UserController {
 	public String adminLogout(SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "redirect:/admin/login/loginForm";
+	}
+	//관리자 회원관리 리스트
+	@RequestMapping(value = "/admin/user/userList", method = RequestMethod.GET)
+	public String adminUserList(Model model) {
+		Map<String, Object> map = userService.selectAdminUserList();
+		model.addAttribute("userList", map.get("userList"));
+		return "admin/user/user_list";
 	}
 	//사용자페이지 로그아웃 맵핑
 	@RequestMapping(value = "/smedu/main/logOut", method = RequestMethod.GET)
@@ -128,4 +135,137 @@ public class UserController {
 		userService.addPlanner(user, planner);
 		return "redirect:/smedu/main/main";
 	}
+	/*------------------------------------------------------------------------*/
+	
+	//학생정보수정페이지 이동
+	@RequestMapping(value="/studentInfo", method=RequestMethod.GET)
+	public String studentSelectOne(Model model 
+									,@RequestParam(value="login", defaultValue="user_code8") String userCode){
+		
+		logger.info(" 회원정보 페이지{}.","studentInfo()");		
+		model.addAttribute("studentInfo", userService.studentSelectOne(userCode));		
+		logger.info(" 회원정보 페이지 이동 정보{}.", model.toString());
+		return"student/mypage/mypage_student_info";
+	}
+	
+	
+	//학생정보수정처리
+	@RequestMapping(value="/updateStudentInfo", method=RequestMethod.POST)
+	public String studentUpdate(StudentDomain studentDomain){
+		logger.info("학생정보수정처리{}.","studentUpdate()"+studentDomain.toString());
+				
+		userService.studentUpdate(studentDomain);
+		
+		return "redirect:/studentInfo";
+	}
+	
+	
+	//이수학점관리페이지 이동
+	@RequestMapping(value="/finalResultGrade", method=RequestMethod.GET)
+	public String finalResultGrade(Model model
+									,@RequestParam(value="login") String userCode){
+	
+		model.addAttribute("finalResultGrade", userService.finalResultGrade(userCode));	
+
+		logger.info("modle toString : {}", model.toString());
+		return "student/mypage/mypage_final_result_grade";		
+	}	
+	
+	
+	//나의 상담내역페이지 이동 
+	@RequestMapping(value="/studentconsultingHistory", method=RequestMethod.GET)
+	public String consultingHistory(Model model
+									,@RequestParam(value="login") String userCode){
+		
+		logger.info("{}", "나의 상담내역페이지 이동");
+		
+		model.addAttribute("board", userService.consultingHistory(userCode));		
+		
+		logger.info("modle toString : {}", model.toString());
+		return "student/mypage/mypage_consulting_history";	
+	}
+	
+	
+	//나의 상담내역디테일 페이지 이동
+	@RequestMapping(value="/studentConsultingHistoryDetail", method=RequestMethod.GET)
+	public String consultingHistoryDetail(Model model
+											,@RequestParam(value="boardArticleCode") String boardArticleCode){
+		
+		logger.info("{}", "나의 상담내역디테일 페이지 이동");
+		
+		BoardArticleDomain boardArticleDomain = userService.consultingHistoryDetail(boardArticleCode);
+		
+		model.addAttribute("consultingHistoryDetail", boardArticleDomain);
+		
+		return "student/mypage/mypage_consulting_history_detail";
+	}
+
+	
+	//나의 학사관리 페이지 이동
+	@RequestMapping(value="/classroomAcademicaCtivity", method=RequestMethod.GET)
+	public String classroomAcademicaCtivity(Model model
+											,@RequestParam(value="login") String userCode
+											,@RequestParam(value="openSubjectCode", defaultValue="") String openSubjectCode
+											,AttendDomain attendDomain){
+	System.out.println("-------------------------"+userCode);
+	//나의 학사관리 페이지 이동
+	model.addAttribute("classroomAcademicaCtivity", userService.classroomAcademicaCtivity(userCode));
+		
+	//나의 학사관리에서 과목 선택시		
+	model.addAttribute("classroomAcademicaCtivityView", userService.classroomAcademicaCtivityView(openSubjectCode));
+		
+	//나의 학사관리에서 과목 선택시 출석여부 확인
+	model.addAttribute("openSubjectAttendList",userService.openSubjectAttendList(userCode, attendDomain));
+	
+	System.out.println(model.toString());
+	return"student/classroom/classroom_academic_activity";
+	}
+	
+	//한명의 교수 정보를 select, value값에 login 시 session 에 저장된 userCode 입력 
+	@RequestMapping(value="/professorInfo")
+	public String professorSelectOne(Model model, 
+								@RequestParam(value="userCode" ) String userCode) {
+		
+		System.out.println("01 professorSelectOne <-- UserController.java");
+		
+		model.addAttribute("professorInfo", userService.getProfessorSelectOne(userCode));
+		
+		
+		return "professor/mypage/mypage_professor_info";
+		
+	}
+	
+	//교수 정보를 update
+	@RequestMapping(value="/updateProfessorInfo", method=RequestMethod.POST)
+	public String professorUpdate(ProfessorDomain professorDomain) {
+		
+		System.out.println("01 professorUpdate <-- UserController.java");
+		String userCode = professorDomain.getUserCode();
+		userService.professorUpdate(professorDomain);
+		
+		return "redirect:/professorInfo?userCode="+userCode+"";
+				
+	}
+	
+	//탈퇴폼
+	@RequestMapping(value="/userDelete")
+	public String userDeleteView() {
+		
+		System.out.println("01 professorDeleteView <-- UserController.java");
+
+		return "smedu/main/user_delete";		
+	}
+	
+	//탈퇴처리 한명의 회원정보의 상태와 탈퇴일을 update
+	@RequestMapping(value="/userStateUpdate", method=RequestMethod.POST)
+	public String userStateUpdate(String userCode) {
+		
+		System.out.println("01 userStateUpdate <-- UserController.java");
+		System.out.println("userCode : " + userCode);
+		
+		userService.userStateUpdate(userCode);
+		
+		return "redirect:/smedu/main/logOut";
+	}
+	
 }

@@ -41,7 +41,21 @@
 	      </ul>
 	    </div>
     </c:if>
-    <c:if test="${userInfo!=null}">
+    <c:if test="${userInfo.userLevel=='학생'}">
+	    <div class="fl_right">
+	      <ul>
+	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
+	        <li><a href="/smedu/main/logOut">로그아웃</a></li>
+	        <li><a href="/studentInfo?login=${userInfo.userCode}">마이페이지</a></li>
+	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
+	      </ul>
+	      &nbsp;
+	      <ul>
+	      	<li>${userInfo.userName}${userInfo.userLevel}님 환영합니다.</li>
+	      </ul>
+	    </div>
+    </c:if>
+    <c:if test="${userInfo.userLevel=='플래너'}">
 	    <div class="fl_right">
 	      <ul>
 	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
@@ -49,7 +63,24 @@
 	        <li><a href="#">마이페이지</a></li>
 	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
 	      </ul>
-	      ${userInfo.userName}님 ${userInfo.userLevel} 로그인
+	      &nbsp;
+	      <ul>
+	      	<li>${userInfo.userName}${userInfo.userLevel}님 환영합니다.</li>
+	      </ul>
+	    </div>
+    </c:if>
+    <c:if test="${userInfo.userLevel=='교수'}">
+	    <div class="fl_right">
+	      <ul>
+	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
+	        <li><a href="/smedu/main/logOut">로그아웃</a></li>
+	        <li><a href="/professorInfo?userCode=${userInfo.userCode}">마이페이지</a></li>
+	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
+	      </ul>
+	      &nbsp;
+	      <ul>
+	      	<li>${userInfo.userName}${userInfo.userLevel}님 환영합니다.</li>
+	      </ul>
 	    </div>
     </c:if>
   </div>
@@ -74,13 +105,13 @@
       </li>
       <li><a class="drop" href="#">학점은행제</a>
         <ul>
-          <li><a href="#">학점은행제소개</a></li>
-          <li><a href="#">학점취득과정</a></li>
-          <li><a href="#">교육과정</a></li>
-          <li><a href="#">학점인정주의사항</a></li>
-          <li><a href="#">오리엔테이션</a></li>
-          <li><a href="#">강의수강방법</a></li>
-          <li><a href="#">출석률확인방법</a></li>
+			<li><a href="/smedu/creditbank/creditbankIntro">학점은행제소개</a>
+			<li><a href="/smedu/creditbank/creditbankRecognitionSubject">학점취득과정</a>
+          	<li><a href="/smedu/creditbank/curriculumIntro">교육과정</a></li>
+			<li><a href="/smedu/creditbank/creditbankPrecaution">학점인정주의사항</a>
+          	<li><a href="/smedu/creditbank/creditbankOrientation">오리엔테이션</a></li>
+			<li><a href="/smedu/creditbank/creditbankLectureWay">강의수강방법</a></li>
+			<li><a href="/smedu/creditbank/creditbankAttendWay">출석률확인방법</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">교육과정</a>
@@ -114,7 +145,7 @@
         </ul>	
       </li>
       <c:if test="${userInfo.userLevel==null}">
-	      <li><a class="drop" href="">나의강의실</a>
+	      <li><a class="drop" href="/smedu/main/loginForm">나의강의실</a>
 	      	 <ul>
 	          <li><a href="#">나의 학사활동</a></li>
 	          <li><a href="#">나의 학점관리</a></li>
@@ -140,9 +171,9 @@
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='교수'}">
-	      <li><a class="drop" href="#">교무관리</a>
+	      <li><a class="drop" href="/professorSubjectSelect?professorCode=${userPlusInfo.professorCode}">교무관리</a>
 	      	 <ul>
-	          <li><a href="#">학생성적조회</a></li>
+	          <li><a href="/professorSubjectSelect?professorCode=${userPlusInfo.professorCode}">학생성적조회</a></li>
 	          <li><a href="#">학생성적관리</a></li>
 	          <li><a href="#">성적이의신청관리</a></li>
 	          <li><a href="#">담당개설과목관리</a></li>

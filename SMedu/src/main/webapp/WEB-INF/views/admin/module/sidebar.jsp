@@ -50,7 +50,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 회원 리스트</a></li>
+            <li><a href="/admin/user/userList"><i class="fa fa-circle-o"></i> 회원 리스트</a></li>
             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 가입 승인요청</a></li>
           </ul>
         </li>
