@@ -25,8 +25,8 @@ public class GradeController {
 	@RequestMapping(value="/professorSubjectSelect")
 	public String professorSubjectSelect(
 			Model model, 
-			@RequestParam(value="professorCode")String professorCode) {
-										
+			@ModelAttribute(value="userPlusInfo")ProfessorDomain professorDomain) {
+		String professorCode = professorDomain.getProfessorCode();					
 		System.out.println("01 professorSubjectSelect <-- GradeController.java");
 		//System.out.println("professorCode : " + professorCode);
 		

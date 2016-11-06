@@ -12,7 +12,7 @@
 	$(document).ready(function(){
 		$("#openSubject").change(function(){
 			var openSubjectCode = $("#openSubject").val();
-			location.replace('/classroomAcademicaCtivity?openSubjectCode=' + openSubjectCode);
+			location.replace('/classroomAcademicActivity?openSubjectCode=' + openSubjectCode);
 		});
 	});
 </script>

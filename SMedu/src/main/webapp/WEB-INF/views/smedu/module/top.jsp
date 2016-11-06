@@ -46,7 +46,7 @@
 	      <ul>
 	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
 	        <li><a href="/smedu/main/logOut">로그아웃</a></li>
-	        <li><a href="/studentInfo?login=${userInfo.userCode}">마이페이지</a></li>
+	        <li><a href="/studentInfo">마이페이지</a></li>
 	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
 	      </ul>
 	      &nbsp;
@@ -74,7 +74,7 @@
 	      <ul>
 	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
 	        <li><a href="/smedu/main/logOut">로그아웃</a></li>
-	        <li><a href="/professorInfo?userCode=${userInfo.userCode}">마이페이지</a></li>
+	        <li><a href="/professorInfo">마이페이지</a></li>
 	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
 	      </ul>
 	      &nbsp;
@@ -171,9 +171,9 @@
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='교수'}">
-	      <li><a class="drop" href="/professorSubjectSelect?professorCode=${userPlusInfo.professorCode}">교무관리</a>
+	      <li><a class="drop" href="/professorSubjectSelect">교무관리</a>
 	      	 <ul>
-	          <li><a href="/professorSubjectSelect?professorCode=${userPlusInfo.professorCode}">학생성적조회</a></li>
+	          <li><a href="/professorSubjectSelect">학생성적조회</a></li>
 	          <li><a href="#">학생성적관리</a></li>
 	          <li><a href="#">성적이의신청관리</a></li>
 	          <li><a href="#">담당개설과목관리</a></li>

@@ -24,11 +24,11 @@
 		<h3>회원 서비스</h3><hr>
 		<nav class="sdb_holder">
 			<ul>
-				<li><a href="/updateStudentInfo?login=${userInfo.userCode}">회원정보수정</a></li>
+				<li><a href="/studentInfo">회원정보수정</a></li>
        			<li><a href="/userDelete">회원탈퇴</a></li>
-       			<li><a href="/classroomAcademicaCtivity?login=${userInfo.userCode}">나의 학사활동</a></li>
-       			<li><a href="/finalResultGrade?login=${userInfo.userCode}">이수학점관리</a></li>
-       			<li><a href="/studentconsultingHistory?login=${userInfo.userCode}">나의 상담내역</a></li>
+       			<li><a href="/classroomAcademicActivity">나의 학사활동</a></li>
+       			<li><a href="/finalResultGrade">이수학점관리</a></li>
+       			<li><a href="/studentconsultingHistory">나의 상담내역</a></li>
 			</ul>
 		</nav>
 	 </c:if>
@@ -36,7 +36,7 @@
 		<h3>회원 서비스</h3><hr>
 		<nav class="sdb_holder">
 			<ul>
-				<li><a href="/professorInfo?userCode=${userInfo.userCode}">회원정보수정</a></li>
+				<li><a href="/professorInfo">회원정보수정</a></li>
        			<li><a href="/userDelete">회원탈퇴</a></li>
 			</ul>
 		</nav>

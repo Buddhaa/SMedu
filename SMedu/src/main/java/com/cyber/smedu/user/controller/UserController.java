@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,7 +130,7 @@ public class UserController {
 		return "redirect:/smedu/main/main";
 	}
 	
-	//교수 가입 처리
+	//플래너  가입 처리
 	@RequestMapping(value = "/smedu/main/plannerInsert", method = RequestMethod.POST)
 	public String plannerInsert(UserDomain user, PlannerDomain planner) {
 		userService.addPlanner(user, planner);
@@ -140,8 +141,8 @@ public class UserController {
 	//학생정보수정페이지 이동
 	@RequestMapping(value="/studentInfo", method=RequestMethod.GET)
 	public String studentSelectOne(Model model 
-									,@RequestParam(value="login", defaultValue="user_code8") String userCode){
-		
+									,@ModelAttribute(value="userInfo") UserDomain userDomain){
+		String userCode = userDomain.getUserCode();
 		logger.info(" 회원정보 페이지{}.","studentInfo()");		
 		model.addAttribute("studentInfo", userService.studentSelectOne(userCode));		
 		logger.info(" 회원정보 페이지 이동 정보{}.", model.toString());
@@ -160,11 +161,11 @@ public class UserController {
 	}
 	
 	
-	//이수학점관리페이지 이동
+	//이수학점관리페이지 이동 -- grade
 	@RequestMapping(value="/finalResultGrade", method=RequestMethod.GET)
 	public String finalResultGrade(Model model
-									,@RequestParam(value="login") String userCode){
-	
+									,@ModelAttribute(value="userInfo") UserDomain userDomain){
+		String userCode = userDomain.getUserCode();
 		model.addAttribute("finalResultGrade", userService.finalResultGrade(userCode));	
 
 		logger.info("modle toString : {}", model.toString());
@@ -172,11 +173,11 @@ public class UserController {
 	}	
 	
 	
-	//나의 상담내역페이지 이동 
+	//나의 상담내역페이지 이동 -- board
 	@RequestMapping(value="/studentconsultingHistory", method=RequestMethod.GET)
 	public String consultingHistory(Model model
-									,@RequestParam(value="login") String userCode){
-		
+									,@ModelAttribute(value="userInfo") UserDomain userDomain){
+		String userCode = userDomain.getUserCode();
 		logger.info("{}", "나의 상담내역페이지 이동");
 		
 		model.addAttribute("board", userService.consultingHistory(userCode));		
@@ -186,7 +187,7 @@ public class UserController {
 	}
 	
 	
-	//나의 상담내역디테일 페이지 이동
+	//나의 상담내역디테일 페이지 이동 -- board
 	@RequestMapping(value="/studentConsultingHistoryDetail", method=RequestMethod.GET)
 	public String consultingHistoryDetail(Model model
 											,@RequestParam(value="boardArticleCode") String boardArticleCode){
@@ -201,12 +202,14 @@ public class UserController {
 	}
 
 	
-	//나의 학사관리 페이지 이동
-	@RequestMapping(value="/classroomAcademicaCtivity", method=RequestMethod.GET)
+	//나의 학사관리 페이지 이동 -- openSubject
+	@RequestMapping(value="/classroomAcademicActivity", method=RequestMethod.GET)
 	public String classroomAcademicaCtivity(Model model
-											,@RequestParam(value="login") String userCode
+											,@ModelAttribute(value="userInfo") UserDomain userDomain
 											,@RequestParam(value="openSubjectCode", defaultValue="") String openSubjectCode
 											,AttendDomain attendDomain){
+	String userCode = userDomain.getUserCode();
+		
 	System.out.println("-------------------------"+userCode);
 	//나의 학사관리 페이지 이동
 	model.addAttribute("classroomAcademicaCtivity", userService.classroomAcademicaCtivity(userCode));
@@ -224,10 +227,10 @@ public class UserController {
 	//한명의 교수 정보를 select, value값에 login 시 session 에 저장된 userCode 입력 
 	@RequestMapping(value="/professorInfo")
 	public String professorSelectOne(Model model, 
-								@RequestParam(value="userCode" ) String userCode) {
+								@ModelAttribute(value="userInfo" ) UserDomain userDomain) {
 		
 		System.out.println("01 professorSelectOne <-- UserController.java");
-		
+		String userCode = userDomain.getUserCode();
 		model.addAttribute("professorInfo", userService.getProfessorSelectOne(userCode));
 		
 		
