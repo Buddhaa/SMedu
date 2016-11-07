@@ -1,6 +1,6 @@
 package com.cyber.smedu.grade.domain;
 
-public class FinalGradeDoamin {
+public class FinalGradeDomain {
 	private String finalResultCompleteConfirmaitionCode;
 	private String studentCode;
 	private String cardinalCode;

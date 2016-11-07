@@ -114,6 +114,32 @@ public class UserServiceImpl implements UserService {
 		map.put("userList", userList);
 		return map;
 	}
+	//관리자 회원 상세보기
+	@Override
+	public Map<String, Object> selectAdminUserDetail(String userCode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		UserDomain userDomain = userDao.selectAdminUserDetail(userCode);
+		map.put("originInfo", userDomain);
+		if(userDomain.getUserLevel().equals("교수")) {
+			ProfessorDomain professorDomain = userDao.selectAdminProfessorDetail(userCode);
+			map.put("plusInfo", professorDomain);
+		} else if (userDomain.getUserLevel().equals("플래너")) {
+			PlannerDomain plannerDomain = userDao.selectAdminPlannerDetail(userCode);
+			map.put("plusInfo", plannerDomain);
+		} else if (userDomain.getUserLevel().equals("학생")) {
+			StudentDomain studentDomain = userDao.selectAdminStudentDetail(userCode);
+			map.put("plusInfo", studentDomain);
+		}
+		return map;
+	}
+	//관리자 가입승인요청리스트 출력
+	@Override
+	public Map<String, Object> selectAdminJoinRequestList() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UserDomain> joinRequestList = userDao.selectAdminJoinRequestList();
+		map.put("joinRequestList", joinRequestList);
+		return map;
+	}
 	//학생정보수정페이지 이동
 	@Override
 	public Map<String,Object> studentSelectOne(String userCode) {	

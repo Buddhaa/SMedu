@@ -50,4 +50,6 @@ public interface UserService {
 	void professorUpdate(ProfessorDomain professorDomain);
 
 	void userStateUpdate(String userCode);
+	Map<String, Object> selectAdminUserDetail(String userCode);
+	Map<String, Object> selectAdminJoinRequestList();
 }

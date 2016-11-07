@@ -127,26 +127,114 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 관리자 회원 리스트 출력 -->
 	<select id="selectAdminUserList" resultType="com.cyber.smedu.user.domain.UserDomain">
 	SELECT
-		user_code as userCode,
-		department_code as departmentCode,
-		user_name as userName,
-		user_level as userLevel,
-		user_join_date as userJoinDate,
-		user_state as userState
+		u.user_code as userCode,
+		u.department_code as departmentCode,
+		d.department_name as departmentName,
+		u.user_name as userName,
+		u.user_level as userLevel,
+		u.user_join_date as userJoinDate,
+		u.user_state as userState
 	FROM
-		user
+		user u 
+	INNER JOIN
+		department d
+	ON 
+		u.department_code = d.department_code
 	</select>
-	<!-- 관리자 학생 상세보기 -->
-	<select id="selectAdminStudent" resultType="com.cyber.smedu.user.domain.StudentDomain">
+	<!-- 관리자 회원 상세보기 -->
+	<select id="selectAdminUserDetail" parameterType="String" resultType="com.cyber.smedu.user.domain.UserDomain">
 	SELECT
-		user_code as userCode,
-		department_code as departmentCode,
-		user_name as userName,
-		user_level as userLevel,
-		user_join_date as userJoinDate,
-		user_state as userState
+		u.user_code as userCode,
+		u.department_code as departmentCode,
+		d.department_name as departmentName,
+		u.user_id as userId,
+		u.user_pw as userPw,
+		u.user_name as userName,
+		u.user_birth as userBirth,
+		u.user_gender as userGender,
+		u.user_address as userAddress,
+		u.user_phone as userPhone,
+		u.user_email as userEmail,
+		u.user_educational as userEducational,
+		u.user_level as userLevel,
+		u.user_join_date as userJoinDate,
+		u.user_state as userState,
+		u.user_out_date as userOutDate
 	FROM
-		user
+		user u 
+	INNER JOIN
+		department d
+	ON 
+		u.department_code = d.department_code
+	WHERE
+		user_code = #{userCode}
+	
+	</select>
+	<!-- 관리자 회원 상세보기 - 교수 -->
+	<select id="selectAdminProfessorDetail" parameterType="String" resultType="com.cyber.smedu.user.domain.ProfessorDomain">
+	SELECT
+		professor_code as professorCode,
+		user_code as userCode,
+		professor_bachelor as professorBachelor,
+		professor_master as professorMaster,
+		professor_doctor as professorDoctor,
+		professor_career as professorCareer
+	FROM
+		professor
+	WHERE
+		user_code = #{userCode}
+	</select>
+	<!-- 관리자 회원 상세보기 - 플래너 -->
+	<select id="selectAdminPlannerDetail" parameterType="String" resultType="com.cyber.smedu.user.domain.PlannerDomain">
+	SELECT
+		planner_code as plannerCode,
+		user_code as userCode,
+		planner_kakao as plannerKakao
+	FROM
+		planner
+	WHERE
+		user_code = #{userCode}
+	</select>
+	<!-- 관리자 회원 상세보기 - 학생 -->
+	<select id="selectAdminStudentDetail" parameterType="String" resultType="com.cyber.smedu.user.domain.StudentDomain">
+	SELECT
+		s.student_code as studentCode,
+		s.cardinal_code as cardinalCode,
+		c.year as year,
+		c.semester as semester,
+		c.cardinal as cardinal,
+		s.user_code as userCode,
+		s.student_path as studentPath,
+		s.student_goal as studentGoal
+	FROM
+		student s
+	INNER JOIN
+		cardinal c
+	ON
+		s.cardinal_code = c.cardinal_code
+	WHERE
+		user_code = #{userCode}
+	</select>		
+	<!-- 관리자 가입승인 요청 리스트 플래너,교수 -->
+	<select id="selectAdminJoinRequestList" resultType="com.cyber.smedu.user.domain.UserDomain">
+	SELECT
+		u.user_code as userCode,
+		u.department_code as departmentCode,
+		d.department_name as departmentName,
+		u.user_name as userName,
+		u.user_phone as userPhone,
+		u.user_email as userEmail,
+		u.user_level as userLevel,
+		u.user_join_date as userJoinDate,
+		u.user_state as userState
+	FROM
+		user u 
+	INNER JOIN
+		department d
+	ON 
+		u.department_code = d.department_code
+	where
+		u.user_state = '승인대기'
 	</select>
 	<!-- 한명의 학생 회원정보 -->
 	<select id="studentSelectOne" 

@@ -69,6 +69,16 @@ public interface UserDao {
 
 	void userStateUpdate(String userCode);
 
+	UserDomain selectAdminUserDetail(String userCode);
+
+	ProfessorDomain selectAdminProfessorDetail(String userCode);
+
+	PlannerDomain selectAdminPlannerDetail(String userCode);
+
+	StudentDomain selectAdminStudentDetail(String userCode);
+
+	List<UserDomain> selectAdminJoinRequestList();
+
 	
 
 }

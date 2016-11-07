@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class UserDomain {
 	private String userCode;
 	private String departmentCode;
+	private String departmentName;
 	private String userId;
 	private String userPw;
 	private String userName;
@@ -30,6 +31,12 @@ public class UserDomain {
 	}
 	public void setDepartmentCode(String departmentCode) {
 		this.departmentCode = departmentCode;
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	public String getUserId() {
 		return userId;

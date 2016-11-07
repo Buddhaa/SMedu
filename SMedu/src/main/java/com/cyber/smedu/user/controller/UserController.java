@@ -85,6 +85,22 @@ public class UserController {
 		model.addAttribute("userList", map.get("userList"));
 		return "admin/user/user_list";
 	}
+	//관리자 회원 상세보기
+	@RequestMapping(value = "/admin/user/userDetail", method = RequestMethod.GET)
+	public String adminUserDetail(Model model,
+									@RequestParam(value="userCode") String userCode) {
+		Map<String, Object> map = userService.selectAdminUserDetail(userCode);
+		model.addAttribute("originInfo", map.get("originInfo"));
+		model.addAttribute("plusInfo", map.get("plusInfo"));
+		return "admin/user/user_detail";
+	}
+	//관리자 교수,플래너 가입승인요청 리스트
+	@RequestMapping(value = "/admin/user/joinRequest", method = RequestMethod.GET)
+	public String adminJoinRequest(Model model) {
+		Map<String, Object> map = userService.selectAdminJoinRequestList();
+		model.addAttribute("joinRequestList", map.get("joinRequestList"));
+		return "admin/user/professor_planner_join";
+	}
 	//사용자페이지 로그아웃 맵핑
 	@RequestMapping(value = "/smedu/main/logOut", method = RequestMethod.GET)
 	public String smeduLogout(SessionStatus sessionStatus) {

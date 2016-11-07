@@ -73,6 +73,31 @@ public class UserDaoImpl implements UserDao {
 	public List<UserDomain> selectAdminUserList() {
 		return sqlSession.selectList(NS+".selectAdminUserList");
 	}
+	//관리자 회원 상세보기 select
+	@Override
+	public UserDomain selectAdminUserDetail(String userCode) {
+		return sqlSession.selectOne(NS+".selectAdminUserDetail", userCode);
+	}
+	//관리자 회원 상세보기 select - 교수 추가정보
+	@Override
+	public ProfessorDomain selectAdminProfessorDetail(String userCode) {
+		return sqlSession.selectOne(NS+".selectAdminProfessorDetail", userCode);
+	}
+	//관리자 회원 상세보기 select - 플래너 추가정보
+	@Override
+	public PlannerDomain selectAdminPlannerDetail(String userCode) {
+		return sqlSession.selectOne(NS+".selectAdminPlannerDetail", userCode);
+	}
+	//관리자 회원 상세보기 select - 학생 추가정보
+	@Override
+	public StudentDomain selectAdminStudentDetail(String userCode) {
+		return sqlSession.selectOne(NS+".selectAdminStudentDetail", userCode);
+	}
+	//관리자 가입승인요청 리스트 select - 학생 추가정보
+	@Override
+	public List<UserDomain> selectAdminJoinRequestList() {
+		return sqlSession.selectList(NS+".selectAdminJoinRequestList");
+	}
 	//한명의 학생 회원정보
 	@Override
 	public StudentDomain studentSelectOne(String userCode) {
