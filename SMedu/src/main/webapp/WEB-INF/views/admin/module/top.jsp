@@ -43,7 +43,11 @@
   <!-- AdminLTE for demo purposes -->
   <script src="/resources/admin/dist/js/demo.js"></script>
   <!-- AdminLTE App -->
-<script src="/resources/admin/dist/js/app.min.js"></script>
+  <script src="/resources/admin/dist/js/app.min.js"></script>
+  <!-- bootstrap datepicker -->
+  <script src="/resources/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="/resources/admin/plugins/datepicker/datepicker3.css">
   <script>
   	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
  	$(document).ready(function(){
@@ -51,7 +55,11 @@
  		if(userInfo==''){
  		alert('비정상적인 접근입니다.');
  		$(location).attr('href', '/admin/login/loginForm');
- 		}
+ 		} 		
+ 		//Date picker
+ 	    $('#datepicker').datepicker({
+ 	      autoclose: true
+ 	    }); 		
  	});
   </script>
 </head>

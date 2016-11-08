@@ -2,4 +2,13 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.CurriculumMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.CurriculumMapper">
+	<!-- 학과 리스트 출력 -->
+	<select id="selectDepartmentList" resultType="com.cyber.smedu.curriculum.domain.DepartmentDomain">
+	SELECT
+		department_code as departmentCode,
+		department_name as departmentName
+	FROM
+		department
+	</select>
+</mapper>

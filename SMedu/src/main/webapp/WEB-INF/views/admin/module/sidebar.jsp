@@ -56,7 +56,7 @@
         </li>
 		<!-- 학생성적관리 -->
 		<li>
-			<a href="documentation/index.html">
+			<a href="/admin/studentGrade/list">
 			&nbsp;<i class="fa fa-table"></i> <span>학생성적관리</span></a>
 		</li>
 		<!-- 기수일정관리 -->
@@ -68,8 +68,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> 모집일정 리스트</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> 기수 모집 등록</a></li>
+            <li><a href="/admin/academicCalendar/list"><i class="fa fa-circle-o"></i> 모집일정 리스트</a></li>
+            <li><a href="/admin/academicCalendar/insertForm"><i class="fa fa-circle-o"></i> 기수 모집 등록</a></li>
           </ul>
         </li>
 		<!-- 교과 관리 -->

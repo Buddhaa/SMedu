@@ -1,6 +1,7 @@
 package com.cyber.smedu.grade.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
@@ -13,5 +14,7 @@ public interface GradeService {
 	List<UserDomain> professorStudentInfoSelect(String openSubjectCode);
 
 	List<GradeDomain> professorStudentGradeSelect(String userCode);
+
+	Map<String, Object> adminStudentGradeList();
 
 }

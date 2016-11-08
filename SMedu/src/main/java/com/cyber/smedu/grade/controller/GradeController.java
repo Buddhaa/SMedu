@@ -17,8 +17,15 @@ import com.cyber.smedu.user.domain.ProfessorDomain;
 public class GradeController {
 	
 	@Autowired
-	GradeService gradeServiceImpl;
+	GradeService gradeService;
+	
+	//관리자 성적관리 학생 리스트 페이지(검색)
+	@RequestMapping(value="/admin/studentGrade/list", method=RequestMethod.GET)
+	public String adminSelectStudentList(Model model) {
 		
+		return "admin/studentgrade/student_grade_list";
+	}
+	
 	/*교수 자신의 담당과목들을 select
 	value 값은 로그인 후 session 에 저장되있는 교수코드 값이 들어간다.*/
 	
@@ -30,7 +37,7 @@ public class GradeController {
 		System.out.println("01 professorSubjectSelect <-- GradeController.java");
 		//System.out.println("professorCode : " + professorCode);
 		
-		model.addAttribute("professorSubject", gradeServiceImpl.professorSubjectSelect(professorCode));
+		model.addAttribute("professorSubject", gradeService.professorSubjectSelect(professorCode));
 		
 		return "professor/management/management_student_grade";		
 	}
@@ -47,8 +54,8 @@ public class GradeController {
 		System.out.println("01 professorStudentGradeSelect <-- GradeController.java");
 		System.out.println("openSubjectCode : " + openSubjectCode);
 		
-		model.addAttribute("professorSubject", gradeServiceImpl.professorSubjectSelect(professorCode));
-		model.addAttribute("professorStudentInfo", gradeServiceImpl.professorStudentInfoSelect(openSubjectCode));		
+		model.addAttribute("professorSubject", gradeService.professorSubjectSelect(professorCode));
+		model.addAttribute("professorStudentInfo", gradeService.professorStudentInfoSelect(openSubjectCode));		
 		
 		return "professor/management/management_student_grade";		
 	}
@@ -59,7 +66,7 @@ public class GradeController {
 		System.out.println("01 professorStudentGradeSelect <-- GradeController.java");
 		System.out.println("userCode : " + userCode);
 		
-		model.addAttribute("professorStudentGrade", gradeServiceImpl.professorStudentGradeSelect(userCode));
+		model.addAttribute("professorStudentGrade", gradeService.professorStudentGradeSelect(userCode));
 		
 		return "professor/management/management_student_grade_search";
 		

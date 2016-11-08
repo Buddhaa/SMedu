@@ -5,15 +5,14 @@ import java.sql.Date;
 public class CardinalDomain {
 	private String cardinalCode;
 	private int year;
-	private String semester;
-	private String cardinal;
+	private int semester;
+	private int cardinal;
 	private Date recruitStartDay;
 	private Date recruitEndDay;
 	private Date classStartDay;
 	private Date classEndDay;
 	private String openSubjectCode;
 	private String subjectName;
-	
 	public String getCardinalCode() {
 		return cardinalCode;
 	}
@@ -26,16 +25,16 @@ public class CardinalDomain {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public String getSemester() {
+	public int getSemester() {
 		return semester;
 	}
-	public void setSemester(String semester) {
+	public void setSemester(int semester) {
 		this.semester = semester;
 	}
-	public String getCardinal() {
+	public int getCardinal() {
 		return cardinal;
 	}
-	public void setCardinal(String cardinal) {
+	public void setCardinal(int cardinal) {
 		this.cardinal = cardinal;
 	}
 	public Date getRecruitStartDay() {
@@ -74,7 +73,6 @@ public class CardinalDomain {
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
 	}
-	
 	@Override
 	public String toString() {
 		return "CardinalDomain [cardinalCode=" + cardinalCode + ", year=" + year + ", semester=" + semester
@@ -82,4 +80,5 @@ public class CardinalDomain {
 				+ ", classStartDay=" + classStartDay + ", classEndDay=" + classEndDay + ", openSubjectCode="
 				+ openSubjectCode + ", subjectName=" + subjectName + "]";
 	}
+	
 }
