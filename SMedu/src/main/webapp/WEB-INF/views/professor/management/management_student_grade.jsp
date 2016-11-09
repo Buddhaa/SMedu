@@ -72,6 +72,7 @@
 						<th>이름</th>
 						<th>전화번호</th>
 						<th>주소</th>
+						<th>E-mail</th>
 						<th>성적조회</th>
 					</tr>
 				</thead>
@@ -82,9 +83,10 @@
 							<td>${professorStudentInfo.userName }</td>
 							<td>${professorStudentInfo.userPhone }</td>
 							<td>${professorStudentInfo.userAddress }</td>
+							<td>${professorStudentInfo.userEmail }</td>
 							<td>
 								<a href="#"
-								onclick="javascript:window.open('/professorStudentGradeSelect?userCode=${professorStudentInfo.userCode }', 'studentGrade', 'left='+(screen.availWidth-400)/2+',top='+(screen.availHeight-260)/2+', width=400, height=230')">
+								onclick="javascript:window.open('/professorStudentGradeSelect?userCode=${professorStudentInfo.userCode }', 'studentGrade', 'left='+(screen.availWidth-400)/2+',top='+(screen.availHeight-360)/2+', width=400, height=330')">
 								조회</a>
 							</td>
 						</tr>

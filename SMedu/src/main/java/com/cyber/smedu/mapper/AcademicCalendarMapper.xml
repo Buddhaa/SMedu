@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		class_end_day as classEndDay
 	FROM
 		cardinal
+	ORDER BY 
+		recruit_start_day DESC
 	</select>
 	<select id="selectCardinalDetail" parameterType="String" resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
 	SELECT

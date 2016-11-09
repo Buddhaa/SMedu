@@ -3,5 +3,134 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.smedu.mapper.OpenSubjectMapper">
+	<select id="lectureList"
+			parameterType="String"
+			resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
+	select 
+		l.lecture_code AS lectureCode,
+		l.lecture_subject AS lectureSubject,
+		l.lecture_content AS lectureContent,
+		l.lecture_link AS lectureLink,
+		l.lecture_time AS lectureTime,
+		o.professor_name AS professorName,
+		o.book_name AS bookName	,
+		o.cardinal_code AS cardinalCode,
+		a.weekly_schedule AS weeklySchedule,
+		a.academic_calendar_start_day AS academicCalendarStartDay,
+		a.academic_calendar_end_day AS academicCalendarEndDay
+		
+	FROM 
+		lecture AS l
+	INNER JOIN 
+		open_subject AS o
+	ON
+		l.open_subject_code = o.open_subject_code	
+	INNER JOIN
+		academic_calendar AS a
+	ON
+		l.academic_calendar_code = a.academic_calendar_code
+	
+	WHERE
+		l.open_subject_code =  #{openSubjectCode}	
+	</select>
+	
+	
+	<select id="openSubjectAttendList"
+			parameterType="com.cyber.smedu.attend.domain.AttendDomain"
+			resultType="com.cyber.smedu.attend.domain.AttendDomain">
+	select 
+		lecture_code AS lectureCode,
+		attend_complete_confirmation AS attendCompleteConfirmation
+	FROM
+		attend
+	WHERE 
+		open_subject_code = #{openSubjectCode} AND student_code = #{studentCode}	
+	</select>
+	
+	
+	<!-- 한명의 학생 회원정보 -->
+	<select id="studentSelectOne" 
+			parameterType="String" 
+			resultType="com.cyber.smedu.user.domain.StudentDomain">
+		SELECT	
+			u.user_code AS userCode,
+			u.department_code AS departmentCode,
+			d.department_name AS departmentName,
+			u.user_id AS userId,
+			u.user_pw AS userPw,
+			u.user_name AS userName,
+			u.user_birth AS userBirth,
+			u.user_gender AS userGender,
+			u.user_address AS userAddress,
+			u.user_phone AS userPhone,
+			u.user_email AS userEmail,
+			u.user_educational AS userEducational,
+			u.user_state AS userState,
+			s.student_code AS studentCode,
+			s.cardinal_code AS cardinalCode,
+			s.student_path AS studentPath,
+			s.student_goal AS studentGoal
+		FROM 
+			user u 
+		INNER JOIN
+			student s
+		ON 
+			u.user_code = s.user_code
+		INNER JOIN 
+			department d
+		ON 
+			u.department_code = d.department_code
+		WHERE 
+			u.user_code = #{userCode}
+	</select>
 
+	<select id="classroomAcademicaCtivity"
+			parameterType="com.cyber.smedu.user.domain.StudentDomain"
+			resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	select 
+		c.open_subject_code AS openSubjectCode,
+		o.subject_name AS subjectName,
+		ca.year AS year,
+		ca.semester AS semester,
+		ca.cardinal AS cardinal,
+		ca.class_start_day AS classStartDay,
+		ca.class_end_day AS classEndDay
+	FROM
+		class_registration AS c	
+	INNER JOIN 
+		open_subject AS o	
+	ON
+		c.open_subject_code = o.open_subject_code	
+	INNER JOIN
+		cardinal AS ca
+	ON
+		ca.cardinal_code = c.cardinal_code		
+	WHERE
+		c.student_code = #{studentCode} AND c.cardinal_code = #{cardinalCode} AND c.pay_state="T"
+	</select>
+	
+	<!-- 강의코드로 한 강의 객체만들기 -->
+	<select id="oneLecture"
+			parameterType="String"
+			resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
+	select 
+		l.lecture_code AS lectureCode,
+		l.open_subject_code AS openSubjectCode,
+		l.academic_calendar_code AS academicCalendarCode,
+		l.lecture_subject AS lectureSubject,
+		l.lecture_content AS lectureContent,
+		l.lecture_link AS lectureLink,
+		l.lecture_time AS lectureTime,
+		l.lecture_register_date AS lectureRegisterDate,
+		a.academic_calendar_end_day AS academicCalendarEndDay
+	FROM 
+		lecture AS l
+	INNER JOIN 
+		academic_calendar AS a
+	ON
+	 	l.academic_calendar_code = a.academic_calendar_code		
+	WHERE 
+		lecture_code = #{lectureCode}		
+	</select>
+	<!-- 장용 -->
 </mapper>

@@ -98,6 +98,11 @@ public class UserDaoImpl implements UserDao {
 	public List<UserDomain> selectAdminJoinRequestList() {
 		return sqlSession.selectList(NS+".selectAdminJoinRequestList");
 	}
+	//관리자 학생성적관리 학생 리스트
+	@Override
+	public List<StudentDomain> selectAdminStudentList(Map<String, Object> map) {
+		return sqlSession.selectList(NS+".selectAdminStudentList", map);
+	}
 	//한명의 학생 회원정보
 	@Override
 	public StudentDomain studentSelectOne(String userCode) {
@@ -121,46 +126,6 @@ public class UserDaoImpl implements UserDao {
 	public StudentDomain studentCode(String userCode) {		
 		
 		return sqlSession.selectOne(NS+".studentSelectOne", userCode);
-	}
-
-	//학생이수학점관리 데이터 받기
-	@Override
-	public List<StudentDomain> finalResultGrade(String studentCode) {
-		
-		return sqlSession.selectList(NS+".finalResultGrade", studentCode);
-	}
-
-	//학생의 상담내역 페이지 이동
-	@Override
-	public List<BoardArticleDomain> consultingHistory(String userCode) {
-		
-		return  sqlSession.selectList(NS+".consultingHistory", userCode);
-	}
-	
-	//학생의 상담내역 디테일페이지 이동
-	@Override
-	public BoardArticleDomain consultingHistoryDetail(String boardArticleCode) {
-		return sqlSession.selectOne(NS+".consultingHistoryDetail", boardArticleCode);
-	}
-
-	//나의 학사관리 페이지 이동
-	@Override
-	public List<CardinalDomain> classroomAcademicaCtivity(String userCode) {
-		return sqlSession.selectList(NS+".classroomAcademicaCtivity", userCode);
-	}
-
-	//해당과목 강의 리스트
-	@Override
-	public List<LectureDomain> lectureList(String openSubjectCode) {
-		
-		return sqlSession.selectList(NS+".lectureList", openSubjectCode);
-	}
-	
-	//나의 학사관리에서 과목 선택시 출석여부 확인
-	@Override
-	public List<AttendDomain> openSubjectAttendList(AttendDomain attendDomain) {
-
-		return sqlSession.selectList(NS+".openSubjectAttendList", attendDomain);
 	}
 	@Override
 	public ProfessorDomain professorSelectOne(String userCode) {		

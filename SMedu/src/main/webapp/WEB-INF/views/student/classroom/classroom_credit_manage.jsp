@@ -9,28 +9,57 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<script>
+	$(document).ready(function(){
+		$("#openSubject").change(function(){
+			var openSubjectCode = $("#openSubject").val();
+			location.replace('/classroomCreditManage?openSubjectCode=' + openSubjectCode);
+		});
+	});
+</script>
 
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
 	<div class="wrapper row3">
 		<div class="hoc container clear">
-			<div class="sidebar one_quarter first">
-				<nav class="sdb_holder">
-					<ul>
-						<li><a href="#">나의 학사 활동</a></li>
-						<li><a href="#">나의 학점관리</a></li>
-						<li><a href="#">과제 참여</a></li>
-						<li><a href="#">토론 참여</a></li>
-						<li><a href="#">성적이의신청</a></li>
-						<li><a href="#">강의평가</a></li>
-						<li><a href="#">수강후기</a></li>
-					</ul>
-				</nav>
-			</div>
+			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
 			<div class="content three_quarter">
-			
-			
+				<fieldset>
+				<h1>나의 학점 관리</h1>
+				</fieldset>
+				<div class="col-md-4">
+					<select class="form-control" id="openSubject">
+						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
+									<c:if test="${status.count eq 1}">
+										<option value="">${openSubjectSelect.year}년-${openSubjectSelect.semester}학기-${openSubjectSelect.cardinal}기</option>
+									</c:if>
+									
+						</c:forEach>
+						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}"> 
+								<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
+						</c:forEach>
+					</select>
+				</div>
+				
+				<!-- 본문 -->
+				<table>
+						<tr>
+						<c:forEach var="gradeDomainList" items="${gradeDomainList}" varStatus="status">
+								<th>
+									${gradeDomainList.gradeEvaluationCategory}
+								</th>	 						
+						</c:forEach>
+						</tr>
+						<tr>
+						<c:forEach var="gradeDomainList" items="${gradeDomainList}" varStatus="status">
+								<td>		
+									${gradeDomainList.gradeScore}
+								</td>
+						</c:forEach>
+						</tr>
+					</table>
+				
 			</div>
 		</div>
 	</div>	

@@ -7,6 +7,7 @@ public class TaskResultDomain {
 	private String taskResultCode;
 	private String taskCode;
 	private String studentCode;
+	private String taskSubject;
 	private String taskResultTitle;
 	private String taskResultContent;
 	private Date taskResultDate;
@@ -33,6 +34,12 @@ public class TaskResultDomain {
 	}
 	public void setStudentCode(String studentCode) {
 		this.studentCode = studentCode;
+	}
+	public String getTaskSubject() {
+		return taskSubject;
+	}
+	public void setTaskSubject(String taskSubject) {
+		this.taskSubject = taskSubject;
 	}
 	public String getTaskResultTitle() {
 		return taskResultTitle;

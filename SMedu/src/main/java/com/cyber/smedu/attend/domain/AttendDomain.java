@@ -1,15 +1,13 @@
 package com.cyber.smedu.attend.domain;
 
-import java.sql.Timestamp;
-
 public class AttendDomain {
 	private String attendCode;
 	private String studentCode;
 	private String openSubjectCode;
 	private String lectureCode;
 	private String academicCalendarCode;
-	private Timestamp attendLectureTime;
-	private Timestamp attendDate;
+	private String attendLectureTime;
+	private String attendDate;
 	private String attendCompleteConfirmation;
 	private int attendScore;
 	
@@ -43,16 +41,16 @@ public class AttendDomain {
 	public void setAcademicCalendarCode(String academicCalendarCode) {
 		this.academicCalendarCode = academicCalendarCode;
 	}
-	public Timestamp getAttendLectureTime() {
+	public String getAttendLectureTime() {
 		return attendLectureTime;
 	}
-	public void setAttendLectureTime(Timestamp attendLectureTime) {
+	public void setAttendLectureTime(String attendLectureTime) {
 		this.attendLectureTime = attendLectureTime;
 	}
-	public Timestamp getAttendDate() {
+	public String getAttendDate() {
 		return attendDate;
 	}
-	public void setAttendDate(Timestamp attendDate) {
+	public void setAttendDate(String attendDate) {
 		this.attendDate = attendDate;
 	}
 	public String getAttendCompleteConfirmation() {

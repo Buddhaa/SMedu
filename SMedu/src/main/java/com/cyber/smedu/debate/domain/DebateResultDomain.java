@@ -7,6 +7,7 @@ public class DebateResultDomain {
 	private String debateResultCode;
 	private String debateCode;
 	private String studentCode;
+	private String userName;
 	private String debateComment;
 	private Timestamp debateRegisterDate;
 	
@@ -27,6 +28,12 @@ public class DebateResultDomain {
 	}
 	public void setStudentCode(String studentCode) {
 		this.studentCode = studentCode;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getDebateComment() {
 		return debateComment;

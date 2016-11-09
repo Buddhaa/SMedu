@@ -30,7 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		s.user_code AS userCode,
 		u.user_name AS userName,
 		u.user_phone AS userPhone,
-		u.user_address AS userAddress
+		u.user_address AS userAddress,
+		u.user_email AS userEmail
 	FROM
 		class_registration c
 	INNER JOIN
@@ -44,20 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		open_subject_code = #{openSubjectCode}
 	AND 
-		pay_state = 
-		(
-		SELECT DISTINCT 
-			c.pay_state 
-		FROM
-			open_subject o
-		INNER JOIN
-			class_registration c
-		ON
-			o.open_subject_code = c.open_subject_code
-		)
+		pay_state = 'T'
 
 	</select>
 
+	<!-- 교수 담당학생의 성적(중간,기말,과제,토론,출석) select 쿼리-->
 	<select id="professorStudentGradeSelect"
 		parameterType="String"
 		resultType="com.cyber.smedu.grade.domain.GradeDomain">
@@ -84,4 +76,138 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	
 	</select>
+	
+	<!-- 교수 담당학생의 최종성적과 이수여부 select 쿼리 -->
+	<select id="professorStudentFinalGradeSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.grade.domain.FinalGradeDomain">
+		
+		SELECT 
+			final_result AS finalResult,
+			complete_confirmation AS completeConfirmation
+		FROM
+			final_result_complete_confirmaition
+		WHERE
+			student_code = 
+			(
+			SELECT 
+				student_code 
+			FROM
+				student
+			WHERE
+				user_code = #{userCode}
+			)
+	
+	</select>
+	
+	<select id="professorStudentNameAndCodeSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.user.domain.StudentDomain">
+	
+	SELECT
+		s.user_code AS userCode,
+		u.user_name AS userName,
+		s.student_code AS studentCode,
+		c.open_subject_code AS openSubjectCode
+	FROM
+		class_registration c
+	INNER JOIN
+		student s
+	ON
+		c.student_code = s.student_code
+	INNER JOIN
+		user u
+	ON
+		s.user_code = u.user_code
+	WHERE
+		open_subject_code = #{openSubjectCode}
+	AND 
+		pay_state = 'T'
+
+	</select>
+	<!-- 한명의 학생 회원정보 -->
+	<select id="studentSelectOne" 
+			parameterType="String" 
+			resultType="com.cyber.smedu.user.domain.StudentDomain">
+		SELECT	
+			u.user_code AS userCode,
+			u.department_code AS departmentCode,
+			d.department_name AS departmentName,
+			u.user_id AS userId,
+			u.user_pw AS userPw,
+			u.user_name AS userName,
+			u.user_birth AS userBirth,
+			u.user_gender AS userGender,
+			u.user_address AS userAddress,
+			u.user_phone AS userPhone,
+			u.user_email AS userEmail,
+			u.user_educational AS userEducational,
+			u.user_state AS userState,
+			s.student_code AS studentCode,
+			s.cardinal_code AS cardinalCode,
+			s.student_path AS studentPath,
+			s.student_goal AS studentGoal
+		FROM 
+			user u 
+		INNER JOIN
+			student s
+		ON 
+			u.user_code = s.user_code
+		INNER JOIN 
+			department d
+		ON 
+			u.department_code = d.department_code
+		WHERE 
+			u.user_code = #{userCode}
+	</select>
+	
+	<select id="finalResultGrade"
+			parameterType="String"
+			resultType="com.cyber.smedu.user.domain.StudentDomain">
+	select 
+		p.student_code AS studentCode,
+		p.cardinal_code AS cardinalCode,
+		f.open_subject_code AS openSubjectCode,
+		f.final_result AS finalResult,
+		f.complete_confirmation AS completeConfirmation,
+		o.subject_name AS subjectName,
+		c.year AS year,
+		c.semester AS semester,
+		c.cardinal AS cardinal
+	from 
+		pay AS p 
+	INNER JOIN 
+		final_result_complete_confirmaition AS f
+	ON 
+		p.student_code = f.student_code AND p.cardinal_code = f.cardinal_code
+	INNER JOIN
+		open_subject AS o
+	ON
+		f.open_subject_code = o.open_subject_code	
+	INNER JOIN
+		cardinal AS c
+	ON
+		f.cardinal_code = c.cardinal_code		
+	WHERE 
+		p.student_code = #{studentCode};	
+	</select>
+	
+	
+	<select id="studentCreditManage"
+			parameterType="com.cyber.smedu.grade.domain.GradeDomain"
+			resultType="com.cyber.smedu.grade.domain.GradeDomain">
+	SELECT 
+		grade_code AS gradeCode,
+		student_code AS studentCode,
+		open_subject_code AS openSubjectCode,
+		grade_evaluation_category AS gradeEvaluationCategory,
+		grade_score AS gradeScore,
+		participation_state AS participationState
+	FROM
+		grade	
+	WHERE
+		student_code = #{studentCode} AND open_subject_code = #{openSubjectCode}	
+	
+	</select>
+
 </mapper>

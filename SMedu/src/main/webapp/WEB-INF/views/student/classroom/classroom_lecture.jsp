@@ -12,28 +12,13 @@
 
 </head>
 <body>
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
-	<div class="wrapper row3">
-		<div class="hoc container clear">
-			<div class="sidebar one_quarter first">
-				<nav class="sdb_holder">
-					<ul>
-						<li><a href="#">나의 학사 활동</a></li>
-						<li><a href="#">나의 학점관리</a></li>
-						<li><a href="#">과제 참여</a></li>
-						<li><a href="#">토론 참여</a></li>
-						<li><a href="#">성적이의신청</a></li>
-						<li><a href="#">강의평가</a></li>
-						<li><a href="#">수강후기</a></li>
-					</ul>
-				</nav>
-			</div>
-			<div class="content three_quarter">
-			
-			
-			</div>
-		</div>
-	</div>	
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/foot.jsp" />
+	<div style="text-align: center;">
+		<h1>${oneLectureList.LectureList.lectureContent}</h1>
+		<iframe width="750" height="500" src="${oneLectureList.LectureList.lectureLink}&autohide=1"></iframe>
+		<p style="color: red" >${oneLectureList.text}</p>
+	</div>
+	
+	<button id="play">재생</button>
+	<button id="pause">일시정지</button>
 </body>
 </html>

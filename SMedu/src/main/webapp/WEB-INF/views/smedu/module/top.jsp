@@ -147,34 +147,34 @@
       <c:if test="${userInfo.userLevel==null}">
 	      <li><a class="drop" href="/smedu/main/loginForm">나의강의실</a>
 	      	 <ul>
-	          <li><a href="#">나의 학사활동</a></li>
-	          <li><a href="#">나의 학점관리</a></li>
-	          <li><a href="#">과제 참여</a></li>
-	          <li><a href="#">토론 참여</a></li>
-	          <li><a href="#">성적 이의신청</a></li>
-	          <li><a href="#">강의 평가</a></li>
-	          <li><a href="#">수강 후기</a></li>
+	          <li><a href="/classroomAcademicActivity">나의 학사활동</a></li>
+	          <li><a href="/classroomCreditManage">나의 학점관리</a></li>
+	          <li><a href="/classroomTaskJoin">과제 참여</a></li>
+	          <li><a href="/classroomDebateJoin">토론 참여</a></li>
+	          <li><a href="/classroomObjection">성적 이의신청</a></li>
+	          <li><a href="/classroomLectureEvaluationList">강의 평가</a></li>
+	          <li><a href="/classroomLectureReview">수강 후기</a></li>
 	        </ul>
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='학생'}">
-	      <li><a class="drop" href="#">나의강의실</a>
+	      <li><a class="drop" href="/classroomAcademicActivity">나의강의실</a>
 	      	 <ul>
-	          <li><a href="#">나의 학사활동</a></li>
-	          <li><a href="#">나의 학점관리</a></li>
-	          <li><a href="#">과제 참여</a></li>
-	          <li><a href="#">토론 참여</a></li>
-	          <li><a href="#">성적 이의신청</a></li>
-	          <li><a href="#">강의 평가</a></li>
-	          <li><a href="#">수강 후기</a></li>
+	          <li><a href="/classroomAcademicActivity">나의 학사활동</a></li>
+	          <li><a href="/classroomCreditManage">나의 학점관리</a></li>
+	          <li><a href="/classroomTaskJoin">과제 참여</a></li>
+	          <li><a href="/classroomDebateJoin">토론 참여</a></li>
+	          <li><a href="/classroomObjection">성적 이의신청</a></li>
+	          <li><a href="/classroomLectureEvaluationList">강의 평가</a></li>
+	          <li><a href="/classroomLectureReview">수강 후기</a></li>
 	        </ul>
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='교수'}">
 	      <li><a class="drop" href="/professorSubjectSelect">교무관리</a>
 	      	 <ul>
-	          <li><a href="/professorSubjectSelect">학생성적조회</a></li>
-	          <li><a href="#">학생성적관리</a></li>
+	          <li><a href="/professorSubjectSelectForCheck">학생성적조회</a></li>
+	          <li><a href="/professorSubjectSelectForManage">학생성적관리</a></li>
 	          <li><a href="#">성적이의신청관리</a></li>
 	          <li><a href="#">담당개설과목관리</a></li>
 	        </ul>

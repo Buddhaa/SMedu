@@ -27,24 +27,6 @@ public interface UserService {
 	//학생의 정보수정 처리
 	void studentUpdate(StudentDomain studentDomain);
 	
-	//학생의 이수학점관리 페이지 이동
-	List<StudentDomain> finalResultGrade(String userCode);
-	
-	//학생의 상담내역 페이지 이동
-	List<BoardArticleDomain> consultingHistory(String userCode);
-	
-	//학생의 상담내역 디테일 페이지 이동
-	BoardArticleDomain consultingHistoryDetail(String boardArticleCode);
-	
-	//나의 학사관리 페이지 이동
-	List<CardinalDomain>classroomAcademicaCtivity(String userCode);
-	
-	//나의 학사관리에서 과목 선택시
-	List<LectureDomain> classroomAcademicaCtivityView(String openSubjectCode);
-	
-	//나의 학사관리에서 과목 선택시 출석여부 확인
-	List<AttendDomain> openSubjectAttendList(String userCode,AttendDomain attendDomain);
-	
 	ProfessorDomain getProfessorSelectOne(String userCode);
 
 	void professorUpdate(ProfessorDomain professorDomain);

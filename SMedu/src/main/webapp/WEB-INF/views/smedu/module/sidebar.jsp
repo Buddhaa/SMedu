@@ -15,20 +15,20 @@
 		     <c:if test="${userInfo.userLevel=='학생'}">
 			   <h3>나의강의실</h3><hr>
 				<ul>
-				  <li><a href="#">나의 학사활동</a></li>
-				  <li><a href="#">나의 학점관리</a></li>
-				  <li><a href="#">과제 참여</a></li>
-				  <li><a href="#">토론 참여</a></li>
-				  <li><a href="#">성적 이의신청</a></li>
-				  <li><a href="#">강의 평가</a></li>
-				  <li><a href="#">수강 후기</a></li>
+				  <li><a href="/classroomAcademicActivity">나의 학사활동</a></li>
+				  <li><a href="/classroomCreditManage">나의 학점관리</a></li>
+				  <li><a href="/classroomTaskJoin">과제 참여</a></li>
+				  <li><a href="/classroomDebateJoin">토론 참여</a></li>
+				  <li><a href="/classroomObjection">성적 이의신청</a></li>
+				  <li><a href="/classroomLectureEvaluationList">강의 평가</a></li>
+				  <li><a href="/classroomLectureReview">수강 후기</a></li>
 				</ul>
 		    </c:if>
 		    <c:if test="${userInfo.userLevel=='교수'}">
 		      <h3>교무관리</h3><hr>
 		     	 <ul>
-		         <li><a href="#">학생성적조회</a></li>
-		         <li><a href="#">학생성적관리</a></li>
+		         <li><a href="/professorSubjectSelectForCheck">학생성적조회</a></li>
+		         <li><a href="/professorSubjectSelectForManage">학생성적관리</a></li>
 		         <li><a href="#">성적이의신청관리</a></li>
 		         <li><a href="#">담당개설과목관리</a></li>
 		       </ul>
@@ -42,11 +42,6 @@
 		       </ul>
 		    </c:if>
 		</nav>
-	</div>
-	
-	
-	
-	
-
+	</div>	
 </body>
 </html>

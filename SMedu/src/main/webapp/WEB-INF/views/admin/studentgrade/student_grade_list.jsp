@@ -27,24 +27,25 @@
     <div class="pad margin no-print">
       <div class="callout callout-info" style="margin-bottom: 0!important; width:600px">
         <h4><i class="fa fa-info"></i> Search Box:</h4><br/>
-        <!-- select -->               
+        <!-- select -->
+        	<form action="/admin/studentGrade/list">
                	<div class="form-group">
                   <label class="col-md-2">학과</label>
-                  <select class="form-control" style="width:200px">
-                    <option>option 1</option>
-                    <option>option 2</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
+                  <select class="form-control" style="width:200px" name="departmentCode">
+                  	<option value="">==선택==</option> 
+                  <c:forEach var="department" items="${departmentList}">
+                    <option value="${department.departmentCode}">${department.departmentName}</option>         
+                  </c:forEach>
                   </select>
                	</div>
                	<div class="form-group">
                   <label class="col-md-2">이름</label>
-                  <input type="text" class="form-control" style="width:200px">                  
+                  <input type="text" class="form-control" style="width:200px" name="userName">                  
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-default"><i class="fa fa-search">검색</i></button>                 
                 </div>
+            </form>
               </div>
       </div>
 	<!-- Main content -->
@@ -69,25 +70,31 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tr>
-                  <th>기수코드</th>
-                  <th>기수</th>
-                  <th>모집 시작일</th>
-                  <th>모집 종료일</th>
-                  <th>수강 시작일</th>
-                  <th>수강 종료일</th>
+                  <th>학생코드</th>
+                  <th>학과</th>
+                  <th>이름</th>
+                  <th>생년월일</th>                  
+                  <th>최근 수강 기수</th>                  
                   <th></th>
                 </tr>
-                <%-- <c:forEach var="cardinal" items="${cardinalList}">
+                <c:forEach var="student" items="${studentList}">
 	                <tr>
-	                  <td>${cardinal.cardinalCode}</td>
-	                  <td>${cardinal.year}년 ${cardinal.semester}학기 ${cardinal.cardinal}기수</td>
-	                  <td>${cardinal.recruitStartDay}</td>
-	                  <td>${cardinal.recruitEndDay}</td>
-	                  <td>${cardinal.classStartDay}</td>
-	                  <td>${cardinal.classEndDay}</td>
-	                  <td><a href="/admin/academicCalendar/detail?cardinalCode=${cardinal.cardinalCode}"><span class="label label-primary">일정확인</span></a></td>
+	                  <td>${student.studentCode}</td>
+	                <c:forEach var="department" items="${departmentList}">
+	                  	<c:if test="${student.departmentCode == department.departmentCode}">
+	                  		<td>${department.departmentName}</td>
+	                  	</c:if>
+	                </c:forEach>
+	                  <td>${student.userName}</td>
+	                  <td>${student.userBirth}</td>
+	                   <c:forEach var="cardinal" items="${cardinalList}">
+	                  	<c:if test="${student.cardinalCode eq cardinal.cardinalCode}">
+	                  		<td>${cardinal.year}년 ${cardinal.semester}학기 ${cardinal.cardinal}기수</td>
+	                  	</c:if>
+	                  </c:forEach>
+	                  <td><a href="/admin/studentGrade/detail"><span class="label label-warning">조회</span></a></td>
 	                </tr>
-                </c:forEach> --%>
+                </c:forEach>
               </table>
             </div>
             <!-- /.box-body -->

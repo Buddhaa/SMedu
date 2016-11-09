@@ -2,4 +2,99 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.DebateMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.DebateMapper">
+
+	<select id="professorStudentDebateCommentAndDateSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.debate.domain.DebateResultDomain">
+	
+	SELECT
+		u.user_code AS userCode,
+		u.user_name AS userName,
+		d.student_code AS studentCode,
+		d.debate_comment AS debateComment,
+		d.debate_register_date AS debateRegisterDate
+	FROM
+		class_registration c
+	INNER JOIN
+		student s
+	ON
+		c.student_code = s.student_code
+	INNER JOIN
+		user u
+	ON
+		s.user_code = u.user_code
+	INNER JOIN
+		debate_result d
+	ON
+		d.student_code = s.student_code
+	WHERE
+		open_subject_code = #{openSubjectCode}
+	AND 
+		pay_state = 'T'
+	ORDER BY
+		d.debate_register_date ASC
+	
+	</select>
+	
+	<select id="professorStudentDebateSubjectAndContentSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.debate.domain.DebateDomain">
+	
+	SELECT
+		debate_code AS debateCode,
+		debate_subject AS debateSubject,
+		debate_content AS debateContent,
+		debate_register_date AS debateRegisterDate
+	FROM
+		debate
+	WHERE
+		open_subject_code = #{openSubjectCode}
+	
+	</select>
+	<!-- 우영 -->
+	<select id="oneDebateList"
+		parameterType="String"
+		resultType="com.cyber.smedu.debate.domain.DebateDomain">
+	SELECT
+		debate_code AS debateCode,
+		open_subject_code AS professorCode,
+		open_subject_code AS openSubjectCode,
+		academic_calendar_code AS academicCalendarCode,
+		debate_subject AS debateSubject,
+		debate_content AS debateContent,
+		debate_register_date AS debateRegisterDate
+	FROM
+		debate
+	WHERE
+		open_subject_code =#{openSubjectCode}
+
+</select>
+
+<select id="debateResultList"
+		parameterType="String"
+		resultType="com.cyber.smedu.debate.domain.DebateResultDomain">
+
+SELECT
+	dr.debate_comment AS debateComment,
+	dr.debate_register_date AS debateRegisterDate,
+	u.user_code AS userCode,
+	u.user_name AS userName
+FROM
+	debate_result dr
+inner join
+	student s
+on
+	dr.student_code = s.student_code
+inner join
+	user u
+on
+	u.user_code = s.user_code
+where
+	dr.debate_code = #{debateCode}
+
+</select>
+<!-- 장용 -->
+	
+
+</mapper>

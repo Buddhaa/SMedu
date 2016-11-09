@@ -25,12 +25,16 @@
 			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
 			<div class="content three_quarter">
 				<fieldset>
-				<legend>나의 학사활동</legend>
+				<h2>나의 학사활동</h2>
 				<div class="col-md-4">
 					<select class="form-control" id="openSubject">
-						<option value="">${classroomAcademicaCtivity.get(1).year}년${classroomAcademicaCtivity.get(1).semester}${classroomAcademicaCtivity.get(1).cardinal}</option>
-						<c:forEach var="classroomAcademicaCtivity" items="${classroomAcademicaCtivity}"> 
-							<option value="${classroomAcademicaCtivity.openSubjectCode}">${classroomAcademicaCtivity.subjectName}</option>
+						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
+							<c:if test="${status.count eq 1}">
+								<option value="">${openSubjectSelect.year}년-${openSubjectSelect.semester}학기-${openSubjectSelect.cardinal}기</option>
+							</c:if>
+						</c:forEach>
+						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}"> 
+							<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -63,12 +67,16 @@
 					        	${lectureList.weeklySchedule}
 					        	[${lectureList.academicCalendarStartDay}~${lectureList.academicCalendarEndDay}]
 					        	
-					        <c:if test="${status.count %5 !=0 }">
-					        	<a href="/classroomLecture?lectureCode=${lectureList.lectureCode}" style="float: right;">수강하기</a>
+					        <c:if test="${status.count %5 !=0 }">								
+					        	<a href="#"
+					        	 onclick="javascript:window.open('/classroomLecture?lectureCode=${lectureList.lectureCode}', 'lectureCode' ,'left='+(screen.availWidth-1000)/2+',top='+(screen.availHeight-800)/2+', width=950, height=700')" style="float: right;">
+								수강하기</a>
 					        </c:if>	
 					        
 					        <c:if test="${status.count %5 ==0 }">
-					        	<a href="/classroomExam?lectureCode=${lectureList.lectureCode}" style="float: right;">시험응시</a>
+					        	<a href="#"
+					        	 onclick="javascript:window.open('/classroomExam?lectureCode=${lectureList.lectureCode}', 'lectureCode' ,'left='+(screen.availWidth-1000)/2+',top='+(screen.availHeight-800)/2+', width=950, height=700')" style="float: right;">
+								시험응시</a>
 					        </c:if> 	
 					        </p>
 					        <p class="panel-title">

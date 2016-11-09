@@ -10,26 +10,32 @@
 </head>
 <body>
 	<div class="hoc container clear">
-	<div class="content three_quarter">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>성적평가항목</th>
-				<th>점수</th>
-				<th>참여여부</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="professorStudentGrade" items="${professorStudentGrade }">
+		<div class="content three_quarter">
+			<table class="table table-hover">
 				<tr>
-					<td>${professorStudentGrade.gradeEvaluationCategory }</td>
-					<td>${professorStudentGrade.gradeScore }</td>
-					<td>${professorStudentGrade.participationState }</td>
+					<th>성적평가항목</th>
+					<th>점수</th>
+					<th>참여여부</th>
 				</tr>
-			</c:forEach>	
-		</tbody>
-	</table>
+				<c:forEach var="professorStudentGrade" items="${professorStudentGrade }">
+					<tr>
+						<td>${professorStudentGrade.gradeEvaluationCategory }</td>
+						<td>${professorStudentGrade.gradeScore }</td>
+						<td>${professorStudentGrade.participationState }</td>
+					</tr>
+				</c:forEach>	
+			</table>
+			<table class="table table-hover">
+				<tr>
+					<th>최종성적</th>
+					<th>이수여부</th>
+				</tr>
+				<tr>
+					<td>${professorStudentFinalGrade.finalResult }</td>
+					<td>${professorStudentFinalGrade.completeConfirmation }</td>
+				</tr>			
+			</table>
+		</div>
 	</div>
-</div>
 </body>
 </html>

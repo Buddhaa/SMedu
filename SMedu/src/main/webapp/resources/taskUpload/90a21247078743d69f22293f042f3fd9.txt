@@ -1,0 +1,21 @@
+한명의 학생정보
+select  
+	department_code as departmentCode,
+	user_id as userId,
+	user_pw as userPw,
+	user_name as userName,
+	user_birth as userBirth,
+	user_gender as userGender,
+	user_address as userAddress,
+	user_phone as userPhone,
+	user_email as userEmail,
+	user_educational as userEducational,
+	student_code as studentCode,
+	cardinal_code as cardinalCode,
+	student_path as studentPath,
+	student_goal as studentGoal
+		
+from user as u INNER JOIN student as s
+on user.user_code = student.user_code
+where user.user_code = 'user_code8';
+

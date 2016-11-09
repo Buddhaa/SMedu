@@ -45,24 +45,6 @@ public interface UserDao {
 	//회원의 학생코드 받기
 	StudentDomain studentCode(String userCode);
 	
-	//학생이수학점관리 데이터 받기
-	List<StudentDomain> finalResultGrade(String studentCode);	
-	
-	//학생의 상담내역 페이지 이동
-	List<BoardArticleDomain> consultingHistory(String userCode);
-	
-	//학생의 상담내역 디테일페이지 이동
-	BoardArticleDomain consultingHistoryDetail(String boardArticleCode);
-	
-	//나의 학사관리 페이지 이동
-	List<CardinalDomain> classroomAcademicaCtivity(String studentCode);
-	
-	//해당과목 강의 리스트
-	List<LectureDomain> lectureList(String openSubjectCode);
-	
-	//나의 학사관리에서 과목 선택시 출석여부 확인
-	List<AttendDomain> openSubjectAttendList(AttendDomain attendDomain);
-	
 	ProfessorDomain professorSelectOne(String userCode);
 
 	void professorUpdate(ProfessorDomain professorDomain);
@@ -78,6 +60,8 @@ public interface UserDao {
 	StudentDomain selectAdminStudentDetail(String userCode);
 
 	List<UserDomain> selectAdminJoinRequestList();
+
+	List<StudentDomain> selectAdminStudentList(Map<String, Object> map);
 
 	
 

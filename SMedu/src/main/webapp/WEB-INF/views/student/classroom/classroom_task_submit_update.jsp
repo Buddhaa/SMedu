@@ -9,28 +9,50 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<script>
+	$(document).ready(function(){
+		
+		$("#taskResultUpdateAdd").click(function(){
+			$("#taskResultUpdateForm").submit();	
+		});
+		
+		$("#taskResultUpdateCancel").click(function(){
+			location.replace('/classroomTaskJoin');
+		});		
+	});
+</script>
 
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
 	<div class="wrapper row3">
 		<div class="hoc container clear">
-			<div class="sidebar one_quarter first">
-				<nav class="sdb_holder">
-					<ul>
-						<li><a href="#">나의 학사 활동</a></li>
-						<li><a href="#">나의 학점관리</a></li>
-						<li><a href="#">과제 참여</a></li>
-						<li><a href="#">토론 참여</a></li>
-						<li><a href="#">성적이의신청</a></li>
-						<li><a href="#">강의평가</a></li>
-						<li><a href="#">수강후기</a></li>
-					</ul>
-				</nav>
-			</div>
+			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
 			<div class="content three_quarter">
-			
-			
+				<fieldset>
+				<h1>과제수정</h1>
+					<form id="taskResultUpdateForm" action="/taskResultUpdate" enctype="multipart/form-data" method="post">
+						<input type="hidden" value="${taskSubmitUpdateDetail.taskResultCode}" name="taskResultCode">						
+						<div class="form-group">
+							<label for="usr">제목:</label>
+							<input type="text" class="form-control" value="${taskSubmitUpdateDetail.taskResultTitle}" name="taskResultTitle">
+						</div>
+						
+						<div class="form-group">
+							<label for="usr">내용:</label>
+							<textarea class="form-control" rows="15" name="taskResultContent">${taskSubmitUpdateDetail.taskResultContent}</textarea>
+						</div>
+						
+						<input type="hidden" value="${taskSubmitUpdateDetail.taskFileName}" name="taskFileName">
+						<input type="hidden" value="${taskSubmitUpdateDetail.taskFileExt}" name="taskFileExt">
+						<div>
+							<input type="file" name="taskFile">
+							<span>제출된 파일 : ${taskSubmitUpdateDetail.taskOriginFileName}</span>
+						</div>
+					</form>
+					<button type="button" id="taskResultUpdateAdd" class="btn btn-primary btn-lg btn-block">과제 수정하기</button>	
+					<button type="button" id="taskResultUpdateCancel" class="btn btn-primary btn-lg btn-block">취소</button>	
+				</fieldset>
 			</div>
 		</div>
 	</div>	

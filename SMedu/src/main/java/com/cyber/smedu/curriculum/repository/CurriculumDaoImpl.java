@@ -10,10 +10,10 @@ import com.cyber.smedu.curriculum.domain.DepartmentDomain;
 
 @Repository
 public class CurriculumDaoImpl implements CurriculumDao {
-	private String NS = "com.cyber.smedu.mapper.UserMapper";
+	private String NS = "com.cyber.smedu.mapper.CurriculumMapper";
 	@Autowired SqlSessionTemplate sqlSession;
 	
-	//전체회원 로그인
+	//학과 리스트 출력
 	@Override
 	public List<DepartmentDomain> selectDepartmentList() {
 		return sqlSession.selectList(NS+".selectDepartmentList");

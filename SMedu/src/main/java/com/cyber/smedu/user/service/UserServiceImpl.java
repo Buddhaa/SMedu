@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 		map.put("cardinal", cardinal);
 		
 		return map;
-	}
+		}
 
 
 
@@ -162,84 +162,7 @@ public class UserServiceImpl implements UserService {
 		userDao.studentUpdate(studentDomain);
 				
 	}
-
-
-	//학생이수학점관리 페이지
-	@Override
-	public List<StudentDomain> finalResultGrade(String userCode) {
-		//회원의 학생코드 받기
-		String studentCode = userDao.studentCode(userCode).getStudentCode();
-		
-		//학생이수학점관리 데이터 받기
-		List<StudentDomain> studentDomainList = userDao.finalResultGrade(studentCode);	
-		
-		return studentDomainList;
-	}
-
-
-
-	//나의 상담내역페이지 이동 
-	@Override
-	public List<BoardArticleDomain> consultingHistory(String userCode) {
-		
-		List<BoardArticleDomain> consultingHistoryList = userDao.consultingHistory(userCode);
-		return consultingHistoryList;
-	}
-
-
-	//나의 상담내역디테일 페이지 이동
-	@Override
-	public BoardArticleDomain consultingHistoryDetail(String boardArticleCode) {
-		
-		BoardArticleDomain boardArticleDomain = userDao.consultingHistoryDetail(boardArticleCode);
-		return boardArticleDomain;
-	}
-
-
 	
-	//나의 학사관리 페이지 이동
-	@Override
-	public List<CardinalDomain> classroomAcademicaCtivity(String userCode) {
-		
-		//학생이 수강중인 과목리스트 받기
-		List<CardinalDomain> CardinalDomain = userDao.classroomAcademicaCtivity(userCode);
-		
-		System.out.println("to"+CardinalDomain);
-		
-		return CardinalDomain;
-	}
-
-
-	//나의 학사관리에서 과목 선택시
-	@Override
-	public List<LectureDomain> classroomAcademicaCtivityView(String openSubjectCode) {
-		
-		if(openSubjectCode.equals("")){			
-			return null;			
-		}else{
-					
-			//해당과목 강의 리스트		
-			List<LectureDomain> lectureList= userDao.lectureList(openSubjectCode);
-							
-			return lectureList;			
-		}		
-	}
-
-
-	//나의 학사관리에서 과목 선택시 출석여부 확인
-	@Override
-	public List<AttendDomain> openSubjectAttendList(String userCode,AttendDomain attendDomain) {
-		
-		//회원의 학생코드 받기
-		String studentCode = userDao.studentCode(userCode).getStudentCode();
-		attendDomain.setStudentCode(studentCode);		
-		System.out.println("attendDomain:" + attendDomain.toString());
-		
-		//학생의 해당과목 출석리스트
-		List<AttendDomain> attendDomainList= userDao.openSubjectAttendList(attendDomain);		
-		System.out.println("attendDomain:" + attendDomainList.toString());
-		return attendDomainList;
-	}
 	@Override
 	public ProfessorDomain getProfessorSelectOne(String userCode) {
 		

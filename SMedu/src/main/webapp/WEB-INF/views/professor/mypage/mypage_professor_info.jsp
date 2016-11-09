@@ -14,7 +14,7 @@
 
 		// 뒤로가기 버튼 click시 main 화면으로 이동
 		$("#returnBtn").click(function() {
-			location.href = "/";
+			location.href = "/smedu/main/main";
 		});
 		// 수정하기 버튼 click시 수정된 정보화면으로 이동
 		$("#professorUpdateBtn").click(function() {
