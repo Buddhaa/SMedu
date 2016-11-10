@@ -57,7 +57,7 @@
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              <a href="#" class="btn btn-primary btn-block"><b>조회</b></a>
             </div>
             <!-- /.box-body -->
           </div>
@@ -66,11 +66,11 @@
           <!-- About Me Box -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
+              <h3 class="box-title">과목 정보</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+              <strong><i class="fa fa-book margin-r-5"></i> 과목명</strong>
 
               <p class="text-muted">
                 B.S. in Computer Science from the University of Tennessee at Knoxville
@@ -78,13 +78,13 @@
 
               <hr>
 
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> 교수 이름</strong>
 
               <p class="text-muted">Malibu, California</p>
 
               <hr>
 
-              <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+              <strong><i class="fa fa-pencil margin-r-5"></i> 이수구분</strong>
 
               <p>
                 <span class="label label-danger">UI Design</span>
@@ -96,7 +96,7 @@
 
               <hr>
 
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> 학점</strong>
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
             </div>
@@ -108,12 +108,17 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-              <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li class="active"><a href="#activity" data-toggle="tab">총 이수학점</a></li>
+              <li class="active"><a href="#activity2" data-toggle="tab">과목 총 성적</a></li>
+              <li><a href="#timeline" data-toggle="tab">제출물 및 시험답안</a></li>
+              <li><a href="#settings" data-toggle="tab">참여권한여부</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
+                
+              </div>
+              <!-- /.tab-pane -->
+              <div class="active tab-pane" id="activity2">
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">

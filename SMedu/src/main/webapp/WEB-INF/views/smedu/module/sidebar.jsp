@@ -33,7 +33,8 @@
 		    <c:if test="${userInfo.userLevel=='플래너'}">
 		      <h3>업무관리</h3><hr>
 		     	 <ul>
-		         <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 관리</a></li>
+		         <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 미답변</a></li>
+		         <li><a href="/planner/work/planner_learningplan_response">학습설계 답변목록</a></li>
 		          <li><a href="/planner/work/planner_student_list">담당학생 관리</a></li>
 		          <li><a href="/planner/work/planner_consult_list">상담기록 관리</a></li>
 		       </ul>
