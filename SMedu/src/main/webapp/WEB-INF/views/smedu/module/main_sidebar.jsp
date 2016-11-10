@@ -45,7 +45,7 @@
 		<h3>회원 서비스</h3><hr>
 		<nav class="sdb_holder">
 			<ul>
-				<li><a href="#">회원정보수정</a></li>
+				<li><a href="/plannerInfo">회원정보수정</a></li>
        			<li><a href="/userDelete">회원탈퇴</a></li>
 			</ul>
 		</nav>

@@ -22,4 +22,10 @@ public interface GradeDao {
 
 	List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode);
 
+	StudentDomain studentCode(String userCode);
+
+	List<StudentDomain> finalResultGrade(String studentCode);
+
+	List<GradeDomain> studentCreditManage(GradeDomain oneGradeDomain);
+
 }

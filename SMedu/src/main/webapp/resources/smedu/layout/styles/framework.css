@@ -97,11 +97,11 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 
 .first{margin-left:0; clear:left;}
 
-.one_quarter{width:15.5%;}
-.one_third{width:65.6441717791411%;}
+.one_quarter{width:19%;}
+.one_third{width:67.6441717791411%;}
 .one_half, .two_quarter{width:65%;}
-.two_third{width:31.28834355828221%;}
-.three_quarter{width:74.23312883435584%;}
+.two_third{width:29.28834355828221%;}
+.three_quarter{width:77.23312883435584%;}
 
 
 /* Spacing

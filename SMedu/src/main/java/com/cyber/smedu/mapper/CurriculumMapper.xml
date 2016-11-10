@@ -11,5 +11,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM
 		department
 	</select>
+	<!-- 의기 -->
 	
+	<select id="subjectList" parameterType="java.util.Map" resultType="com.cyber.smedu.curriculum.domain.SubjectDomain" >
+		SELECT 
+			subject_code as subjectCode, 
+			department_code as departmentCode, 
+			subject_name as subjectName, 
+			subject_sort as subjectSort, 
+			subject_pay as subjectPay, 
+			subject_credit as subjectCredit
+		FROM 
+			subject
+	</select>
+	<!-- 현호 -->
 </mapper>

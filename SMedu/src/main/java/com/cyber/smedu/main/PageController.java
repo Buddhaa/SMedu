@@ -52,7 +52,7 @@ public class PageController {
 	}
 	/*
 	creditbank폴더 -> 학점은행제란?, 학점인정절차, 학습자등록, 학점인정신청, 학위수여, 평가인정학습과목,
-	독학학위제, 전공소개, 학점인정주의사항, 관련법규, 오리엔테이션, 강의수강방법, 출석률확인방법 페이지 
+	독학학위제, 학점인정주의사항, 관련법규, 오리엔테이션, 강의수강방법, 출석률확인방법 페이지 
 	*/
 	//학점은행제란? 페이지 이동
 	@RequestMapping(value = "/smedu/creditbank/creditbankIntro", method = RequestMethod.GET)
@@ -94,13 +94,7 @@ public class PageController {
 	@RequestMapping(value = "/smedu/creditbank/creditbankSelfEducation", method = RequestMethod.GET)
 	public String creditbankSelfEducation() {
 		return "smedu/creditbank/creditbank_self_education";
-	}
-	
-	//교육과정 페이지 이동
-	@RequestMapping(value = "/smedu/creditbank/curriculumIntro", method = RequestMethod.GET)
-	public String curriculumIntro() {
-		return "smedu/creditbank/curriculum_intro";
-	}
+	}	
 	
 	//학점인정주의사항 페이지 이동
 	@RequestMapping(value = "/smedu/creditbank/creditbankPrecaution", method = RequestMethod.GET)
@@ -131,4 +125,22 @@ public class PageController {
 	public String creditbankAttendWay() {
 		return "smedu/creditbank/creditbank_attend_way";
 	}
+	//컴퓨터공학과란 페이지 이동
+	@RequestMapping(value = "/smedu/curriculum/curriculumComputer", method = RequestMethod.GET)
+	public String curriculumComputer() {
+		return "smedu/curriculum/curriculum_computer";
+	}
+		
+	//정보통신학과란 페이지 이동
+	@RequestMapping(value = "/smedu/curriculum/curriculumCommunication", method = RequestMethod.GET)
+	public String curriculumCommunication() {
+		return "smedu/curriculum/curriculum_communication";
+	}
+	
+	//정보보안학과란 페이지 이동
+	@RequestMapping(value = "/smedu/curriculum/curriculumSecurity", method = RequestMethod.GET)
+	public String curriculumSecurity() {
+		return "smedu/curriculum/curriculum_security";
+	}
+	/*현호--------------------------------------------------------------------------------------*/
 }

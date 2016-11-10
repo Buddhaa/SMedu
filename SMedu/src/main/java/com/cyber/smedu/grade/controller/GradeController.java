@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.cyber.smedu.grade.service.GradeService;
+import com.cyber.smedu.opensubject.service.OpenSubjectService;
 import com.cyber.smedu.user.domain.ProfessorDomain;
+import com.cyber.smedu.user.domain.UserDomain;
 
 @Controller
 @SessionAttributes({"userInfo", "userPlusInfo"})
@@ -20,6 +22,10 @@ public class GradeController {
 	
 	@Autowired
 	GradeService gradeService;
+	
+	@Autowired 
+	OpenSubjectService openSubjectService;
+	
 	
 	//관리자 성적관리 학생 리스트 페이지(검색)
 	@RequestMapping(value="/admin/studentGrade/list", method=RequestMethod.GET)
@@ -124,4 +130,32 @@ public class GradeController {
 		
 	}
 	/*우영---------------------------------------------------------------------------------------------------------------------*/
+	//이수학점관리페이지 이동
+		@RequestMapping(value="/finalResultGrade", method=RequestMethod.GET)
+		public String finalResultGrade(Model model
+										,@ModelAttribute(value="userInfo") UserDomain userDomain){
+			String userCode = userDomain.getUserCode();
+			model.addAttribute("finalResultGrade", gradeService.finalResultGrade(userCode));	
+
+			return "student/mypage/mypage_final_result_grade";		
+		}	
+
+		
+		//나의 학점 관리 페이지 이동
+		@RequestMapping(value="/classroomCreditManage", method=RequestMethod.GET)
+		public String CreditManage(Model model
+									,@ModelAttribute(value="userInfo") UserDomain userDomain
+									,@RequestParam(value="openSubjectCode", defaultValue="") String openSubjectCode){
+		
+			String userCode = userDomain.getUserCode();
+			
+			//나의 학점 관리 페이지 이동 -> 과목선택 가져오기
+			model.addAttribute("openSubjectSelect", openSubjectService.classroomAcademicaCtivity(userCode));
+			
+			//나의 학점 관리 페이지에서 과목 선택시 -> 해당 과목 출석률, 과제, 토론, 시험, 총성적 받아오기
+			model.addAttribute("gradeDomainList", gradeService.studentCreditManage(userCode, openSubjectCode));
+			
+			return "student/classroom/classroom_credit_manage";
+		}
+	/*장용------------------------------------------------------------------------------------------------------------------*/
 }

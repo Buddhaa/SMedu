@@ -27,23 +27,21 @@
 <title>시커먼스</title>
 </head>
 <body>
-	<jsp:include
-		page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />
-	
-	<div class="hoc container clear">	
+<jsp:include page="../module/top.jsp" />
+
+<div class="wrapper row3">
+	<div class="hoc container clear">
+		<jsp:include page="../module/main_sidebar.jsp" />
+		
 		<div class="content three_quarter">
-			<jsp:include
-				page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/main_sidebar.jsp" />
-			<form id="userDeleteForm" action="/userStateUpdate" 
-				class="form-horizontal" method="post">
+		<h1>회원탈퇴</h1><hr>
+			<form id="userDeleteForm" action="/userStateUpdate"  class="form-horizontal" method="post">
 				
 				<!-- session에 저장된 userPw,userCode값 꺼내서 value에 넣기 -->
 				<input type="hidden" id="sessionUserPw" value="${userInfo.userPw}"> <!-- ${ssesionKeyValue.userPw} -->				
 				<input type="hidden" name="userCode" value="${userInfo.userCode}"> <!-- ${ssesionKeyValue.userCode} -->
 				<fieldset>
-					
-					<legend>회원탈퇴</legend>
-				
+									
 					<div class="form-group">
 						<ul>
 							<li>회원탈퇴시 회원님의 본 사이트에 입력한 회원님의 모든 정보가 자동삭제 됩니다.</li>
@@ -55,11 +53,12 @@
 					</div>
 					
 					<div style="background-color: #ffdcdc" class="form-group">
-						<p>
-							본인 확인을 위해 비밀번호를 입력한 후, “탈퇴확인” 버튼을 눌러주세요.<br>
+						<ul>
+							<li>본인 확인을 위해 비밀번호를 입력한 후, “탈퇴확인” 버튼을 눌러주세요.<br>
 							(회원 탈퇴시 나의계정의 <strong style="color: red;">모든 정보와 DB가 자동 삭제되며,<br>
-								재가입하신 이후에도 사이트 이용에도 제한이 적용</strong>되오니 신중하게 탈퇴신청을 해주세요.)<br>
-						</p>						
+							재가입하신 이후에도 사이트 이용에도 제한이 적용</strong>되오니 신중하게 탈퇴신청을 해주세요.)<br>
+						</li>
+						</ul>						
 						<div class="form-group">							
 							<label class="col-md-4 control-label">비밀번호</label>
 							<div class="col-md-4">
@@ -79,7 +78,8 @@
 			</form>
 		</div>
 	</div>
-	<jsp:include
-		page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/foot.jsp" />
+</div>
+
+<jsp:include page="../module/foot.jsp" />
 </body>
 </html>

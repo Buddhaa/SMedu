@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<br>
 <div class="wrapper row4">
   <footer id="footer" class="hoc clear">   
     <nav>
@@ -31,7 +32,7 @@
   			<p>한국 스마트 정보 교육원 www.ksmart.or.kr/</p> 
 			<p>전화번호 : 063 - 717 - 1008</p> 
 			<p>주소 : 전북 전주시 덕진구 기린대로 446(금암동 708-16) 2층 한국스마트정보교육원</p>
-			<p>Copyright &copy; 2016 - All Rights Reserved - <a href="#">buddha.cafe24.com</a></p>
+			<p>Copyright &copy; 2016 - All Rights Reserved - <a href="http://buddhaa.cafe24.com">buddhaa.cafe24.com</a></p>
 		</div>
 	<div class="two_third" align="center">
 		<a href=""><img alt="" src="/resources/smedu/images/demo/backgrounds/logo2.jpg"></a>

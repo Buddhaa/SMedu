@@ -2,4 +2,70 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.BoardMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.BoardMapper">
+
+	<select id="consultingHistory"
+				parameterType="String"
+				resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
+		select 
+			board_article_code AS boardArticleCode,
+			board_article_title AS boardArticleTitle,
+			board_article_writer AS boardArticleWriter,
+			board_article_date AS boardArticleDate
+		from board_article
+		where user_code = #{userCode} AND board_code = "board_code5"			
+	</select>
+	
+	<select id="consultingHistoryDetail"
+				parameterType="String"
+				resultType="com.cyber.smedu.board.domain.BoardArticleDomain">	
+		select 
+			b.board_article_title AS boardArticleTitle,
+			b.board_article_writer AS boardArticleWriter,
+			b.board_article_content AS boardArticleContent,
+			c.comment_content AS commentContent,
+			c.comment_date AS commentDate,
+			u.user_name AS userName		
+		FROM 
+			board_article AS b		
+		LEFT OUTER JOIN
+			comment AS c	
+		ON 
+			b.board_article_code = c.board_article_code		
+		LEFT OUTER JOIN
+			user AS u
+		ON
+			c.user_code = u.user_code		
+		WHERE
+			b.board_article_code = #{boardArticleCode}	
+	</select>
+	<!-- 장용 -->
+	<select id="boardCategoryList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardCategoryDomain">
+		select 
+			board_code as boardCode, 
+			board_name as boardName
+		from 
+			board
+	</select>
+	
+	<select id="boardConsultingList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
+		select 
+			board_article_code as boardArticleCode, 
+			user_code as userCode, 
+			board_code as boardCode, 
+			board_article_title as boardArticleTitle, 
+			board_article_writer as boardArticleWriter, 
+			board_article_content as boardArticleContent, 
+			board_article_date as boardArticleDate,
+			board_article_read_count as boardArticleReadCount
+		from 
+			board_article
+		where 
+			board_code = 'board_code5'
+		order by 
+			board_article_code desc;
+	
+	</select>
+	<!-- 현호 -->
+
+</mapper>

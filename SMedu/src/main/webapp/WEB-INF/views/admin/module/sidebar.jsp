@@ -81,11 +81,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> 학과</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 교재</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 과목</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 개설과목</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> 강의</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 학과</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 교재</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 과목</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 개설과목</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 강의</a></li>
           </ul>
         </li>
 		<!-- 시험/과제/토론 관리 -->
@@ -97,9 +97,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 시험</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 과제</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 토론</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 시험</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 과제</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 토론</a></li>
           </ul>
         </li>
 		<!-- 게시판 관리 -->
@@ -111,11 +111,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> 공지사항</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> 자료실</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> 수강후기</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> FAQ</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> 상담게시판</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 공지사항</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 자료실</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 수강후기</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> FAQ</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 상담게시판</a></li>
           </ul>
         </li>
         <li class="header">DOCUMNET</li>
@@ -128,8 +128,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> 수강신청 이력 조회</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> 결제이력 조회</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 수강신청 이력 조회</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 결제이력 조회</a></li>
           </ul>
         </li>
 		<!-- 학습설계/강의평가 조회 -->
@@ -142,8 +142,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> 학습설계 조회</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> 강의평가 조회</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 학습설계 조회</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 강의평가 조회</a></li>
           </ul>
         </li>
 		

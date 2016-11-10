@@ -23,23 +23,75 @@ var loginFalseMessage = '<c:out value='${loginFalseMessage}'/>';
 			<jsp:include page="../module/main_sidebar.jsp" />
     	<div class="content three_quarter"> 
 		  <h1>로그인</h1><hr>
-		  <form action="/smedu/login/login" method="post">
-		    <div class="form-group">
-		      <label>아이디:</label>
-		      	<input type="text" class="form-control" id="email" name="userId" value="jinho">
-		    </div>
-		    <div class="form-group">
-		      <label>비밀번호:</label>
-		      	<input type="password" class="form-control" id="pwd" name="userPw" value="1234">
-		    </div>
-		    교수 : professor001 / pw001
-		    플래너 : planner001 / pw001
-		    학생 : jinho / 1234
-		    <div class="checkbox">
-		      <label><input type="checkbox">아이디 저장</label>
-		    </div>
-		    <button type="submit" class="btn btn-default">로그인</button>
-		  </form>
+		  <div id="content">
+				<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+					<li class="active"><a href="#student" data-toggle="tab">학생</a></li>
+					<li><a href="#professor" data-toggle="tab">교수</a></li>
+					<li><a href="#planner" data-toggle="tab">플래너</a></li>
+				</ul>
+					<div id="my-tab-content" class="tab-content">
+						<div class="tab-pane active" id="student">
+							<div class="row">
+								<div class="col-lg-12">
+									<form action="/smedu/login/login" method="post">
+									    <div class="form-group">
+									      <label>아이디</label>
+									      	<input type="text" class="form-control" id="email" name="userId" value="jinho">
+									    </div>
+									    <div class="form-group">
+									      <label>비밀번호</label>
+									      	<input type="password" class="form-control" id="pwd" name="userPw" value="1234">
+									    </div>
+									    <div class="checkbox">
+									      <label><input type="checkbox">아이디 저장</label>
+									    </div>
+									    <button type="submit" class="btn btn-default">로그인</button>
+								 	</form>	
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="professor">
+							<div class="row">
+								<div class="col-lg-12">
+									<form action="/smedu/login/login" method="post">
+									    <div class="form-group">
+									      <label>아이디</label>
+									      	<input type="text" class="form-control" id="email" name="userId" value="professor003">
+									    </div>
+									    <div class="form-group">
+									      <label>비밀번호</label>
+									      	<input type="password" class="form-control" id="pwd" name="userPw" value="pw003">
+									    </div>
+									    <div class="checkbox">
+									      <label><input type="checkbox">아이디 저장</label>
+									    </div>
+									    <button type="submit" class="btn btn-default">로그인</button>
+								 	</form>	
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="planner">
+							<div class="row">
+								<div class="col-lg-12">
+									<form action="/smedu/login/login" method="post">
+									    <div class="form-group">
+									      <label>아이디</label>
+									      	<input type="text" class="form-control" id="email" name="userId" value="planner001">
+									    </div>
+									    <div class="form-group">
+									      <label>비밀번호</label>
+									      	<input type="password" class="form-control" id="pwd" name="userPw" value="pw001">
+									    </div>
+									    <div class="checkbox">
+									      <label><input type="checkbox">아이디 저장</label>
+									    </div>
+									    <button type="submit" class="btn btn-default">로그인</button>
+								 	</form>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>
 </div>

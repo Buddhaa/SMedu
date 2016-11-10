@@ -25,4 +25,8 @@ public interface GradeService {
 
 	List<GradeDomain> professorStudentGradeSelect(String userCode);
 
+	List<StudentDomain> finalResultGrade(String userCode);
+
+	List<GradeDomain> studentCreditManage(String userCode, String openSubjectCode);
+
 }

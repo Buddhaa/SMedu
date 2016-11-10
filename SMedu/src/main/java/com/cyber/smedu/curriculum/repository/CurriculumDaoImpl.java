@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cyber.smedu.curriculum.domain.DepartmentDomain;
+import com.cyber.smedu.curriculum.domain.SubjectDomain;
 
 @Repository
 public class CurriculumDaoImpl implements CurriculumDao {
@@ -17,5 +18,10 @@ public class CurriculumDaoImpl implements CurriculumDao {
 	@Override
 	public List<DepartmentDomain> selectDepartmentList() {
 		return sqlSession.selectList(NS+".selectDepartmentList");
+	}
+	//과목 조회
+	@Override
+	public List<SubjectDomain> selectSubjectList() {
+		return sqlSession.selectList(NS+".subjectList");
 	}
 }

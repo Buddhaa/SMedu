@@ -60,7 +60,7 @@
 	      <ul>
 	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
 	        <li><a href="/smedu/main/logOut">로그아웃</a></li>
-	        <li><a href="#">마이페이지</a></li>
+	        <li><a href="/plannerInfo">마이페이지</a></li>
 	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
 	      </ul>
 	      &nbsp;
@@ -95,7 +95,7 @@
 <div class="wrapper row4">
   <nav id="mainav" class="hoc clear"> 
     <ul class="clear">
-      <li><a class="drop" href="/smedu/introduction/introductionAcademy">프로젝트소개</a>
+      <li><a class="drop" href="/smedu/introduction/introductionProject">프로젝트소개</a>
       	<ul>
           <li><a href="/smedu/introduction/introductionProject">프로젝트소개</a></li>
        	  <li><a href="/smedu/introduction/introductionAcademy">교육원 소개</a></li>
@@ -103,7 +103,7 @@
        	  <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">학점은행제</a>
+      <li><a class="drop" href="/smedu/creditbank/creditbankIntro">학점은행제</a>
         <ul>
 			<li><a href="/smedu/creditbank/creditbankIntro">학점은행제소개</a>
 			<li><a href="/smedu/creditbank/creditbankRecognitionSubject">학점취득과정</a>
@@ -114,11 +114,11 @@
 			<li><a href="/smedu/creditbank/creditbankAttendWay">출석률확인방법</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">교육과정</a>
+      <li><a class="drop" href="/smedu/curriculum/curriculumComputer">교육과정</a>
         <ul>
-          <li><a href="#">컴퓨터공학과</a></li>
-          <li><a href="#">정보통신학과</a></li>
-          <li><a href="#">정보보안학과</a></li>
+          <li><a href="/smedu/curriculum/curriculumComputer">컴퓨터공학과</a></li>
+          <li><a href="/smedu/curriculum/curriculumCommunication">정보통신학과</a></li>
+          <li><a href="/smedu/curriculum/curriculumSecurity">정보보안학과</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">수강신청</a>
@@ -128,11 +128,10 @@
           <li><a href="#">결제 이력 페이지</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">상담신청</a>
+      <li><a class="drop" href="/smedu/consulting/consultingList">상담실</a>
       	 <ul>
-          <li><a href="#">상담신청</a></li>
-          <li><a href="#">학습설계</a></li>
-          <li><a href="#">상담게시판</a></li>
+          <li><a href="/smedu/consulting/consultingList">상담신청</a></li>
+          <li><a href="/smedu/consulting/consultingLearningPlanInsert">맞춤학습설계</a></li>
         </ul>
       </li>
       <li><a class="drop" href="#">열린마당</a>
@@ -171,7 +170,7 @@
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='교수'}">
-	      <li><a class="drop" href="/professorSubjectSelect">교무관리</a>
+	      <li><a class="drop" href="/professorSubjectSelectForCheck">교무관리</a>
 	      	 <ul>
 	          <li><a href="/professorSubjectSelectForCheck">학생성적조회</a></li>
 	          <li><a href="/professorSubjectSelectForManage">학생성적관리</a></li>
@@ -181,17 +180,18 @@
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='플래너'}">
-	      <li><a class="drop" href="#">업무관리</a>
+	      <li><a class="drop" href="/planner/work/planner_learningplan_nonresponse">업무관리</a>
 	      	 <ul>
-	          <li><a href="#">학습설계 관리</a></li>
-	          <li><a href="#">담당학생 관리</a></li>
-	          <li><a href="#">상담기록 관리</a></li>
+	          <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 관리</a></li>
+	          <li><a href="/planner/work/planner_student_list">담당학생 관리</a></li>
+	          <li><a href="/planner/work/planner_consult_list">상담기록 관리</a></li>
 	        </ul>
 	      </li>
       </c:if>
     </ul>
   </nav>
 </div>
+<br/>
 <!-- /nav -->
 <!-- /top -->
 </body>

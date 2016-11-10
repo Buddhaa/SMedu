@@ -2,21 +2,30 @@ package com.cyber.smedu.task.domain;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class TaskResultDomain {
 
 	private String taskResultCode;
 	private String taskCode;
 	private String studentCode;
-	private String taskSubject;
 	private String taskResultTitle;
 	private String taskResultContent;
 	private Date taskResultDate;
+	private MultipartFile taskFile;
 	private String taskFileName;
 	private String taskFileExt;
-	private int taskFileSize;
+	private long taskFileSize;
 	private String taskFileType;
 	private String taskOriginFileName;
+	private String taskSubject;
 	
+	public String getTaskSubject() {
+		return taskSubject;
+	}
+	public void setTaskSubject(String taskSubject) {
+		this.taskSubject = taskSubject;
+	}
 	public String getTaskResultCode() {
 		return taskResultCode;
 	}
@@ -34,12 +43,6 @@ public class TaskResultDomain {
 	}
 	public void setStudentCode(String studentCode) {
 		this.studentCode = studentCode;
-	}
-	public String getTaskSubject() {
-		return taskSubject;
-	}
-	public void setTaskSubject(String taskSubject) {
-		this.taskSubject = taskSubject;
 	}
 	public String getTaskResultTitle() {
 		return taskResultTitle;
@@ -59,6 +62,12 @@ public class TaskResultDomain {
 	public void setTaskResultDate(Date taskResultDate) {
 		this.taskResultDate = taskResultDate;
 	}
+	public MultipartFile getTaskFile() {
+		return taskFile;
+	}
+	public void setTaskFile(MultipartFile taskFile) {
+		this.taskFile = taskFile;
+	}
 	public String getTaskFileName() {
 		return taskFileName;
 	}
@@ -71,10 +80,10 @@ public class TaskResultDomain {
 	public void setTaskFileExt(String taskFileExt) {
 		this.taskFileExt = taskFileExt;
 	}
-	public int getTaskFileSize() {
+	public long getTaskFileSize() {
 		return taskFileSize;
 	}
-	public void setTaskFileSize(int taskFileSize) {
+	public void setTaskFileSize(long taskFileSize) {
 		this.taskFileSize = taskFileSize;
 	}
 	public String getTaskFileType() {
@@ -94,9 +103,8 @@ public class TaskResultDomain {
 	public String toString() {
 		return "TaskResultDomain [taskResultCode=" + taskResultCode + ", taskCode=" + taskCode + ", studentCode="
 				+ studentCode + ", taskResultTitle=" + taskResultTitle + ", taskResultContent=" + taskResultContent
-				+ ", taskResultDate=" + taskResultDate + ", taskFileName=" + taskFileName + ", taskFileExt="
-				+ taskFileExt + ", taskFileSize=" + taskFileSize + ", taskFileType=" + taskFileType
+				+ ", taskResultDate=" + taskResultDate + ", taskFile=" + taskFile + ", taskFileName=" + taskFileName
+				+ ", taskFileExt=" + taskFileExt + ", taskFileSize=" + taskFileSize + ", taskFileType=" + taskFileType
 				+ ", taskOriginFileName=" + taskOriginFileName + "]";
-	}
-	
+	}	
 }

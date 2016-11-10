@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,9 +101,9 @@
 										  <div class="col-md-4">
 										    <select class="form-control" name="departmentCode">
 										    	<option value="">==선택==</option>
-										    	<option value="department_code1">컴퓨터정보학과</option>
-										    	<option value="department_code2">정보통신학과</option>
-										    	<option value="department_code3">정보보안학과</option>
+										    	<c:forEach var="department" items="${departmentList}"> 
+			 										<option value="${department.departmentCode}">${department.departmentName}</option>
+			 									</c:forEach>
 										    </select>
 										  </div>
 										</div>
@@ -243,9 +244,9 @@
 										  <div class="col-md-4">
 										    <select class="form-control" name="departmentCode">
 										    	<option value="">==선택==</option>
-										    	<option value="department_code1">컴퓨터정보학과</option>
-										    	<option value="department_code2">정보통신학과</option>
-										    	<option value="department_code3">정보보안학과</option>
+										    	<c:forEach var="department" items="${departmentList}"> 
+			 										<option value="${department.departmentCode}">${department.departmentName}</option>
+			 									</c:forEach>
 										    </select>
 										  </div>
 										</div>

@@ -62,7 +62,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">학과</label>
 							<div class="col-md-4">
-								<p class="form-control-static">${professorInfo.departmentName }</p>
+								<p class="form-control-static">${professorInfo.departmentName}</p>
 							</div>
 						</div>
 

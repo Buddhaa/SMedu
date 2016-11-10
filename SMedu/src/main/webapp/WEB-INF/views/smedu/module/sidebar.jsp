@@ -5,9 +5,6 @@
 <html>
 <head>
 <title>시커먼스</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="/resources/smedu/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
 <body>
 	<div class="sidebar one_quarter first">
@@ -36,9 +33,9 @@
 		    <c:if test="${userInfo.userLevel=='플래너'}">
 		      <h3>업무관리</h3><hr>
 		     	 <ul>
-		         <li><a href="#">학습설계 관리</a></li>
-		         <li><a href="#">담당학생 관리</a></li>
-		         <li><a href="#">상담기록 관리</a></li>
+		         <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 관리</a></li>
+		          <li><a href="/planner/work/planner_student_list">담당학생 관리</a></li>
+		          <li><a href="/planner/work/planner_consult_list">상담기록 관리</a></li>
 		       </ul>
 		    </c:if>
 		</nav>
