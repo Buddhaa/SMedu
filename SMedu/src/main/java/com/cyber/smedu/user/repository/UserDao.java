@@ -63,6 +63,8 @@ public interface UserDao {
 
 	List<StudentDomain> selectAdminStudentList(Map<String, Object> map);
 
+	UserDomain selectAdminStudentGradeDetail(String userCode);
+
 	
 
 }

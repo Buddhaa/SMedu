@@ -19,6 +19,11 @@ public class CurriculumDaoImpl implements CurriculumDao {
 	public List<DepartmentDomain> selectDepartmentList() {
 		return sqlSession.selectList(NS+".selectDepartmentList");
 	}
+	//학과 출력
+	@Override
+	public DepartmentDomain selectDepartmentOne(String departmentCode) {
+		return sqlSession.selectOne(NS+".selectDepartmentOne", departmentCode);
+	}
 	//과목 조회
 	@Override
 	public List<SubjectDomain> selectSubjectList() {

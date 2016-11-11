@@ -266,6 +266,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.user_name LIKE '%${userName}%'
 	</if>
 	</select>
+	<!-- 관리자 페이지 학생 성적관리 학생 상세보기 출력 (학생정보와 학과명) -->
+	<select id="selectAdminStudentGradeDetail" parameterType="String" resultType="com.cyber.smedu.user.domain.UserDomain">
+	SELECT
+		u.user_code as userCode,
+		u.user_name as userName,
+		u.department_code as departmentCode,
+		d.department_name as departmentName,
+		u.user_level as userLevel,
+		u.user_birth as userBirth
+	FROM
+		user u
+	INNER JOIN
+		department d
+	ON
+		u.department_code = d.department_code
+	WHERE
+		u.user_code = #{userCode}
+	</select>
 	<!-- 한명의 학생 회원정보 -->
 	<select id="studentSelectOne" 
 			parameterType="String" 

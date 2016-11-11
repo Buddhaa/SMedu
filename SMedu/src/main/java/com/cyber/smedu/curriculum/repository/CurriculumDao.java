@@ -12,4 +12,6 @@ public interface CurriculumDao {
 
 	List<SubjectDomain> selectSubjectList();
 
+	DepartmentDomain selectDepartmentOne(String departmentCode);
+
 }

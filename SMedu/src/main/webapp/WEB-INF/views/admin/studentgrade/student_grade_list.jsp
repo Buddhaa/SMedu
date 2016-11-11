@@ -92,7 +92,7 @@
 	                  		<td>${cardinal.year}년 ${cardinal.semester}학기 ${cardinal.cardinal}기수</td>
 	                  	</c:if>
 	                  </c:forEach>
-	                  <td><a href="/admin/studentGrade/detail"><span class="label label-warning">조회</span></a></td>
+	                  <td><a href="/admin/studentGrade/detail?userCode=${student.userCode}&studentCode=${student.studentCode}"><span class="label label-warning">조회</span></a></td>
 	                </tr>
                 </c:forEach>
               </table>

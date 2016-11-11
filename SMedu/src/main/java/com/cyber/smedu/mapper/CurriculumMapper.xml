@@ -11,6 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	FROM
 		department
 	</select>
+	<!-- 학과코드에 해당하는 학과 출력 -->
+	<select id="selectDepartmentOne" parameterType="String" resultType="com.cyber.smedu.curriculum.domain.DepartmentDomain">
+	SELECT
+		department_code as departmentCode,
+		department_name as departmentName
+	FROM
+		department
+	WHERE
+		department_code = #{departmentCode}
+	</select>
 	<!-- 의기 -->
 	
 	<select id="subjectList" parameterType="java.util.Map" resultType="com.cyber.smedu.curriculum.domain.SubjectDomain" >

@@ -2,4 +2,40 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.PayMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.PayMapper">
+<select id="selectStudentPayCardinal" parameterType="String" resultType="com.cyber.smedu.pay.domain.PayDomain">
+	SELECT
+		p.cardinal_code as cardinalCode,
+		c.year as year,
+		c.semester as semester,
+		c.cardinal as cardinal
+	FROM
+		pay p
+	INNER JOIN
+		cardinal c
+	ON
+		p.cardinal_code = c.cardinal_code
+	WHERE
+		p.student_code = #{studentCode}
+</select>
+<select id="selectStudentCardinalClassRegistration" parameterType="java.util.Map" resultType="com.cyber.smedu.pay.domain.ClassRegistrationDomain">
+	SELECT
+		c.cardinal_code as cardinalCode,
+		c.student_code as studentCode,
+		c.open_subject_code as openSubjectCode,
+		o.subject_code as subjectCode,
+		o.subject_name as subjectName
+	FROM
+		class_registration c
+	INNER JOIN
+		open_subject o
+	ON
+		c.open_subject_code = o.open_subject_code
+	WHERE		
+		c.student_code = #{studentCode}
+	AND
+		c.cardinal_code = #{cardinalCode}
+	AND
+		c.pay_state = 'T'
+</select>
+</mapper>

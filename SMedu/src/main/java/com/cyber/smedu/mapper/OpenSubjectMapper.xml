@@ -3,6 +3,25 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.smedu.mapper.OpenSubjectMapper">
+	<!-- 관리자 학생성적관리 상세보기 기수, 과목 선택시 과목정보 -->
+	<select id="selectAdminStudentGradeDetailSubject"
+			parameterType="String"
+			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	SELECT 
+		s.subject_name as subjectName,
+		o.professor_name as professorName,
+		s.subject_sort as subjectSort,
+		s.subject_credit as subjectCredit
+	FROM
+		open_subject o
+	INNER JOIN
+		subject s
+	ON
+		o.subject_code = s.subject_code
+	WHERE 
+		open_subject_code = #{openSubjectCode}
+	</select>
+	
 	<select id="lectureList"
 			parameterType="String"
 			resultType="com.cyber.smedu.opensubject.domain.LectureDomain">

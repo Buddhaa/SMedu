@@ -40,7 +40,23 @@ public class GradeController {
 	}
 	//관리자 성적관리 학생 상세보기
 	@RequestMapping(value="/admin/studentGrade/detail", method=RequestMethod.GET)
-	public String adminSelectStudentDetail(Model model) {
+	public String adminSelectStudentDetail(Model model,
+											@RequestParam(value="userCode")String userCode,
+											@RequestParam(value="studentCode")String studentCode,
+											@RequestParam(value="cardinalCode", defaultValue="")String cardinalCode,
+											@RequestParam(value="openSubjectCode", defaultValue="")String openSubjectCode) {
+		Map<String, Object> map = gradeService.adminStudentGradeDetail(userCode, studentCode, cardinalCode, openSubjectCode);
+		model.addAttribute("studentInfo", map.get("studentInfo"));
+		model.addAttribute("studentCode", studentCode);
+		model.addAttribute("cardinalList", map.get("cardinalList"));
+		model.addAttribute("cardinalCode", cardinalCode);
+		model.addAttribute("openSubjectCode", openSubjectCode);
+		if(cardinalCode != "") {
+			model.addAttribute("classRegistrationList", map.get("classRegistrationList"));
+			if(openSubjectCode != "") {
+				model.addAttribute("openSubject", map.get("openSubject"));
+			}
+		}
 		
 		return "admin/studentgrade/student_grade_detail";
 	}

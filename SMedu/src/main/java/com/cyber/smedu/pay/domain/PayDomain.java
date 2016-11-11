@@ -7,10 +7,31 @@ public class PayDomain {
 	private String payCode;
 	private String studentCode;
 	private String cardinalCode;
+	private int year;
+	private int semester;
+	private int cardinal;
 	private String payMethod;
 	private int payAmount;
 	private Timestamp payDate;
 	
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
+	}
+	public int getSemester() {
+		return semester;
+	}
+	public void setSemester(int semester) {
+		this.semester = semester;
+	}
+	public int getCardinal() {
+		return cardinal;
+	}
+	public void setCardinal(int cardinal) {
+		this.cardinal = cardinal;
+	}
 	public String getPayCode() {
 		return payCode;
 	}

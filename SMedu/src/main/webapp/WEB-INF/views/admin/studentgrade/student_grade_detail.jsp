@@ -6,6 +6,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){		
+		$("#cardinal").val("${cardinalCode}").attr("selected", "selected");
+		$("#openSubject").val("${openSubjectCode}").attr("selected", "selected");
+		$("#cardinal").change(function(){
+			var userCode = $("#userCode").val();
+			var studentCode = $("#studentCode").val();
+			var cardinalCode = $("#cardinal").val();
+			var openSubjectCode = $("#openSubject").val();
+			location.replace('/admin/studentGrade/detail?userCode='+ userCode +'&studentCode='+ studentCode +'&cardinalCode='+ cardinalCode);
+		});
+		$("#openSubject").change(function(){
+			var userCode = $("#userCode").val();
+			var studentCode = $("#studentCode").val();
+			var cardinalCode = $("#cardinal").val();
+			var openSubjectCode = $("#openSubject").val();
+			location.replace('/admin/studentGrade/detail?userCode='+ userCode +'&studentCode='+ studentCode +'&cardinalCode='+ cardinalCode+'&openSubjectCode=' + openSubjectCode);
+		});
+		$("#test").click(function(){
+			var openSubjectCode = $("#openSubject").val();
+			if(openSubjectCode == '') {
+				alert("조회할 과목을 선택후 조회해주세요.")
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" />
@@ -35,29 +62,43 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="/resources/admin/dist/img/profile.jpg" alt="User profile picture">
 
-              <h3 class="profile-username text-center">이름</h3>
+              <h3 class="profile-username text-center">${studentInfo.userName}</h3>
 
-              <p class="text-muted text-center">권한</p>
+              <p class="text-muted text-center">${studentInfo.userLevel}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>학생코드</b> <a class="pull-right">1,322</a>
+                  <b>학생코드</b> <a class="pull-right">${studentCode}</a>
+                  <input type="hidden" id="studentCode" value="${studentCode}">
+                  <input type="hidden" id="userCode" value="${studentInfo.userCode}">
                 </li>
                 <li class="list-group-item">
-                  <b>생년월일</b> <a class="pull-right">543</a>
+                  <b>생년월일</b> <a class="pull-right">${studentInfo.userBirth}</a>
+                </li>
+                <li class="list-group-item">                	
+                  <b>학과</b> <a class="pull-right">${studentInfo.departmentName}</a>             
                 </li>
                 <li class="list-group-item">
-                  <b>학과</b> <a class="pull-right">13,287</a>
+                  <b>기수</b>
+				  <select class="form-control pull-right" id="cardinal" name="cardinalCode" style=" width:150px;">
+                  	<option value="">==선택==</option> 
+                  <c:forEach var="cardinal" items="${cardinalList}">
+                    <option value="${cardinal.cardinalCode}">${cardinal.year}년${cardinal.semester}학기${cardinal.cardinal}기</option>         
+                  </c:forEach>
+                  </select>
                 </li>
+                
                 <li class="list-group-item">
-                  <b>기수</b> <a class="pull-right">13,287</a>
+                  <b>수강 과목</b>                  
+			      <select class="form-control pull-right" id="openSubject" style=" width:150px; height:32px;">
+                  	<option value="">==선택==</option> 
+                  <c:forEach var="classRegistration" items="${classRegistrationList}">
+                    <option value="${classRegistration.openSubjectCode}">${classRegistration.subjectName}</option>    
+                  </c:forEach>                 
+                  </select>
                 </li>
-                <li class="list-group-item">
-                  <b>수강 과목</b> <a class="pull-right">13,287</a>
-                </li>
-              </ul>
-
-              <a href="#" class="btn btn-primary btn-block"><b>조회</b></a>
+              </ul>             
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -73,32 +114,28 @@
               <strong><i class="fa fa-book margin-r-5"></i> 과목명</strong>
 
               <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
+                ${openSubject.subjectName}
               </p>
 
               <hr>
 
               <strong><i class="fa fa-map-marker margin-r-5"></i> 교수 이름</strong>
 
-              <p class="text-muted">Malibu, California</p>
+              <p class="text-muted">${openSubject.professorName} 교수</p>
 
               <hr>
 
               <strong><i class="fa fa-pencil margin-r-5"></i> 이수구분</strong>
 
               <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
+                ${openSubject.subjectSort}
               </p>
 
               <hr>
 
               <strong><i class="fa fa-file-text-o margin-r-5"></i> 학점</strong>
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              <p>${openSubject.subjectCredit}학점</p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -109,7 +146,7 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#activity" data-toggle="tab">총 이수학점</a></li>
-              <li class="active"><a href="#activity2" data-toggle="tab">과목 총 성적</a></li>
+              <li><a href="#activity2" data-toggle="tab" id="test">과목 총 성적</a></li>
               <li><a href="#timeline" data-toggle="tab">제출물 및 시험답안</a></li>
               <li><a href="#settings" data-toggle="tab">참여권한여부</a></li>
             </ul>
@@ -118,7 +155,13 @@
                 
               </div>
               <!-- /.tab-pane -->
-              <div class="active tab-pane" id="activity2">
+              <c:if test="${openSubjectCode ==''}">
+              <div class="tab-pane" id="activity2">
+              조회할 과목을 선택후 조회해주세요
+              </div>
+              </c:if>
+              <c:if test="${openSubjectCode !=''}">
+              <div class="tab-pane" id="activity2">
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
@@ -233,6 +276,8 @@
                 <!-- /.post -->
               </div>
               <!-- /.tab-pane -->
+              </c:if>
+              
               <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">

@@ -8,10 +8,25 @@ public class ClassRegistrationDomain {
 	private String cardinalCode;
 	private String studentCode;
 	private String openSubjectCode;
+	private String subjectCode;
+	private String subjectName;
 	private int classRegistrationAmount;
 	private Date classRegistrationDate;
 	private String payState;
 	
+	
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+	public String getSubjectCode() {
+		return subjectCode;
+	}
+	public void setSubjectCode(String subjectCode) {
+		this.subjectCode = subjectCode;
+	}
 	public String getClassRegistrationCode() {
 		return classRegistrationCode;
 	}

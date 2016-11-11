@@ -29,4 +29,6 @@ public interface GradeService {
 
 	List<GradeDomain> studentCreditManage(String userCode, String openSubjectCode);
 
+	Map<String, Object> adminStudentGradeDetail(String userCode, String studentCode, String cardinalCode, String openSubjectCode);
+
 }

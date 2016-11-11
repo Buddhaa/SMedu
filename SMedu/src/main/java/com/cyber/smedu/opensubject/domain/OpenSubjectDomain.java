@@ -14,6 +14,21 @@ public class OpenSubjectDomain {
 	private String bookName;
 	private Date registerDate;
 	
+	private String subjectSort;
+	private int subjectCredit;
+	
+	public String getSubjectSort() {
+		return subjectSort;
+	}
+	public void setSubjectSort(String subjectSort) {
+		this.subjectSort = subjectSort;
+	}
+	public int getSubjectCredit() {
+		return subjectCredit;
+	}
+	public void setSubjectCredit(int subjectCredit) {
+		this.subjectCredit = subjectCredit;
+	}	
 	public String getOpenSubjectCode() {
 		return openSubjectCode;
 	}

@@ -8,12 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyber.smedu.academiccalendar.repository.AcademicCalendarDao;
+import com.cyber.smedu.curriculum.domain.DepartmentDomain;
 import com.cyber.smedu.curriculum.repository.CurriculumDao;
 import com.cyber.smedu.grade.domain.FinalGradeDomain;
 import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.grade.repository.GradeDao;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.opensubject.repository.OpenSubjectDao;
+import com.cyber.smedu.pay.domain.ClassRegistrationDomain;
+import com.cyber.smedu.pay.domain.PayDomain;
+import com.cyber.smedu.pay.repository.PayDao;
+import com.cyber.smedu.pay.repository.PayDaoImpl;
 import com.cyber.smedu.user.domain.StudentDomain;
 import com.cyber.smedu.user.domain.UserDomain;
 import com.cyber.smedu.user.repository.UserDao;
@@ -32,6 +37,8 @@ public class GradeServiceImpl implements GradeService {
 	UserDao userDao;
 	@Autowired 
 	OpenSubjectDao openSubjectDao;
+	@Autowired 
+	PayDao payDao;
 	
 	//관리자 학생성적관리 학생리스트
 	@Override
@@ -44,6 +51,29 @@ public class GradeServiceImpl implements GradeService {
 		map.put("departmentList", curriculumDao.selectDepartmentList()); //검색창 학과 출력
 		return map;
 		
+	}
+	//관리자 학생성적관리 학생 상세보기
+	@Override
+	public Map<String, Object> adminStudentGradeDetail(String userCode, String studentCode, String cardinalCode, String openSubjectCode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		//학생 기본정보,학과명 출력
+		UserDomain studentInfo = userDao.selectAdminStudentGradeDetail(userCode);
+		map.put("studentInfo", studentInfo);
+		//학생이 수강신청 했던 기수출력
+		List<PayDomain> cardinalList = payDao.selectStudentPayCardinal(studentCode);
+		map.put("cardinalList", cardinalList);
+		//기수 선택시 수강과목 리스트 출력		
+		if(cardinalCode!=""){
+			map.put("studentCode", studentCode);
+			map.put("cardinalCode", cardinalCode);
+			List<ClassRegistrationDomain> classRegistrationList = payDao.selectStudentCardinalClassRegistration(map);
+			map.put("classRegistrationList", classRegistrationList);
+			if(openSubjectCode!="") {
+				OpenSubjectDomain openSubject = openSubjectDao.selectAdminStudentGradeDetailSubject(openSubjectCode);
+				map.put("openSubject", openSubject);
+			}
+		}
+		return map;
 	}
 	
 	/*의기---------------------------------------------------------------------------------------------------------------------*/

@@ -93,7 +93,7 @@ public class UserDaoImpl implements UserDao {
 	public StudentDomain selectAdminStudentDetail(String userCode) {
 		return sqlSession.selectOne(NS+".selectAdminStudentDetail", userCode);
 	}
-	//관리자 가입승인요청 리스트 select - 학생 추가정보
+	//관리자 가입승인요청 리스트 select
 	@Override
 	public List<UserDomain> selectAdminJoinRequestList() {
 		return sqlSession.selectList(NS+".selectAdminJoinRequestList");
@@ -102,6 +102,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<StudentDomain> selectAdminStudentList(Map<String, Object> map) {
 		return sqlSession.selectList(NS+".selectAdminStudentList", map);
+	}
+	//관리자 학생성적관리 학생 상세보기
+	@Override
+	public UserDomain selectAdminStudentGradeDetail(String userCode) {
+		return sqlSession.selectOne(NS+".selectAdminStudentGradeDetail", userCode);
 	}
 	//한명의 학생 회원정보
 	@Override

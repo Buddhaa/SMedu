@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.user.domain.StudentDomain;
 
 @Repository
@@ -16,6 +17,12 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 	private String NS = "com.cyber.smedu.mapper.OpenSubjectMapper";
 	@Autowired SqlSessionTemplate sqlSession;
 
+	//관리자 학생성적관리 상세보기에서 기수, 개설과목 선택시 개설과목, 과목정보 출력
+	@Override
+	public OpenSubjectDomain selectAdminStudentGradeDetailSubject(String openSubjectCode) {
+		
+		return sqlSession.selectOne(NS+".selectAdminStudentGradeDetailSubject", openSubjectCode);
+	}
 	//나의 학사관리 페이지 이동
 	@Override
 	public List<CardinalDomain> classroomAcademicaCtivity(StudentDomain studentDomain) {
