@@ -10,8 +10,14 @@ public class TaskDomain {
 	private String academicCalendarCode;
 	private String taskSubject;
 	private String taskContent;
-	private Date taskRegisterCode;
+	private Date taskRegisterDate;
 	
+	public Date getTaskRegisterDate() {
+		return taskRegisterDate;
+	}
+	public void setTaskRegisterDate(Date taskRegisterDate) {
+		this.taskRegisterDate = taskRegisterDate;
+	}
 	public String getTaskCode() {
 		return taskCode;
 	}
@@ -48,17 +54,12 @@ public class TaskDomain {
 	public void setTaskContent(String taskContent) {
 		this.taskContent = taskContent;
 	}
-	public Date getTaskRegisterCode() {
-		return taskRegisterCode;
-	}
-	public void setTaskRegisterCode(Date taskRegisterCode) {
-		this.taskRegisterCode = taskRegisterCode;
-	}
+	
 	@Override
 	public String toString() {
 		return "TaskDomain [taskCode=" + taskCode + ", professorCode=" + professorCode + ", openSubjectCode="
 				+ openSubjectCode + ", academicCalendarCode=" + academicCalendarCode + ", taskSubject=" + taskSubject
-				+ ", taskContent=" + taskContent + ", taskRegisterCode=" + taskRegisterCode + "]";
+				+ ", taskContent=" + taskContent + ", taskRegisterCode=" + taskRegisterDate + "]";
 	}
 
 }
