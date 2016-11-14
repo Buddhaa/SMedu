@@ -73,6 +73,9 @@ public class GradeServiceImpl implements GradeService {
 				map.put("openSubject", openSubject);
 			}
 		}
+		//총 이수성적 출력
+		List<FinalGradeDomain> finalGradeList = gradeDao.adminStudentFinalGrade(studentCode);
+		map.put("finalGradeList", finalGradeList);
 		return map;
 	}
 	

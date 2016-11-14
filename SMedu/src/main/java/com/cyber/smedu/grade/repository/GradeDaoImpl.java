@@ -19,6 +19,16 @@ public class GradeDaoImpl implements GradeDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	private final String NS = "com.cyber.smedu.mapper.GradeMapper";
 	
+	
+	@Override
+	public List<FinalGradeDomain> adminStudentFinalGrade(String studentCode) {
+				
+		return sqlSessionTemplate.selectList(NS+".adminStudentFinalGrade", studentCode);
+		
+	}
+	
+	
+	/*의기--------------------------------------------------------------------------------------------------------*/
 	@Override
 	public List<OpenSubjectDomain> professorSubjectSelectForCheck(String professorCode) {
 		

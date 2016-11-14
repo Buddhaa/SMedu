@@ -28,4 +28,6 @@ public interface GradeDao {
 
 	List<GradeDomain> studentCreditManage(GradeDomain oneGradeDomain);
 
+	List<FinalGradeDomain> adminStudentFinalGrade(String studentCode);
+
 }

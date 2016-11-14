@@ -135,7 +135,7 @@
 
               <strong><i class="fa fa-file-text-o margin-r-5"></i> 학점</strong>
 
-              <p>${openSubject.subjectCredit}학점</p>
+              <p>${openSubject.subjectCredit}학점</p>              
             </div>
             <!-- /.box-body -->
           </div>
@@ -152,7 +152,53 @@
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
-                
+                <div class="row">
+			        <div class="col-xs-12 table-responsive">
+			          <table class="table table-striped">
+			            <thead>
+				            <tr>
+				              <th>학기</th>
+				              <th>구분</th>
+				              <th>과목명</th>
+				              <th>개강일</th>
+				              <th>종강일</th>
+				              <th>이수학점</th>
+				              <th>총점</th>
+				              <th>교수명</th>
+				              <th>이수여부</th>
+				            </tr>
+			            </thead>
+			            <tbody>
+			            	<c:forEach var="finalGrade" items="${finalGradeList}">
+					            <tr>
+					              <td>${finalGrade.year}년도${finalGrade.semester}학기</td>
+					              <td>${finalGrade.subjectSort}</td>
+					              <td>${finalGrade.subjectName}</td>
+					              <td>${finalGrade.classStartDay}</td>
+					              <td>${finalGrade.classEndDay}</td>
+					              <td>${finalGrade.subjectCredit}</td>
+					              <td>${finalGrade.finalResult}</td>
+					              <td>${finalGrade.userName}</td>
+					              <td>${finalGrade.completeConfirmation}</td>
+					            </tr>
+				            </c:forEach>	           
+			            </tbody>
+			            <tfoot>
+			            <tr>
+			            <td>합계</td>
+			            <td></td>
+			            <td></td>
+			            <td></td>
+			            <td></td>
+			            <td>총 이수학점:</td>
+			            <td>총 평균점수:</td>
+			            </tr>
+			            </tfoot>
+			          </table>
+			        </div>
+			        <!-- /.col -->
+			      </div>
+			      <!-- /.row -->
               </div>
               <!-- /.tab-pane -->
               <c:if test="${openSubjectCode ==''}">

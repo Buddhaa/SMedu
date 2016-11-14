@@ -51,6 +51,7 @@ public class GradeController {
 		model.addAttribute("cardinalList", map.get("cardinalList"));
 		model.addAttribute("cardinalCode", cardinalCode);
 		model.addAttribute("openSubjectCode", openSubjectCode);
+		model.addAttribute("finalGradeList", map.get("finalGradeList"));
 		if(cardinalCode != "") {
 			model.addAttribute("classRegistrationList", map.get("classRegistrationList"));
 			if(openSubjectCode != "") {
