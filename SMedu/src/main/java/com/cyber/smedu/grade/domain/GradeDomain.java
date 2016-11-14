@@ -6,7 +6,7 @@ public class GradeDomain {
 	private String openSubjectCode;
 	private String gradeEvaluationCategory;
 	private int gradeScore;
-	private char participationState;
+	private String participationState;
 	public String getGradeCode() {
 		return gradeCode;
 	}
@@ -37,10 +37,10 @@ public class GradeDomain {
 	public void setGradeScore(int gradeScore) {
 		this.gradeScore = gradeScore;
 	}
-	public char getParticipationState() {
+	public String getParticipationState() {
 		return participationState;
 	}
-	public void setParticipationState(char participationState) {
+	public void setParticipationState(String participationState) {
 		this.participationState = participationState;
 	}
 	

@@ -1,6 +1,7 @@
 package com.cyber.smedu.grade.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.grade.domain.FinalGradeDomain;
 import com.cyber.smedu.grade.domain.GradeDomain;
@@ -29,5 +30,7 @@ public interface GradeDao {
 	List<GradeDomain> studentCreditManage(GradeDomain oneGradeDomain);
 
 	List<FinalGradeDomain> adminStudentFinalGrade(String studentCode);
+
+	List<GradeDomain> adminStudentSubjectGrade(Map<String, Object> map);
 
 }

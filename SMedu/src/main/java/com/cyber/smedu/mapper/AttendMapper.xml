@@ -3,7 +3,29 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.smedu.mapper.AttendMapper">
+	
+	<!-- 관리자 학생성적관리 수강과목선택시 해당과목 출석률 -->
+	<select id="adminStudentGradeAttendSelect"
+		parameterType="java.util.Map"
+		resultType="com.cyber.smedu.attend.domain.AttendDomain">		
 
+	SELECT
+		attend_code as attendCode,
+		academic_calendar_code AS academicCalendarCode,
+		attend_lecture_time AS attendLectureTime, 
+		attend_date AS attendDate, 
+		attend_complete_confirmation AS attendCompleteConfirmation, 
+		attend_score AS attendScore
+	FROM
+		attend
+	WHERE
+		student_code = #{studentCode}
+	AND
+		open_subject_code = #{openSubjectCode}
+	
+	</select>
+	
+	<!-- 의기 -->
 	<select id="professorStudentNameSelect"
 		parameterType="String"
 		resultType="com.cyber.smedu.user.domain.UserDomain">
@@ -82,5 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		student_code = #{studentCode}
 	
 	</select>
+	
+	<!-- 우영 -->
 
 </mapper>

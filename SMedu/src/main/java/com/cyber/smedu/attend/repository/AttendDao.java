@@ -1,6 +1,7 @@
 package com.cyber.smedu.attend.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
@@ -16,5 +17,7 @@ public interface AttendDao {
 	List<AcademicCalendarDomain> professorStudentWeeklyScheduleSelect(String openSubjectDomain);
 
 	List<AttendDomain> professorStudentAttendInfoSelect(String studentCode);
+
+	List<AttendDomain> adminStudentGradeAttendSelect(Map<String, Object> map);
 
 }

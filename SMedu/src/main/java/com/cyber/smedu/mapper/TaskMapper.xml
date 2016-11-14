@@ -4,6 +4,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.smedu.mapper.TaskMapper">
 
+<select id="adminStudentGradeTaskResult"
+	parameterType="java.util.Map"
+	resultType="com.cyber.smedu.task.domain.TaskResultDomain">
+	
+SELECT 
+	t.task_subject AS taskSubject,
+	t.task_content AS taskContent,
+	t.task_register_date AS taskRegisterDate,
+	tr.task_result_title AS taskResultTitle,
+	tr.task_result_content AS taskResultContent,
+	tr.task_file_name AS taskFileName,
+	tr.task_origin_file_name AS taskOriginFileName,
+	tr.task_file_ext AS taskFileExt,
+	tr.task_file_size AS taskFileSize,
+	tr.task_result_date AS taskResultDate,
+	ts.task_score AS taskScore,
+	ts.task_score_date AS taskScoreDate
+FROM
+	open_subject o
+INNER JOIN
+	task t
+ON
+	o.open_subject_code = t.open_subject_code
+INNER JOIN
+	task_result tr
+ON
+	t.task_code = tr.task_code
+INNER JOIN
+	task_score ts
+ON
+	tr.task_result_code = ts.task_result_code
+WHERE
+	tr.student_code = #{studentCode}
+AND
+	t.open_subject_code = #{openSubjectCode}
+
+</select>
+<!-- 의기 -->
 <select id="professorStudentTaskResultDetail"
 	parameterType="String"
 	resultType="com.cyber.smedu.task.domain.TaskResultDomain">
@@ -28,7 +66,9 @@ INNER JOIN
 ON
 	t.task_code = tr.task_code
 WHERE
-	tr.student_code = #{studentCode}
+	tr.student_code = #{studentCode}<!-- 
+AND
+	t.open_subject_code = #{openSubjectCode} -->
 
 </select>
 	<!-- 우영 -->

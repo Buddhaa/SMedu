@@ -26,6 +26,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE 
 		st.student_code = #{studentCode}
 	</select>
+	<!-- 관리자 학생성적관리 수강과목 선택시 해당과목 성적출력 -->
+	<select id="adminStudentSubjectGrade"
+		parameterType="java.util.Map"
+		resultType="com.cyber.smedu.grade.domain.GradeDomain">
+	SELECT
+		 grade_code as gradeCode,
+		 grade_evaluation_category as gradeEvaluationCategory,
+		 grade_score as gradeScore,
+		 participation_state as participationState
+	FROM
+		grade
+	WHERE 
+		student_code = #{studentCode}
+	AND
+		open_subject_code = #{openSubjectCode}
+	</select>
 	<!-- 의기 -->
 <!-- 교수 담당과목을 select하는 쿼리 -->
 	<select id="professorSubjectSelect"

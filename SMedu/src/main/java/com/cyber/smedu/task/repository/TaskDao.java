@@ -1,5 +1,7 @@
 package com.cyber.smedu.task.repository;
 
+import java.util.Map;
+
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
 
@@ -18,5 +20,7 @@ public interface TaskDao {
 	void taskResultContentUpdate(TaskResultDomain taskResultDomain);
 
 	void taskResultFullUpdate(TaskResultDomain taskResultDomain);
+
+	TaskResultDomain adminStudentGradeTaskResult(Map<String, Object> map);
 
 }

@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyber.smedu.academiccalendar.repository.AcademicCalendarDao;
+import com.cyber.smedu.attend.domain.AttendDomain;
+import com.cyber.smedu.attend.repository.AttendDao;
+import com.cyber.smedu.attend.repository.AttendDaoImpl;
 import com.cyber.smedu.curriculum.domain.DepartmentDomain;
 import com.cyber.smedu.curriculum.repository.CurriculumDao;
 import com.cyber.smedu.grade.domain.FinalGradeDomain;
@@ -19,6 +22,9 @@ import com.cyber.smedu.pay.domain.ClassRegistrationDomain;
 import com.cyber.smedu.pay.domain.PayDomain;
 import com.cyber.smedu.pay.repository.PayDao;
 import com.cyber.smedu.pay.repository.PayDaoImpl;
+import com.cyber.smedu.task.domain.TaskDomain;
+import com.cyber.smedu.task.domain.TaskResultDomain;
+import com.cyber.smedu.task.repository.TaskDao;
 import com.cyber.smedu.user.domain.StudentDomain;
 import com.cyber.smedu.user.domain.UserDomain;
 import com.cyber.smedu.user.repository.UserDao;
@@ -39,6 +45,10 @@ public class GradeServiceImpl implements GradeService {
 	OpenSubjectDao openSubjectDao;
 	@Autowired 
 	PayDao payDao;
+	@Autowired
+	AttendDao attendDao;
+	@Autowired
+	TaskDao taskDao;
 	
 	//관리자 학생성적관리 학생리스트
 	@Override
@@ -62,6 +72,9 @@ public class GradeServiceImpl implements GradeService {
 		//학생이 수강신청 했던 기수출력
 		List<PayDomain> cardinalList = payDao.selectStudentPayCardinal(studentCode);
 		map.put("cardinalList", cardinalList);
+		//총 이수성적 출력
+		List<FinalGradeDomain> finalGradeList = gradeDao.adminStudentFinalGrade(studentCode);
+		map.put("finalGradeList", finalGradeList);
 		//기수 선택시 수강과목 리스트 출력		
 		if(cardinalCode!=""){
 			map.put("studentCode", studentCode);
@@ -71,12 +84,28 @@ public class GradeServiceImpl implements GradeService {
 			if(openSubjectCode!="") {
 				OpenSubjectDomain openSubject = openSubjectDao.selectAdminStudentGradeDetailSubject(openSubjectCode);
 				map.put("openSubject", openSubject);
+				//수강과목 선택시 과목 성적 출력
+				map.put("openSubjectCode", openSubjectCode);
+				List<GradeDomain> gradeList = gradeDao.adminStudentSubjectGrade(map);
+				map.put("gradeList", gradeList);
+				//수강과목 선택시 출석률, 과목 제출물 및 시험답안 출력
+				//출석률
+				List<AttendDomain> attendList = attendDao.adminStudentGradeAttendSelect(map);
+				map.put("attendList", attendList);
+				//과제
+				TaskResultDomain task = taskDao.adminStudentGradeTaskResult(map);
+				map.put("task", task);				
+				//토론
+				
+				//중간고사
+				
+				//기말고사
+				
 			}
 		}
-		//총 이수성적 출력
-		List<FinalGradeDomain> finalGradeList = gradeDao.adminStudentFinalGrade(studentCode);
-		map.put("finalGradeList", finalGradeList);
+		
 		return map;
+		
 	}
 	
 	/*의기---------------------------------------------------------------------------------------------------------------------*/

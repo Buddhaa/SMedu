@@ -31,6 +31,12 @@
 				alert("조회할 과목을 선택후 조회해주세요.")
 			}
 		});
+		$("#test2").click(function(){
+			var openSubjectCode = $("#openSubject").val();
+			if(openSubjectCode == '') {
+				alert("조회할 과목을 선택후 조회해주세요.")
+			}
+		});
 	});
 </script>
 </head>
@@ -104,10 +110,10 @@
           </div>
           <!-- /.box -->
 
-          <!-- About Me Box -->
+          <!-- About Me Box -->          
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">과목 정보</h3>
+              <h3 class="box-title">과목 정보 <c:if test="${openSubjectCode == ''}">- 과목을 선택해주세요</c:if></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -138,20 +144,26 @@
               <p>${openSubject.subjectCredit}학점</p>              
             </div>
             <!-- /.box-body -->
-          </div>
+          </div>          
           <!-- /.box -->
-        </div>
+        </div>        
         <!-- /.col -->
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
+            <c:if test="${openSubjectCode == ''}">
               <li class="active"><a href="#activity" data-toggle="tab">총 이수학점</a></li>
               <li><a href="#activity2" data-toggle="tab" id="test">과목 총 성적</a></li>
-              <li><a href="#timeline" data-toggle="tab">제출물 및 시험답안</a></li>
-              <li><a href="#settings" data-toggle="tab">참여권한여부</a></li>
+            </c:if>
+            <c:if test="${openSubjectCode != ''}">
+              <li><a href="#activity" data-toggle="tab">총 이수학점</a></li>
+              <li class="active"><a href="#activity2" data-toggle="tab" id="test">과목 총 성적</a></li>
+            </c:if>
+              <li><a href="#timeline" data-toggle="tab" id="test2">제출물 및 시험답안</a></li>
             </ul>
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
+              <c:if test="${openSubjectCode == ''}">
+              <div class="active tab-pane" id="activity">                        
                 <div class="row">
 			        <div class="col-xs-12 table-responsive">
 			          <table class="table table-striped">
@@ -200,209 +212,265 @@
 			      </div>
 			      <!-- /.row -->
               </div>
+              </c:if>
+              <c:if test="${openSubjectCode != ''}">
+              <div class="tab-pane" id="activity">                        
+                <div class="row">
+			        <div class="col-xs-12 table-responsive">
+			          <table class="table table-striped">
+			            <thead>
+				            <tr>
+				              <th>학기</th>
+				              <th>구분</th>
+				              <th>과목명</th>
+				              <th>개강일</th>
+				              <th>종강일</th>
+				              <th>이수학점</th>
+				              <th>총점</th>
+				              <th>교수명</th>
+				              <th>이수여부</th>
+				            </tr>
+			            </thead>
+			            <tbody>
+			            	<c:forEach var="finalGrade" items="${finalGradeList}">
+					            <tr>
+					              <td>${finalGrade.year}년도${finalGrade.semester}학기</td>
+					              <td>${finalGrade.subjectSort}</td>
+					              <td>${finalGrade.subjectName}</td>
+					              <td>${finalGrade.classStartDay}</td>
+					              <td>${finalGrade.classEndDay}</td>
+					              <td>${finalGrade.subjectCredit}</td>
+					              <td>${finalGrade.finalResult}</td>
+					              <td>${finalGrade.userName}</td>
+					              <td>${finalGrade.completeConfirmation}</td>
+					            </tr>
+				            </c:forEach>	           
+			            </tbody>
+			            <tfoot>
+			            <tr>
+			            <td>합계</td>
+			            <td></td>
+			            <td></td>
+			            <td></td>
+			            <td></td>
+			            <td>총 이수학점:</td>
+			            <td>총 평균점수:</td>
+			            </tr>
+			            </tfoot>
+			          </table>
+			        </div>
+			        <!-- /.col -->
+			      </div>
+			      <!-- /.row -->
+              </div>
+              </c:if>
               <!-- /.tab-pane -->
               <c:if test="${openSubjectCode ==''}">
-              <div class="tab-pane" id="activity2">
-              조회할 과목을 선택후 조회해주세요
-              </div>
+	              <div class="tab-pane" id="activity2">
+	              조회할 과목을 선택후 조회해주세요
+	              </div>
               </c:if>
               <c:if test="${openSubjectCode !=''}">
-              <div class="tab-pane" id="activity2">
+              <div class="active tab-pane" id="activity2">
                 <!-- Post -->
                 <div class="post">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+               	  <div class="user-block">
                         <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
+                          <a href="#">${openSubject.subjectName}</a>
                           <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
                         </span>
-                    <span class="description">Shared publicly - 7:30 PM today</span>
+                    <span class="description">
+                    <c:forEach var="cardinal" items="${cardinalList}">
+                    	<c:if test="${cardinal.cardinalCode == cardinalCode}">
+                    		${cardinal.year}년${cardinal.semester}학기${cardinal.cardinal}기     
+                    	</c:if> 
+                    </c:forEach>
+                  </span>
                   </div>
-                  <!-- /.user-block -->
-                  <p>
-                    Lorem ipsum represents a long-held tradition for designers,
-                    typographers and the like. Some people hate it and argue for
-                    its demise, but others ignore the hate as they create awesome
-                    tools to help create filler text for everyone from bacon lovers
-                    to Charlie Sheen fans.
-                  </p>
-                  <ul class="list-inline">
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                    </li>
-                    <li class="pull-right">
-                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
-                  </ul>
-
-                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                 <table class="table table-bordered">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>성적평가항목</th>
+                  <th>점수</th>
+                  <th>참여여부</th>
+                  <th></th>
+                </tr>
+                <c:forEach var="grade" items="${gradeList}">
+	                <tr>
+	                  <td>${grade.gradeCode}</td>
+	                  <td>${grade.gradeEvaluationCategory}</td>
+	                  <td><span class="badge bg-light-blue">${grade.gradeScore}</span></td>
+	                  <c:if test="${grade.participationState == 'T'}">                
+	                 	 <td><span class="badge bg-green">O</span></td>
+	                  </c:if>
+	                  <c:if test="${grade.participationState == 'F'}">                
+	                 	 <td><span class="badge bg-red">X</span></td>
+	                  </c:if>
+	                  <td><a href="#"><span class="label label-warning">참여권한부여</span></a></td>
+	                </tr>
+                </c:forEach>
+                <c:forEach var="finalGrade" items="${finalGradeList}"> 
+	                <c:if test="${finalGrade.subjectName == openSubject.subjectName}">
+	                	<c:if test="${finalGrade.finalResult >= 60}">        
+			                <tr>
+			                  <td>합계</td>
+			                  <td></td>
+			                  <td>
+			                    <div class="progress progress-xs progress-striped active">
+			                      <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+			                    </div>
+			                  </td>
+			                  <td>총점 : <span class="badge bg-green">${finalGrade.finalResult}</span></td>
+			                  <td>이수여부 : <span class="badge bg-green">이수</span></td>
+			                </tr>
+		                </c:if>
+		                <c:if test="${finalGrade.finalResult < 60}">     
+			                <tr>
+			                  <td>합계</td>
+			                  <td></td>
+			                  <td>
+			                    <div class="progress progress-xs progress-striped active">
+			                      <div class="progress-bar progress-bar-danger" style="width: 50%"></div>
+			                    </div>
+			                  </td>
+			                  <td>총점 : <span class="badge bg-red">${finalGrade.finalResult}</span></td>
+			                  <td>이수여부 : <span class="badge bg-red">미이수</span></td>
+			               </tr>
+		                </c:if>
+	                </c:if>
+	            </c:forEach>               
+              </table>              
                 </div>
                 <!-- /.post -->
-
-                <!-- Post -->
-                <div class="post clearfix">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                    <span class="description">Sent you a message - 3 days ago</span>
-                  </div>
-                  <!-- /.user-block -->
-                  <p>
-                    Lorem ipsum represents a long-held tradition for designers,
-                    typographers and the like. Some people hate it and argue for
-                    its demise, but others ignore the hate as they create awesome
-                    tools to help create filler text for everyone from bacon lovers
-                    to Charlie Sheen fans.
-                  </p>
-
-                  <form class="form-horizontal">
-                    <div class="form-group margin-bottom-none">
-                      <div class="col-sm-9">
-                        <input class="form-control input-sm" placeholder="Response">
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <!-- /.post -->
-
-                <!-- Post -->
                 <div class="post">
-                  <div class="user-block">
-                    <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                    <span class="description">Posted 5 photos - 5 days ago</span>
-                  </div>
-                  <!-- /.user-block -->
-                  <div class="row margin-bottom">
-                    <div class="col-sm-6">
-                      <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
-                          <br>
-                          <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                          <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
-                          <br>
-                          <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-
-                  <ul class="list-inline">
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
-                    <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                    </li>
-                    <li class="pull-right">
-                      <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-                        (5)</a></li>
-                  </ul>
-
-                  <input class="form-control input-sm" type="text" placeholder="Type a comment">
                 </div>
-                <!-- /.post -->
               </div>
               <!-- /.tab-pane -->
               </c:if>
-              
+              <c:if test="${openSubjectCode ==''}">
+	              <div class="tab-pane" id="timeline">
+	              조회할 과목을 선택후 조회해주세요
+	              </div>
+              </c:if>
               <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
                   <li class="time-label">
-                        <span class="bg-red">
-                          10 Feb. 2014
+                        <span class="bg-gray">
+                          출석률
                         </span>
                   </li>
                   <!-- /.timeline-label -->
                   <!-- timeline item -->
                   <li>
-                    <i class="fa fa-envelope bg-blue"></i>
 
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                      <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                      <div class="timeline-body">
-                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                        weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                        quora plaxo ideeli hulu weebly balihoo...
-                      </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-primary btn-xs">Read more</a>
-                        <a class="btn btn-danger btn-xs">Delete</a>
-                      </div>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-user bg-aqua"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                      <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                      </h3>
-                    </div>
-                  </li>
-                  <!-- END timeline item -->
-                  <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-comments bg-yellow"></i>
-
-                    <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                      <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                    <div class="timeline-item">                      
+						 <span class="time"><i class="fa fa-clock-o"></i> 1주차 ~ 10주차</span>
+                      <h3 class="timeline-header"><a href="#">출석률</a></h3>
+                      <span class="description">&nbsp;&nbsp;&nbsp;&nbsp; 만점 : 20</span>	
 
                       <div class="timeline-body">
-                        Take me to your leader!
-                        Switzerland is small and neutral!
-                        We are more like Germany, ambitious and misunderstood!
+                        <table class="table table-bordered">
+			                <tr>
+			                  <th style="width: 50px">#</th>
+			                  <th style="width: 20px">1주차</th>
+			                  <th style="width: 20px">2주차</th>
+			                  <th style="width: 20px">3주차</th>
+			                  <th style="width: 20px">4주차</th>
+			                  <th style="width: 20px">중간고사</th>
+			                  <th style="width: 20px">6주차</th>
+			                  <th style="width: 20px">7주차</th>
+			                  <th style="width: 20px">8주차</th>
+			                  <th style="width: 20px">9주차</th>
+			                  <th style="width: 20px">기말고사</th>
+			                  <th style="width: 20px"></th>
+			                </tr>
+			                <tr>
+			                  <td>출석여부</td>
+			                <c:forEach var="attend" items="${attendList}">
+				              <c:if test="${attend.attendCompleteConfirmation == 'T'}">                
+			                  <td><span class="badge bg-green">O</span></td>
+			                  </c:if>
+			                  <c:if test="${attend.attendCompleteConfirmation == 'F'}">                
+			                  <td><span class="badge bg-red">X</span></td>
+			                  </c:if>
+				            </c:forEach>				              
+				            </tr>
+				            <tr>
+				              <td>출석날짜</td>
+				            <c:forEach var="attend" items="${attendList}">
+				              <td>${attend.attendDate}</td>
+				            </c:forEach>
+				            </tr>  
+				            <tr>
+				              <td>출석점수</td>
+				            <c:forEach var="attend" items="${attendList}">
+				              <td>${attend.attendScore}</td>
+				            </c:forEach>
+				            </tr>       
+			                
+			              </table>              
                       </div>
-                      <div class="timeline-footer">
-                        <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                      <div class="timeline-footer">                        
                       </div>
                     </div>
                   </li>
-                  <!-- END timeline item -->
+                  <!-- END timeline item -->                  
                   <!-- timeline time label -->
                   <li class="time-label">
-                        <span class="bg-green">
-                          3 Jan. 2014
+                        <span class="bg-gray">
+                          과제 및 토론
                         </span>
                   </li>
                   <!-- /.timeline-label -->
                   <!-- timeline item -->
-                  <li>
-                    <i class="fa fa-camera bg-purple"></i>
-
+                  <li>    
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+					  <span class="time"><i class="fa fa-clock-o"></i>제출날짜 : ${task.taskResultDate}</span>					  
+                      <h3 class="timeline-header"><a href="#">과제</a> </h3>
+                      <div class="timeline-header">
+                      <h4>&nbsp;과제 주제 - ${task.taskSubject}</h4>
+					  	<hr/>
+					  	&nbsp;&nbsp;과제 내용 - ${task.taskContent}					  	
+                      </div>					  	
+                      <div class="timeline-header">
+                      <h4>&nbsp;제출물 제목 - ${task.taskResultTitle}</h4>
+					  	<hr/>
+					  	&nbsp;&nbsp;제출물 내용 - ${task.taskResultContent}
+					  	<c:if test="${task.taskFileName != null}">
+					  	<br/><br/>
+					  	&nbsp;&nbsp;<small>첨부파일 : ${task.taskOriginFileName}(${task.taskFileSize}kb)</small>
+					  	</c:if>
+                      </div>
+                      <span class="time"><i class="fa fa-clock-o"></i>채점날짜 : ${task.taskScoreDate}</span>					  
+                      <h3 class="timeline-header"><a href="#">점수 : ${task.taskScore}</a> </h3>
+                    </div>
+                  </li>
+                  <!-- END timeline item --> 
+                  <!-- timeline item -->
+                  <li>    
+                    <div class="timeline-item">
+					  <span class="time"><i class="fa fa-clock-o"></i> 8주차</span>
+                      <h3 class="timeline-header"><a href="#">토론</a> </h3>
 
-                      <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                      <div class="timeline-body">                        
+                      </div>
+                    </div>
+                  </li>
+                  <!-- END timeline item --> 
+                  <!-- timeline time label -->
+                  <li class="time-label">
+                        <span class="bg-gray">
+                          중간 및 기말
+                        </span>
+                  </li>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <li>    
+                    <div class="timeline-item">
+					  <span class="time"><i class="fa fa-clock-o"></i> 5주차</span>
+                      <h3 class="timeline-header"><a href="#">중간고사</a> </h3>
 
                       <div class="timeline-body">
                         <img src="http://placehold.it/150x100" alt="..." class="margin">
@@ -412,67 +480,26 @@
                       </div>
                     </div>
                   </li>
-                  <!-- END timeline item -->
-                  <li>
-                    <i class="fa fa-clock-o bg-gray"></i>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.tab-pane -->
+                  <!-- END timeline item --> 
+                  <!-- timeline item -->
+                  <li>    
+                    <div class="timeline-item">
+					  <span class="time"><i class="fa fa-clock-o"></i> 10주차</span>
+                      <h3 class="timeline-header"><a href="#">기말고사</a> </h3>
 
-              <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
+                      <div class="timeline-body">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <img src="http://placehold.it/150x100" alt="..." class="margin">
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
-                    </div>
-                  </div>
-                </form>
+                  </li>
+                  <!-- END timeline item -->                                  
+                </ul>
               </div>
+                           
+              
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->

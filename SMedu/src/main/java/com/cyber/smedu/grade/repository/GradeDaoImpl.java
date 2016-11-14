@@ -1,6 +1,7 @@
 package com.cyber.smedu.grade.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,20 @@ public class GradeDaoImpl implements GradeDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	private final String NS = "com.cyber.smedu.mapper.GradeMapper";
 	
-	
+	//관리자 학생성적관리 총이수성적
 	@Override
 	public List<FinalGradeDomain> adminStudentFinalGrade(String studentCode) {
 				
 		return sqlSessionTemplate.selectList(NS+".adminStudentFinalGrade", studentCode);
 		
 	}
-	
+	//관리자 학생성적관리 수강과목 선택시 해당 수강과목 성적출력
+	@Override
+	public List<GradeDomain> adminStudentSubjectGrade(Map<String, Object> map) {
+				
+		return sqlSessionTemplate.selectList(NS+".adminStudentSubjectGrade", map);
+		
+	}
 	
 	/*의기--------------------------------------------------------------------------------------------------------*/
 	@Override

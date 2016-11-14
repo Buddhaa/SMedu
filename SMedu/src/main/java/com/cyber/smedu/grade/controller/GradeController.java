@@ -45,17 +45,21 @@ public class GradeController {
 											@RequestParam(value="studentCode")String studentCode,
 											@RequestParam(value="cardinalCode", defaultValue="")String cardinalCode,
 											@RequestParam(value="openSubjectCode", defaultValue="")String openSubjectCode) {
+		
 		Map<String, Object> map = gradeService.adminStudentGradeDetail(userCode, studentCode, cardinalCode, openSubjectCode);
-		model.addAttribute("studentInfo", map.get("studentInfo"));
-		model.addAttribute("studentCode", studentCode);
-		model.addAttribute("cardinalList", map.get("cardinalList"));
-		model.addAttribute("cardinalCode", cardinalCode);
-		model.addAttribute("openSubjectCode", openSubjectCode);
-		model.addAttribute("finalGradeList", map.get("finalGradeList"));
+		model.addAttribute("studentInfo", map.get("studentInfo")); //학생정보
+		model.addAttribute("studentCode", studentCode); //학생코드
+		model.addAttribute("cardinalList", map.get("cardinalList")); //학생 기수 리스트
+		model.addAttribute("cardinalCode", cardinalCode); //선택 기수코드
+		model.addAttribute("openSubjectCode", openSubjectCode); //선택 과목코드
+		model.addAttribute("finalGradeList", map.get("finalGradeList")); //학생 총 성적 이수과목 리스트
 		if(cardinalCode != "") {
-			model.addAttribute("classRegistrationList", map.get("classRegistrationList"));
+			model.addAttribute("classRegistrationList", map.get("classRegistrationList")); //학생의 수강과목 리스트
 			if(openSubjectCode != "") {
-				model.addAttribute("openSubject", map.get("openSubject"));
+				model.addAttribute("openSubject", map.get("openSubject")); //학생 과목 선택시 과목정보
+				model.addAttribute("gradeList", map.get("gradeList")); //학생 선택과목 성적
+				model.addAttribute("attendList", map.get("attendList")); //학생 선택과목 출석률
+				model.addAttribute("task", map.get("task")); //학생 선택과목 과제 주제,결과물,점수
 			}
 		}
 		

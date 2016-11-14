@@ -19,7 +19,35 @@ public class TaskResultDomain {
 	private String taskFileType;
 	private String taskOriginFileName;
 	private String taskSubject;
+	private String taskContent;
+	private String taskRegisterDate;
+	private int taskScore;
+	private Date taskScoreDate;
 	
+	public String getTaskContent() {
+		return taskContent;
+	}
+	public void setTaskContent(String taskContent) {
+		this.taskContent = taskContent;
+	}
+	public String getTaskRegisterDate() {
+		return taskRegisterDate;
+	}
+	public void setTaskRegisterDate(String taskRegisterDate) {
+		this.taskRegisterDate = taskRegisterDate;
+	}
+	public int getTaskScore() {
+		return taskScore;
+	}
+	public void setTaskScore(int taskScore) {
+		this.taskScore = taskScore;
+	}
+	public Date getTaskScoreDate() {
+		return taskScoreDate;
+	}
+	public void setTaskScoreDate(Date taskScoreDate) {
+		this.taskScoreDate = taskScoreDate;
+	}
 	public String getTaskSubject() {
 		return taskSubject;
 	}

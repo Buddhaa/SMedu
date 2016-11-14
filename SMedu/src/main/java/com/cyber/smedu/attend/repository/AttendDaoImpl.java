@@ -1,6 +1,7 @@
 package com.cyber.smedu.attend.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,13 @@ public class AttendDaoImpl implements AttendDao{
 	private SqlSessionTemplate sqlSessionTemplate;
 	private final String NS = "com.cyber.smedu.mapper.AttendMapper";
 	
+	@Override
+	public List<AttendDomain> adminStudentGradeAttendSelect(Map<String, Object> map) {
+				
+		return sqlSessionTemplate.selectList(NS+".adminStudentGradeAttendSelect", map);
+	}
 	
+	/*의기-------------------------------------------------------------------------------------------*/
 	@Override
 	public UserDomain professorStudentNameSelect(String studentCode) {
 		
@@ -51,4 +58,5 @@ public class AttendDaoImpl implements AttendDao{
 		
 		return sqlSessionTemplate.selectList(NS+".professorStudentAttendInfoSelect", studentCode);		
 	}
+	/*우영-------------------------------------------------------------------------------------------*/
 }
