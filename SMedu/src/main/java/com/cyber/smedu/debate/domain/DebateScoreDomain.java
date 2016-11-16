@@ -7,10 +7,16 @@ public class DebateScoreDomain {
 	private String debateScoreCode;
 	private String professorCode;
 	private String debateCode;
-	private String debateResultCode;
+	private String studentCode;
 	private int debateScore;
 	private Date debateScoreDate;
 	
+	public String getStudentCode() {
+		return studentCode;
+	}
+	public void setStudentCode(String studentCode) {
+		this.studentCode = studentCode;
+	}
 	public String getDebateScoreCode() {
 		return debateScoreCode;
 	}
@@ -29,12 +35,6 @@ public class DebateScoreDomain {
 	public void setDebateCode(String debateCode) {
 		this.debateCode = debateCode;
 	}
-	public String getDebateResultCode() {
-		return debateResultCode;
-	}
-	public void setDebateResultCode(String debateResultCode) {
-		this.debateResultCode = debateResultCode;
-	}
 	public int getDebateScore() {
 		return debateScore;
 	}
@@ -50,7 +50,7 @@ public class DebateScoreDomain {
 	@Override
 	public String toString() {
 		return "DebateScoreDomain [debateScoreCode=" + debateScoreCode + ", professorCode=" + professorCode
-				+ ", debateCode=" + debateCode + ", debateResultCode=" + debateResultCode + ", debateScore="
+				+ ", debateCode=" + debateCode + ", debateResultCode=" + ", debateScore="
 				+ debateScore + ", debateScoreDate=" + debateScoreDate + "]";
 	}
 }

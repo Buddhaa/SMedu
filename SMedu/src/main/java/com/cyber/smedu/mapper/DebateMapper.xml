@@ -3,7 +3,43 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.smedu.mapper.DebateMapper">
-
+	
+	<!-- 관리자 학생성적관리 토론 채점점수 -->
+	<select id="adminStudentGradeSubjectDebateScoreSelect"
+		parameterType="java.util.Map"
+		resultType="com.cyber.smedu.debate.domain.DebateScoreDomain">	
+	SELECT 
+		debate_score as debateScore,
+		debate_score_date as debateScoreDate,
+		debate_score_code as debateScoreCode
+	FROM
+		debate_score
+	WHERE
+		debate_code = #{debateCode}
+	AND
+		student_code = #{studentCode}
+	
+	</select>
+	
+	<!-- 관리자 학생성적관리 토론 답변 -->
+	<select id="adminStudentGradeSubjectDebateResultSelect"
+		parameterType="java.util.Map"
+		resultType="com.cyber.smedu.debate.domain.DebateResultDomain">	
+	SELECT 
+		debate_result_code as debateResultCode,
+		debate_code as debateCode,
+		student_code as studentCode,
+		debate_comment as debateComment,
+		debate_register_date as debateRegisterDate
+	FROM
+		debate_result
+	WHERE
+		debate_code = #{debateCode}
+	AND
+		student_code = #{studentCode}
+	
+	</select>
+<!-- 의기 -->
 	<select id="professorStudentDebateCommentAndDateSelect"
 		parameterType="String"
 		resultType="com.cyber.smedu.debate.domain.DebateResultDomain">

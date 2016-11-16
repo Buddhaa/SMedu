@@ -1,6 +1,7 @@
 package com.cyber.smedu.debate.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
+import com.cyber.smedu.debate.domain.DebateScoreDomain;
 
 @Repository
 public class DebateDaoImpl implements DebateDao {
@@ -16,6 +18,20 @@ public class DebateDaoImpl implements DebateDao {
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "com.cyber.smedu.mapper.DebateMapper";
 	
+	@Override
+	public DebateScoreDomain adminStudentGradeSubjectDebateScoreSelect(Map<String, Object> map) {
+				
+		return sqlSession.selectOne(NS+".adminStudentGradeSubjectDebateScoreSelect", map);
+		
+	}
+	
+	@Override
+	public List<DebateResultDomain> adminStudentGradeSubjectDebateResultSelect(Map<String, Object> map) {
+				
+		return sqlSession.selectList(NS+".adminStudentGradeSubjectDebateResultSelect", map);
+		
+	}
+	//의기
 	@Override
 	public List<DebateResultDomain> professorStudentDebateCommentAndDateSelect(String openSubjectCode) {
 		

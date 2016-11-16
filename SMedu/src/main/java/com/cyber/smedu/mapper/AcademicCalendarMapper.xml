@@ -46,4 +46,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		cardinal_code = #{cardinalCode}
 	</select>
+	<select id="adminStudentGradeTestAcademicCalendarCodeSelect" parameterType="java.util.Map"
+		resultType="com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain">
+	SELECT
+		academic_calendar_code as academicCalendarCode,
+		cardinal_code as cardinalCode,
+		weekly_schedule as weeklySchedule,
+		academic_calendar_start_day as academicCalendarStartDay,
+		academic_calendar_end_day as academicCalendarEndDay
+	FROM 
+		academic_calendar
+	WHERE
+		cardinal_code = #{cardinalCode}
+	AND
+		weekly_schedule = #{exam}
+	</select>
 </mapper>

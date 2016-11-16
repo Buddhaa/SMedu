@@ -2,20 +2,40 @@ package com.cyber.smedu.exam.domain;
 
 import java.sql.Timestamp;
 
-public class AnswerDomain {
-	
-	//학생답안 및 채점관리 VO
+public class AnswerDomain {		
 	
 	private String answerQuestionCode;
 	private String studentCode;
 	private String testPaperCode;
 	private String examQuestionCode;
 	private String professorCode;
-	private int answerQuestion; //답안
-	private Timestamp examDate; //응시날짜
-	private int answerQuestionScore; //점수
-	private Timestamp markedDate; //채점날짜
+	private int answerQuestion;
+	private Timestamp examDate; 
+	private int answerQuestionScore; 
+	private Timestamp markedDate;
 	
+	private int examQuestionNo;	
+	private int examQuestionAnswer;	
+	private int examQuestionScore;	
+	
+	public int getExamQuestionNo() {
+		return examQuestionNo;
+	}
+	public void setExamQuestionNo(int examQuestionNo) {
+		this.examQuestionNo = examQuestionNo;
+	}
+	public int getExamQuestionAnswer() {
+		return examQuestionAnswer;
+	}
+	public void setExamQuestionAnswer(int examQuestionAnswer) {
+		this.examQuestionAnswer = examQuestionAnswer;
+	}
+	public int getExamQuestionScore() {
+		return examQuestionScore;
+	}
+	public void setExamQuestionScore(int examQuestionScore) {
+		this.examQuestionScore = examQuestionScore;
+	}
 	public String getAnswerQuestionCode() {
 		return answerQuestionCode;
 	}

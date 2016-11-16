@@ -1,6 +1,7 @@
 package com.cyber.smedu.academiccalendar.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
@@ -12,5 +13,7 @@ public interface AcademicCalendarDao {
 	CardinalDomain selectCardinalDetail(String cardinalCode);
 
 	List<AcademicCalendarDomain> selectAcademicCalendarDetail(String cardinalCode);
+
+	AcademicCalendarDomain adminStudentGradeTestAcademicCalendarCodeSelect(Map<String, Object> map);
 
 }

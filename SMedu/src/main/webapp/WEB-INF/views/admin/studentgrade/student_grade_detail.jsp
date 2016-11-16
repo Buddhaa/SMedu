@@ -412,8 +412,8 @@
 			                
 			              </table>              
                       </div>
-                      <div class="timeline-footer">                        
-                      </div>
+                      <span class="time"><i class="fa fa-clock-o"></i>채점날짜 : ${debateScore.debateScoreDate}</span>					  
+                      <h3 class="timeline-header"><a href="#">출석 점수 : ${debateScore.debateScore}</a> </h3>
                     </div>
                   </li>
                   <!-- END timeline item -->                  
@@ -433,8 +433,9 @@
                       <h4>&nbsp;과제 주제 - ${task.taskSubject}</h4>
 					  	<hr/>
 					  	&nbsp;&nbsp;과제 내용 - ${task.taskContent}					  	
-                      </div>					  	
+                      </div>				  	
                       <div class="timeline-header">
+                      <span class="time"><i class="fa fa-clock-o"></i>제출날짜 : ${task.taskResultDate}</span>
                       <h4>&nbsp;제출물 제목 - ${task.taskResultTitle}</h4>
 					  	<hr/>
 					  	&nbsp;&nbsp;제출물 내용 - ${task.taskResultContent}
@@ -444,18 +445,28 @@
 					  	</c:if>
                       </div>
                       <span class="time"><i class="fa fa-clock-o"></i>채점날짜 : ${task.taskScoreDate}</span>					  
-                      <h3 class="timeline-header"><a href="#">점수 : ${task.taskScore}</a> </h3>
+                      <h3 class="timeline-header"><a href="#">채점점수 : ${task.taskScore}</a> </h3>
                     </div>
                   </li>
                   <!-- END timeline item --> 
                   <!-- timeline item -->
                   <li>    
                     <div class="timeline-item">
-					  <span class="time"><i class="fa fa-clock-o"></i> 8주차</span>
+					  <span class="time"><i class="fa fa-clock-o"></i>제출날짜 : ${debate.debateRegisterDate}</span>
                       <h3 class="timeline-header"><a href="#">토론</a> </h3>
-
-                      <div class="timeline-body">                        
+					  <div class="timeline-header">
+                      <h4>&nbsp;토론 주제 - ${debate.debateSubject}</h4>
+					  	<hr/>
+					  	&nbsp;&nbsp;토론 내용 - ${debate.debateContent}					  	
                       </div>
+                      <c:forEach var="debateResult" items="${debateResult}">
+                      <div class="timeline-header">
+                      <span class="time"><i class="fa fa-clock-o"></i>답변날짜 : ${debateResult.debateRegisterDate}</span>
+                      <h4>&nbsp;답변 내용 - ${debateResult.debateComment}</h4>					  						  	
+                      </div>
+                      </c:forEach>
+                      <span class="time"><i class="fa fa-clock-o"></i>채점날짜 : ${debateScore.debateScoreDate}</span>					  
+                      <h3 class="timeline-header"><a href="#">채점점수 : ${debateScore.debateScore}</a> </h3>                    
                     </div>
                   </li>
                   <!-- END timeline item --> 
@@ -469,33 +480,183 @@
                   <!-- timeline item -->
                   <li>    
                     <div class="timeline-item">
-					  <span class="time"><i class="fa fa-clock-o"></i> 5주차</span>
+					  <span class="time"><i class="fa fa-clock-o"></i> 제출날짜 : ${MidExamInfo.testPaperDate}</span>
                       <h3 class="timeline-header"><a href="#">중간고사</a> </h3>
-
+					  <span class="description">&nbsp;&nbsp;&nbsp;&nbsp; 시험응시기간 : ${MidExamInfo.academicCalendarStartDay} ~ ${MidExamInfo.academicCalendarEndDay}</span><br>
+					  <span class="description">&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i> 학생시험응시날짜 : ${MidExamAndAnswerList[0].examDate}</span>	
                       <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <table class="table table-bordered">
+			                <tr>
+			                  <th>#</th>
+			                  <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${MidExamAndAnswer.examQuestionNo}번</th>
+			                  </c:forEach>			                  
+			                </tr>
+			                <tr>
+			                  <td>시험답안</td>
+			                <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${MidExamAndAnswer.examQuestionAnswer}</th>
+			                  </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>배점</td>
+				            <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${MidExamAndAnswer.examQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr>  
+				            <tr>
+				              <td>학생답안</td>
+				            <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="0" end="9" step="1">
+				              <c:if test="${MidExamAndAnswer.answerQuestion == MidExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-green">${MidExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                  <c:if test="${MidExamAndAnswer.answerQuestion != MidExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-red">${MidExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                 </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>채점점수</td>
+				            <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${MidExamAndAnswer.answerQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr> 
+			                
+			              </table>
+			              <table class="table table-bordered">
+			                <tr>
+			                  <th>#</th>
+			                  <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${MidExamAndAnswer.examQuestionNo}번</th>
+			                  </c:forEach>			                  
+			                </tr>
+			                <tr>
+			                  <td>시험답안</td>
+			                <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${MidExamAndAnswer.examQuestionAnswer}</th>
+			                  </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>배점</td>
+				            <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${MidExamAndAnswer.examQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr>  
+				            <tr>
+				              <td>학생답안</td>
+				            <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="10" end="19" step="1">
+				              <c:if test="${MidExamAndAnswer.answerQuestion == MidExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-green">${MidExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                  <c:if test="${MidExamAndAnswer.answerQuestion != MidExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-red">${MidExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                 </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>채점점수</td>
+				            <c:forEach var="MidExamAndAnswer" items="${MidExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${MidExamAndAnswer.answerQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr> 
+			                
+			              </table>                   
                       </div>
+                      <span class="time"><i class="fa fa-clock-o"></i>채점날짜 : ${debateScore.debateScoreDate}</span>					  
+                      <h3 class="timeline-header"><a href="#">채점 총 점수 : ${debateScore.debateScore}</a> </h3>
                     </div>
                   </li>
                   <!-- END timeline item --> 
                   <!-- timeline item -->
                   <li>    
                     <div class="timeline-item">
-					  <span class="time"><i class="fa fa-clock-o"></i> 10주차</span>
+					  <span class="time"><i class="fa fa-clock-o"></i> 제출날짜 : ${finalExamInfo.testPaperDate}</span>
                       <h3 class="timeline-header"><a href="#">기말고사</a> </h3>
-
+					  <span class="description">&nbsp;&nbsp;&nbsp;&nbsp; 시험응시기간 : ${finalExamInfo.academicCalendarStartDay} ~ ${finalExamInfo.academicCalendarEndDay}</span><br>
+					  <span class="description">&nbsp;&nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i> 학생시험응시날짜 : ${finalExamAndAnswerList[0].examDate}</span>	
                       <div class="timeline-body">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
-                        <img src="http://placehold.it/150x100" alt="..." class="margin">
+                        <table class="table table-bordered">
+			                <tr>
+			                  <th>#</th>
+			                  <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${finalExamAndAnswer.examQuestionNo}번</th>
+			                  </c:forEach>			                  
+			                </tr>
+			                <tr>
+			                  <td>시험답안</td>
+			                <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${finalExamAndAnswer.examQuestionAnswer}</th>
+			                  </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>배점</td>
+				            <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${finalExamAndAnswer.examQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr>  
+				            <tr>
+				              <td>학생답안</td>
+				            <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="0" end="9" step="1">
+				              <c:if test="${finalExamAndAnswer.answerQuestion == finalExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-green">${finalExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                  <c:if test="${finalExamAndAnswer.answerQuestion != finalExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-red">${finalExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                 </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>채점점수</td>
+				            <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="0" end="9" step="1">
+			                  <th>${finalExamAndAnswer.answerQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr> 
+			                
+			              </table>
+			              <table class="table table-bordered">
+			                <tr>
+			                  <th>#</th>
+			                  <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${finalExamAndAnswer.examQuestionNo}번</th>
+			                  </c:forEach>			                  
+			                </tr>
+			                <tr>
+			                  <td>시험답안</td>
+			                <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${finalExamAndAnswer.examQuestionAnswer}</th>
+			                  </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>배점</td>
+				            <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${finalExamAndAnswer.examQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr>  
+				            <tr>
+				              <td>학생답안</td>
+				            <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="10" end="19" step="1">
+				              <c:if test="${finalExamAndAnswer.answerQuestion == finalExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-green">${finalExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                  <c:if test="${finalExamAndAnswer.answerQuestion != finalExamAndAnswer.examQuestionAnswer}">				           
+			                  	<th><span class="badge bg-red">${finalExamAndAnswer.answerQuestion}</span></th>
+			                  </c:if>
+			                 </c:forEach>
+				            </tr>
+				            <tr>
+				              <td>채점점수</td>
+				            <c:forEach var="finalExamAndAnswer" items="${finalExamAndAnswerList}" begin="10" end="19" step="1">
+			                  <th>${finalExamAndAnswer.answerQuestionScore}점</th>
+			                  </c:forEach>
+				            </tr> 
+			                
+			              </table>                   
                       </div>
+                      <span class="time"><i class="fa fa-clock-o"></i>채점날짜 : ${debateScore.debateScoreDate}</span>					  
+                      <h3 class="timeline-header"><a href="#">채점 총 점수 : ${debateScore.debateScore}</a> </h3>
                     </div>
                   </li>
-                  <!-- END timeline item -->                                  
+                  <!-- END timeline item -->                                   
                 </ul>
               </div>
                            

@@ -2,4 +2,45 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.ExamMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.ExamMapper">
+<select id="adminStudentGradeTestPaperSelect" parameterType="java.util.Map" resultType="com.cyber.smedu.exam.domain.TestPaperDomain">
+	SELECT
+		tp.test_paper_code as testPaperCode,
+		tp.test_paper_date as testPaperDate,
+		ac.academic_calendar_start_day as academicCalendarStartDay,
+		ac.academic_calendar_end_day as academicCalendarEndDay
+	FROM 
+		test_paper tp
+	INNER JOIN
+		academic_calendar ac
+	ON
+		tp.academic_calendar_code = ac.academic_calendar_code
+	WHERE
+		tp.open_subject_code = #{openSubjectCode}
+	AND
+		tp.academic_calendar_code = #{academicCalendarCode}
+</select>
+
+<select id="adminStudentGradeExamAndAnswerSelect" parameterType="java.util.Map" resultType="com.cyber.smedu.exam.domain.AnswerDomain">
+	SELECT 
+		eq.exam_question_no as examQuestionNo,
+		eq.exam_question_answer as examQuestionAnswer,
+		eq.exam_question_score as examQuestionScore,
+		ap.answer_question as answerQuestion,
+		ap.exam_date as examDate,
+		ap.answer_question_score as answerQuestionScore,
+		ap.marked_date as markedDate
+	FROM
+		exam_question eq
+	INNER JOIN
+		answer_paper ap
+	ON
+		eq.exam_question_code = ap.exam_question_code
+	WHERE
+		ap.test_paper_code = #{testPaperCode}
+	AND
+		ap.student_code = #{studentCode}
+	ORDER BY
+		eq.exam_question_no ASC
+	</select>
+</mapper>

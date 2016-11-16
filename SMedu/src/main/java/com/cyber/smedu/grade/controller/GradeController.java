@@ -53,13 +53,20 @@ public class GradeController {
 		model.addAttribute("cardinalCode", cardinalCode); //선택 기수코드
 		model.addAttribute("openSubjectCode", openSubjectCode); //선택 과목코드
 		model.addAttribute("finalGradeList", map.get("finalGradeList")); //학생 총 성적 이수과목 리스트
-		if(cardinalCode != "") {
+		if(!cardinalCode.equals("")) {
 			model.addAttribute("classRegistrationList", map.get("classRegistrationList")); //학생의 수강과목 리스트
-			if(openSubjectCode != "") {
+			if(!openSubjectCode.equals("")) {
 				model.addAttribute("openSubject", map.get("openSubject")); //학생 과목 선택시 과목정보
 				model.addAttribute("gradeList", map.get("gradeList")); //학생 선택과목 성적
 				model.addAttribute("attendList", map.get("attendList")); //학생 선택과목 출석률
 				model.addAttribute("task", map.get("task")); //학생 선택과목 과제 주제,결과물,점수
+				model.addAttribute("debate", map.get("debate")); //학생 선택과목 토론 주제, 내용, 등록일자
+				model.addAttribute("debateResult", map.get("debateResult")); //학생 선택과목 토론 답변,답변일자,점수
+				model.addAttribute("debateScore", map.get("debateScore")); //학생 선택과목 토론 점수, 채점날짜				
+				model.addAttribute("MidExamInfo", map.get("MidExam")); //중간고사 시험지 정보
+				model.addAttribute("finalExamInfo", map.get("finalExam")); //기말고사 시험지 정보
+				model.addAttribute("MidExamAndAnswerList", map.get("MidExamAndAnswerList")); //중간고사 문제 답안 배점 학생 답안 채점점수
+				model.addAttribute("finalExamAndAnswerList", map.get("finalExamAndAnswerList")); //기말고사 문제 답안 배점 학생 답안 채점점수
 			}
 		}
 		

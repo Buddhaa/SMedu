@@ -1,14 +1,12 @@
 package com.cyber.smedu.exam.domain;
 
-public class ExamQuestionsDomain {
-	
-	//시험문제 관리 VO
+public class ExamQuestionsDomain {	
 	
 	private String examQuestionCode;
 	private String testPaperCode;
-	private int examQuestionNo;	//시험문제 번호
-	private int examQuestionAnswer;	//시험문제 정답
-	private int examQuestionScore;	//시험문제 배점
+	private int examQuestionNo;	
+	private int examQuestionAnswer;	
+	private int examQuestionScore;	
 	private String examFileName;
 	private String examFileExt;
 	private int examFileSize;

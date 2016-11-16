@@ -1,16 +1,37 @@
 package com.cyber.smedu.exam.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class TestPaperDomain {
-	
-	//시험지 관리 VO
-	
+		
 	private String testPaperCode;
 	private String openSubjectCode;
 	private String academicCalendarCode;
-	private Timestamp testTime; //시험시간
+	private Date testPaperDate;
+	private Timestamp testTime; 
 	
+	private Date academicCalendarStartDay;
+	private Date academicCalendarEndDay;
+	
+	public Date getTestPaperDate() {
+		return testPaperDate;
+	}
+	public void setTestPaperDate(Date testPaperDate) {
+		this.testPaperDate = testPaperDate;
+	}
+	public Date getAcademicCalendarStartDay() {
+		return academicCalendarStartDay;
+	}
+	public void setAcademicCalendarStartDay(Date academicCalendarStartDay) {
+		this.academicCalendarStartDay = academicCalendarStartDay;
+	}
+	public Date getAcademicCalendarEndDay() {
+		return academicCalendarEndDay;
+	}
+	public void setAcademicCalendarEndDay(Date academicCalendarEndDay) {
+		this.academicCalendarEndDay = academicCalendarEndDay;
+	}
 	public String getTestPaperCode() {
 		return testPaperCode;
 	}
