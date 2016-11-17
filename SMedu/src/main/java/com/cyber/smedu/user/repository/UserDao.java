@@ -32,7 +32,7 @@ public interface UserDao {
 	public int insertPlanner(PlannerDomain planner);
 
 	//관리자 회원 리스트
-	public List<UserDomain> selectAdminUserList();
+	public List<UserDomain> selectAdminUserList(Map<String, Object> map);
 	//한명의 학생 회원정보
 	StudentDomain studentSelectOne(String userCode);
 
@@ -64,6 +64,8 @@ public interface UserDao {
 	List<StudentDomain> selectAdminStudentList(Map<String, Object> map);
 
 	UserDomain selectAdminStudentGradeDetail(String userCode);
+
+	
 
 	
 

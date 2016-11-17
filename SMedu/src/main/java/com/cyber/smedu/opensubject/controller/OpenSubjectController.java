@@ -1,6 +1,7 @@
 package com.cyber.smedu.opensubject.controller;
 
 import java.text.ParseException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,14 @@ import com.cyber.smedu.user.domain.UserDomain;
 @SessionAttributes({"userInfo", "userPlusInfo"})
 public class OpenSubjectController {
 	@Autowired OpenSubjectService openSubjectService;
+		
+	@RequestMapping(value="/admin/curriculum/openSubjectList", method=RequestMethod.GET)
+	public String adminOpenSubjectList(Model model){	
+		Map<String, Object> map = openSubjectService.selectAdminOpenSubject();
+		model.addAttribute("openSubjectList", map.get("openSubjectList"));
+		return"admin/curriculum/open_subject_list";
+	}
+	//의기
 	
 	//나의 학사관리 페이지 이동 -- openSubject
 	@RequestMapping(value="/classroomAcademicActivity", method=RequestMethod.GET)
@@ -55,5 +64,6 @@ public class OpenSubjectController {
 		System.out.println("model : " + model.toString());
 		return "student/classroom/classroom_lecture";
 	}
+	//장용
 	
 }

@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	<!-- 관리자 회원 리스트 출력 -->
-	<select id="selectAdminUserList" resultType="com.cyber.smedu.user.domain.UserDomain">
+	<select id="selectAdminUserList" parameterType="java.util.Map" resultType="com.cyber.smedu.user.domain.UserDomain">
 	SELECT
 		u.user_code as userCode,
 		u.department_code as departmentCode,
@@ -139,8 +139,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	INNER JOIN
 		department d
 	ON 
-		u.department_code = d.department_code
-	ORDER BY user_level
+		u.department_code = d.department_code		
+	<where>		
+		<if test="departmentCode != ''">
+				u.department_code = #{departmentCode}
+		</if>
+		<if test="userLevel != ''">	
+			AND 
+				u.user_level = #{userLevel}
+		</if>
+		<if test="userName != ''">	
+			AND
+				u.user_name LIKE '%${userName}%'
+		</if>
+		<if test="userState != ''">	
+			AND
+				u.user_state = #{userState}
+		</if>
+	</where>
+	
+	ORDER BY 
+		user_level
+	
 	</select>
 	<!-- 관리자 회원 상세보기 -->
 	<select id="selectAdminUserDetail" parameterType="String" resultType="com.cyber.smedu.user.domain.UserDomain">

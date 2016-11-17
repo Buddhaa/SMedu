@@ -21,5 +21,7 @@ public interface OpenSubjectService {
 	
 	//나의 학사관리 페이지에서 과목 수강하기 클릭시 팝업창에 해당 과목의 동영상 나오기
 	Map<String, Object> oneLecture(String lectureCode) throws ParseException;
+
+	Map<String, Object> selectAdminOpenSubject();
 	
 }

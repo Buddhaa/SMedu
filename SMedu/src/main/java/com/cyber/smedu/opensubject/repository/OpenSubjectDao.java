@@ -28,4 +28,6 @@ public interface OpenSubjectDao {
 
 	OpenSubjectDomain selectAdminStudentGradeDetailSubject(String openSubjectCode);
 
+	List<OpenSubjectDomain> selectAdminOpenSubject();
+
 }

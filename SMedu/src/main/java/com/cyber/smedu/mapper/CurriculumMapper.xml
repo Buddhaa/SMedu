@@ -25,14 +25,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="subjectList" parameterType="java.util.Map" resultType="com.cyber.smedu.curriculum.domain.SubjectDomain" >
 		SELECT 
-			subject_code as subjectCode, 
-			department_code as departmentCode, 
-			subject_name as subjectName, 
-			subject_sort as subjectSort, 
-			subject_pay as subjectPay, 
-			subject_credit as subjectCredit
+			s.subject_code as subjectCode, 
+			s.department_code as departmentCode, 
+			d.department_name as departmentName, 
+			s.subject_name as subjectName, 
+			s.subject_sort as subjectSort, 
+			s.subject_pay as subjectPay, 
+			s.subject_credit as subjectCredit,
+			s.subject_date as subjectDate,
+			s.subject_state as subjectState
 		FROM 
-			subject
+			subject s
+		INNER JOIN
+			department d
+		ON
+			s.department_code = d.department_code
 	</select>
 	<!-- 현호 -->
 </mapper>

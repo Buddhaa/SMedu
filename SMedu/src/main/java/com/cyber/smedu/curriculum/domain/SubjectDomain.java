@@ -13,6 +13,15 @@ public class SubjectDomain {
 	private String subjectGoal;
 	private Date subjectDate;
 	private String subjectState;
+	
+	private String departmentName;
+	
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
 	public String getSubjectCode() {
 		return subjectCode;
 	}

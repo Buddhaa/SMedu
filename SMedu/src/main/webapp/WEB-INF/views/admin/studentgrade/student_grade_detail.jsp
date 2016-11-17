@@ -37,6 +37,12 @@
 				alert("조회할 과목을 선택후 조회해주세요.")
 			}
 		});
+		$("#test3").click(function(){
+			var openSubjectCode = $("#openSubject").val();
+			if(openSubjectCode == '') {
+				alert("조회할 과목을 선택후 조회해주세요.")
+			}
+		});
 	});
 </script>
 </head>
@@ -159,7 +165,8 @@
               <li><a href="#activity" data-toggle="tab">총 이수학점</a></li>
               <li class="active"><a href="#activity2" data-toggle="tab" id="test">과목 총 성적</a></li>
             </c:if>
-              <li><a href="#timeline" data-toggle="tab" id="test2">제출물 및 시험답안</a></li>
+              <li><a href="#timeline" data-toggle="tab" id="test2">출석률 및 제출물</a></li>
+              <li><a href="#timeline2" data-toggle="tab" id="test3">중간·기말 답안</a></li>
             </ul>
             <div class="tab-content">
               <c:if test="${openSubjectCode == ''}">
@@ -292,7 +299,7 @@
                   <th style="width: 10px">#</th>
                   <th>성적평가항목</th>
                   <th>점수</th>
-                  <th>참여여부</th>
+                  <th>참여완료여부</th>
                   <th></th>
                 </tr>
                 <c:forEach var="grade" items="${gradeList}">
@@ -469,7 +476,18 @@
                       <h3 class="timeline-header"><a href="#">채점점수 : ${debateScore.debateScore}</a> </h3>                    
                     </div>
                   </li>
-                  <!-- END timeline item --> 
+                  <!-- END timeline item -->                                                    
+                </ul>
+              </div>
+              
+              <c:if test="${openSubjectCode ==''}">
+	              <div class="tab-pane" id="timeline2">
+	              조회할 과목을 선택후 조회해주세요
+	              </div>
+              </c:if>
+              <div class="tab-pane" id="timeline2">
+                <!-- The timeline -->
+                <ul class="timeline timeline-inverse">                 
                   <!-- timeline time label -->
                   <li class="time-label">
                         <span class="bg-gray">
@@ -659,7 +677,7 @@
                   <!-- END timeline item -->                                   
                 </ul>
               </div>
-                           
+                                       
               
               <!-- /.tab-pane -->
             </div>

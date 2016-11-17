@@ -2,4 +2,16 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.BookMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.BookMapper">
+	<select id="bookListSelect" resultType="com.cyber.smedu.book.domain.BookDomain">
+		SELECT 
+			book_code as bookCode,
+			book_name as bookName, 
+			book_company as bookCompany, 
+			book_writer as bookWriter, 
+			book_introduce as bookIntroduce, 
+			book_date as bookDate
+		FROM
+			book
+	</select>
+</mapper>

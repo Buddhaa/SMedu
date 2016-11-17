@@ -6,6 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){		
+		$("#departmentSearch").val("${departmentCode}").attr("selected", "selected");
+		$("#userLevelSearch").val("${userLevel}").attr("selected", "selected");
+		$("#userNameSearch").val("${userName}").attr("selected", "selected");
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" />
@@ -24,7 +32,41 @@
         <li class="active">Simple</li>
       </ol>
     </section>
-
+	<div class="pad margin no-print" style="margin: 5px;">
+      <!-- <div class="callout callout-info" style="margin-bottom: 0!important; width:600px"> -->
+      <div class="callout callout-info" style="margin-bottom: 0!important; width:600px; height:260px;">
+        <h4><i class="fa fa-info"></i> Search Box:</h4><br/>
+        <!-- select -->
+        	<form action="/admin/user/userList">
+               	<div class="form-group">
+                  <label class="col-md-2">학과</label>
+                  <select class="form-control" style="width:200px" name="departmentCode" id="departmentSearch">
+                  	<option value="">==선택==</option> 
+                  <c:forEach var="department" items="${departmentList}">
+                  	<option value="${department.departmentCode}">${department.departmentName}</option>
+                  </c:forEach>
+                  </select>
+               	</div>
+               	<div class="form-group">
+                  <label class="col-md-2">권한</label>
+                  <select class="form-control" style="width:200px" name="userLevel" id="userLevelSearch">
+                  	<option value="">==선택==</option> 
+                  	<option value="교수">교수</option> 
+                  	<option value="플래너">플래너</option> 
+                  	<option value="학생">학생</option>                  
+                  </select>
+               	</div>
+               	<div class="form-group">
+                  <label class="col-md-2">이름</label>
+                  <input type="text" class="form-control" style="width:200px" name="userName" id="userNameSearch">                  
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search">검색</i></button> 
+                  <a href="/admin/user/userList?userState=탈퇴"><button type="button" class="btn btn-default">탈퇴회원 조회</button></a>       
+                </div>
+            </form>
+              </div>
+      </div>
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -35,10 +77,8 @@
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 200px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
                   <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
               </div>

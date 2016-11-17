@@ -20,7 +20,6 @@ public interface UserService {
 	public int addStudent(UserDomain user, StudentDomain student);
 	public int addProfessor(UserDomain user, ProfessorDomain professor);
 	public int addPlanner(UserDomain user, PlannerDomain planner);
-	public Map<String, Object> selectAdminUserList();
 	//학생의 정보수정페이지 이동
 	Map<String, Object> studentSelectOne(String userCode);
 	
@@ -34,4 +33,5 @@ public interface UserService {
 	void userStateUpdate(String userCode);
 	Map<String, Object> selectAdminUserDetail(String userCode);
 	Map<String, Object> selectAdminJoinRequestList();
+	Map<String, Object> selectAdminUserList(String departmentCode, String userLevel, String userName, String userState);
 }

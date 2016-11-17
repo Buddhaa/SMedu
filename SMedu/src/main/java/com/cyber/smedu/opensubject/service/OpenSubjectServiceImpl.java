@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.opensubject.repository.OpenSubjectDao;
 import com.cyber.smedu.user.domain.StudentDomain;
 
@@ -21,6 +22,14 @@ public class OpenSubjectServiceImpl implements OpenSubjectService{
 	@Autowired OpenSubjectDao openSubjectDao;
 	
 	Map<String, Object> map = new HashMap<String, Object>();
+	
+	//관리자 개설과목 리스트
+	@Override
+	public Map<String, Object> selectAdminOpenSubject() {
+		List<OpenSubjectDomain> openSubjectList = openSubjectDao.selectAdminOpenSubject();
+		map.put("openSubjectList", openSubjectList);
+		return map;
+	}
 	
 	//나의 학사관리 페이지 이동
 	@Override

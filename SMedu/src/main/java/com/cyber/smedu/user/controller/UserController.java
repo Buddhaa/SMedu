@@ -80,9 +80,19 @@ public class UserController {
 	}
 	//관리자 회원관리 리스트
 	@RequestMapping(value = "/admin/user/userList", method = RequestMethod.GET)
-	public String adminUserList(Model model) {
-		Map<String, Object> map = userService.selectAdminUserList();
+	public String adminUserList(Model model,
+									@RequestParam(value="departmentCode", defaultValue="") String departmentCode,
+									@RequestParam(value="userLevel", defaultValue="") String userLevel,
+									@RequestParam(value="userName", defaultValue="") String userName,
+									@RequestParam(value="userState", defaultValue="") String userState) {
+		Map<String, Object> map = userService.selectAdminUserList(departmentCode, userLevel, userName, userState);
+		
+		model.addAttribute("departmentCode", departmentCode);
+		model.addAttribute("userLevel", userLevel);
+		model.addAttribute("userName", userName);
+		
 		model.addAttribute("userList", map.get("userList"));
+		model.addAttribute("departmentList", map.get("departmentList"));
 		return "admin/user/user_list";
 	}
 	//관리자 회원 상세보기

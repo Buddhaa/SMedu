@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.board.domain.BoardArticleDomain;
+import com.cyber.smedu.curriculum.domain.DepartmentDomain;
+import com.cyber.smedu.curriculum.repository.CurriculumDao;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
 import com.cyber.smedu.user.domain.PlannerDomain;
 import com.cyber.smedu.user.domain.ProfessorDomain;
@@ -22,6 +24,7 @@ import com.cyber.smedu.user.repository.UserDao;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired UserDao userDao;
+	@Autowired CurriculumDao curriculumDao;
 	//관리자 페이지 로그인 처리
 	@Override
 	public Map<String, Object> adminLogin(String userId, String userPw) {
@@ -108,9 +111,18 @@ public class UserServiceImpl implements UserService {
 	}
 	//관리자 회원리스트 출력
 	@Override
-	public Map<String, Object> selectAdminUserList() {
+	public Map<String, Object> selectAdminUserList(String departmentCode, String userLevel, String userName, String userState) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UserDomain> userList = userDao.selectAdminUserList();
+		//검색창 학과리스트
+		List<DepartmentDomain> departmentList = curriculumDao.selectDepartmentList();
+		map.put("departmentList", departmentList);
+		//회원리스트
+		//검색 값 확인
+		map.put("departmentCode", departmentCode);
+		map.put("userLevel", userLevel);
+		map.put("userName", userName);
+		map.put("userState", userState);
+		List<UserDomain> userList = userDao.selectAdminUserList(map);
 		map.put("userList", userList);
 		return map;
 	}

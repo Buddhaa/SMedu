@@ -6,6 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){		
+		$("#departmentSearch").val("${departmentCode}").attr("selected", "selected");
+		$("#userNameSearch").val("${userName}").attr("selected", "selected");
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" />
@@ -24,14 +31,15 @@
         <li class="active">Simple</li>
       </ol>
     </section>
-    <div class="pad margin no-print">
-      <div class="callout callout-info" style="margin-bottom: 0!important; width:600px">
+    <div class="pad margin no-print" style="margin: 5px;">
+      <!-- <div class="callout callout-info" style="margin-bottom: 0!important; width:600px"> -->
+      <div class="callout callout-info" style="margin-bottom: 0!important; width:600px; height:210px;">
         <h4><i class="fa fa-info"></i> Search Box:</h4><br/>
         <!-- select -->
         	<form action="/admin/studentGrade/list">
                	<div class="form-group">
                   <label class="col-md-2">학과</label>
-                  <select class="form-control" style="width:200px" name="departmentCode">
+                  <select class="form-control" style="width:200px" name="departmentCode" id="departmentSearch">
                   	<option value="">==선택==</option> 
                   <c:forEach var="department" items="${departmentList}">
                     <option value="${department.departmentCode}">${department.departmentName}</option>         
@@ -40,7 +48,7 @@
                	</div>
                	<div class="form-group">
                   <label class="col-md-2">이름</label>
-                  <input type="text" class="form-control" style="width:200px" name="userName">                  
+                  <input type="text" class="form-control" style="width:200px" name="userName" id="userNameSearch">                  
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-default"><i class="fa fa-search">검색</i></button>                 

@@ -23,6 +23,13 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 		
 		return sqlSession.selectOne(NS+".selectAdminStudentGradeDetailSubject", openSubjectCode);
 	}
+	//-- 관리자 개설과목 리스트 -->
+	@Override
+	public List<OpenSubjectDomain> selectAdminOpenSubject() {
+		
+		return sqlSession.selectList(NS+".selectAdminOpenSubject");
+	}
+	/*의기-----------------------------------------------------------*/
 	//나의 학사관리 페이지 이동
 	@Override
 	public List<CardinalDomain> classroomAcademicaCtivity(StudentDomain studentDomain) {

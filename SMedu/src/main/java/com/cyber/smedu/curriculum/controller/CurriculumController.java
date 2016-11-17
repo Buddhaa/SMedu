@@ -15,6 +15,21 @@ public class CurriculumController {
 	
 	@Autowired CurriculumService curriculumService;
 	
+	//관리자 학과리스트
+	@RequestMapping(value = "/admin/curriculum/departmentList")
+	public String adminDepartmentList(Model model) {
+		Map<String, Object> map = curriculumService.selectDepartmentList();
+		model.addAttribute("departmentList", map.get("departmentList"));
+		return "admin/curriculum/department_list";
+	}
+	//관리자 과목리스트
+	@RequestMapping(value = "/admin/curriculum/subjectList")
+	public String adminSubjectList(Model model) {
+		Map<String, Object> map = curriculumService.selectSubjectList();
+		model.addAttribute("subjectList", map.get("subjectList"));
+		return "admin/curriculum/subject_list";
+	}
+	//의기
 	//교육과정 페이지 이동
 	@RequestMapping(value = "/smedu/creditbank/curriculumIntro", method = RequestMethod.GET)
 	public String curriculumIntro(Model model) {
@@ -22,4 +37,5 @@ public class CurriculumController {
 		model.addAttribute("subjectList", map.get("subjectList"));
 		return "smedu/creditbank/curriculum_intro";
 	}
+	//현호
 }

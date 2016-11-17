@@ -22,6 +22,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		open_subject_code = #{openSubjectCode}
 	</select>
 	
+	<!-- 관리자 개설과목 리스트 -->
+	<select id="selectAdminOpenSubject"
+			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	SELECT 
+		open_subject_code as openSubjectCode,
+		cardinal_code as cardinalCode,
+		professor_code as professorCode,
+		subject_code as subjectCode,
+		book_code as bookCode,	
+		cardinal as cardinal,
+		professor_name as professorName,
+		subject_name as subjectName,
+		book_name as bookName,
+		register_date as registerDate
+	FROM
+		open_subject	
+	</select>
+	<!-- 의기 -->
+	
 	<select id="lectureList"
 			parameterType="String"
 			resultType="com.cyber.smedu.opensubject.domain.LectureDomain">

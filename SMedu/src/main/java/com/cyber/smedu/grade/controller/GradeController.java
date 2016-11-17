@@ -33,6 +33,8 @@ public class GradeController {
 											@RequestParam(value="departmentCode", defaultValue="")String departmentCode,
 											@RequestParam(value="userName", defaultValue="")String userName) {
 		Map<String, Object> map = gradeService.adminStudentGradeList(departmentCode, userName); //검색창 학과리스트
+		model.addAttribute("departmentCode", map.get("departmentCode"));
+		model.addAttribute("userName", map.get("userName"));
 		model.addAttribute("studentList", map.get("studentList"));
 		model.addAttribute("cardinalList", map.get("cardinalList"));
 		model.addAttribute("departmentList", map.get("departmentList"));

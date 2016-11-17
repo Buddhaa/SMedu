@@ -70,8 +70,8 @@ public class UserDaoImpl implements UserDao {
 	}
 	//관리자 회원리스트 select
 	@Override
-	public List<UserDomain> selectAdminUserList() {
-		return sqlSession.selectList(NS+".selectAdminUserList");
+	public List<UserDomain> selectAdminUserList(Map<String, Object> map) {
+		return sqlSession.selectList(NS+".selectAdminUserList", map);
 	}
 	//관리자 회원 상세보기 select
 	@Override

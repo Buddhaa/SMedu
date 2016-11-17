@@ -74,19 +74,9 @@
         </li>
 		<!-- 교과 관리 -->
 		<li class="treeview">
-          <a href="#">
-            &nbsp;<i class="fa fa-book"></i> <span> 교과관리</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> 학과</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 교재</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 과목</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 개설과목</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 강의</a></li>
-          </ul>
+          <a href="/admin/curriculum/departmentList">
+            &nbsp;<i class="fa fa-book"></i> <span> 교과관리</span>            
+          </a>          
         </li>
 		<!-- 시험/과제/토론 관리 -->
 		<li class="treeview">
