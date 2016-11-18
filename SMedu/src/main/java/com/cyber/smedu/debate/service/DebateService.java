@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 public interface DebateService {
 
@@ -13,5 +14,15 @@ public interface DebateService {
 	DebateDomain professorStudentDebateSubjectAndContentSelect(String openSubjectCode);
 
 	Map<String, Object> oneDebateList(String openSubjectCode);
+
+	List<OpenSubjectDomain> professorSubjectSelectForDebate(String professorCode);
+
+	DebateDomain professorDebateSelect(String openSubjectCode);
+
+	void professorDebateUpdate(DebateDomain debateDomain);
+
+	void professorDebateInsert(DebateDomain debateDomain);
+
+	void debateResultAdd(String userCode, DebateResultDomain debateResultDomain);
 
 }

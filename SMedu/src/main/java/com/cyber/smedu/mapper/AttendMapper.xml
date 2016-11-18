@@ -106,5 +106,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 우영 -->
+	<update id="examAttendUpdate"
+		parameterType="String">
+	UPDATE attend
+	SET
+		attend_complete_confirmation='T'
+	WHERE 
+		attend_code = #{attendCode}		
+
+</update>
+
+<select id="studentAttend"
+		parameterType="com.cyber.smedu.attend.domain.AttendDomain"
+		resultType="com.cyber.smedu.attend.domain.AttendDomain">
+	SELECT
+		attend_code AS attendCode,
+		attend_lecture_time AS attendLectureTime,
+		attend_complete_confirmation AS attendCompleteConfirmation
+	FROM
+		attend
+	WHERE
+		student_code = #{studentCode}	AND	lecture_code = #{lectureCode}
+
+
+</select>
+
+<update id="lectureAttendUpdate"
+		parameterType="com.cyber.smedu.attend.domain.AttendDomain">
+	UPDATE attend
+		SET
+			attend_lecture_time=#{attendLectureTime},
+			attend_complete_confirmation=#{attendCompleteConfirmation}
+	WHERE 
+		attend_code=#{attendCode}
+</update>
+	<!-- 장용 -->
 
 </mapper>

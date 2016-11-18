@@ -13,11 +13,20 @@ public class LectureDomain {
 	private String professorName;
 	private String bookName;
 	private String cardinalCode;
-	private Timestamp lectureTime;
+	private String lectureTime;
 	private Date lectureRegisterDate;
 	private String weeklySchedule;
 	private String academicCalendarStartDay;
 	private String academicCalendarEndDay;
+	
+	private String academicCalendarCode;
+	
+	public String getAcademicCalendarCode() {
+		return academicCalendarCode;
+	}
+	public void setAcademicCalendarCode(String academicCalendarCode) {
+		this.academicCalendarCode = academicCalendarCode;
+	}
 	public String getLectureCode() {
 		return lectureCode;
 	}
@@ -66,10 +75,10 @@ public class LectureDomain {
 	public void setCardinalCode(String cardinalCode) {
 		this.cardinalCode = cardinalCode;
 	}
-	public Timestamp getLectureTime() {
+	public String getLectureTime() {
 		return lectureTime;
 	}
-	public void setLectureTime(Timestamp lectureTime) {
+	public void setLectureTime(String lectureTime) {
 		this.lectureTime = lectureTime;
 	}
 	public Date getLectureRegisterDate() {

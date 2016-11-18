@@ -158,4 +158,9 @@ public class UserDaoImpl implements UserDao {
 		
 		sqlSession.update(NS+".userStateUpdate", userCode);
 	}
+	//아이디 중복 체크
+	@Override
+	public UserDomain userIdCheck(String userId) {
+		return sqlSession.selectOne(NS+".userIdCheck", userId);
+	}
 }

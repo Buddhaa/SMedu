@@ -17,4 +17,8 @@ public interface AttendService {
 
 	List<AttendDomain> professorStudentAttendInfoSelect(String studentCode);
 
+	AttendDomain studentAttend(String userCode, String lectureCode);
+
+	void lectureAttendUpdate(AttendDomain attendDomain);
+
 }

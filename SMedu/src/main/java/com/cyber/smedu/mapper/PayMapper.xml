@@ -38,4 +38,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND
 		c.pay_state = 'T'
 </select>
+<!-- 의기 -->
+<select id="selectClassregistrationPayHistory" resultType="java.util.Map" parameterType="com.cyber.smedu.pay.domain.ClassRegistrationDomain">
+	select 
+		cr.class_registration_code as classRegistrationCode, 
+		cr.cardinal_code as cardinalCode, 
+		cr.student_code as studentCode, 
+		cr.open_subject_code as openSubjectCode, 
+		cr.class_registration_amount as classRegistrationAmount, 
+		cr.class_registration_date as classRegistrationDate, 
+		cr.pay_state as payState,
+		osc.subject_name as subjectName
+	from
+		class_registration as cr
+	inner join
+		open_subject as osc
+	on
+		cr.open_subject_code = osc.open_subject_code
+	where
+		cr.student_code = #{studentCode}
+	</select>
+<!-- 현호 -->
 </mapper>

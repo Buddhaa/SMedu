@@ -12,7 +12,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		
+		$("#professorSubjectSelect").val("${openSubjectCode }").attr("selected", "selected");
 		$("#professorSubjectSelect").change(function() {
 
 			if ($("#professorSubjectSelect").val() == "") {

@@ -16,6 +16,14 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- File Upload를 위한 multipartResolver -->
+	<bean id="multipartResolver"
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>102400000</value>
+		</property>
+	</bean>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,7 +38,7 @@
 	<!--  datasource -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://buddhaa.cafe24.com/buddhaa?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="url" value="jdbc:mysql://localhost:3306/buddhaa?useUnicode=true&amp;characterEncoding=utf8" />
         <property name="username" value="buddhaa" />
         <property name="password" value="sickermans0" />
     </bean>

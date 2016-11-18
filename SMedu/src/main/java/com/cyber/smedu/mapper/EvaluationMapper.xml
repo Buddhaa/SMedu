@@ -2,4 +2,58 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.EvaluationMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.EvaluationMapper">
+
+<!-- //////////////////11.10 입력 -->
+
+<select id="lectureEvaluationItemsList"
+		resultType="com.cyber.smedu.evaluation.domain.EvaluationCategoryDomain">
+	SELECT
+		lecture_evaluation_items_code AS lectureEvaluationItemsCode,
+		lecture_evaluation_items AS lectureEvaluationItems
+	FROM
+		lecture_evaluation_items
+
+</select>
+
+<insert id="evaluationAdd"
+		parameterType="com.cyber.smedu.evaluation.domain.EvaluationDomain">
+	INSERT INTO lecture_evaluation
+		(
+		lecture_evaluation_code, 
+		student_code, 
+		open_subject_code, 
+		lecture_evaluation_items_code, 
+		lecture_evaluation_score, 
+		lecture_evaluation_date
+		)
+	VALUES 
+		(
+		CONCAT('lecture_evaluation_code',(SELECT COUNT(l.lecture_evaluation_code)+1 FROM lecture_evaluation l)), 
+		#{studentCode}, 
+		#{openSubjectCode}, 
+		#{lectureEvaluationItemsCode}, 
+		#{lectureEvaluationScore}, 
+		NOW()
+		)
+</insert>
+
+<select id="lectureEvaluationCheck"
+		parameterType="com.cyber.smedu.evaluation.domain.EvaluationDomain"
+		resultType="com.cyber.smedu.evaluation.domain.EvaluationDomain">
+		
+	SELECT
+		lecture_evaluation_code AS lectureEvaluationCode,
+		student_code AS studentCode,
+		open_subject_code AS openSubjectCode,
+		lecture_evaluation_items_code AS lectureEvaluationItemsCode,
+		lecture_evaluation_score AS lectureEvaluationScore,
+		lecture_evaluation_date AS lectureEvaluationDate
+	FROM
+		lecture_evaluation
+	WHERE
+		student_code=#{studentCode} AND open_subject_code=#{openSubjectCode}
+</select>
+<!-- 장용 -->
+
+</mapper>

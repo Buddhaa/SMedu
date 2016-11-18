@@ -34,6 +34,12 @@ public class PlannerWorkController {
 		model.addAttribute("departmentList", map.get("departmentList"));
 		return "smedu/consulting/consulting_learning_plan_insert";
 	}
+	//학습설계 입력처리
+	@RequestMapping(value = "/smedu/consulting/consultingLearningPlanInsert", method = RequestMethod.POST)
+	public String consultingLearningPlanInsert(LearningPlanDomain LearningPlanDomain) {
+		plannerWorkService.insertConsultingLearningPlan(LearningPlanDomain);
+		return "redirect:/smedu/consulting/consultingLearningPlanInsert";
+	}
 	/*현호*/
 	//플래너 회원정보를 select, value값에 login 시 session에 저장된 userCode 입력 맵핑
 		@RequestMapping(value="/plannerInfo")

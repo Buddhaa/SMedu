@@ -16,4 +16,10 @@ public interface AcademicCalendarDao {
 
 	AcademicCalendarDomain adminStudentGradeTestAcademicCalendarCodeSelect(Map<String, Object> map);
 
+	List<CardinalDomain> selectCommunityAcademiccalendarList(Map<String, Object> map);
+
+	int selectCardinalTotalCount();
+
+	List<CardinalDomain> selectTodayCardinalList();
+
 }

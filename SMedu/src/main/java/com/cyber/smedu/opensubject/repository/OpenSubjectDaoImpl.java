@@ -1,11 +1,13 @@
 package com.cyber.smedu.opensubject.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
@@ -65,4 +67,73 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 
 		return sqlSession.selectOne(NS+".oneLecture",lectureCode);
 	}
+
+	//openSubjectCode로 교수코드 받아오기
+	@Override
+	public OpenSubjectDomain objectionInsertForm(String openSubjectCode) {
+
+		return sqlSession.selectOne(NS+".objectionInsertForm",openSubjectCode);
+	}
+	/*장용-----------------------------------------------------------*/
+	//수강신청 페이지 출력
+		@Override
+		public List<OpenSubjectDomain> selectOpenSubjectList(Map<String, Object> map) {
+			return sqlSession.selectList(NS+".selectOpenSubjectList", map);
+		}
+	//현호
+		
+	@Override
+	public List<OpenSubjectDomain> professorSubjectSelectForLecture(String professorCode) {
+		
+		System.out.println("03 professorSubjectSelectForLecture <-- ObjectionDaoImpl.java");
+		
+		return sqlSession.selectList(NS+".professorSubjectSelectForLecture", professorCode);
+		
+	}
+	
+	@Override
+	public List<OpenSubjectDomain> professorLectureListSelect(String openSubjectCode) {
+
+		System.out.println("03 professorLectureListSelect <-- ObjectionDaoImpl.java");
+		
+		return sqlSession.selectList(NS+".professorLectureListSelect", openSubjectCode);
+	
+	}
+	
+	//강의 상세보기
+	@Override
+	public LectureDomain professorLetureDetail(String lectureCode) {
+		
+		System.out.println("03 professorLetureDetail <-- ObjectionDaoImpl.java");
+		
+		return sqlSession.selectOne(NS+".professorLetureDetail", lectureCode);		
+	}
+	
+	//강의 업데이트
+	@Override
+	public void professorLectureUpdate(LectureDomain lectureDomain) {
+		sqlSession.update(NS+".professorLectureUpdate", lectureDomain);
+	}
+	
+	//강의 등록 화면에 필요한 정보 select
+	@Override
+	public List<AcademicCalendarDomain> professorLectureInsertView(String openSubjectCode) {
+		
+		return sqlSession.selectList(NS+".LectureInsertViewForSelect", openSubjectCode);
+	}
+	
+	//강의 등록
+	@Override
+	public void professorLectureInsert(LectureDomain lectureDomain) {
+		sqlSession.insert(NS+".professorLectureInsert", lectureDomain);
+	}
+	
+	@Override
+	public List<LectureDomain> lectureAcademicCalendarCodeSelect(String openSubjectCode) {
+
+		return sqlSession.selectList(NS+".lectureAcademicCalendarCodeSelect", openSubjectCode);
+		
+	}
+	
+	//우영
 }

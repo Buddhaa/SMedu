@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
 import com.cyber.smedu.debate.domain.DebateScoreDomain;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 @Repository
 public class DebateDaoImpl implements DebateDao {
@@ -51,19 +52,56 @@ public class DebateDaoImpl implements DebateDao {
 		return sqlSession.selectOne(NS+".professorStudentDebateSubjectAndContentSelect", openSubjectCode);
 		
 	}
+	
+	@Override
+	public List<OpenSubjectDomain> professorSubjectSelectForDebate(String professorCode) {
+		
+		System.out.println("03 professorSubjectSelectForDebate <-- DebateDaoImpl.java");
+		System.out.println("professorCode : " + professorCode);
+		
+		return sqlSession.selectList(NS+".professorSubjectSelectForDebate", professorCode);
+		
+	}
+	
+	@Override
+	public DebateDomain professorDebateSelect(String openSubjectCode) {
+		return sqlSession.selectOne(NS+".professorDebateSelect", openSubjectCode);	
+	}
+	
+	@Override
+	public void professorDebateUpdate(DebateDomain debateDomain) {
+		sqlSession.update(NS+".professorDebateUpdate", debateDomain);
+	}
+	
+	@Override
+	public void professorDebateInsert(DebateDomain debateDomain) {
+		sqlSession.insert(NS+".professorDebateInsert", debateDomain);
+	}
 	//우영
+	
 	//토론 참여 페이지에서 과목 선택시 해당 과목 주제 리스트 받아오기
-		@Override
-		public DebateDomain oneDebateList(String openSubjectCode) {
-			
-			return sqlSession.selectOne(NS + ".oneDebateList", openSubjectCode);
-		}
+	@Override
+	public DebateDomain oneDebateList(String openSubjectCode) {
+		
+		return sqlSession.selectOne(NS + ".oneDebateList", openSubjectCode);
+	}
 
-		//주제에 대한 학생들의 토론 리스트 받아오기
-		@Override
-		public List<DebateResultDomain> debateResultList(String debateCode) {
-			
-			return sqlSession.selectList(NS+".debateResultList", debateCode);
-		}
+	//주제에 대한 학생들의 토론 리스트 받아오기
+	@Override
+	public List<DebateResultDomain> debateResultList(String debateCode) {
+		
+		return sqlSession.selectList(NS+".debateResultList", debateCode);
+	}
+
+	
+	//////////////////11.10 입력
+	
+	//토론참여에 해당 과목을 학생이 토론 글쓰기를 눌렀을때 	
+		
+	@Override
+	public void debateResultAdd(DebateResultDomain debateResultDomain) {
+		
+		sqlSession.insert(NS+".debateResultAdd", debateResultDomain);
+	}
 	//장용
 }

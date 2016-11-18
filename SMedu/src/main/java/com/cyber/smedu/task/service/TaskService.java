@@ -1,7 +1,12 @@
 package com.cyber.smedu.task.service;
 
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
+import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
 
 public interface TaskService {
@@ -13,9 +18,17 @@ public interface TaskService {
 
 	String taskResultAddCheck(String userCode, TaskResultDomain taskResultDomain);
 
-	void taskResultAdd(String userCode, TaskResultDomain taskResultDomain);
-
-	void taskResultUpdate(TaskResultDomain taskResultDomain);
+	void taskResultUpdate(TaskResultDomain taskResultDomain, HttpServletRequest request);
 
 	TaskResultDomain taskSubmitUpdateDetail(String taskResultCode);
+
+	List<OpenSubjectDomain> professorSubjectSelectForTask(String professorCode);
+
+	TaskDomain professorTaskSelect(String openSubjectCode);
+
+	void professorTaskUpdate(TaskDomain taskDomain);
+
+	void professorTaskInsert(TaskDomain taskDomain);
+
+	void taskResultAdd(String userCode, TaskResultDomain taskResultDomain, HttpServletRequest request);
 }

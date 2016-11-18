@@ -15,9 +15,24 @@
 		<div class="hoc container clear">
 			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
 			<div class="content three_quarter">
-				<fieldset>
-				<legend>나의 학사활동</legend>			
-				</fieldset>
+				    <div class="form-group">
+				      <label for="usr">제목:</label>
+				      <input type="text" class="form-control"  value="${objectionList.objectionTitle}" readonly="readonly">
+				      
+				      <label for="usr">이의신청 분류:</label>
+				      <input type="text" class="form-control"  value="${objectionList.objectionType}" readonly="readonly">
+				 
+				      <label for="comment">내용:</label>
+				      <textarea class="form-control" rows="15" readonly="readonly">${objectionList.objectionContent}</textarea>
+				      <span>문의일자 : ${objectionList.objectionDate}</span>
+				 
+				      <c:if test="${objectionList.objectionReply != null}">				      
+					      <hr/>
+					      <label for="usr">답변:</label>
+					      <textarea class="form-control" rows="15" readonly="readonly">${objectionList.objectionReply}</textarea>
+					      <span>답변일자 : ${objectionList.objectionReplyDate}</span>
+				      </c:if>
+				    </div>
 			</div>
 		</div>
 	</div>	

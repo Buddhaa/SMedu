@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cyber.smedu.board.domain.BoardArticleDomain;
+import com.cyber.smedu.user.domain.UserDomain;
 
 public interface BoardService {
 	
@@ -14,7 +15,33 @@ public interface BoardService {
 	BoardArticleDomain consultingHistoryDetail(String boardArticleCode);
 
 	Map<String, Object> selectBoardCategoryList();
+	
+	public int getStartPage(int page);
+	
+	public int getLastPage(String boardCode);
 
-	Map<String, Object> selectBoardConsultingList();
-		
+	public List<BoardArticleDomain> selectBoardConsultingList(int page, String word);
+
+	List<BoardArticleDomain> communityNoticeList(int page, String word);
+
+	List<BoardArticleDomain> communityLectureReviewList(int page, String word);
+
+	List<BoardArticleDomain> communityFaq(String word);
+
+	List<BoardArticleDomain> communityDataList(int page, String word);
+
+	BoardArticleDomain communityNoticeDetail(String boardArticleCode);
+
+	BoardArticleDomain communityLectureReviewDetail(String boardArticleCode);
+
+	BoardArticleDomain communityDataDetail(String boardArticleCode);
+	
+	public int updateBoardArticleReadCount(String boardArticleCode);
+
+	List<BoardArticleDomain> studentLectureReviewList(String userCode);
+
+	BoardArticleDomain lectureReviewBoard(String boardArticleCode);
+
+	void lectureReviewAdd(UserDomain userDomain, BoardArticleDomain boardArticleDomain);
+
 }

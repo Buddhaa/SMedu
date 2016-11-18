@@ -7,6 +7,15 @@ public class GradeDomain {
 	private String gradeEvaluationCategory;
 	private int gradeScore;
 	private String participationState;
+	
+	private String subjectName;
+	
+	public String getSubjectName() {
+		return subjectName;
+	}
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
 	public String getGradeCode() {
 		return gradeCode;
 	}

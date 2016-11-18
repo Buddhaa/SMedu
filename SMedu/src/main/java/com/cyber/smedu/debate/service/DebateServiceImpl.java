@@ -10,12 +10,17 @@ import org.springframework.stereotype.Service;
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
 import com.cyber.smedu.debate.repository.DebateDao;
+import com.cyber.smedu.grade.repository.GradeDao;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 @Service
 public class DebateServiceImpl implements DebateService {
 
 	@Autowired
 	DebateDao debateDao;
+	
+	@Autowired
+	GradeDao gradeDao;
 	
 	@Override
 	public List<DebateResultDomain> professorStudentDebateCommentAndDateSelect(String openSubjectCode) {
@@ -42,7 +47,40 @@ public class DebateServiceImpl implements DebateService {
 		return debateDomain;
 		
 	}
+	
+	@Override
+	public List<OpenSubjectDomain> professorSubjectSelectForDebate(String professorCode) {
+		
+		System.out.println("02 professorSubjectSelectForDebate <-- DebateServiceImpl.java ");
+		System.out.println("professorCode : " + professorCode);
+		
+		List<OpenSubjectDomain> openSubjectDomain
+			= debateDao.professorSubjectSelectForDebate(professorCode);
+		
+		return openSubjectDomain;
+	}
+	
+	@Override
+	public DebateDomain professorDebateSelect(String openSubjectCode) {
+		
+		DebateDomain debateDomain
+			= debateDao.professorDebateSelect(openSubjectCode);
+		
+		return debateDomain;
+		
+	}
+	
+	@Override
+	public void professorDebateUpdate(DebateDomain debateDomain) {
+		debateDao.professorDebateUpdate(debateDomain);
+	}
+	
+	@Override
+	public void professorDebateInsert(DebateDomain debateDomain) {
+		debateDao.professorDebateInsert(debateDomain);
+	}
 	//우영
+
 	//토론 참여 페이지에서 과목 선택시 해당 과목 주제 리스트 받아오기
 	@Override
 	public Map<String,Object> oneDebateList(String openSubjectCode) {
@@ -61,6 +99,23 @@ public class DebateServiceImpl implements DebateService {
 		}
 		
 		return map;
+	}
+
+	
+	//////////////////11.10 입력
+	
+	//토론참여에 해당 과목을 학생이 토론 글쓰기를 눌렀을때 
+	@Override
+	public void debateResultAdd(String userCode, DebateResultDomain debateResultDomain) {
+		
+		//회원의 학생코드 받기
+		String studentCode = gradeDao.studentCode(userCode).getStudentCode();
+		
+		debateResultDomain.setStudentCode(studentCode);
+		
+		//토론답글 등록 처리
+		debateDao.debateResultAdd(debateResultDomain);
+		
 	}
 	//장용
 }

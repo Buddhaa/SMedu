@@ -96,4 +96,10 @@ public class PlannerWorkServiceImpl implements PlannerWorkService {
 		= plannerWorkDao.selectPlannerStudentDetail(plannerStudentCode);
 		return studentDetail;
 	}
+	//진호
+	//상담설계 입력
+	@Override
+	public int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain) {
+		return plannerWorkDao.insertConsultingLearningPlan(LearningPlanDomain);
+	}
 }

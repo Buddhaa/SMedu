@@ -1,11 +1,13 @@
 package com.cyber.smedu.task.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
 
@@ -31,6 +33,29 @@ public class TaskDaoImpl implements TaskDao{
 		
 		return sqlSession.selectOne(NS+".professorStudentTaskResultDetail", studentCode);
 		
+	}
+	
+	@Override
+	public List<OpenSubjectDomain> professorSubjectSelectForTask(String professorCode) {
+			
+		return sqlSession.selectList(NS+".professorSubjectSelectForTask", professorCode);
+		
+	}
+	
+	@Override
+	public TaskDomain professorTaskSelect(String openSubjectCode) {
+		
+		return sqlSession.selectOne(NS+".professorTaskSelect", openSubjectCode);	
+	}
+	
+	@Override
+	public void professorTaskUpdate(TaskDomain taskDomain) {
+		sqlSession.update(NS+".professorTaskUpdate", taskDomain);
+	}
+	
+	@Override
+	public void professorTaskInsert(TaskDomain taskDomain) {
+		sqlSession.insert(NS+".professorTaskInsert", taskDomain);
 	}
 //우영---------------------------------------------------------------------------------------------
 	

@@ -11,6 +11,9 @@
 
 <script>
 	$(document).ready(function(){
+		
+		$("#openSubject").val("${selectbox}");
+		
 		$("#openSubject").change(function(){
 			var openSubjectCode = $("#openSubject").val();
 			location.replace('/classroomCreditManage?openSubjectCode=' + openSubjectCode);
@@ -28,38 +31,33 @@
 				<fieldset>
 				<h1>나의 학점 관리</h1>
 				</fieldset>
-				<div class="col-md-4">
-					<select class="form-control" id="openSubject">
-						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
-									<c:if test="${status.count eq 1}">
-										<option value="">${openSubjectSelect.year}년-${openSubjectSelect.semester}학기-${openSubjectSelect.cardinal}기</option>
-									</c:if>
-									
-						</c:forEach>
-						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}"> 
-								<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
-						</c:forEach>
-					</select>
-				</div>
-				
 				<!-- 본문 -->
-				<table>
-						<tr>
-						<c:forEach var="gradeDomainList" items="${gradeDomainList}" varStatus="status">
-								<th>
-									${gradeDomainList.gradeEvaluationCategory}
-								</th>	 						
+				<table class="table table-hover">
+					<thead>
+				      <tr>
+				        <th>개설과목</th>
+				        <th>중간고사</th>
+				        <th>기말고사</th>
+				        <th>출석</th>
+				        <th>과제</th>
+				        <th>토론</th>
+				      </tr>
+				    </thead>
+				    <tbody>	
+				    	<tr>			    
+						<c:forEach var="creditList" items="${creditList}" varStatus="status">
+						<c:if test="${status.index%5 ==0 }">
+							<td>
+								${creditList.subjectName}
+							</td>
+						</c:if>
+							<td>
+								${creditList.gradeScore}
+							</td>							
 						</c:forEach>
 						</tr>
-						<tr>
-						<c:forEach var="gradeDomainList" items="${gradeDomainList}" varStatus="status">
-								<td>		
-									${gradeDomainList.gradeScore}
-								</td>
-						</c:forEach>
-						</tr>
-					</table>
-				
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>	

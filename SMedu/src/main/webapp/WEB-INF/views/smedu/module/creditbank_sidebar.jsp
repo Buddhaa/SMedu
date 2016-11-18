@@ -33,7 +33,7 @@
 						<li><a href="/smedu/creditbank/creditbankRegulation">관련법규</a></li>
 					</ul>
 				</li>
-				<li><a href="/smedu/creditbank/creditbankOrientation">오리엔테이션</a></li>
+				<!-- <li><a href="/smedu/creditbank/creditbankOrientation">오리엔테이션</a></li> -->
 				<li><a href="/smedu/creditbank/creditbankLectureWay">강의수강방법</a></li>
 				<li><a href="/smedu/creditbank/creditbankAttendWay">출석률확인방법</a></li>
 			</ul>

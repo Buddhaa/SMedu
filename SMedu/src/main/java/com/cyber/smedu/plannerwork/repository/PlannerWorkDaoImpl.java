@@ -81,4 +81,12 @@ public class PlannerWorkDaoImpl implements PlannerWorkDao {
 	public List<PlannerStudentDomain> selectPlannerStudentDetail(String plannerStudentCode) {
 		return sessionTemplate.selectList(NS+".selectPlannerStudentDetail", plannerStudentCode);
 	}	
+	//진호
+	//맞춤학습설계 등록
+	@Override
+	public int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain) {
+		return sessionTemplate.insert(NS+".insertConsultingLearningPlan", LearningPlanDomain);
+	}
+	//현호
+	
 }

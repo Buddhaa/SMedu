@@ -31,6 +31,8 @@ public interface PlannerWorkService {
 	List<PlanRecordDomain> getPlannerConsultList();
 
 	Map<String, Object> applicantSelectOne(String learningPlanCode);
+
+	int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain);
 	
 	
 }

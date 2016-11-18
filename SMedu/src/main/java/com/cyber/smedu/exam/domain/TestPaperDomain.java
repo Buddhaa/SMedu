@@ -9,7 +9,7 @@ public class TestPaperDomain {
 	private String openSubjectCode;
 	private String academicCalendarCode;
 	private Date testPaperDate;
-	private Timestamp testTime; 
+	private String testTime; 
 	
 	private Date academicCalendarStartDay;
 	private Date academicCalendarEndDay;
@@ -50,10 +50,10 @@ public class TestPaperDomain {
 	public void setAcademicCalendarCode(String academicCalendarCode) {
 		this.academicCalendarCode = academicCalendarCode;
 	}
-	public Timestamp getTestTime() {
+	public String getTestTime() {
 		return testTime;
 	}
-	public void setTestTime(Timestamp testTime) {
+	public void setTestTime(String testTime) {
 		this.testTime = testTime;
 	}
 	

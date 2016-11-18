@@ -93,25 +93,25 @@ public class GradeDaoImpl implements GradeDao {
 	}
 	/*우영--------------------------------------------------------------------------------------------------------*/
 	//회원의 학생코드 받기
-		@Override
-		public StudentDomain studentCode(String userCode) {		
-			
-			return sqlSessionTemplate.selectOne(NS+".studentSelectOne", userCode);
-		}
+	@Override
+	public StudentDomain studentCode(String userCode) {		
 		
-		//학생이수학점관리 데이터 받기
-		@Override
-		public List<StudentDomain> finalResultGrade(String studentCode) {
-			
-			return sqlSessionTemplate.selectList(NS+".finalResultGrade", studentCode);
-		}
+		return sqlSessionTemplate.selectOne(NS+".studentSelectOne", userCode);
+	}
 
+	
+	@Override
+	public List<FinalGradeDomain> finalResultGrade(String studentCode) {
 		
-		//해당 학생의과목 출석률, 과제, 토론, 시험, 총성적 받아오기
-		@Override
-		public List<GradeDomain> studentCreditManage(GradeDomain oneGradeDomain) {
-			
-			return sqlSessionTemplate.selectList(NS+".studentCreditManage", oneGradeDomain);
-		}
+		return sqlSessionTemplate.selectList(NS+".finalResultGrade", studentCode);
+	}
+
+	//해당 학생의과목 출석률, 과제, 토론, 시험, 총성적 받아오기
+	@Override
+	public List<GradeDomain> creditManage(String studentCode) {
+		
+		return sqlSessionTemplate.selectList(NS+".creditManage", studentCode);
+	}
 	/*장용-----------------------------------------------------------------------------------------*/
+	
 }

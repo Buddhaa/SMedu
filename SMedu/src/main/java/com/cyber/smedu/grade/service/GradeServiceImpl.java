@@ -232,36 +232,27 @@ public class GradeServiceImpl implements GradeService {
 		
 	}
 	/*우영--------------------------------------------------------------------------------------------------------*/
-	//학생이수학점관리 페이지
-		@Override
-		public List<StudentDomain> finalResultGrade(String userCode) {
-			//회원의 학생코드 받기
-			String studentCode = gradeDao.studentCode(userCode).getStudentCode();
-			
-			//학생이수학점관리 데이터 받기
-			List<StudentDomain> studentDomainList = gradeDao.finalResultGrade(studentCode);	
-			
-			return studentDomainList;
-		}
+	//나의 학점 관리 페이지에서 과목 선택시 -> 해당 과목 출석률, 과제, 토론, 시험, 총성적 받아오기
+	@Override
+	public List<FinalGradeDomain> finalResultGrade(String userCode){
 		
-		//나의 학점 관리 페이지에서 과목 선택시 -> 해당 과목 출석률, 과제, 토론, 시험, 총성적 받아오기
-		@Override
-		public List<GradeDomain> studentCreditManage(String userCode, String openSubjectCode){
-			
-			//회원의 학생도메인 받기
-			StudentDomain studentDomain = openSubjectDao.studentCode(userCode);	
-			String studentCode = studentDomain.getStudentCode();		
-			
-			//학생의 성적을 받아오기 위해 객체 생성
-			GradeDomain oneGradeDomain = new GradeDomain();
-			oneGradeDomain.setStudentCode(studentCode);
-			oneGradeDomain.setOpenSubjectCode(openSubjectCode);
-			
-			System.out.println("openSubjectCode : " + openSubjectCode);
-			//해당 학생의과목 출석률, 과제, 토론, 시험, 총성적 받아오기
-			List<GradeDomain> gradeDomainList= gradeDao.studentCreditManage(oneGradeDomain);
-					
-			return gradeDomainList;
-		}
+		//회원의 학생코드 받기
+		String studentCode = gradeDao.studentCode(userCode).getStudentCode();
+				
+		return gradeDao.finalResultGrade(studentCode);
+	}
+
+	
+	//나의 학점관리 페이지 이동
+	@Override
+	public List<GradeDomain> creditManage(String userCode) {
+		
+		//회원의 학생코드 받기
+		String studentCode = gradeDao.studentCode(userCode).getStudentCode();
+		
+		//해당 학생의과목 출석률, 과제, 토론, 시험, 총성적 받아오기
+		return gradeDao.creditManage(studentCode);
+	}
 	/*장용-------------------------------------------------------------------------------*/
+	
 }

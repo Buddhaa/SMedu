@@ -2,4 +2,160 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cyber.smedu.mapper.ObjectionMapper"></mapper>
+<mapper namespace="com.cyber.smedu.mapper.ObjectionMapper">
+
+	<!-- 성적이의신청관리를 위한 교수 담당과목 select -->
+	<select id="professorSubjectSelectForObjection"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+		
+	SELECT
+		open_subject_code AS openSubjectCode,
+		subject_code AS subjectCode,
+		cardinal_code AS cardinalCode,
+		subject_name AS subjectName
+	FROM
+		open_subject
+	WHERE
+		professor_code = #{professorCode}
+		
+	</select>
+	
+	<!-- 교수담당 학생들의 해당 과목에대한 성적이의신청 정보 select(학생이름/이의신청종류/제목/날짜/답변여부) -->
+	<select id="professorStudentObjectionInfoSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.objection.domain.ObjectionDomain">
+		
+	SELECT
+		o.objection_code AS objectionCode,
+		o.student_code AS studentCode,
+		u.user_name AS userName,
+		o.objection_type AS objectionType,
+		o.objection_title AS objectionTitle,
+		o.objection_date AS objectionDate,
+		o.objection_reply AS objectionReply
+	FROM
+		objection o
+	INNER JOIN
+		student s
+	ON
+		o.student_code = s.student_code
+	INNER JOIN
+		user u
+	ON
+		u.user_code = s.user_code
+	WHERE
+		o.open_subject_code = #{openSubjectCode}
+			
+	</select>
+	
+	<!-- 성적이의신청 상세보기 select -->
+	<select id="professorStudentObjectionDetail"
+		parameterType="String"
+		resultType="com.cyber.smedu.objection.domain.ObjectionDomain">
+	
+	SELECT 
+		objection_code AS objectionCode,
+		objection_title AS objectionTitle,
+		objection_content AS objectionContent,
+		objection_date AS objectionDate,
+		objection_reply AS objectionReply,
+		objection_reply_date AS objectionReplyDate
+	FROM
+		objection
+	WHERE
+		objection_code = #{objectionCode}
+	
+	</select>
+	
+	<update id="professorStudentObjectionReply"
+		parameterType="com.cyber.smedu.objection.domain.ObjectionDomain">
+		
+		UPDATE 
+			objection
+		SET
+			objection_reply = #{objectionReply},
+			objection_reply_date = NOW()
+		WHERE 
+			objection_code = #{objectionCode}
+	
+	</update>
+	<!-- 우영 -->
+	<select id="objectionView"
+			parameterType="String"
+			resultType="com.cyber.smedu.objection.domain.ObjectionDomain">
+	SELECT
+		o.objection_code AS objectionCode,
+		o.student_code AS studentCode,
+		o.professor_code AS professorCode,
+		o.open_subject_code AS openSubjectCode,
+		op.subject_name AS subjectName,
+		o.objection_type AS objectionType,
+		o.objection_title AS objectionTitle,
+		o.objection_content AS objectionContent,
+		o.objection_date AS objectionDate,
+		o.objection_reply AS objectionReply,
+		o.objection_reply_date AS objectionReplyDate
+	FROM
+		objection AS o
+	INNER JOIN
+		open_subject AS op
+	ON
+		o.open_subject_code = op.open_subject_code		
+	WHERE
+		o.student_code = #{studentCode}
+	</select>
+
+	
+	<insert id="objectionAdd"
+			parameterType="com.cyber.smedu.objection.domain.ObjectionDomain">
+	INSERT INTO objection
+		(
+			objection_code, 
+			student_code, 
+			professor_code, 
+			open_subject_code, 
+			objection_type, 
+			objection_title, 
+			objection_content, 
+			objection_date 
+		)
+		VALUES 
+		(
+			CONCAT('objection_code',(SELECT COUNT(o.objection_code)+1 FROM objection o)),
+			#{studentCode}, 
+			#{professorCode}, 
+			#{openSubjectCode}, 
+			#{objectionType}, 
+			#{objectionTitle}, 
+			#{objectionContent}, 
+			NOW()
+		)
+	</insert>
+	
+	<select id="objectionDetail"
+			parameterType="com.cyber.smedu.objection.domain.ObjectionDomain"
+			resultType="com.cyber.smedu.objection.domain.ObjectionDomain">
+	SELECT
+		objection_code AS objectionCode,
+		student_code AS studentCode,
+		professor_code AS professorCode,
+		open_subject_code AS openSubjectCode,
+		objection_type AS objectionType,
+		objection_title AS objectionTitle,
+		objection_content AS objectionContent,
+		objection_date AS objectionDate,
+		objection_reply AS objectionReply,
+		objection_reply_date AS objectionReplyDate
+		
+	FROM
+		objection 
+	WHERE
+		objection_code = #{objectionCode}
+	
+	
+	</select>
+	<!-- 장용 -->
+
+
+</mapper>

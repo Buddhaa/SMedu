@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.attend.service.AttendService;
 
 @Controller
@@ -31,5 +33,16 @@ public class AttendController {
 		return "professor/management/management_atend_detail";
 		
 	}
+	//우영
+	//학생 강의 출석저장
+		@RequestMapping(value="/lectureAttendUpdate", method=RequestMethod.GET)
+		public String lectureAttendUpdate(AttendDomain attendDomain){
+
+			System.out.println(attendDomain.toString());
+			attendService.lectureAttendUpdate(attendDomain);
+		
+			return "student/classroom/close";	
+	}
+	//장용
 	
 }

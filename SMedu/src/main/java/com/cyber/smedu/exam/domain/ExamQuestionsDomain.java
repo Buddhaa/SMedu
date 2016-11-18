@@ -1,18 +1,35 @@
 package com.cyber.smedu.exam.domain;
 
-public class ExamQuestionsDomain {	
+public class ExamQuestionsDomain {
+	
+	//���蹮�� ���� VO
 	
 	private String examQuestionCode;
 	private String testPaperCode;
-	private int examQuestionNo;	
-	private int examQuestionAnswer;	
-	private int examQuestionScore;	
+	private int examQuestionNo;	//���蹮�� ��ȣ
+	private int examQuestionAnswer;	//���蹮�� ����
+	private int examQuestionScore;	//���蹮�� ����
 	private String examFileName;
 	private String examFileExt;
 	private int examFileSize;
 	private String examFileType;
 	private String examOriginFileName;
+	private String openSubjectCode;
+	private String academicCalendarCode;
 	
+	
+	public String getOpenSubjectCode() {
+		return openSubjectCode;
+	}
+	public void setOpenSubjectCode(String openSubjectCode) {
+		this.openSubjectCode = openSubjectCode;
+	}
+	public String getAcademicCalendarCode() {
+		return academicCalendarCode;
+	}
+	public void setAcademicCalendarCode(String academicCalendarCode) {
+		this.academicCalendarCode = academicCalendarCode;
+	}
 	public String getExamQuestionCode() {
 		return examQuestionCode;
 	}
@@ -80,8 +97,11 @@ public class ExamQuestionsDomain {
 				+ ", examQuestionNo=" + examQuestionNo + ", examQuestionAnswer=" + examQuestionAnswer
 				+ ", examQuestionScore=" + examQuestionScore + ", examFileName=" + examFileName + ", examFileExt="
 				+ examFileExt + ", examFileSize=" + examFileSize + ", examFileType=" + examFileType
-				+ ", examOriginFileName=" + examOriginFileName + "]";
+				+ ", examOriginFileName=" + examOriginFileName + ", openSubjectCode=" + openSubjectCode
+				+ ", academicCalendarCode=" + academicCalendarCode + "]";
 	}
+	
+
 	
 	
 }

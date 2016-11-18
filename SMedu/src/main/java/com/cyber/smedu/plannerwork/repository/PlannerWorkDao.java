@@ -30,5 +30,7 @@ public interface PlannerWorkDao {
 	List<PlanRecordDomain> selectPlannerConsultList();
 
 	LearningPlanDomain applicantSelectOne(String learningPlanCode);
+
+	int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain);
 	
 }

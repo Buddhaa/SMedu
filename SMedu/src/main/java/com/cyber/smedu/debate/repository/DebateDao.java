@@ -6,6 +6,7 @@ import java.util.Map;
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
 import com.cyber.smedu.debate.domain.DebateScoreDomain;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 public interface DebateDao {
 
@@ -20,5 +21,15 @@ public interface DebateDao {
 	List<DebateResultDomain> adminStudentGradeSubjectDebateResultSelect(Map<String, Object> map);
 
 	DebateScoreDomain adminStudentGradeSubjectDebateScoreSelect(Map<String, Object> map);
+
+	List<OpenSubjectDomain> professorSubjectSelectForDebate(String professorCode);
+
+	DebateDomain professorDebateSelect(String openSubjectCode);
+
+	void professorDebateUpdate(DebateDomain debateDomain);
+
+	void professorDebateInsert(DebateDomain debateDomain);
+
+	void debateResultAdd(DebateResultDomain debateResultDomain);
 
 }

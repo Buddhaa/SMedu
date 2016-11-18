@@ -43,36 +43,110 @@ AND
 </select>
 <!-- 의기 -->
 <select id="professorStudentTaskResultDetail"
-	parameterType="String"
-	resultType="com.cyber.smedu.task.domain.TaskResultDomain">
+		parameterType="String"
+		resultType="com.cyber.smedu.task.domain.TaskResultDomain">
+	
+	SELECT 
+		t.task_subject AS taskSubject,
+		tr.task_result_title AS taskResultTitle,
+		tr.task_result_content AS taskResultContent,
+		tr.task_file_name AS taskFileName,
+		tr.task_origin_file_name AS taskOriginFileName,
+		tr.task_file_ext AS taskFileExt,
+		tr.task_file_size AS taskFileSize,
+		tr.task_result_date AS taskResultDate
+	FROM
+		open_subject o
+	INNER JOIN
+		task t
+	ON
+		o.open_subject_code = t.open_subject_code
+	INNER JOIN
+		task_result tr
+	ON
+		t.task_code = tr.task_code
+	WHERE
+		tr.student_code = #{studentCode}
+	
+	</select>
+	
+	<!-- 과제관리를 위한 담당 과목 select -->
+	<select id="professorSubjectSelectForTask"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	
+	SELECT
+		open_subject_code AS openSubjectCode,
+		subject_code AS subjectCode,
+		cardinal_code AS cardinalCode,
+		subject_name AS subjectName
+	FROM
+		open_subject
+	WHERE
+		professor_code = #{professorCode}
+	
+	</select>
+	
+	<!-- 해당 과목의 과제 정보 select -->
+	<select id="professorTaskSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.task.domain.TaskDomain">
+		
+	SELECT
+		task_code AS taskCode,
+		task_subject AS taskSubject,
+		task_content AS taskContent,
+		task_register_date AS taskRegisterDate
+	FROM
+		task
+	WHERE
+		open_subject_code = #{openSubjectCode}
+		
+	</select>
 
-SELECT 
-	t.task_subject AS taskSubject,
-	tr.task_result_title AS taskResultTitle,
-	tr.task_result_content AS taskResultContent,
-	tr.task_file_name AS taskFileName,
-	tr.task_origin_file_name AS taskOriginFileName,
-	tr.task_file_ext AS taskFileExt,
-	tr.task_file_size AS taskFileSize,
-	tr.task_result_date AS taskResultDate
-FROM
-	open_subject o
-INNER JOIN
-	task t
-ON
-	o.open_subject_code = t.open_subject_code
-INNER JOIN
-	task_result tr
-ON
-	t.task_code = tr.task_code
-WHERE
-	tr.student_code = #{studentCode}<!-- 
-AND
-	t.open_subject_code = #{openSubjectCode} -->
-
-</select>
+	<update id="professorTaskUpdate"
+		parameterType="com.cyber.smedu.task.domain.TaskDomain">
+		
+	UPDATE 
+		task
+	SET
+		task_subject = #{taskSubject},
+		task_content = #{taskContent}
+	WHERE 
+		task_code = #{taskCode}
+	
+	</update>
+	
+	<insert id="professorTaskInsert"
+		parameterType="com.cyber.smedu.task.domain.TaskDomain">
+		
+	INSERT INTO 
+		task
+		(
+		task_code, 
+		professor_code, 
+		open_subject_code, 
+		academic_calendar_code, 
+		task_subject, 
+		task_content, 
+		task_register_date
+		)
+	VALUES 
+		(
+		CONCAT('task_code',(SELECT COUNT(t.task_code)+1 FROM task t)),
+		(SELECT professor_code FROM open_subject WHERE open_subject_code = #{openSubjectCode}),
+		#{openSubjectCode},
+		(SELECT a.academic_calendar_code FROM open_subject o INNER JOIN academic_calendar a
+		ON o.cardinal_code = a.cardinal_code WHERE open_subject_code = #{openSubjectCode} LIMIT 1 OFFSET 2),
+		${taskSubject}, 
+		${taskContent}, 
+		NOW()
+		)
+	
+	</insert>
 	<!-- 우영 -->
 <!-- 과제 참여에서 과목 선택시 주제 내용 받아오기 -->
+	<!-- 과제 참여에서 과목 선택시 주제 내용 받아오기 -->
 	<select id="oneTaskView"
 			parameterType="String"
 			resultType="com.cyber.smedu.task.domain.TaskDomain">

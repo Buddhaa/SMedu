@@ -133,7 +133,7 @@ $(document).ready(function(){
 		  <label class="col-md-4 control-label">기수</label>
 		  <div class="col-md-4">
 		    <p class="form-control-static">
-		    	${studentInfo.cardinal.year}년${studentInfo.cardinal.semester}${studentInfo.cardinal.cardinal}<br/>
+		    	${studentInfo.cardinal.year}년${studentInfo.cardinal.semester}학기${studentInfo.cardinal.cardinal}기<br/>
 		    	${studentInfo.cardinal.classStartDay} ~ ${studentInfo.cardinal.classEndDay}</p>
 		  </div>
 		</div>	

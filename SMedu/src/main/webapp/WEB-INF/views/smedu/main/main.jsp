@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,50 +74,27 @@
 										<thead>
 											<tr>
 												<th>공지사항</th>
-												<th style="width: 10px">
-													<a href="#">
+												<th style="width: 100px">
+													<a href="/smedu/community/communityNoticeList">
 														<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span>
 													</a>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach var="communityNoticeList" items="${communityNoticeList }" end="5">
 											<tr id="tr_0">
 												<td valign="top" align="left">
-													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
+													<a href="/smedu/community/communityNoticeDetail?boardArticleCode=${communityNoticeList.boardArticleCode }">
+													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">
+													${communityNoticeList.boardArticleTitle }
+													</a>
 												</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
-											<tr id="tr_0">
-												<td valign="top" align="left">
-													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
+												<td valign="top" align="right">
+												${communityNoticeList.boardArticleDate }
 												</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
 											</tr>
-											<tr id="tr_0">
-												<td valign="top" align="left">
-													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
-												</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
-											<tr id="tr_0">
-												<td valign="top" align="left">
-													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
-												</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
-											<tr id="tr_0">
-												<td valign="top" align="left">
-													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
-												</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
-											<tr id="tr_0">
-												<td valign="top" align="left">
-													<img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">공지사항
-												</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -128,19 +106,29 @@
 									<table class="table table-bordered table-hover" id="tableAddRow">
 										<thead>
 											<tr>
-												<th>학사일정</th>
-												<th style="width: 10px">
-													<a href="#">
-														<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span>
+								                <th>기수</th>
+								                <th>모집 시작일</th>
+								                <th>모집 종료일</th>
+								                <th>수강 시작일</th>
+								                <th>수강 종료일</th>
+												<th style="width: 90px">
+													<a href="/smedu/community/communityAcademiccalendarList">
+														<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0">more</span>
 													</a>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr id="tr_0">
-												<td valign="top" align="left">학사일정</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
+											<c:forEach var="selectCommunityAcademiccalendarList" items="${selectCommunityAcademiccalendarList}" end="5">
+								                <tr id="tr_0">
+								                  <td>${selectCommunityAcademiccalendarList.year}년 ${selectCommunityAcademiccalendarList.semester}학기 ${selectCommunityAcademiccalendarList.cardinal}기수</td>
+								                  <td>${selectCommunityAcademiccalendarList.recruitStartDay}</td>
+								                  <td>${selectCommunityAcademiccalendarList.recruitEndDay}</td>
+								                  <td>${selectCommunityAcademiccalendarList.classStartDay}</td>
+								                  <td>${selectCommunityAcademiccalendarList.classEndDay}</td>
+								                  <td><a href="/smedu/community/communityAcademiccalendarDetail?cardinalCode=${selectCommunityAcademiccalendarList.cardinalCode}"><span class="label label-primary">일정확인</span></a></td>
+								                </tr>
+							                </c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -153,18 +141,26 @@
 										<thead>
 											<tr>
 												<th>수강후기</th>
-													<th style="width: 10px">
-														<a href="#">
-															<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span>
-														</a>
-													</th>
+												<th style="width: 100px">
+													<a href="/smedu/community/communityLectureReviewList">
+														<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span>
+													</a>
+												</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr id="tr_0">
-												<td valign="top" align="left">수강후기</td>
-												<td valign="top" align="right">2016.10.18&nbsp;&nbsp;</td>
-											</tr>
+											<c:forEach var="communityLectureReviewList" items="${communityLectureReviewList }" end="5">
+												<tr id="tr_0">
+													
+													<td valign="top" align="left">
+														<a href="/smedu/community/communityLectureReviewDetail?boardArticleCode=${communityLectureReviewList.boardArticleCode }">
+															${communityLectureReviewList.boardArticleTitle }
+														</a>
+													</td>
+													
+													<td valign="top" align="right">${communityLectureReviewList.boardArticleDate }</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

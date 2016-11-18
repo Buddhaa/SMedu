@@ -43,4 +43,271 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	ORDER BY
 		eq.exam_question_no ASC
 	</select>
+	<!-- 의기 -->
+	
+	<select id="professorSubjectSelectForExam"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	
+	SELECT
+		open_subject_code AS openSubjectCode,
+		subject_code AS subjectCode,
+		cardinal_code AS cardinalCode,
+		subject_name AS subjectName
+	FROM
+		open_subject
+	WHERE
+		professor_code=#{professorCode}
+	
+	
+	</select>
+	
+	<select id="professorExamSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.exam.domain.ExamQuestionsDomain">
+		
+	SELECT 
+		e.exam_question_code AS examQuestionCode,
+		e.exam_question_no AS examQuestionNo,
+		e.exam_question_answer AS examQuestionAnswer,
+		e.exam_question_score AS examQuestionScore,
+		e.exam_file_name AS examFileName,
+		e.exam_file_ext AS examFileExt
+	FROM
+		open_subject o
+	INNER JOIN
+		test_paper t
+	ON
+		o.open_subject_code = t.open_subject_code
+	INNER JOIN
+		exam_question e
+	ON
+		e.test_paper_code = t.test_paper_code
+	WHERE
+		t.open_subject_code = #{openSubjectCode}
+	
+	</select>
+	
+	<select id="midAcademicCalendarCodeSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain">
+	
+	SELECT 
+		a.academic_calendar_code AS academicCalendarCode, 
+		a.weekly_schedule AS weeklySchedule
+	FROM
+		open_subject o
+	INNER JOIN
+		academic_calendar a
+	ON
+		o.cardinal_code = a.cardinal_code
+	WHERE
+		o.open_subject_code = #{openSubjectCode}
+	LIMIT 1 OFFSET 4 
+	
+	</select>
+	
+	<select id="lastAcademicCalendarCodeSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain">
+	
+	SELECT 
+		a.academic_calendar_code AS academicCalendarCode, 
+		a.weekly_schedule AS weeklySchedule
+	FROM
+		open_subject o
+	INNER JOIN
+		academic_calendar a
+	ON
+		o.cardinal_code = a.cardinal_code
+	WHERE
+		o.open_subject_code = #{openSubjectCode}
+	LIMIT 1 OFFSET 9 
+	
+	</select>
+	
+	<insert id="examQuestionInsert"
+		parameterType="com.cyber.smedu.exam.domain.ExamQuestionsDomain">
+	INSERT INTO 
+		exam_question
+		(
+		exam_question_code,
+		test_paper_code, 
+		exam_question_no, 
+		exam_question_answer, 
+		exam_question_score, 
+		exam_file_name, 
+		exam_file_ext, 
+		exam_file_size, 
+		exam_file_type, 
+		exam_origin_file_name
+		)
+	VALUES 
+		(
+		CONCAT('exam_question_code',(SELECT COUNT(e.exam_question_code)+1 FROM exam_question e)),
+		(SELECT test_paper_code FROM test_paper WHERE open_subject_code = #{openSubjectCode} AND academic_calendar_code = #{academicCalendarCode}), 
+		#{examQuestionNo}, 
+		#{examQuestionAnswer}, 
+		#{examQuestionScore}, 
+		#{examFileName},
+		#{examFileExt}, 
+		#{examFileSize}, 
+		#{examFileType}, 
+		#{examOriginFileName}
+		)
+	
+	</insert>
+	
+	<select id="midExamQuestionSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.exam.domain.ExamQuestionsDomain">
+	
+	SELECT 
+		exam_question_code AS examQuestionCode,
+		exam_file_name AS examFileName,
+		exam_file_ext AS examFileExt,
+		exam_origin_file_name AS examOriginFileName
+	FROM 
+		exam_question 
+	WHERE 
+		test_paper_code = 
+		(
+		SELECT 
+			test_paper_code 
+		FROM 
+			test_paper 
+		WHERE 
+			open_subject_code = #{openSubjectCode} 
+		AND 
+			academic_calendar_code = 
+			(	
+			SELECT 
+				a.academic_calendar_code AS academicCalendarCode
+			FROM
+				open_subject o
+			INNER JOIN
+				academic_calendar a
+			ON
+				o.cardinal_code = a.cardinal_code
+			WHERE
+				o.open_subject_code = #{openSubjectCode}
+			LIMIT 1 OFFSET 4
+			)
+		)
+
+	</select>
+	
+	<select id="finalExamQuestionSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.exam.domain.ExamQuestionsDomain">
+	
+	SELECT 
+		exam_question_code AS examQuestionCode,
+		exam_file_name AS examFileName,
+		exam_file_ext AS examFileExt,
+		exam_origin_file_name AS examOriginFileName
+	FROM 
+		exam_question 
+	WHERE 
+		test_paper_code = 
+		(
+		SELECT 
+			test_paper_code 
+		FROM 
+			test_paper 
+		WHERE 
+			open_subject_code = #{openSubjectCode} 
+		AND 
+			academic_calendar_code = 
+			(	
+			SELECT 
+				a.academic_calendar_code AS academicCalendarCode
+			FROM
+				open_subject o
+			INNER JOIN
+				academic_calendar a
+			ON
+				o.cardinal_code = a.cardinal_code
+			WHERE
+				o.open_subject_code = #{openSubjectCode}
+			LIMIT 1 OFFSET 9
+			)
+		)
+			
+	</select>
+	<!-- 우영 -->
+	<select id="oneTestPaperDomain"
+		parameterType="com.cyber.smedu.opensubject.domain.LectureDomain"
+		resultType="com.cyber.smedu.exam.domain.TestPaperDomain">
+
+	SELECT
+		test_paper_code AS testPaperCode,
+		open_subject_code AS openSubjectCode,
+		academic_calendar_code AS academicCalendarCode,
+		test_time AS testTime
+	FROM
+		test_paper	
+	WHERE
+		open_subject_code = #{openSubjectCode}  AND academic_calendar_code = #{academicCalendarCode}
+	
+</select>
+
+<select id="examQuestionsList"
+		parameterType="String"
+		resultType="com.cyber.smedu.exam.domain.ExamQuestionsDomain">
+	SELECT
+		exam_question_code AS examQuestionCode,
+		test_paper_code AS testPaperCode,
+		exam_question_no AS examQuestionNo,
+		exam_question_answer AS examQuestionAnswer,
+		exam_question_score AS examQuestionScore,
+		exam_file_name AS examFileName,
+		exam_file_ext AS examFileExt,
+		exam_file_size AS examFileSize,
+		exam_file_type AS examFileType,
+		exam_origin_file_name AS examOriginFileName
+	FROM
+		exam_question
+	WHERE
+		test_paper_code = #{testPaperCode}
+	ORDER BY
+		exam_question_no ASC	
+</select>
+
+<insert id="answerPaperAdd"
+		parameterType="com.cyber.smedu.exam.domain.AnswerDomain">
+	INSERT INTO answer_paper
+		(
+		answer_question_code, 
+		student_code, 
+		test_paper_code, 
+		exam_question_code, 
+		professor_code, 
+		answer_question, 
+		exam_date
+		)
+	VALUES 
+		(
+		CONCAT('answer_question_code',(SELECT COUNT(a.answer_question_code)+1 FROM answer_paper AS a)), 
+		#{studentCode}, 
+		#{testPaperCode}, 
+		#{examQuestionCode}, 
+		(SELECT o.professor_code FROM	test_paper AS t INNER JOIN	open_subject AS o ON	t.open_subject_code = o.open_subject_code WHERE	t.test_paper_code = #{testPaperCode}), 
+		#{answerQuestion}, 
+		NOW()
+		)		
+</insert>
+
+<select id="examCheck"
+		parameterType="com.cyber.smedu.attend.domain.AttendDomain"
+		resultType="com.cyber.smedu.attend.domain.AttendDomain">
+SELECT
+	attend_code AS attendCode,
+	attend_complete_confirmation AS attendCompleteConfirmation
+FROM
+	attend	
+WHERE
+	student_code = #{studentCode} AND open_subject_code=#{openSubjectCode} AND lecture_code=#{lectureCode}
+</select>
+	<!-- 장용 -->
 </mapper>

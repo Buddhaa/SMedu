@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.attend.repository.AttendDao;
+import com.cyber.smedu.grade.repository.GradeDao;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.user.domain.UserDomain;
 
@@ -16,6 +17,8 @@ public class AttendServiceImpl implements AttendService {
 
 	@Autowired
 	AttendDao attendDao;
+	@Autowired
+	GradeDao gradeDao;
 	
 	@Override
 	public UserDomain professorStudentNameSelect(String studentCode) {
@@ -61,4 +64,28 @@ public class AttendServiceImpl implements AttendService {
 		
 		return attendDomain;
 	}
+	//우영
+	//해당강의 출석을 받아오기
+	@Override
+	public AttendDomain studentAttend(String userCode, String lectureCode) {
+		
+		//회원의 학생코드 받기
+		String studentCode = gradeDao.studentCode(userCode).getStudentCode();
+		
+		AttendDomain attendDomain = new AttendDomain();
+		
+		attendDomain.setStudentCode(studentCode);
+		attendDomain.setLectureCode(lectureCode);
+		
+		return attendDao.studentAttend(attendDomain);
+	}
+
+	
+	//학생 강의 출석저장
+	@Override
+	public void lectureAttendUpdate(AttendDomain attendDomain) {
+
+		attendDao.lectureAttendUpdate(attendDomain);
+	}
+	
 }

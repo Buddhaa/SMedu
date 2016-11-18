@@ -15,7 +15,7 @@
 			<jsp:include page="../module/consulting_sidebar.jsp" />
     	<div class="content three_quarter"> 
 		  <h1>상담신청</h1><hr>
-		  	<table class="table table-bordered">
+			<table class="table table-bordered">
 		      <tr>
 		        <td>번호</td>
 		        <td>제목</td>
@@ -34,14 +34,64 @@
 			     </tr>
 	  		</c:forEach>
 		  	</table>
-		  		
-		  	<div class="form-group">
-			  	<label class="col-md-1 control">검색 :</label> 
-			  <div class="col-md-4">
-			   
-			  <input id="userPw" type="password" class="form-control input-md">
-			  </div>
+  
+	   
+	   
+	   
+
+      		<div class="fl_right">
+    		<c:if test="${userInfo.userLevel=='학생'}">
+      			<a href="/smedu/consulting/consultingInsert">
+	   			<input type="button" value="글쓰기" class="btn btn-default">
+	   			</a>
+	   		</c:if>
+	   			<a href="/smedu/consulting/consultingList">
+	   			<input type="button" value="목록" class="btn btn-default">
+	   			</a>
+	   			
+	   		</div>
+	   		
+		   <nav class="pagination">
+	        <ul>
+			<c:if test="${page>1}">
+				<li><a href="/smedu/consulting/consultingList?page=${page-1}">◀</a></li>
+			</c:if>
+			
+			<c:forEach var="pageIndex" begin="${startPage}" end="${lastPage}" >
+				<c:if test="${page==pageIndex}">
+				<li class="current"><strong>${pageIndex}</strong></li>
+				</c:if>
+				<c:if test="${page!=pageIndex}">
+				<li><a href="/smedu/consulting/consultingList?page=${pageIndex}">${pageIndex}</a></li>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${page<lastPage}">
+			<li><a href="/smedu/consulting/consultingList?page=${page+1}">▶</a></li>
+			</c:if>
+			 </ul>
+	      </nav>
+	     
+	   		
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 col-sm-offset-2">
+						<div id="imaginary_container"> 
+							<form action="/smedu/consulting/consultingList">
+							<div class="input-group stylish-input-group">
+								<input type="text" class="form-control" placeholder="Search" name="word">
+								<span class="input-group-addon">
+									<button type="submit"><span class="glyphicon glyphicon-search"></span></button>  
+								</span>  
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
+      
+      
+      
 		</div>
 	</div>
 </div>

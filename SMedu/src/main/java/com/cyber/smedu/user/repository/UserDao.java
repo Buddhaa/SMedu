@@ -65,6 +65,8 @@ public interface UserDao {
 
 	UserDomain selectAdminStudentGradeDetail(String userCode);
 
+	UserDomain userIdCheck(String userId);
+
 	
 
 	

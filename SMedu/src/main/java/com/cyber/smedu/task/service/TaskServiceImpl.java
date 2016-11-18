@@ -3,13 +3,17 @@ package com.cyber.smedu.task.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cyber.smedu.grade.repository.GradeDao;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
 import com.cyber.smedu.task.repository.TaskDao;
@@ -35,7 +39,37 @@ public class TaskServiceImpl implements TaskService{
 		return taskResultDomain;
 		
 	}
+	
+	@Override
+	public List<OpenSubjectDomain> professorSubjectSelectForTask(String professorCode) {
+		
+		List<OpenSubjectDomain> openSubjectCode
+			= taskDao.professorSubjectSelectForTask(professorCode);
+		
+		return openSubjectCode;
+		
+	}
+	
+	@Override
+	public TaskDomain professorTaskSelect(String openSubjectCode) {
+		
+		TaskDomain taskDomain
+			= taskDao.professorTaskSelect(openSubjectCode);
+		
+		return taskDomain;
+		
+	}
+	@Override
+	public void professorTaskUpdate(TaskDomain taskDomain) {
+		taskDao.professorTaskUpdate(taskDomain);
+	}
+	
+	@Override
+	public void professorTaskInsert(TaskDomain taskDomain) {
+		taskDao.professorTaskInsert(taskDomain);
+	}
 	//우영
+	
 	@Override
 	public Map<String, Object> oneTaskView(String userCode, String openSubjectCode) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -100,10 +134,10 @@ public class TaskServiceImpl implements TaskService{
 	
 	
 	@Override
-	public void taskResultAdd(String userCode, TaskResultDomain taskResultDomain) {
+	public void taskResultAdd(String userCode, TaskResultDomain taskResultDomain, HttpServletRequest request) {
+	
 		//회원의 학생코드 받기
 		String studentCode = gradeDao.studentCode(userCode).getStudentCode();
-		
 		
 		UUID uuid = UUID.randomUUID();
 		String taskFileName = uuid.toString().replace("-", "");
@@ -119,10 +153,13 @@ public class TaskServiceImpl implements TaskService{
 		taskResultDomain.setStudentCode(studentCode);
 		taskResultDomain.setTaskOriginFileName(taskOriginFileName);
 		
-		String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";
+		//파일 저장 서버 배포용
+		String uploadPath = request.getSession().getServletContext().getRealPath("/") +"resources/taskUpload/";
 		
-		
-		//저장	
+		/*//파일 저장 개인 테스트용
+		String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";*/
+				
+		//파일 이름
 		String saveFileName= uploadPath + "\\" + taskFileName + "." + taskFileExt;
 		
 		/*새로운 파일 File생성 api이용*/
@@ -139,7 +176,6 @@ public class TaskServiceImpl implements TaskService{
 		
 		//학생이 과제 업로드시 
 		System.out.println("taskResultDomain : " + taskResultDomain.toString());
-		
 		
 		taskDao.taskResultAdd(taskResultDomain);
 		
@@ -163,13 +199,17 @@ public class TaskServiceImpl implements TaskService{
 
 	//학생이 과제를 수정하기 버튼을 눌렀을때 업데이트 처리
 	@Override
-	public void taskResultUpdate(TaskResultDomain taskResultDomain) {
+	public void taskResultUpdate(TaskResultDomain taskResultDomain, HttpServletRequest request) {
 		
 		
 				
 		//파일을 다시 업로드 시킬 경우 기존에 있던 파일은 삭제
 		if(!taskResultDomain.getTaskFile().getOriginalFilename().equals("")){
-			String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";
+			/*//파일 저장 개인 테스트
+			String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";*/
+			
+			//파일 저장 서버 배포용
+			String uploadPath = request.getSession().getServletContext().getRealPath("/") +"resources/taskUpload/";
 			
 			//삭제할 파일이름을 가져온다.
 			String deleteFileName = taskResultDomain.getTaskFileName();

@@ -15,7 +15,14 @@
 			<jsp:include page="../module/consulting_sidebar.jsp" />
     	<div class="content three_quarter"> 
 		  <h1>맞춤학습설계</h1><hr>
-	  		<form action="">
+		  	<div align="center">
+		  	<img alt="" src="/resources/smedu/images/demo/backgrounds/consulting_learning_plan1.gif" >
+		  	<img alt="" src="/resources/smedu/images/demo/backgrounds/consulting_learning_plan2.gif" >
+		  	<img alt="" src="/resources/smedu/images/demo/backgrounds/consulting_learning_plan3.gif" >
+		  	<img alt="" src="/resources/smedu/images/demo/backgrounds/consulting_learning_plan4.gif" >
+	  		</div>
+	  		<br>
+	  		<form action="/smedu/consulting/consultingLearningPlanInsert" method="post">
 		  		<table class="table">
 					<tr>
 						<td>이름</td>
@@ -46,7 +53,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" align="center">
-							 <button class="btn btn-default" id="#">신청하기</button>
+							 <button type="submit" class="btn btn-default" id="#">신청하기</button>
 						</td>
 					</tr>
 				</table>

@@ -12,4 +12,6 @@ public interface PayDao {
 
 	List<ClassRegistrationDomain> selectStudentCardinalClassRegistration(Map<String, Object> map);
 
+	List<ClassRegistrationDomain> selectClassregistrationPayHistory(String studentCode);
+
 }

@@ -44,12 +44,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="lectureList"
 			parameterType="String"
 			resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
-	select 
+	SELECT 
 		l.lecture_code AS lectureCode,
 		l.lecture_subject AS lectureSubject,
 		l.lecture_content AS lectureContent,
 		l.lecture_link AS lectureLink,
 		l.lecture_time AS lectureTime,
+		l.open_subject_code AS openSubjectCode,
 		o.professor_name AS professorName,
 		o.book_name AS bookName	,
 		o.cardinal_code AS cardinalCode,
@@ -69,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		l.academic_calendar_code = a.academic_calendar_code
 	
 	WHERE
-		l.open_subject_code =  #{openSubjectCode}	
+		l.open_subject_code =   #{openSubjectCode}	
 	</select>
 	
 	
@@ -170,5 +171,188 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE 
 		lecture_code = #{lectureCode}		
 	</select>
+	
+	<select id="objectionInsertForm"
+			parameterType="String"
+			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	SELECT
+		professor_code AS professorCode,
+		open_subject_code AS openSubjectCode
+	FROM
+		open_subject
+	WHERE
+		open_subject_code = #{openSubjectCode}
+	
+	</select>
 	<!-- 장용 -->
+	<select id="selectOpenSubjectList"
+			parameterType="java.util.Map"
+			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	SELECT 
+		os.open_subject_code as openSubjectCode,
+		os.cardinal_code as cardinalCode,
+		os.professor_code as professorCode,
+		os.subject_code as subjectCode,
+		os.professor_name as professorName,
+		s.department_code as departmentCode,
+		s.subject_name as subjectName,
+		s.subject_sort as subjectSort,
+		s.subject_pay as subjectPay,
+		s.subject_credit as subjectCredit
+	FROM
+		open_subject as os
+	INNER JOIN
+		subject as s
+	on
+		os.subject_code = s.subject_code
+	<where>
+		<if test="cardinalCode!=''">
+		os.cardinal_code = #{cardinalCode}
+		</if>
+		<if test="departmentCode!=''">
+	AND
+		s.department_code = #{departmentCode}
+		</if>
+	</where>
+	</select>
+	<!-- 현호 -->
+	
+	<!-- 강의관리를 위한 교수 담당과목 select -->
+	<select id="professorSubjectSelectForLecture"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+		
+	SELECT
+		open_subject_code AS openSubjectCode,
+		subject_code AS subjectCode,
+		cardinal_code AS cardinalCode,
+		subject_name AS subjectName
+	FROM
+		open_subject
+	WHERE
+		professor_code = #{professorCode}
+		
+	</select>
+	
+	<!-- 리스트에 보여주기위한 해당과목의 일정별 강의 주제/강의시간/강의등록일자 등 select -->
+	<select id="professorLectureListSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
+		
+	SELECT
+		a.weekly_schedule AS weeklySchedule,
+		l.lecture_code AS lectureCode,
+		l.lecture_subject AS lectureSubject,
+		l.lecture_time AS lectureTime,
+		l.lecture_register_date AS lectureRegisterDate
+	FROM	
+		lecture l
+	INNER JOIN
+		academic_calendar a
+	ON
+		a.academic_calendar_code = l.academic_calendar_code
+	WHERE
+		l.open_subject_code = #{openSubjectCode}
+	ORDER BY
+		lecture_code ASC
+		
+	</select>
+	
+	<!-- 강의 상세보기를 위한 select -->
+	<select id="professorLetureDetail"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
+
+	SELECT
+		lecture_code AS lectureCode,
+		lecture_subject AS lectureSubject,
+		lecture_content AS lectureContent,
+		lecture_link AS lectureLink,
+		lecture_time AS lectureTime
+	FROM
+		lecture
+	WHERE
+		lecture_code = #{lectureCode}
+	
+	</select>
+	
+	<!-- 강의 update -->
+	<update id="professorLectureUpdate"
+		parameterType="com.cyber.smedu.opensubject.domain.LectureDomain">
+	
+	UPDATE 
+		lecture
+	SET
+		lecture_subject = #{lectureSubject},
+		lecture_content = #{lectureContent},
+		lecture_link = #{lectureLink},
+		lecture_time = #{lectureTime}
+	WHERE 
+		lecture_code = #{lectureCode}
+	</update>
+	
+	<!-- 강의등록 화면에 뿌려줄 정보 select -->
+	<select id="LectureInsertViewForSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain">
+
+	SELECT 
+		a.academic_calendar_code AS academicCalendarCode,
+		a.weekly_schedule AS weeklySchedule
+	FROM
+		open_subject o 
+	INNER JOIN
+		academic_calendar a
+	ON
+		o.cardinal_code = a.cardinal_code
+	WHERE
+		o.open_subject_code = #{openSubjectCode}
+	
+	</select>
+	
+	<!-- 강의insert 쿼리 -->
+	<insert id="professorLectureInsert"
+		parameterType="com.cyber.smedu.opensubject.domain.LectureDomain">
+	
+	INSERT INTO 
+		lecture
+		(
+		lecture_code, 
+		open_subject_code, 
+		academic_calendar_code, 
+		lecture_subject, 
+		lecture_content, 
+		lecture_link, 
+		lecture_time, 
+		lecture_register_date
+		)
+	VALUES 
+		(
+		CONCAT('lecture_code',(SELECT COUNT(l.lecture_code)+1 FROM lecture l)), 
+		#{openSubjectCode}, 
+		#{academicCalendarCode}, 
+		#{lectureSubject}, 
+		#{lectureContent}, 
+		#{lectureLink}, 
+		#{lectureTime}, 
+		NOW()
+		)
+	
+	</insert>
+	
+	<select id="lectureAcademicCalendarCodeSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.LectureDomain">
+	SELECT 
+		l.academic_calendar_code AS academicCalendarCode
+	FROM
+		open_subject o
+	INNER JOIN
+		lecture l
+	ON
+		o.open_subject_code = l.open_subject_code
+	WHERE
+		l.open_subject_code = #{openSubjectCode}
+	</select>
+	<!-- 우영 -->
 </mapper>

@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
+import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
+import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 public interface OpenSubjectService {
 	
@@ -23,5 +25,21 @@ public interface OpenSubjectService {
 	Map<String, Object> oneLecture(String lectureCode) throws ParseException;
 
 	Map<String, Object> selectAdminOpenSubject();
+
+	Map<String, Object> selectOpenSubjectList(String departmentCode, String cardinalCode);
+	
+	List<OpenSubjectDomain> professorSubjectSelectForLecture(String professorCode);
+
+	List<OpenSubjectDomain> professorLectureListSelect(String openSubjectCode);
+
+	LectureDomain professorLetureDetail(String lectureCode);
+
+	void professorLectureUpdate(LectureDomain lectureDomain);
+
+	List<AcademicCalendarDomain> professorLectureInsertView(String openSubjectCode);
+
+	void professorLectureInsert(LectureDomain lectureDomain);
+
+	List<LectureDomain> lectureAcademicCalendarCodeSelect(String openSubjectCode);
 	
 }

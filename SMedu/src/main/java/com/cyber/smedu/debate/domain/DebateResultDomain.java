@@ -11,6 +11,14 @@ public class DebateResultDomain {
 	private String debateComment;
 	private Timestamp debateRegisterDate;
 	
+	private String userCode;
+	
+	public String getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
 	public String getDebateResultCode() {
 		return debateResultCode;
 	}

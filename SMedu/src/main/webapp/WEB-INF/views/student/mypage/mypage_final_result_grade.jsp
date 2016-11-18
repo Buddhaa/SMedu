@@ -18,29 +18,45 @@
 			<fieldset>				
 				<legend>나의정보</legend>					
 				  <table class="table table-hover">
-				    <thead>
-						<tr>
-							<th>년</th>
-							<th>학기</th>
-							<th>기수</th>
-							<th>과목</th>
-							<th>학점</th>
-							<th>이수여부</th>
-						</tr>
-					</thead>
-				    <tbody>
-						<c:forEach var="finalResult" items="${finalResultGrade}">
+					<thead>
+				      <tr>
+				        <th>년도(학기-기)</th>
+				        <th>시작일 ~ 종료일</th>
+				        <th>과정명</th>
+				        <th>교수명</th>
+				        <th>학점</th>
+				        <th>총점</th>
+				        <th>이수구분</th>
+				      </tr>
+				    </thead>
+				    <tbody>				    
+						<c:forEach var="gradeDomainList" items="${gradeDomainList}">
 							<tr>
-								<td>${finalResult.year}</td>
-								<td>${finalResult.semester}</td>
-								<td>${finalResult.cardinal}</td>
-								<td>${finalResult.subjectName}</td>
-								<td>${finalResult.finalResult}</td>
-								<td>${finalResult.completeConfirmation}</td>
-							</tr>
+								<td>
+									${gradeDomainList.year}(${gradeDomainList.semester}학기${gradeDomainList.cardinal}기)
+								</td>
+								<td>
+									${gradeDomainList.classStartDay}~${gradeDomainList.classEndDay}
+								</td>
+								<td>
+									${gradeDomainList.subjectName}
+								</td>
+								<td>
+									${gradeDomainList.userName}
+								</td>
+								<td>
+									${gradeDomainList.subjectCredit}
+								</td>
+								<td>
+									${gradeDomainList.finalResult}	
+								</td>
+								<td>
+									${gradeDomainList.completeConfirmation}
+								</td>	
+							</tr>	
 						</c:forEach>
 					</tbody>
-				  </table>							
+				</table>							
 			</fieldset>
 			</div>
 		</div>

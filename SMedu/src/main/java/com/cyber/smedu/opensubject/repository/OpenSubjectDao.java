@@ -1,7 +1,9 @@
 package com.cyber.smedu.opensubject.repository;
 
 import java.util.List;
+import java.util.Map;
 
+import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
@@ -29,5 +31,23 @@ public interface OpenSubjectDao {
 	OpenSubjectDomain selectAdminStudentGradeDetailSubject(String openSubjectCode);
 
 	List<OpenSubjectDomain> selectAdminOpenSubject();
+
+	List<OpenSubjectDomain> selectOpenSubjectList(Map<String, Object> map);
+	
+	List<OpenSubjectDomain> professorSubjectSelectForLecture(String professorCode);
+
+	List<OpenSubjectDomain> professorLectureListSelect(String openSubjectCode);
+
+	LectureDomain professorLetureDetail(String lectureCode);
+
+	void professorLectureUpdate(LectureDomain lectureDomain);
+
+	List<AcademicCalendarDomain> professorLectureInsertView(String openSubjectCode);
+
+	void professorLectureInsert(LectureDomain lectureDomain);
+
+	List<LectureDomain> lectureAcademicCalendarCodeSelect(String openSubjectCode);
+
+	OpenSubjectDomain objectionInsertForm(String openSubjectCode);
 
 }

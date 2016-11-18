@@ -1,15 +1,27 @@
 package com.cyber.smedu.main;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.cyber.smedu.academiccalendar.service.AcademicCalendarService;
+import com.cyber.smedu.board.service.BoardService;
 
 @Controller
 public class PageController {
-	
+	@Autowired BoardService boardService;
+	@Autowired AcademicCalendarService academicCalendarService;
 	//메인 페이지 이동
 	@RequestMapping(value = "/smedu/main/main", method = RequestMethod.GET)
-	public String main() {
+	public String main(Model model,
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="word", required=false) String word) {
+		model.addAttribute("communityNoticeList", boardService.communityNoticeList(page, word));
+		model.addAttribute("communityLectureReviewList", boardService.communityLectureReviewList(page, word));
+		model.addAttribute("selectCommunityAcademiccalendarList", academicCalendarService.selectCommunityAcademiccalendarList(page));
 		return "smedu/main/main";
 	}
 	

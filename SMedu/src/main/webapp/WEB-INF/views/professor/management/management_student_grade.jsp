@@ -12,7 +12,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
+	
+		$("#professorSubjectSelect").val("${openSubjectCode }").attr("selected", "selected");
 		$("#professorSubjectSelect").change(function() {
 
 			if ($("#professorSubjectSelect").val() == "") {
@@ -21,7 +22,6 @@
 				$("#professorSubjectSelectForm").submit();
 			}
 		});
-
 	});
 	
 </script>
@@ -45,6 +45,7 @@
 				<fieldset>
 
 					<legend>학생성적조회</legend>
+					
 					<div class="form-group">
 
 						<label class="col-md-2 control-label">과목 선택</label>
@@ -65,7 +66,7 @@
 					</div>
 				</fieldset>
 			</form>
-			
+
 			<table class="table table-hover">
 				<thead>
 					<tr>

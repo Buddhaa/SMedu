@@ -42,6 +42,7 @@
 	    </div>
     </c:if>
     <c:if test="${userInfo.userLevel=='학생'}">
+   		
 	    <div class="fl_right">
 	      <ul>
 	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
@@ -52,7 +53,13 @@
 	      &nbsp;
 	      <ul>
 	      	<li>${userInfo.userName}${userInfo.userLevel}님 환영합니다.</li>
+	      	<li>
+	      	<a href="/classroomAcademicActivity">
+	      	<button class="btn btn-default" style="height: 30px; width: 140px;"><strong>나의 강의실</strong></button>      	
+	      	</a>
+	      	</li>
 	      </ul>
+	      
 	    </div>
     </c:if>
     <c:if test="${userInfo.userLevel=='플래너'}">
@@ -66,6 +73,12 @@
 	      &nbsp;
 	      <ul>
 	      	<li>${userInfo.userName}${userInfo.userLevel}님 환영합니다.</li>
+	      	<li>
+	      	<a href="/planner/work/planner_learningplan_nonresponse">
+	      	<button class="btn btn-default" style="height: 30px; width: 140px;"><strong>업무관리</strong></button>
+	      	</a>
+	      	</li>
+	      	
 	      </ul>
 	    </div>
     </c:if>
@@ -80,6 +93,11 @@
 	      &nbsp;
 	      <ul>
 	      	<li>${userInfo.userName}${userInfo.userLevel}님 환영합니다.</li>
+	      	<li>
+	      	<a href="/professorSubjectSelectForCheck">
+	      	<button class="btn btn-default" style="height: 30px; width: 140px;"><strong>교무관리</strong></button>
+	      	</a>
+	      	</li>
 	      </ul>
 	    </div>
     </c:if>
@@ -109,7 +127,7 @@
 			<li><a href="/smedu/creditbank/creditbankRecognitionSubject">학점취득과정</a>
           	<li><a href="/smedu/creditbank/curriculumIntro">교육과정</a></li>
 			<li><a href="/smedu/creditbank/creditbankPrecaution">학점인정주의사항</a>
-          	<li><a href="/smedu/creditbank/creditbankOrientation">오리엔테이션</a></li>
+          	<!-- <li><a href="/smedu/creditbank/creditbankOrientation">오리엔테이션</a></li> -->
 			<li><a href="/smedu/creditbank/creditbankLectureWay">강의수강방법</a></li>
 			<li><a href="/smedu/creditbank/creditbankAttendWay">출석률확인방법</a></li>
         </ul>
@@ -121,11 +139,17 @@
           <li><a href="/smedu/curriculum/curriculumSecurity">정보보안학과</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">수강신청</a>
+      <li><a class="drop" href="/smedu/classregistration/classregistrationOpenSubject">수강신청</a>
       	 <ul>
-          <li><a href="#">수강신청</a></li>
-          <li><a href="#">신청/결제</a></li>
-          <li><a href="#">결제 이력 페이지</a></li>
+          <li><a href="/smedu/classregistration/classregistrationOpenSubject">수강신청</a></li>
+      	  <c:if test="${userInfo.userLevel==null}">
+      	  	<li><a href="/smedu/main/loginForm">신청/결제</a></li>
+          	<li><a href="/smedu/main/loginForm">결제 이력 페이지</a></li>
+          </c:if>
+          <c:if test="${userInfo.userLevel !=null}">
+          	<li><a href="/smedu/classregistration/classregistrationPaySubject">신청/결제</a></li>
+          	<li><a href="/smedu/classregistration/classregistrationPayHistory">결제 이력 페이지</a></li>
+          </c:if>
         </ul>
       </li>
       <li><a class="drop" href="/smedu/consulting/consultingList">상담실</a>
@@ -134,30 +158,30 @@
           <li><a href="/smedu/consulting/consultingLearningPlanInsert">맞춤학습설계</a></li>
         </ul>
       </li>
-      <li><a class="drop" href="#">열린마당</a>
+      <li><a class="drop" href="/smedu/community/communityNoticeList">열린마당</a>
       	 <ul>
-          <li><a href="#">공지사항</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">자료실</a></li>
-          <li><a href="#">학사일정</a></li>
-          <li><a href="#">수강후기</a></li>
+          <li><a href="/smedu/community/communityNoticeList">공지사항</a></li>
+          <li><a href="/smedu/community/communityFaq">FAQ</a></li>
+          <li><a href="/smedu/community/communityDataList">자료실</a></li>
+          <li><a href="/smedu/community/communityAcademiccalendarList">학사일정</a></li>
+          <li><a href="/smedu/community/communityLectureReviewList">수강후기</a></li>
         </ul>	
       </li>
       <c:if test="${userInfo.userLevel==null}">
-	      <li><a class="drop" href="/smedu/main/loginForm">나의강의실</a>
+	      <li class="active"><a class="drop" href="/smedu/main/loginForm">나의강의실</a>
 	      	 <ul>
-	          <li><a href="/classroomAcademicActivity">나의 학사활동</a></li>
-	          <li><a href="/classroomCreditManage">나의 학점관리</a></li>
-	          <li><a href="/classroomTaskJoin">과제 참여</a></li>
-	          <li><a href="/classroomDebateJoin">토론 참여</a></li>
-	          <li><a href="/classroomObjection">성적 이의신청</a></li>
-	          <li><a href="/classroomLectureEvaluationList">강의 평가</a></li>
-	          <li><a href="/classroomLectureReview">수강 후기</a></li>
+	          <li><a href="/smedu/main/loginForm">나의 학사활동</a></li>
+	          <li><a href="/smedu/main/loginForm">나의 학점관리</a></li>
+	          <li><a href="/smedu/main/loginForm">과제 참여</a></li>
+	          <li><a href="/smedu/main/loginForm">토론 참여</a></li>
+	          <li><a href="/smedu/main/loginForm">성적 이의신청</a></li>
+	          <li><a href="/smedu/main/loginForm">강의 평가</a></li>
+	          <li><a href="/smedu/main/loginForm">수강 후기</a></li>
 	        </ul>
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='학생'}">
-	      <li><a class="drop" href="/classroomAcademicActivity">나의강의실</a>
+	      <li class="active"><a class="drop" href="/classroomAcademicActivity">나의강의실</a>
 	      	 <ul>
 	          <li><a href="/classroomAcademicActivity">나의 학사활동</a></li>
 	          <li><a href="/classroomCreditManage">나의 학점관리</a></li>
@@ -170,17 +194,24 @@
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='교수'}">
-	      <li><a class="drop" href="/professorSubjectSelectForCheck">교무관리</a>
+	      <li class="active"><a class="drop" href="/professorSubjectSelectForCheck">교무관리</a>
 	      	 <ul>
 	          <li><a href="/professorSubjectSelectForCheck">학생성적조회</a></li>
 	          <li><a href="/professorSubjectSelectForManage">학생성적관리</a></li>
-	          <li><a href="#">성적이의신청관리</a></li>
-	          <li><a href="#">담당개설과목관리</a></li>
+	          <li><a href="/professorSubjectSelectForObjection">성적이의신청관리</a></li>
+	          <li><a href="#">담당개설과목관리</a>
+		          <ul>
+		          		<li><a href="/professorSubjectSelectForLecture">강의 관리</a></li>
+		          		<li><a href="/professorSubjectSelectForExam">시험 관리</a></li>
+		          		<li><a href="/professorSubjectSelectForDebate">토론 관리</a></li>
+		          		<li><a href="/professorSubjectSelectForTask">과제 관리</a></li>
+		          </ul>
+		      </li>
 	        </ul>
 	      </li>
       </c:if>
       <c:if test="${userInfo.userLevel=='플래너'}">
-	      <li><a class="drop" href="/planner/work/planner_learningplan_nonresponse">업무관리</a>
+	      <li class="active"><a class="drop" href="/planner/work/planner_learningplan_nonresponse">업무관리</a>
 	      	 <ul>
 	          <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 관리</a></li>
 	          <li><a href="/planner/work/planner_student_list">담당학생 관리</a></li>

@@ -39,8 +39,86 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			b.board_article_code = #{boardArticleCode}	
 	</select>
+	
+	<!-- //////////////////11.11 입력 -->	
+	<select id="studentLectureReviewList"
+			parameterType="String"
+			resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
+	SELECT
+		board_article_code AS boardArticleCode,
+		user_code AS userCode,
+		board_code AS boardCode,
+		board_article_title AS boardArticleTitle,
+		board_article_writer AS boardArticleWriter,
+		board_article_content AS boardArticleContent,
+		board_reply_group AS boardReplyGroup,
+		board_reply_level AS boardReplyLevel,
+		board_reply_seq AS boardReplySeq,
+		board_article_read_count AS boardArticleReadCount,
+		board_article_date AS boardArticleDate
+	FROM
+		board_article	
+	WHERE
+		user_code = #{userCode} AND board_code="board_code4"					
+
+	</select>
+	
+	<select id = "lectureReviewBoard"
+			parameterType="String"
+			resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
+	SELECT
+		board_article_code AS boardArticleCode,
+		user_code AS userCode,
+		board_code AS boardCode,
+		board_article_title AS boardArticleTitle,
+		board_article_writer AS boardArticleWriter,
+		board_article_content AS boardArticleContent,
+		board_reply_group AS boardReplyGroup,
+		board_reply_level AS boardReplyLevel,
+		board_reply_seq AS boardReplySeq,
+		board_article_read_count AS boardArticleReadCount,
+		board_article_date As boardArticleDate
+		
+	FROM
+		board_article	
+	WHERE
+		board_article_code = #{boardArticleCode}
+	</select>
+	
+	<insert id="lectureReviewAdd"
+			parameterType="com.cyber.smedu.board.domain.BoardArticleDomain">
+	
+	INSERT INTO board_article
+	(
+		board_article_code, 
+		user_code, 
+		board_code, 
+		board_article_title, 
+		board_article_writer, 
+		board_article_content, 
+		board_reply_group, 
+		board_reply_level, 
+		board_reply_seq, 
+		board_article_read_count, 
+		board_article_date
+	)
+	VALUES 
+	(
+		CONCAT('board_article_code',(SELECT COUNT(b.board_article_code)+1 FROM board_article AS b)), 
+		#{userCode}, 
+		'board_code4', 
+		#{boardArticleTitle}, 
+		#{boardArticleWriter}, 
+		#{boardArticleContent}, 
+		(SELECT Max(b.board_reply_group)+1 FROM board_article AS b), 
+		0, 
+		0, 
+		0, 
+		NOW()
+	)
+	</insert>
 	<!-- 장용 -->
-	<select id="boardCategoryList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardCategoryDomain">
+	<select id="selectBoardCategoryList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardCategoryDomain">
 		select 
 			board_code as boardCode, 
 			board_name as boardName
@@ -48,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			board
 	</select>
 	
-	<select id="boardConsultingList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
+	<select id="selectBoardArticleList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
 		select 
 			board_article_code as boardArticleCode, 
 			user_code as userCode, 
@@ -60,12 +138,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			board_article_read_count as boardArticleReadCount
 		from 
 			board_article
-		where 
-			board_code = 'board_code5'
-		order by 
-			board_article_code desc;
-	
+		<where>
+		    <if test='boardCode == "board_code1"'>
+		      	board_code = 'board_code1'
+		    </if>
+		    <if test='boardCode == "board_code2"'>
+        		AND board_code = 'board_code2' 
+		    </if>
+		    <if test='boardCode == "board_code3"'>
+        		AND board_code = 'board_code3' 
+		    </if>
+		    <if test='boardCode == "board_code4"'>
+        		AND board_code = 'board_code4' 
+		    </if>
+		    <if test='boardCode == "board_code5"'>
+        		AND board_code = 'board_code5' 
+		    </if>
+		    <if test="word != null">
+	        	AND board_article_title like CONCAT('%',#{word},'%')
+	        </if>
+  		</where>
+		ORDER BY 
+			board_article_code DESC
+			<if test='boardCode != "board_code2"'>
+				LIMIT
+					#{helperPaging.startRow}, 
+	        	  	#{helperPaging.linePerPage}
+        	 </if>
+			
 	</select>
+	
+	<select id="selectBoardTotalCount" parameterType="String" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM 
+        	board_article
+        WHERE
+        	board_code = #{boardCode}
+    </select>
+    
+    <select id="selectBoardArticleDetail" parameterType="String" resultType="com.cyber.smedu.board.domain.BoardArticleDomain">	
+		select 
+			b.board_article_title AS boardArticleTitle,
+			b.board_article_writer AS boardArticleWriter,
+			b.board_article_content AS boardArticleContent,
+			b.board_article_date as boardArticleDate,
+			b.board_article_read_count as boardArticleReadCount,
+			c.comment_content AS commentContent,
+			c.comment_date AS commentDate,
+			u.user_name AS userName		
+		FROM 
+			board_article AS b		
+		LEFT OUTER JOIN
+			comment AS c	
+		ON 
+			b.board_article_code = c.board_article_code		
+		LEFT OUTER JOIN
+			user AS u
+		ON
+			c.user_code = u.user_code		
+		WHERE
+			b.board_article_code = #{boardArticleCode}	
+	</select>
+	
+	<update id="updateBoardArticleReadCount" parameterType="String">
+		UPDATE board_article
+		SET
+		 	board_article_read_count = board_article_read_count + 1
+		WHERE 
+			board_article_code = #{boardArticleCode}
+	</update>
+	
 	<!-- 현호 -->
 
 </mapper>

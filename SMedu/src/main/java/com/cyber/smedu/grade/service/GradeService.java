@@ -25,10 +25,10 @@ public interface GradeService {
 
 	List<GradeDomain> professorStudentGradeSelect(String userCode);
 
-	List<StudentDomain> finalResultGrade(String userCode);
-
-	List<GradeDomain> studentCreditManage(String userCode, String openSubjectCode);
+	List<FinalGradeDomain> finalResultGrade(String userCode);
 
 	Map<String, Object> adminStudentGradeDetail(String userCode, String studentCode, String cardinalCode, String openSubjectCode);
+
+	List<GradeDomain> creditManage(String userCode);
 
 }

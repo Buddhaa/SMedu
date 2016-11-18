@@ -10,9 +10,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
+		
+		$("#openSubject").val("${selectbox}");
+		
 		$("#openSubject").change(function(){
 			var openSubjectCode = $("#openSubject").val();
 			location.replace('classroomDebateJoin?openSubjectCode=' + openSubjectCode);
+		});
+		
+		$("#debateResultAddBtn").click(function(){
+			if($("#debateComment").val() == ""){
+				alert("토론등록시에는 내용이 있어야 합니다.");
+			}else{
+				$("#debateResultAddForm").submit();
+			}
 		});
 	});
 </script>
@@ -25,21 +36,20 @@
 			<div class="content three_quarter">
 				<h1>토론 참여</h1>					
 				<div class="col-md-4">
-				<select class="form-control" id="openSubject">
-					<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
-						<c:if test="${status.count eq 1}">
-							<option value="">${openSubjectSelect.year}년-${openSubjectSelect.semester}학기-${openSubjectSelect.cardinal}기</option>
-						</c:if>
-					</c:forEach>
-					<c:forEach var="openSubjectSelect" items="${openSubjectSelect}"> 
-						<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
-					</c:forEach>
-				</select>
+					<label>과목선택</label>
+					<select class="form-control" id="openSubject">
+						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
+							<c:if test="${status.count eq 1 }">
+								<option value="">${openSubjectSelect.year}년${openSubjectSelect.semester}학기${openSubjectSelect.cardinal}기</option>
+							</c:if>
+							<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
+						</c:forEach>
+					</select>
 				</div>	
 				<br/>
 				<br/>
 				<c:if test="${oneDebateList.oneDebateList ne null}">
-					<div class="form-group">
+					<div class="form-group" style="margin-top: 3%">
 				      <label for="usr">주제:</label>
 				      <input type="text" class="form-control" value="${oneDebateList.oneDebateList.debateSubject}" readonly="readonly">
 				    </div>
@@ -51,10 +61,23 @@
 					<c:forEach var="debateResultList" items="${oneDebateList.debateResultList}">
 						<div><span>작성자 :${debateResultList.userName}</span></div> 
 						<input type="hidden" value="${debateResultList.userCode}"/>
-						<div>${debateResultList.debateComment}</div>
-						<div style="text-align: right;"><span>작성일 :${debateResultList.debateRegisterDate}</span></div>
+						<div>
+							${debateResultList.debateComment}
+						</div>
+						<div style="text-align: right;">
+						<span>작성일 :${debateResultList.debateRegisterDate}</span>
+						</div>				
+					</c:forEach>
+					<hr/>
 					
-					</c:forEach>					
+					<form id="debateResultAddForm" action="/debateResultAdd" method="post">
+						<input type="hidden" name="debateCode" value="${oneDebateList.oneDebateList.debateCode}">
+						<div class="form-group">
+							<label for="comment">토론 글쓰기:</label>
+							<textarea class="form-control" rows="5" id="debateComment" name="debateComment"></textarea>
+						</div>
+					</form>		
+					<button type="button" id="debateResultAddBtn" class="btn">토론등록</button>			
 				</c:if>				
 			</div>
 		</div>

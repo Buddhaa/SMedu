@@ -1,6 +1,7 @@
 package com.cyber.smedu.board.repositroy;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.board.domain.BoardArticleDomain;
 import com.cyber.smedu.board.domain.BoardCategoryDomain;
@@ -18,6 +19,19 @@ public interface BoardDao {
 	BoardArticleDomain consultingHistoryDetail(String boardArticleCode);
 
 	List<BoardCategoryDomain> selectBoardCategoryList();
+	
+	public int selectBoardTotalCount(String boardCode);
 
-	List<BoardArticleDomain> selectBoardConsultingList();
+	List<BoardArticleDomain> selectBoardArticleList(Map<String, Object> map);
+
+	BoardArticleDomain selectBoardArticleDetail(String boardArticleCode);
+
+	int updateBoardArticleReadCount(String boardArticleCode);
+
+	List<BoardArticleDomain> studentLectureReviewList(String userCode);
+
+	BoardArticleDomain lectureReviewBoard(String boardArticleCode);
+
+	void lectureReviewAdd(BoardArticleDomain boardArticleDomain);
+
 }

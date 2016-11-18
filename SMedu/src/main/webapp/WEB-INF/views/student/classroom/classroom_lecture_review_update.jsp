@@ -16,9 +16,18 @@
 			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
 			<div class="content three_quarter">
 				<fieldset>
-				<legend>나의 학사활동</legend>			
+				<h1>나의 수강후기</h1>			
 				</fieldset>
-			</div>
+				<div style="margin-top: 3%">
+					<input type="text" class="form-control" value="${lectureReviewBoard.boardArticleTitle}" readonly="readonly">
+				</div>
+				<div style="margin-top: 3%">
+					<textarea class="form-control" rows="8" readonly="readonly">${lectureReviewBoard.boardArticleTitle}</textarea>
+				</div>
+				<div>
+					작성일자 : ${lectureReviewBoard.boardArticleDate}
+				</div>
+			</div>				
 		</div>
 	</div>	
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/foot.jsp" />

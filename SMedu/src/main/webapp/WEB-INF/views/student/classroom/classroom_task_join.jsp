@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
+		$("#openSubject").val("${selectbox}");
 		var check = "${check}"
 		
 		if(check != ''){
@@ -23,8 +24,11 @@
 		});
 		
 		$("#taskResultAdd").click(function(){
-			$("#taskResultAddForm").submit();
-			
+			if($("#taskFile").val() == ""){
+				alert("과제 파일을 등록해주세요");
+			}else{
+				$("#taskResultAddForm").submit();
+			}
 		});
 	});
 </script>
@@ -56,16 +60,15 @@
 				<fieldset>
 					<h1>과제 참여</h1>
 					<div class="col-md-4">
-					<select class="form-control" id="openSubject">
-						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
-							<c:if test="${status.count eq 1}">
-								<option value="">${openSubjectSelect.year}년-${openSubjectSelect.semester}학기-${openSubjectSelect.cardinal}기</option>
-							</c:if>
-						</c:forEach>
-						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}"> 
-							<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
-						</c:forEach>
-					</select>
+						<label>과목선택</label>
+						<select class="form-control" id="openSubject">
+							<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
+								<c:if test="${status.count eq 1 }">
+									<option value="">${openSubjectSelect.year}년${openSubjectSelect.semester}학기${openSubjectSelect.cardinal}기</option>
+								</c:if>
+								<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
+							</c:forEach>
+						</select>
 					</div>	
 					<br/>
 					<br/>
@@ -73,7 +76,7 @@
 						<c:if test="${oneTaskView.taskList ne null}">
 							<form id="taskResultAddForm" action="/taskResultAdd" method="POST" enctype="multipart/form-data">
 								<input type="hidden" value="${oneTaskView.taskList.taskCode}" name="taskCode">
-								<div class="form-group">
+								<div class="form-group" style="margin-top: 3%">
 							      <label for="usr">주제:</label>
 							      <input type="text" class="form-control" value="${oneTaskView.taskList.taskSubject}" readonly="readonly">
 							    </div>
@@ -92,7 +95,7 @@
 							    <label for="usr">내용:</label>
 							    <textarea class="form-control" rows="15" name="taskResultContent"></textarea>
 							   	<hr/>
-							   	<input type="file" name="taskFile">
+							   	<input type="file" name="taskFile" id="taskFile">
 						    </form>
 						    <button type="button" id="taskResultAdd" class="btn btn-primary btn-lg btn-block">과제 제출하기</button>
 						    <label for="usr"></label>

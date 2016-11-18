@@ -61,4 +61,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND
 		weekly_schedule = #{exam}
 	</select>
+	
+	<!-- 의기 -->	
+	<select id="selectCommunityAcademiccalendarList" resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	SELECT
+		cardinal_code as cardinalCode,
+		year as year,
+		semester as semester,
+		cardinal as cardinal,
+		recruit_start_day as recruitStartDay,
+		recruit_end_day as recruitEndDay,
+		class_start_day as classStartDay,
+		class_end_day as classEndDay
+	FROM
+		cardinal
+	ORDER BY 
+		recruit_start_day DESC
+	LIMIT
+		#{helperPaging.startRow}, 
+      	#{helperPaging.linePerPage}
+	</select>
+	
+	<select id="selectCardinalTotalCount" resultType="Integer">
+	SELECT
+		count(*)
+	FROM
+		cardinal
+	</select>
+	
+	<select id="selectTodayCardinalList" resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	SELECT
+			cardinal_code as cardinalCode,
+			year as year,
+			semester as semester,
+			cardinal as cardinal,
+			recruit_start_day as recruitStartDay,
+			recruit_end_day as recruitEndDay
+		FROM
+			cardinal
+		WHERE
+			str_to_date(now(),'%Y-%m-%d') >= recruit_start_day 
+		AND
+			recruit_end_day >= str_to_date(now(),'%Y-%m-%d')
+	</select>
+	<!-- 현호 -->
 </mapper>

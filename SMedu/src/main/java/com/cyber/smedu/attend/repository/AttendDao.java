@@ -20,4 +20,10 @@ public interface AttendDao {
 
 	List<AttendDomain> adminStudentGradeAttendSelect(Map<String, Object> map);
 
+	void examAttendUpdate(String attendCode);
+
+	AttendDomain studentAttend(AttendDomain attendDomain);
+
+	void lectureAttendUpdate(AttendDomain attendDomain);
+
 }

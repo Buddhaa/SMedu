@@ -40,7 +40,8 @@ blockquote::before{display:block; position:absolute; top:0; left:0; font-family:
 .clear::before, .clear::after, .group::before, .group::after{display:table; content:"";}
 .clear, .clear::after, .group, .group::after{clear:both;}
 
-a{outline:none; text-decoration:none;}
+a{text-decoration:none !important;}
+a:hover{text-decoration: underline;}
 
 .fl_left, .imgl{float:left;}
 .fl_right, .imgr{float:right;}
@@ -147,4 +148,22 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 }
 .carousel-indicators .active {
 background: #333333;
+}
+
+
+
+#imaginary_container{
+    margin-top:20%; /* Don't copy this */
+}
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
 }

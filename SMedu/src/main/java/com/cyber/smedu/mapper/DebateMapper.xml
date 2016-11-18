@@ -88,6 +88,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		open_subject_code = #{openSubjectCode}
 	
 	</select>
+	
+	<select id="professorSubjectSelectForDebate"
+		parameterType="String"
+		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+		
+	SELECT
+		open_subject_code AS openSubjectCode,
+		subject_code AS subjectCode,
+		cardinal_code AS cardinalCode,
+		professor_code AS professorCode,
+		subject_name AS subjectName
+	FROM
+		open_subject
+	WHERE
+		professor_code = #{professorCode}
+		
+	</select>
+	
+	<select id="professorDebateSelect"
+		parameterType="String"
+		resultType="com.cyber.smedu.debate.domain.DebateDomain">
+		
+	SELECT
+		debate_code AS debateCode,
+		professor_code AS professorCode,
+		open_subject_code AS openSubjectCode,
+		academic_calendar_code AS academicCalendarCode,
+		debate_subject AS debateSubject,
+		debate_content AS debateContent,
+		debate_register_date AS debateRegisterDate
+	FROM
+		debate
+	WHERE
+		open_subject_code = #{openSubjectCode}
+	</select>
+	
+	<update id="professorDebateUpdate"
+		parameterType="com.cyber.smedu.debate.domain.DebateDomain">
+		
+	UPDATE 
+		debate
+	SET
+		debate_subject = #{debateSubject},
+		debate_content = #{debateContent}
+	WHERE
+		debate_code = #{debateCode}
+		
+	</update>
+
+<!-- 토론 insert 쿼리 -->	
+	<insert id="professorDebateInsert"
+		parameterType="com.cyber.smedu.debate.domain.DebateDomain">
+	
+	INSERT INTO 
+		debate
+		(
+		debate_code, 
+		professor_code, 
+		open_subject_code, 
+		academic_calendar_code, 
+		debate_subject, 
+		debate_content, 
+		debate_register_date
+		)
+	VALUES 
+		(
+		CONCAT('debate_code',(SELECT COUNT(d.debate_code)+1 FROM debate d)),
+		(SELECT professor_code FROM open_subject WHERE open_subject_code = #{openSubjectCode}),
+		#{openSubjectCode},
+		(SELECT a.academic_calendar_code FROM open_subject o INNER JOIN academic_calendar a
+		ON o.cardinal_code = a.cardinal_code WHERE open_subject_code = #{openSubjectCode} LIMIT 1 OFFSET 7),
+		#{debateSubject}, 
+		#{debateContent}, 
+		NOW()
+		)
+	
+	</insert>
 	<!-- 우영 -->
 	<select id="oneDebateList"
 		parameterType="String"
@@ -130,6 +207,28 @@ where
 	dr.debate_code = #{debateCode}
 
 </select>
+
+
+<!-- //////////////////11.10 입력 -->
+	<insert id="debateResultAdd"
+			parameterType="com.cyber.smedu.debate.domain.DebateResultDomain">
+	INSERT INTO debate_result
+			(
+			debate_result_code, 
+			debate_code, 
+			student_code, 
+			debate_comment, 
+			debate_register_date
+			)
+		VALUES 
+			(
+			CONCAT('debate_result_code',(SELECT COUNT(r.debate_result_code)+1 FROM debate_result r)),
+			#{debateCode}, 
+			#{studentCode}, 
+			#{debateComment}, 
+			NOW()
+			)	
+	</insert>
 <!-- 장용 -->
 	
 

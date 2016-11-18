@@ -6,130 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-    //window "load" 를 jquery로 바꾼모습
-    $(document).ready(function(){
-        //아이디 
-        $("#id").focus();
-        $("#id").blur(function(){ //jquery문자가 들어오면 태그
-            if(!(isNaN($("#id").val())) || $("#id").val().length<4){ //글자,숫자만입력 & 4자이상 
-                $("#idHelper").text("4자이상 숫자만은 사용이 안됩니다.");
-                $("#id").focus();
-            }
-            else{
-                $("#idHelper").text("");
-                $("#pw1").focus();
-            }
-        });
-        
-        //비밀번호와 비밀번호확인
-        $("#pw2").blur(function(){
-            if($("#pw1").val() != $("#pw2").val()){     //비밀번호와 비밀번호확인이 불일치할때
-                $("#pwHelper").text("pw확인하세요.");
-                $("#pw1").focus();
-            }
-            else if($("#pw1").val().length < 4){    //비밀번호가 4글자 이상
-                $("#pwHelper").text("pw는 4자 이상");
-                $("#pw1").focus();
-            } 
-            else{
-                $("#pwHelper").text("");
-            }
-        });
-        
-        //나이
-        $("#age").blur(function(){
-            if(isNaN($("#age").val()) || $("#age").val()<0){ //숫자가아니거나 음수값일때
-                $("#ageHelper").text("숫자또는 정수만 입력하세요!");
-                $("#age").focus();
-            }
-            else{
-                $("#ageHelper").text("");
-                
-            }
-        });
-        
-        //이메일
-        $("#email").blur(function(){
-            if(!(isNaN($("#email").val()))){    //글자와 숫자만 입력
-                $("#emailHelper").text("이메일을 확인하세요!.");
-                $("#email").focus();
-            }
-            else{
-                $("#emailHelper").text("");
-                
-            }
-        });
-        
-        //메모
-        
-        $("#memo").blur(function(){
-            if ($("#memo").val()=="" ){    //메모가 공백일때
-                $("#memoHelper").text("메모를 기입하세요!.");
-                $("#memo").focus();
-            }
-            else{
-                $("#memoHelper").text("");
-            }
-        });
-        //버튼
-        $("#signup").click(function(){
-            //성별을 체크않했을때
-            var gender = $(".gender:checked");
-            if($(".gender:checked").length != 0){
-                $("#genderHelper").text("");
-            }
-            //취미를 2개 이상 체크않했을때
-            var hobby = $(".hobby:checked");
-            if($(".hobby:checked").length >= 2){
-                $("#hobbyHelper").text("");
-            }
-            //아이디가 공백일때
-            if($("#id").val() == ""){
-                $("#idHelper").text("아이디가 공백입니다.");
-                $("#id").focus();
-            }
-            //비밀번호가 공백일때
-            else if($("#pw1").val() == "") {
-                $("#pwHelper").text("pw확인하세요.");
-                $("#pw1").focus();
-            }
-            //성별체크 않했을때
-            else if($(".gender:checked").length == 0){
-                $("#genderHelper").text("성별을 선택하세요.!");
-            }
-            //취미가 2개이상 체크를 않했을때
-            else if($(".hobby:checked").length < 2){
-                $("#hobbyHelper").text("취미를 2개이상 선택하세요.!");
-            }
-            //나이가 공백일때
-            else if($("#age").val() == ""){
-                $("#ageHelper").text("나이를 입력하세요.!");
-                $("#age").focus();
-            }
-            //이메일이 공백일때
-            else if($("#email").val() == ""){
-                $("#emailHelper").text("이메일를 입력하세요.!");
-                $("#email").focus();
-            }
-            //이메일 url을 선택않했을때
-            else if($("#url").val() == ""){
-                $("#emailHelper").text("이메일을 선택하세요.!");
-                $("#url").focus();
-            }
-            //메모가 공백일때
-            else if($("#memo").val() == ""){
-                $("#memoHelper").text("메모를 기입하세요.!");
-                $("#memo").focus();
-            }
-            //모든값이 통과했을때 result.jsp로 이동
-            else{
-                $("#form1").submit();
-            }
-        });
-    });
-</script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 <jsp:include page="../module/top.jsp" />
@@ -143,13 +20,19 @@
 			<form class="form-horizontal" action="/smedu/main/studentInsert" method="post">
 			<fieldset>
 			<input name="userLevel" type="hidden" value="학생">
- 			<%-- <input name="userCode" type="text" value="${userCode}">
-			<input name="studentCode" type="text" value="${studentCode }"> --%>
+
 			<div class="form-group">
 			  <label class="col-md-4 control-label">아이디</label>  
 			  <div class="col-md-4">
 			  <input name="userId" type="text" class="form-control input-md">
-			  <button id="jwoongbock" class="btn btn-default">중복확인</button>
+			  </div>
+			  
+			 
+			  <div class="col-md-4">
+			  <a href='#' ONCLICK="window.open('/smedu/main/idCheckForm','win','width=450,height=200,menubar=no,scrollbars=yes');return false">
+			  <input type="button" id="jwoongbock" class="btn btn-default" value="중복확인">
+			  </a>
+			  
 			  </div>
 			</div>
 			

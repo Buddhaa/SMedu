@@ -25,4 +25,12 @@ public class PayDaoImpl implements PayDao{
 	public List<ClassRegistrationDomain> selectStudentCardinalClassRegistration(Map<String, Object> map) {
 		return sqlSession.selectList(NS+".selectStudentCardinalClassRegistration", map);
 	}
+	//의기
+	
+	//결제이력 페이지
+	@Override
+	public List<ClassRegistrationDomain> selectClassregistrationPayHistory(String studentCode) {	
+		return sqlSession.selectList(NS+".selectClassregistrationPayHistory", studentCode);
+	}
+	//현호
 }

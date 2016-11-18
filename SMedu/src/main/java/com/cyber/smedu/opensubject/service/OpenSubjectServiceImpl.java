@@ -10,7 +10,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
+import com.cyber.smedu.academiccalendar.repository.AcademicCalendarDao;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.opensubject.domain.LectureDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
@@ -20,6 +22,7 @@ import com.cyber.smedu.user.domain.StudentDomain;
 @Service
 public class OpenSubjectServiceImpl implements OpenSubjectService{
 	@Autowired OpenSubjectDao openSubjectDao;
+	@Autowired AcademicCalendarDao academicCalendarDao;
 	
 	Map<String, Object> map = new HashMap<String, Object>();
 	
@@ -30,6 +33,7 @@ public class OpenSubjectServiceImpl implements OpenSubjectService{
 		map.put("openSubjectList", openSubjectList);
 		return map;
 	}
+	//의기
 	
 	//나의 학사관리 페이지 이동
 	@Override
@@ -114,5 +118,101 @@ public class OpenSubjectServiceImpl implements OpenSubjectService{
 		
 		return map;
 	}
+	//장용
+	//수강신청 리스트
+		@Override
+		public Map<String, Object> selectOpenSubjectList(String departmentCode, String cardinalCode) {
+			System.out.println("departmentCode : " + departmentCode);
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<CardinalDomain> cardinalList = academicCalendarDao.selectTodayCardinalList();
+			
+			if(cardinalCode.equals("")){
+				cardinalCode = cardinalList.get(0).getCardinalCode();	
+				map.put("cardinalCode", cardinalCode);
+				System.out.println("cardinalCode:"+cardinalCode);
+			} else {
+			map.put("cardinalCode", cardinalCode);
+			}
+			System.out.println(map.get("cardinalCode"));
+			map.put("departmentCode", departmentCode);		
+			List<OpenSubjectDomain> openSubjectList = openSubjectDao.selectOpenSubjectList(map);
+			System.out.println("openSubjectList : " + openSubjectList);
+			map.put("cardinalList", cardinalList);
+			map.put("openSubjectList", openSubjectList);
+			return map;
+		}
+	//현호
+		
+	//강의관리를 위한 교수 담당과목 select
+	@Override
+	public List<OpenSubjectDomain> professorSubjectSelectForLecture(String professorCode) {
+		
+		System.out.println("02 professorSubjectSelectForLecture <-- ObjectionServiceImpl.java");
+		
+		List<OpenSubjectDomain> openSubjectDomain
+			= openSubjectDao.professorSubjectSelectForLecture(professorCode);
+			
+		return openSubjectDomain;	
+	}
+	
+	@Override
+	public List<OpenSubjectDomain> professorLectureListSelect(String openSubjectCode) {
+		
+		System.out.println("02 professorLectureListSelect <-- ObjectionServiceImpl.java");
+		//System.out.println("openSubjectCode : " + openSubjectCode);
+		
+		List<OpenSubjectDomain> openSubjectDomain
+			= openSubjectDao.professorLectureListSelect(openSubjectCode);
+		
+		return openSubjectDomain;
+	}
+	
+	//강의 상세보기
+	@Override
+	public LectureDomain professorLetureDetail(String lectureCode) {
+		
+		System.out.println("02 professorLetureDetail <-- ObjectionServiceImpl.java");
+		//System.out.println("lectureCode : " + lectureCode);
+		
+		LectureDomain lectureDomain
+			= openSubjectDao.professorLetureDetail(lectureCode);
+		
+		return lectureDomain;		
+	}
+	
+	//강의 업데이트
+	@Override
+	public void professorLectureUpdate(LectureDomain lectureDomain) {
+		openSubjectDao.professorLectureUpdate(lectureDomain);
+	}
+	
+	//강의 insert form 에 필요한 코드/주차별 일정 select
+	@Override
+	public List<AcademicCalendarDomain> professorLectureInsertView(String openSubjectCode) {
+		
+		List<AcademicCalendarDomain> academicCalendarDomain
+			= openSubjectDao.professorLectureInsertView(openSubjectCode);
+		
+		return academicCalendarDomain;	
+	}
+	
+	//강의 등록
+	@Override
+	public void professorLectureInsert(LectureDomain lectureDomain) {
+		
+		openSubjectDao.professorLectureInsert(lectureDomain);
+	}
+	
+	//vallidation을위한 lecture의 academicCalendarCode select
+	@Override
+	public List<LectureDomain> lectureAcademicCalendarCodeSelect(String openSubjectCode) {
+		
+		List<LectureDomain> lectureDomain =
+				openSubjectDao.lectureAcademicCalendarCodeSelect(openSubjectCode);
+		
+		return lectureDomain;
+		
+	}
+	//우영
 
 }

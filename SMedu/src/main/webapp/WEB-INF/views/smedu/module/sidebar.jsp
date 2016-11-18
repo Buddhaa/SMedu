@@ -5,6 +5,26 @@
 <html>
 <head>
 <title>시커먼스</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="/resources/smedu/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('#openSubjectCategory').hide();
+		
+		$(function() {
+			$('a').on('click', openSubjectManage);
+		
+		});		
+		function openSubjectManage() {
+			
+			$('#openSubjectCategory').show();
+		}	
+	});
+
+</script>
 </head>
 <body>
 	<div class="sidebar one_quarter first">
@@ -26,15 +46,23 @@
 		     	 <ul>
 		         <li><a href="/professorSubjectSelectForCheck">학생성적조회</a></li>
 		         <li><a href="/professorSubjectSelectForManage">학생성적관리</a></li>
-		         <li><a href="#">성적이의신청관리</a></li>
-		         <li><a href="#">담당개설과목관리</a></li>
+		         <li><a href="/professorSubjectSelectForObjection">성적이의신청관리</a></li>
+		         <li><a href="#" onclick="openSubjectManage">담당개설과목관리</a>
+					<div id="openSubjectCategory">
+					<ul>
+		         		<li><a href="/professorSubjectSelectForLecture">강의 관리</a></li>
+		         		<li><a href="/professorSubjectSelectForExam">시험 관리</a></li>
+		         		<li><a href="/professorSubjectSelectForDebate">토론 관리</a></li>
+		         		<li><a href="/professorSubjectSelectForTask">과제 관리</a></li>
+					</ul>
+					</div>
+		         </li>
 		       </ul>
 		    </c:if>
 		    <c:if test="${userInfo.userLevel=='플래너'}">
 		      <h3>업무관리</h3><hr>
 		     	 <ul>
-		         <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 미답변</a></li>
-		         <li><a href="/planner/work/planner_learningplan_response">학습설계 답변목록</a></li>
+		         <li><a href="/planner/work/planner_learningplan_nonresponse">학습설계 관리</a></li>
 		          <li><a href="/planner/work/planner_student_list">담당학생 관리</a></li>
 		          <li><a href="/planner/work/planner_consult_list">상담기록 관리</a></li>
 		       </ul>

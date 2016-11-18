@@ -229,4 +229,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				p.student_code = #{studentCode}									
 
 </select>
+<!-- 진호 -->
+<insert id="insertConsultingLearningPlan" parameterType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain">
+	INSERT INTO learning_plan(
+		learning_plan_code, 
+		department_code, 
+		applicant_name, 
+		applicant_phone, 
+		inquire_content,
+		inquire_date
+	) VALUES (
+		CONCAT('learning_plan_code',(SELECT COUNT(l.learning_plan_code)+1 FROM learning_plan l)),
+		#{departmentCode},
+		#{applicantName},
+		#{applicantPhone},
+		#{inquireContent},
+		NOW()
+	)
+</insert>
+<!-- 현호 -->
 </mapper>

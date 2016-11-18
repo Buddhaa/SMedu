@@ -25,12 +25,12 @@ public interface GradeDao {
 
 	StudentDomain studentCode(String userCode);
 
-	List<StudentDomain> finalResultGrade(String studentCode);
-
-	List<GradeDomain> studentCreditManage(GradeDomain oneGradeDomain);
+	List<FinalGradeDomain> finalResultGrade(String studentCode);
 
 	List<FinalGradeDomain> adminStudentFinalGrade(String studentCode);
 
 	List<GradeDomain> adminStudentSubjectGrade(Map<String, Object> map);
+
+	List<GradeDomain> creditManage(String studentCode);
 
 }
