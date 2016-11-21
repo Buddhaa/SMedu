@@ -27,9 +27,9 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 	}
 	//-- 관리자 개설과목 리스트 -->
 	@Override
-	public List<OpenSubjectDomain> selectAdminOpenSubject() {
+	public List<OpenSubjectDomain> selectAdminOpenSubject(Map<String, Object> map) {
 		
-		return sqlSession.selectList(NS+".selectAdminOpenSubject");
+		return sqlSession.selectList(NS+".selectAdminOpenSubject", map);
 	}
 	/*의기-----------------------------------------------------------*/
 	//나의 학사관리 페이지 이동

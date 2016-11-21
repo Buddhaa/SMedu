@@ -33,6 +33,10 @@ public class AcademicCalendarDaoImpl implements AcademicCalendarDao{
 		return sqlSession.selectOne(NS+".adminStudentGradeTestAcademicCalendarCodeSelect", map);
 	}
 	@Override
+	public List<CardinalDomain> selectOpenSubjectCardinalList() {
+		return sqlSession.selectList(NS+".selectOpenSubjectCardinalList");
+	}
+	@Override
 	public List<CardinalDomain> selectCommunityAcademiccalendarList(Map<String, Object> map) {
 		return sqlSession.selectList(NS+".selectCommunityAcademiccalendarList", map);
 	}

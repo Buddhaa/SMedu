@@ -1,6 +1,7 @@
 package com.cyber.smedu.curriculum.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.curriculum.domain.DepartmentDomain;
 import com.cyber.smedu.curriculum.domain.SubjectDomain;
@@ -10,8 +11,10 @@ public interface CurriculumDao {
 
 	List<DepartmentDomain> selectDepartmentList();
 
+	DepartmentDomain selectDepartmentOne(String departmentCode);
+
 	List<SubjectDomain> selectSubjectList();
 
-	DepartmentDomain selectDepartmentOne(String departmentCode);
+	List<SubjectDomain> adminSelectSubjectList(Map<String, Object> map);
 
 }

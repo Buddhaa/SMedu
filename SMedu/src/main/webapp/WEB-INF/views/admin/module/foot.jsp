@@ -13,5 +13,7 @@
     <strong>Copyright &copy; 2016 <a href="#">SMedu</a>.</strong> All rights
     reserved.
   </footer>
+
+</div>
 </body>
 </html>

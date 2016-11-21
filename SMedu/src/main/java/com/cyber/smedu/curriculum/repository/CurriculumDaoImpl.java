@@ -1,6 +1,7 @@
 package com.cyber.smedu.curriculum.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class CurriculumDaoImpl implements CurriculumDao {
 	@Override
 	public DepartmentDomain selectDepartmentOne(String departmentCode) {
 		return sqlSession.selectOne(NS+".selectDepartmentOne", departmentCode);
+	}
+	//관리자 과목 조회
+	@Override
+	public List<SubjectDomain> adminSelectSubjectList(Map<String, Object> map) {
+		return sqlSession.selectList(NS+".adminSubjectList", map);
 	}
 	//과목 조회
 	@Override

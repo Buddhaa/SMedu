@@ -15,9 +15,10 @@ public class BookServiceImpl implements BookService {
 	@Autowired BookDao bookDao;
 	
 	@Override
-	public Map<String, Object> bookListSelect() {
+	public Map<String, Object> bookListSelect(String bookName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<BookDomain> bookList = bookDao.bookListSelect();
+		map.put("bookName", bookName);
+		List<BookDomain> bookList = bookDao.bookListSelect(map);
 		map.put("bookList", bookList);
 		return map;
 	}

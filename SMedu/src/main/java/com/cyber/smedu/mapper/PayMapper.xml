@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND
 		c.cardinal_code = #{cardinalCode}
 	AND
-		c.pay_state = 'T'
+		c.pay_state = '결제완료'
 </select>
 <!-- 의기 -->
 <select id="selectClassregistrationPayHistory" resultType="java.util.Map" parameterType="com.cyber.smedu.pay.domain.ClassRegistrationDomain">

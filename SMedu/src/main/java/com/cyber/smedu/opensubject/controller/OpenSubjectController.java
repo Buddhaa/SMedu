@@ -30,9 +30,18 @@ public class OpenSubjectController {
 	@Autowired AttendService attendService;
 		
 	@RequestMapping(value="/admin/curriculum/openSubjectList", method=RequestMethod.GET)
-	public String adminOpenSubjectList(Model model){	
-		Map<String, Object> map = openSubjectService.selectAdminOpenSubject();
+	public String adminOpenSubjectList(Model model,
+											@RequestParam(value="cardinalCode", defaultValue="") String cardinalCode,
+											@RequestParam(value="subjectName", defaultValue="") String subjectName,
+											@RequestParam(value="professorName", defaultValue="") String professorName){	
+		Map<String, Object> map = openSubjectService.selectAdminOpenSubject(cardinalCode, subjectName, professorName);
 		model.addAttribute("openSubjectList", map.get("openSubjectList"));
+		model.addAttribute("cardinalList", map.get("cardinalList"));
+		
+		//select박스 값 검색후 저장
+		model.addAttribute("cardinalCode", cardinalCode);
+		model.addAttribute("subjectName", subjectName);
+		model.addAttribute("professorName", professorName);
 		return"admin/curriculum/open_subject_list";
 	}
 	//의기
@@ -60,9 +69,7 @@ public class OpenSubjectController {
 	
 	System.out.println(model.toString());
 	return"student/classroom/classroom_academic_activity";
-	}
-
-	
+	}	
 	
 	//나의 학사관리 페이지에서 과목 수강하기 클릭시 팝업창에 해당 과목의 동영상 나오기
 	@RequestMapping(value="/classroomLecture", method=RequestMethod.GET)

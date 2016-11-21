@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- CSS -->
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -21,6 +22,28 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/resources/admin/dist/css/skins/_all-skins.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="/resources/admin/plugins/datepicker/datepicker3.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/resources/admin/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/resources/admin/dist/css/skins/_all-skins.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/resources/admin/plugins/iCheck/flat/blue.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="/resources/admin/plugins/morris/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="/resources/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/resources/admin/plugins/datepicker/datepicker3.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/resources/admin/plugins/daterangepicker/daterangepicker.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  
+  
+  <!-- JS -->
   <!-- jQuery 2.2.3 -->
   <script src="/resources/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
   <!-- Bootstrap 3.3.6 -->
@@ -29,6 +52,10 @@
   <script src="/resources/admin/plugins/fastclick/fastclick.js"></script>
   <!-- AdminLTE App -->
   <script src="/resources/admin/dist/js/app.min.js"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="/resources/admin/dist/js/pages/dashboard.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/resources/admin/dist/js/demo.js"></script>
   <!-- Sparkline -->
   <script src="/resources/admin/plugins/sparkline/jquery.sparkline.min.js"></script>
   <!-- jvectormap -->
@@ -45,9 +72,29 @@
   <!-- AdminLTE App -->
   <script src="/resources/admin/dist/js/app.min.js"></script>
   <!-- bootstrap datepicker -->
+  <script src="/resources/admin/plugins/datepicker/bootstrap-datepicker.js"></script>  
+  <!-- daterangepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+  <script src="/resources/admin/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- datepicker -->
   <script src="/resources/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="/resources/admin/plugins/datepicker/datepicker3.css">
+  <!-- Bootstrap WYSIHTML5 -->
+  <script src="/resources/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+  <!-- Morris.js charts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="/resources/admin/plugins/morris/morris.min.js"></script>  
+  <!-- jQuery UI 1.11.4 -->
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="/resources/admin/plugins/knob/jquery.knob.js"></script>
+  <!-- FastClick -->
+  <script src="/resources/admin/plugins/fastclick/fastclick.js"></script>
+  <!-- daterangepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+  <script src="/resources/admin/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- datepicker -->
+  <script src="/resources/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+  
   <script>
   	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
  	$(document).ready(function(){
@@ -55,13 +102,12 @@
  		if(userInfo==''){
  		alert('비정상적인 접근입니다.');
  		$(location).attr('href', '/admin/login/loginForm');
- 		} 		
- 		//Date picker
- 	    $('#datepicker').datepicker({
- 	      autoclose: true
- 	    }); 		
+ 		}		
  	});
   </script>
+  <script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

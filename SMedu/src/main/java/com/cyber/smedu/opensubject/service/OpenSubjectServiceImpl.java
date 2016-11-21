@@ -28,9 +28,15 @@ public class OpenSubjectServiceImpl implements OpenSubjectService{
 	
 	//관리자 개설과목 리스트
 	@Override
-	public Map<String, Object> selectAdminOpenSubject() {
-		List<OpenSubjectDomain> openSubjectList = openSubjectDao.selectAdminOpenSubject();
+	public Map<String, Object> selectAdminOpenSubject(String cardinalCode, String subjectName, String professorName) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cardinalCode", cardinalCode);
+		map.put("subjectName", subjectName);
+		map.put("professorName", professorName);
+		List<OpenSubjectDomain> openSubjectList = openSubjectDao.selectAdminOpenSubject(map);
+		List<CardinalDomain> cardinalList = academicCalendarDao.selectOpenSubjectCardinalList();
 		map.put("openSubjectList", openSubjectList);
+		map.put("cardinalList", cardinalList);
 		return map;
 	}
 	//의기

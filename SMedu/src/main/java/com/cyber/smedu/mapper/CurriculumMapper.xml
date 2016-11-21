@@ -21,6 +21,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		department_code = #{departmentCode}
 	</select>
+	<select id="adminSubjectList" parameterType="java.util.Map" resultType="com.cyber.smedu.curriculum.domain.SubjectDomain" >
+		SELECT 
+			s.subject_code as subjectCode, 
+			s.department_code as departmentCode, 
+			d.department_name as departmentName, 
+			s.subject_name as subjectName, 
+			s.subject_sort as subjectSort, 
+			s.subject_pay as subjectPay, 
+			s.subject_credit as subjectCredit,
+			s.subject_date as subjectDate,
+			s.subject_state as subjectState
+		FROM 
+			subject s
+		INNER JOIN
+			department d
+		ON
+			s.department_code = d.department_code
+		<where>
+			<if test="departmentCode != ''">
+				s.department_code = #{departmentCode}
+			</if>
+			<if test="subjectName != ''">
+				AND
+					s.subject_name LIKE '%${subjectName}%'
+			</if>
+			<if test="subjectState != ''">
+				AND
+					s.subject_state = #{subjectState}
+			</if>
+		</where>
+	</select>
 	<!-- 의기 -->
 	
 	<select id="subjectList" parameterType="java.util.Map" resultType="com.cyber.smedu.curriculum.domain.SubjectDomain" >

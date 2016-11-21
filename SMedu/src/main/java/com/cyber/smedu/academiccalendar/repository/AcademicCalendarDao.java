@@ -22,4 +22,6 @@ public interface AcademicCalendarDao {
 
 	List<CardinalDomain> selectTodayCardinalList();
 
+	List<CardinalDomain> selectOpenSubjectCardinalList();
+
 }

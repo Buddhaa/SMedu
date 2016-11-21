@@ -22,22 +22,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		open_subject_code = #{openSubjectCode}
 	</select>
 	
-	<!-- 관리자 개설과목 리스트 -->
+	<!-- 관리자 개설과목 리스트 (검색)-->
 	<select id="selectAdminOpenSubject"
 			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
 	SELECT 
-		open_subject_code as openSubjectCode,
-		cardinal_code as cardinalCode,
-		professor_code as professorCode,
-		subject_code as subjectCode,
-		book_code as bookCode,	
-		cardinal as cardinal,
-		professor_name as professorName,
-		subject_name as subjectName,
-		book_name as bookName,
-		register_date as registerDate
+		os.open_subject_code as openSubjectCode,
+		os.cardinal_code as cardinalCode,
+		os.professor_code as professorCode,
+		os.subject_code as subjectCode,
+		os.book_code as bookCode,	
+		os.cardinal as cardinal,
+		os.professor_name as professorName,
+		os.subject_name as subjectName,
+		os.book_name as bookName,
+		os.register_date as registerDate
 	FROM
-		open_subject	
+		open_subject os
+	INNER JOIN
+		cardinal c
+	ON
+		os.cardinal_code = c.cardinal_code
+	WHERE
+		str_to_date(now(),'%Y-%m-%d') >= c.recruit_start_day 
+	AND
+		c.class_end_day >= str_to_date(now(),'%Y-%m-%d')
+	<if test="cardinalCode != ''">
+	AND
+		c.cardinal_code = #{cardinalCode}
+	</if>
+	<if test="subjectName != ''">
+	AND
+		os.subject_name = #{subjectName}
+	</if>
+	<if test="professorName != ''">
+	AND
+		os.professor_name = #{professorName}
+	</if>
 	</select>
 	<!-- 의기 -->
 	
@@ -145,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	ON
 		ca.cardinal_code = c.cardinal_code		
 	WHERE
-		c.student_code = #{studentCode} AND c.cardinal_code = #{cardinalCode} AND c.pay_state="T"
+		c.student_code = #{studentCode} AND c.cardinal_code = #{cardinalCode} AND c.pay_state="결제완료"
 	</select>
 	
 	<!-- 강의코드로 한 강의 객체만들기 -->

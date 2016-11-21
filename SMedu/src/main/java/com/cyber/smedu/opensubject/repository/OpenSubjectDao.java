@@ -30,8 +30,6 @@ public interface OpenSubjectDao {
 
 	OpenSubjectDomain selectAdminStudentGradeDetailSubject(String openSubjectCode);
 
-	List<OpenSubjectDomain> selectAdminOpenSubject();
-
 	List<OpenSubjectDomain> selectOpenSubjectList(Map<String, Object> map);
 	
 	List<OpenSubjectDomain> professorSubjectSelectForLecture(String professorCode);
@@ -49,5 +47,7 @@ public interface OpenSubjectDao {
 	List<LectureDomain> lectureAcademicCalendarCodeSelect(String openSubjectCode);
 
 	OpenSubjectDomain objectionInsertForm(String openSubjectCode);
+
+	List<OpenSubjectDomain> selectAdminOpenSubject(Map<String, Object> map);
 
 }

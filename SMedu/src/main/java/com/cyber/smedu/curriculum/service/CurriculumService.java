@@ -5,5 +5,6 @@ import java.util.Map;
 //인터페이스
 public interface CurriculumService {
 	public Map<String, Object> selectDepartmentList();
-	public Map<String, Object> selectSubjectList();
+	Map<String, Object> selectSubjectList();
+	Map<String, Object> adminSelectSubjectList(String departmentCode, String subjectName, String subjectState);
 }

@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cyber.smedu.mapper.BookMapper">
-	<select id="bookListSelect" resultType="com.cyber.smedu.book.domain.BookDomain">
+	<select id="bookListSelect" parameterType="java.util.Map" resultType="com.cyber.smedu.book.domain.BookDomain">
 		SELECT 
 			book_code as bookCode,
 			book_name as bookName, 
@@ -12,6 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			book_introduce as bookIntroduce, 
 			book_date as bookDate
 		FROM
-			book
+			book		
+		<if test="bookName != ''">
+		WHERE
+			book_name LIKE '%${bookName}%'
+		</if>
 	</select>
 </mapper>

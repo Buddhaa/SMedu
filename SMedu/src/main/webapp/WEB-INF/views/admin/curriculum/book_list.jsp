@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){		
+		$("#bookNameSearch").val("${bookName}").attr("selected", "selected");
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" />
@@ -44,8 +50,10 @@
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="교재명 검색">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+	                <form action="/admin/curriculum/bookList">
+	                  <input type="text" name="bookName" class="form-control input-sm" placeholder="교재명 검색" id="bookNameSearch">
+	                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+	                </form>
                 </div>
               </div>
               <!-- /.box-tools -->

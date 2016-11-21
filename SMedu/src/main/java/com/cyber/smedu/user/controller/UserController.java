@@ -49,7 +49,7 @@ public class UserController {
 			model.addAttribute("loginFalseMessage", map.get("loginFalse"));
 			return "admin/login/login";
 		}
-		return "admin/main/main";
+		return "redirect:/admin/main/main";
 	}
 	//메인 페이지 로그인 처리 맵핑
 	@RequestMapping(value = "/smedu/login/login", method = RequestMethod.POST)
@@ -71,7 +71,7 @@ public class UserController {
 	//관리자 메인 페이지 맵핑
 	@RequestMapping(value = "/admin/main/main", method = RequestMethod.GET)
 	public String adminMain() {
-		return "admin/main/main";
+		return "admin/main/main2";
 	}
 	
 	//관리자 로그아웃 맵핑
@@ -121,59 +121,59 @@ public class UserController {
 	}
 	
 	//로그인 폼으로 이동
-		@RequestMapping(value = "/smedu/main/loginForm", method = RequestMethod.GET)
-		public String loginForm() {
-			return "smedu/main/login_form";
-		}
-		
-		//회원가입 폼으로 이동
-		@RequestMapping(value = "/smedu/main/signUpUser", method = RequestMethod.GET)
-		public String signUpUser() {
-			return "smedu/main/sign_up_user";
-		}
-		
-		//교수,플래너 폼으로 이동
-		@RequestMapping(value = "/smedu/main/professorPlannerInsertForm", method = RequestMethod.GET)
-		public String professorPlannerInsertForm(Model model) {
-			Map<String, Object> map = curriculumService.selectDepartmentList();
-			model.addAttribute("departmentList", map.get("departmentList"));
-			return "smedu/main/professor_planner_insert";
-		}
+	@RequestMapping(value = "/smedu/main/loginForm", method = RequestMethod.GET)
+	public String loginForm() {
+		return "smedu/main/login_form";
+	}
+	
+	//회원가입 폼으로 이동
+	@RequestMapping(value = "/smedu/main/signUpUser", method = RequestMethod.GET)
+	public String signUpUser() {
+		return "smedu/main/sign_up_user";
+	}
+	
+	//교수,플래너 폼으로 이동
+	@RequestMapping(value = "/smedu/main/professorPlannerInsertForm", method = RequestMethod.GET)
+	public String professorPlannerInsertForm(Model model) {
+		Map<String, Object> map = curriculumService.selectDepartmentList();
+		model.addAttribute("departmentList", map.get("departmentList"));
+		return "smedu/main/professor_planner_insert";
+	}
 
-		//학생(회원) 폼으로 이동
-		@RequestMapping(value = "/smedu/main/studentInsertForm", method = RequestMethod.GET)
-		public String studentInsertForm(Model model) {
-			Map<String, Object> map = curriculumService.selectDepartmentList();
-			model.addAttribute("departmentList", map.get("departmentList"));
-			return "smedu/main/student_insert";
-		}
-		
-		//학생 (회원) 가입 처리
-		@RequestMapping(value = "/smedu/main/studentInsert", method = RequestMethod.POST)
-		public String studentInsert(UserDomain user, StudentDomain student) {
-			userService.addStudent(user, student);
-			return "redirect:/smedu/main/main";
-		}
-		
-		//교수 가입 처리
-		@RequestMapping(value = "/smedu/main/professorInsert", method = RequestMethod.POST)
-		public String professorInsert(UserDomain user, ProfessorDomain professor) {
-			userService.addProfessor(user, professor);
-			return "redirect:/smedu/main/main";
-		}
-		
-		//플래너  가입 처리
-		@RequestMapping(value = "/smedu/main/plannerInsert", method = RequestMethod.POST)
-		public String plannerInsert(UserDomain user, PlannerDomain planner) {
-			userService.addPlanner(user, planner);
-			return "redirect:/smedu/main/main";
-		}
-		
-		//아이디 중복체크폼 페이지 이동
-		@RequestMapping(value = "/smedu/main/idCheckForm", method = RequestMethod.GET)
-		public String idCheckForm() {
-			return "/smedu/main/id_check";
-		}
+	//학생(회원) 폼으로 이동
+	@RequestMapping(value = "/smedu/main/studentInsertForm", method = RequestMethod.GET)
+	public String studentInsertForm(Model model) {
+		Map<String, Object> map = curriculumService.selectDepartmentList();
+		model.addAttribute("departmentList", map.get("departmentList"));
+		return "smedu/main/student_insert";
+	}
+	
+	//학생 (회원) 가입 처리
+	@RequestMapping(value = "/smedu/main/studentInsert", method = RequestMethod.POST)
+	public String studentInsert(UserDomain user, StudentDomain student) {
+		userService.addStudent(user, student);
+		return "redirect:/smedu/main/main";
+	}
+	
+	//교수 가입 처리
+	@RequestMapping(value = "/smedu/main/professorInsert", method = RequestMethod.POST)
+	public String professorInsert(UserDomain user, ProfessorDomain professor) {
+		userService.addProfessor(user, professor);
+		return "redirect:/smedu/main/main";
+	}
+	
+	//플래너  가입 처리
+	@RequestMapping(value = "/smedu/main/plannerInsert", method = RequestMethod.POST)
+	public String plannerInsert(UserDomain user, PlannerDomain planner) {
+		userService.addPlanner(user, planner);
+		return "redirect:/smedu/main/main";
+	}
+	
+	//아이디 중복체크폼 페이지 이동
+	@RequestMapping(value = "/smedu/main/idCheckForm", method = RequestMethod.GET)
+	public String idCheckForm() {
+		return "/smedu/main/id_check";
+	}
 	/*------------------------------------------------------------------------*/
 	
 	//학생정보수정페이지 이동

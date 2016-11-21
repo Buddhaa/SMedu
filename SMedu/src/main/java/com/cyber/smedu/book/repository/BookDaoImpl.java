@@ -1,6 +1,7 @@
 package com.cyber.smedu.book.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class BookDaoImpl implements BookDao {
 	String NS = "com.cyber.smedu.mapper.BookMapper";
 	
 	@Override
-	public List<BookDomain> bookListSelect() {
-		return sqlSession.selectList(NS+".bookListSelect");
+	public List<BookDomain> bookListSelect(Map<String, Object> map) {
+		return sqlSession.selectList(NS+".bookListSelect", map);
 	}
 }
