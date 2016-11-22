@@ -19,6 +19,10 @@ public class AttendDaoImpl implements AttendDao{
 	private SqlSessionTemplate sqlSession;
 	private final String NS = "com.cyber.smedu.mapper.AttendMapper";
 	
+	public AttendDaoImpl(){
+		System.out.println("AttendDaoImpl sqlSession:"+sqlSession);
+	}
+	
 	@Override
 	public List<AttendDomain> adminStudentGradeAttendSelect(Map<String, Object> map) {
 				

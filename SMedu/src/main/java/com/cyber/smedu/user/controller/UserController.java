@@ -67,12 +67,7 @@ public class UserController {
 			return "smedu/main/login_form";
 		}
 		return "redirect:/smedu/main/main";
-	}
-	//관리자 메인 페이지 맵핑
-	@RequestMapping(value = "/admin/main/main", method = RequestMethod.GET)
-	public String adminMain() {
-		return "admin/main/main2";
-	}
+	}	
 	
 	//관리자 로그아웃 맵핑
 	@RequestMapping(value = "/admin/logout", method = RequestMethod.GET)

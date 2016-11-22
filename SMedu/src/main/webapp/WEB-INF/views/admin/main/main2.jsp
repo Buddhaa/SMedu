@@ -34,14 +34,14 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>35</h3>
+              <h3>${todayCount}</h3>
 
               <p>오늘 방문자수</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+              <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">Today Count</a>
           </div>
         </div>
         <!-- ./col -->
@@ -49,14 +49,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>1083<sup style="font-size: 20px"></sup></h3>
+              <h3>${totalCount}<sup style="font-size: 20px"></sup></h3>
 
               <p>총 방문자수</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">Total Count</a>
           </div>
         </div>
         <!-- ./col -->
@@ -64,14 +64,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>${monthStudentCount}</h3>
 
-              <p>11월 학생 가입자수</p>
+              <p>이번 달 학생 가입자수</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">This Month Student Join Count</a>
           </div>
         </div>
         <!-- ./col -->

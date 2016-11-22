@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cyber.smedu.mapper.StatsMapper">
+	
+	<!-- 오늘 카운트 날짜가 있는지 확인 -->
+	<select id="isToday"
+		parameterType="String"
+		resultType="com.cyber.smedu.stats.domain.StatsDomain">		
+
+	SELECT
+		stats_code as statsCode,
+		stats_count as statsCount,
+		stats_date as statsDate
+	FROM
+		stats
+	WHERE
+		stats_date = #{day}
+	</select>
+	<!-- 총 방문자수 -->
+	<select id="totalCount"
+		resultType="int">		
+	SELECT
+		SUM(stats_count)
+	FROM
+		stats
+	</select>
+	<!-- 날짜가 있을경우 조회수 + 1 -->
+	<update id="updateStats"
+		parameterType="String">		
+
+	UPDATE
+		stats
+	SET
+		stats_count = stats_count + 1
+	WHERE
+		stats_date = #{day}
+	</update>
+	
+	<!-- 날짜가 없을경우 날짜 입력 조회수 + 1 -->
+	<update id="insertStats"
+		parameterType="com.cyber.smedu.stats.domain.StatsDomain">		
+
+	INSERT INTO
+		stats(stats_count, stats_date)
+	VALUES
+		(#{count}, #{day})
+	</update>
+	
+	<!-- 이번 달 총 학생 가입자수 -->
+	<select id="monthJoinStudentCount" resultType="int">
+	select 
+		count(user_code)
+	from
+		user
+	where
+		user_level = '학생'
+	and
+		date_format(user_join_date, '%Y-%m-%d')
+	between 
+		DATE_FORMAT(CONCAT(DATE_FORMAT( date_add(now(), INTERVAL + 0 month) ,'%Y-%m'),'-1'),'%Y-%m-%d') and last_day(now());
+	</select>
+	
+</mapper>

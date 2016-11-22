@@ -13,7 +13,8 @@ import com.cyber.smedu.board.service.BoardService;
 @Controller
 public class PageController {
 	@Autowired BoardService boardService;
-	@Autowired AcademicCalendarService academicCalendarService;
+	@Autowired AcademicCalendarService academicCalendarService;	
+	
 	//메인 페이지 이동
 	@RequestMapping(value = "/smedu/main/main", method = RequestMethod.GET)
 	public String main(Model model,

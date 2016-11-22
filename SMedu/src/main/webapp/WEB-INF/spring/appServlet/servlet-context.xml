@@ -38,7 +38,7 @@
 	<!--  datasource -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://buddhaa.cafe24.com/buddhaa?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="url" value="jdbc:mysql://localhost:3306/buddhaa?useUnicode=true&amp;characterEncoding=utf8" />
         <property name="username" value="buddhaa" />
         <property name="password" value="sickermans0" />
     </bean>

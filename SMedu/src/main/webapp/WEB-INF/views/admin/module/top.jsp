@@ -94,7 +94,7 @@
   <script src="/resources/admin/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- datepicker -->
   <script src="/resources/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
-  
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
   	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
  	$(document).ready(function(){
@@ -107,7 +107,7 @@
   </script>
   <script>
   $.widget.bridge('uibutton', $.ui.button);
-</script>
+</script> -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

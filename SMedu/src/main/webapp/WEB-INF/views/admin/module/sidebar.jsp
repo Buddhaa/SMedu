@@ -61,7 +61,7 @@
 		</li>
 		<!-- 기수일정관리 -->
 		<li class="treeview">
-          <a href="pages/calendar.html">
+          <a href="#">
            &nbsp;<i class="fa fa-calendar"></i> <span>기수일정관리</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

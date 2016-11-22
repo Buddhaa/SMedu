@@ -90,6 +90,8 @@ public class BoardServiceImpl implements BoardService {
 		//공지사항 리스트
 		@Override
 		public List<BoardArticleDomain> communityNoticeList(int page, String word) {
+			System.out.println("boardDao"+boardDao);
+			
 			HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("boardCode", "board_code1");
