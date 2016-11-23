@@ -7,9 +7,54 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<jsp:include page="../module/top.jsp" />
+	<script>
+	$(document).ready(function(){
+		var area = new Morris.Area({
+		    element: 'revenue-chart',
+		    resize: true,
+		    data: [
+		      {y: '2014 Q1', item1: 1999, item2: 2666},
+		      {y: '2014 Q2', item1: 1299, item2: 2294},
+		      {y: '2014 Q3', item1: 2199, item2: 1969},
+		      {y: '2014 Q4', item1: 1199, item2: 3597},
+		      {y: '2015 Q1', item1: 4199, item2: 1914},
+		      {y: '2015 Q2', item1: 4199, item2: 4293},
+		      {y: '2015 Q3', item1: 3199, item2: 3795},
+		      {y: '2015 Q4', item1: 2199, item2: 5967},
+		      {y: '2016 Q1', item1: 1199, item2: 4460},
+		      {y: '2016 Q2', item1: 6199, item2: 5713}
+		    ],
+		    xkey: 'y',
+		    ykeys: ['item1', 'item2'],
+		    labels: ['2016년', '2015년'],
+		    lineColors: ['#a0d0e0', '#3c8dbc'],
+		    hideHover: 'auto'
+		  });
+		
+		var donut = new Morris.Donut({
+		    element: 'sales-chart',
+		    resize: true,
+		    colors: ["#3c8dbc","#FFFF6C", "#f56954", "#00a65a","#A748FF"],
+		    data: [		      
+		      {label: "인터넷광고%", value: "${studentKnowPathPercent.aa}"},
+		      {label: "지역신문%", value: "${studentKnowPathPercent.bb}"},
+		      {label: "지인소개%", value: "${studentKnowPathPercent.cc}"},
+		      {label: "협력기관%", value: "${studentKnowPathPercent.dd}"},
+		      {label: "홍보물%", value: "${studentKnowPathPercent.ee}"}
+		    ],
+		    hideHover: 'auto'
+		  });
+		
+		area.redraw();
+		donut.redraw();		  
+			 
+	});
+
+	</script>
 	<jsp:include page="../module/sidebar.jsp" />
 	
 	<!-- Content Wrapper. Contains page content -->
@@ -79,14 +124,13 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>4500000원</h3>
-
-              <p>11월 총 매출</p>
+              <h3>${monthStudentPay}원</h3>
+              <p>이번달 수강신청 총 결제 금액</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer">This Month Student Pay</a>
           </div>
         </div>
         <!-- ./col -->
@@ -106,8 +150,8 @@
             </ul>
             <div class="tab-content no-padding">
               <!-- Morris chart - Sales -->
-              <div class="chart tab-pane active" id="" style="position: relative; height: 300px;"></div>
-              <div class="chart tab-pane" id="" style="position: relative; height: 300px;"></div>
+              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
+              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
             </div>
           </div>
           <!-- /.nav-tabs-custom -->
@@ -218,98 +262,40 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <ul class="todo-list">
-                <li>
-                  <!-- drag handle -->
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <!-- checkbox -->
-                  <input type="checkbox" value="">
-                  <!-- todo text -->
-                  <span class="text">Design a nice theme</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Make the theme responsive</span>
-                  <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Check your messages and notifications</span>
-                  <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-                <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                  <input type="checkbox" value="">
-                  <span class="text">Let theme shine like a star</span>
-                  <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+              <table class="table table-bordered">
+                <tr>
+                  <th>회원코드</th>
+                  <th>이름</th>
+                  <th>학과</th>
+                  <th>권한</th>
+                  <th>가입일</th>
+                  <th>상태</th>
+                  <th></th>
+                </tr>
+                <c:forEach var="recentlyUser" items="${recentlyUserList}">
+	                <tr>
+	                  <td>${recentlyUser.userCode}</td>
+	                  <td>${recentlyUser.userName}</td>
+	                  <td>${recentlyUser.departmentName}</td>
+	                  <td>${recentlyUser.userLevel}</td>
+	                  <td>${recentlyUser.userJoinDate}</td>
+	                  <td>
+	                  <c:if test="${recentlyUser.userState=='정상'}">
+	                  	<span class="label label-success">정상</span>
+	                  </c:if>
+	                  <c:if test="${recentlyUser.userState=='승인대기'}">
+	                  	<span class="label label-warning">승인대기</span>
+	                  </c:if>
+	                  <c:if test="${recentlyUser.userState=='탈퇴'}">
+	                  	<span class="label label-danger">탈퇴</span>
+	                  </c:if>
+	                  </td>	   
+	                  <td><a href="/admin/user/userDetail?userCode=${recentlyUser.userCode}"><span class="label label-primary">상세보기</span></a></td>               
+	                </tr>
+                </c:forEach>                
+              </table>
             </div>
           </div>
-          <!-- /.box -->
 
           <!-- quick email widget -->
           <div class="box box-info">
@@ -521,6 +507,5 @@
   </div>
   <!-- /.content-wrapper -->
 	<jsp:include page="../module/foot.jsp" />
-
 </body>
 </html>

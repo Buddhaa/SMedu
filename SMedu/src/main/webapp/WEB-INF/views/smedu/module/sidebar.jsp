@@ -15,7 +15,7 @@
 		$('#openSubjectCategory').hide();
 		
 		$(function() {
-			$('a').on('click', openSubjectManage);
+			$('#openSubjectManage').on('click', openSubjectManage);
 		
 		});		
 		function openSubjectManage() {
@@ -47,7 +47,7 @@
 		         <li><a href="/professorSubjectSelectForCheck">학생성적조회</a></li>
 		         <li><a href="/professorSubjectSelectForManage">학생성적관리</a></li>
 		         <li><a href="/professorSubjectSelectForObjection">성적이의신청관리</a></li>
-		         <li><a href="#" onclick="openSubjectManage">담당개설과목관리</a>
+		         <li><a href="#" onclick="openSubjectManage" id="openSubjectManage">담당개설과목관리</a>
 					<div id="openSubjectCategory">
 					<ul>
 		         		<li><a href="/professorSubjectSelectForLecture">강의 관리</a></li>

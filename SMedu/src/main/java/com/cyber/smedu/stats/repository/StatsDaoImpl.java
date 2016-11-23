@@ -1,10 +1,13 @@
 package com.cyber.smedu.stats.repository;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cyber.smedu.stats.domain.StatsDomain;
+import com.cyber.smedu.user.domain.UserDomain;
 
 @Repository
 public class StatsDaoImpl implements StatsDao{
@@ -30,6 +33,18 @@ public class StatsDaoImpl implements StatsDao{
 	@Override
 	public int monthJoinStudentCount() {		
 		return sqlSession.selectOne(NS+".monthJoinStudentCount");
-	}		
+	}
+	@Override
+	public int monthStudentPayCount() {		
+		return sqlSession.selectOne(NS+".monthStudentPayCount");
+	}
+	@Override
+	public List<UserDomain> recentlyJoinUser() {		
+		return sqlSession.selectList(NS+".recentlyJoinUser");
+	}
+	@Override
+	public StatsDomain studentKnowPathPercent() {		
+		return sqlSession.selectOne(NS+".studentKnowPathPercent");
+	}
 	
 }

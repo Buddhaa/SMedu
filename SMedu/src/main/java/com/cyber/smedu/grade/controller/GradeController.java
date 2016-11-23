@@ -42,6 +42,7 @@ public class GradeController {
 		model.addAttribute("departmentList", map.get("departmentList"));
 		return "admin/studentgrade/student_grade_list";
 	}
+	
 	//관리자 성적관리 학생 상세보기
 	@RequestMapping(value="/admin/studentGrade/detail", method=RequestMethod.GET)
 	public String adminSelectStudentDetail(Model model,

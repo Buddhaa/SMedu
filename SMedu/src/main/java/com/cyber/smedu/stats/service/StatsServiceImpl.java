@@ -3,6 +3,7 @@ package com.cyber.smedu.stats.service;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.cyber.smedu.stats.domain.StatsDomain;
 import com.cyber.smedu.stats.repository.StatsDao;
+import com.cyber.smedu.user.domain.UserDomain;
+import com.cyber.smedu.user.repository.UserDao;
 
 @Service
 public class StatsServiceImpl implements StatsService{
@@ -35,6 +38,18 @@ public class StatsServiceImpl implements StatsService{
 		//현재 날짜 기준 월에 해당하는 학생 가입자수
 		int monthStudentCount = statsDao.monthJoinStudentCount();
 		map.put("monthStudentCount", monthStudentCount);
+		
+		//현재 날짜 기준 월에 해당하는 총 수강신청 결제금액
+		int monthStudentPay = statsDao.monthStudentPayCount();
+		map.put("monthStudentPay", monthStudentPay);
+		
+		//최근 가입자 목록
+		List<UserDomain> recentlyUserList =  statsDao.recentlyJoinUser();
+		map.put("recentlyUserList", recentlyUserList);
+		
+		//학생 가입자 유입경로 백분율 통계
+		StatsDomain studentKnowPathPercent = statsDao.studentKnowPathPercent();
+		map.put("studentKnowPathPercent", studentKnowPathPercent);
 		
 		return map;
 	}

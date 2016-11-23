@@ -5,6 +5,42 @@ public class StatsDomain {
 	private int statsCount;
 	private String statsDate;
 	
+	private int aa;
+	private int bb;
+	private int cc;
+	private int dd;
+	private int ee;
+	
+	public int getAa() {
+		return aa;
+	}
+	public void setAa(int aa) {
+		this.aa = aa;
+	}
+	public int getBb() {
+		return bb;
+	}
+	public void setBb(int bb) {
+		this.bb = bb;
+	}
+	public int getCc() {
+		return cc;
+	}
+	public void setCc(int cc) {
+		this.cc = cc;
+	}
+	public int getDd() {
+		return dd;
+	}
+	public void setDd(int dd) {
+		this.dd = dd;
+	}
+	public int getEe() {
+		return ee;
+	}
+	public void setEe(int ee) {
+		this.ee = ee;
+	}
 	public String getStatsCode() {
 		return statsCode;
 	}

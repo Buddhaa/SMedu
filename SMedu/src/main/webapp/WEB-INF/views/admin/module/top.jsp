@@ -46,6 +46,16 @@
   <!-- JS -->
   <!-- jQuery 2.2.3 -->
   <script src="/resources/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <script>
+  	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
+ 	$(document).ready(function(){
+ 		//로그인 안하고 관리자 페이지 이동 못하게 방지 (세션값 확인)
+ 		if(userInfo==''){
+ 		alert('비정상적인 접근입니다.');
+ 		$(location).attr('href', '/admin/login/loginForm');
+ 		}		
+ 	});
+  </script>
   <!-- Bootstrap 3.3.6 -->
   <script src="/resources/admin/bootstrap/js/bootstrap.min.js"></script>
   <!-- FastClick -->
@@ -66,7 +76,7 @@
   <!-- ChartJS 1.0.1 -->
   <script src="/resources/admin/plugins/chartjs/Chart.min.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="/resources/admin/dist/js/pages/dashboard2.js"></script>
+<!--   <script src="/resources/admin/dist/js/pages/dashboard2.js"></script> -->
   <!-- AdminLTE for demo purposes -->
   <script src="/resources/admin/dist/js/demo.js"></script>
   <!-- AdminLTE App -->
@@ -94,20 +104,11 @@
   <script src="/resources/admin/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- datepicker -->
   <script src="/resources/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script>
-  	var userInfo = '<c:out value='${userInfo}'/>'; //세션에 저장된 회원정보 변수에 할당
- 	$(document).ready(function(){
- 		//로그인 안하고 관리자 페이지 이동 못하게 방지 (세션값 확인)
- 		if(userInfo==''){
- 		alert('비정상적인 접근입니다.');
- 		$(location).attr('href', '/admin/login/loginForm');
- 		}		
- 	});
-  </script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+  
   <script>
   $.widget.bridge('uibutton', $.ui.button);
-</script> -->
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

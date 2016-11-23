@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	INSERT INTO
 		stats(stats_count, stats_date)
 	VALUES
-		(#{count}, #{day})
+		(#{statsCount}, #{statsDate})
 	</update>
 	
 	<!-- 이번 달 총 학생 가입자수 -->
@@ -60,6 +60,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		date_format(user_join_date, '%Y-%m-%d')
 	between 
 		DATE_FORMAT(CONCAT(DATE_FORMAT( date_add(now(), INTERVAL + 0 month) ,'%Y-%m'),'-1'),'%Y-%m-%d') and last_day(now());
+	</select>
+	<!-- 이번 달 수강신청 총 결제금액 -->
+	<select id="monthStudentPayCount" resultType="int">
+	select 
+		sum(pay_amount)
+	from
+		pay
+	where
+		date_format(pay_date, '%Y-%m-%d')
+	between 
+		DATE_FORMAT(CONCAT(DATE_FORMAT( date_add(now(), INTERVAL + 0 month) ,'%Y-%m'),'-1'),'%Y-%m-%d') and last_day(now());
+	</select>
+	<!-- 최근가입자 목록 5개-->
+	<select id="recentlyJoinUser" resultType="com.cyber.smedu.user.domain.UserDomain">
+	SELECT
+		u.user_code as userCode,
+		u.department_code as departmentCode,
+		d.department_name as departmentName,
+		u.user_birth as userBirth,
+		u.user_name as userName,
+		u.user_level as userLevel,
+		u.user_join_date as userJoinDate,
+		u.user_state as userState
+	FROM
+		user u 
+	INNER JOIN
+		department d
+	ON 
+		u.department_code = d.department_code
+	ORDER BY
+		u.user_join_date DESC
+	LIMIT
+		5
+	</select>
+	
+	<!-- 학생 가입 알게된 경로 백분율 통계-->
+	<select id="studentKnowPathPercent" resultType="com.cyber.smedu.stats.domain.StatsDomain">
+	SELECT
+		round(sum(a*100/tot ),1) as aa,
+		round(sum(b*100/tot),1) as bb,
+		round(sum(c*100/tot),1) as cc,
+		round(sum(d*100/tot),1) as dd,
+		round(sum(e*100/tot),1) as ee
+	FROM
+		(SELECT COUNT(student_path) as a FROM student WHERE student_path='인터넷광고') as a,
+		(SELECT COUNT(student_path) as b FROM student WHERE student_path='지역신문') as b,
+		(SELECT COUNT(student_path) as c FROM student WHERE student_path='지인소개') as c,
+		(SELECT COUNT(student_path) as d FROM student WHERE student_path='협력기관') as d,
+		(SELECT COUNT(student_path) as e FROM student WHERE student_path='홍보물')as e,
+		(SELECT COUNT(student_path) as tot FROM student) as tot
 	</select>
 	
 </mapper>
