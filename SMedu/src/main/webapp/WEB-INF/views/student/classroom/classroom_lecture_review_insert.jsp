@@ -24,7 +24,7 @@
 		});
 	});
 </script>
-
+<title>시커먼스</title>
 </head>
 
 <body>

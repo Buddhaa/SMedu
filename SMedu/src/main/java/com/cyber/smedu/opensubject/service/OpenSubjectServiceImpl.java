@@ -18,11 +18,13 @@ import com.cyber.smedu.opensubject.domain.LectureDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.opensubject.repository.OpenSubjectDao;
 import com.cyber.smedu.user.domain.StudentDomain;
+import com.cyber.smedu.user.repository.UserDao;
 
 @Service
 public class OpenSubjectServiceImpl implements OpenSubjectService{
 	@Autowired OpenSubjectDao openSubjectDao;
 	@Autowired AcademicCalendarDao academicCalendarDao;
+	@Autowired UserDao userDao;
 	
 	Map<String, Object> map = new HashMap<String, Object>();
 	
@@ -40,6 +42,21 @@ public class OpenSubjectServiceImpl implements OpenSubjectService{
 		return map;
 	}
 	//의기
+	
+	//학생이 수강신청을 안했을 경우 수강신청 페이지로 이동
+	@Override
+	public String studentCodeCheck(String userCode) {
+		
+		StudentDomain studentCode = userDao.studentCode(userCode);
+		System.out.println("studentCode : " + studentCode);
+		if(studentCode.getCardinalCode() == null){
+			
+			return "수강신청 안함";
+		}else{
+			
+			return "수강신청 함";
+		}	
+	}
 	
 	//나의 학사관리 페이지 이동
 	@Override
@@ -124,6 +141,16 @@ public class OpenSubjectServiceImpl implements OpenSubjectService{
 		
 		return map;
 	}
+	
+	@Override
+	public OpenSubjectDomain examOpenSubjectList(String openSubjectCode, String lectureCode) {
+		LectureDomain lectureDomain = new LectureDomain();
+		
+		lectureDomain.setOpenSubjectCode(openSubjectCode);
+		lectureDomain.setLectureCode(lectureCode);
+				
+		return openSubjectDao.examOpenSubjectList(lectureDomain);
+	}	
 	//장용
 	//수강신청 리스트
 		@Override

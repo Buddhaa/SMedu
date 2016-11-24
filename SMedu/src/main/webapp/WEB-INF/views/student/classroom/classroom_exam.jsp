@@ -38,6 +38,12 @@
 <script>
   	$(document).ready(function(){
   		
+  		//F5 막기
+  		window.onkeydown = function(){
+  			if(event.keyCode == 116){ event.returnValue = false;
+  			}
+  		} 
+  		
   		//시험 문제번호, 문제답 입력될 배열
   		var score = [];
 		var examQuestionCode = [];
@@ -74,7 +80,7 @@
    		setTimeout(function(){test();} , Time*60*1000);
    		
    	
-   		//시험제출 눌렀을때 리스너
+   		//시험제출 눌렀을때 실행
 		$("#examAddBtn").click(function(){
   			if($(".examRadio:checked").length == 20){
   				
@@ -92,13 +98,27 @@
 		});
 	});
 </script>
-
+<title>시커먼스</title>
 </head>
-<body class="container">
+<body class="container" oncontextmenu="return false">
 	<input type="hidden" value="${examCheck.attendCode}" id="attendCode">
-	<dl>
+	<dl style="width: 100%">
         <dd id="countdown-retro"></dd>
     </dl>
+    <div style="width: 400px;">
+    	<h2>
+	    	<span>
+	    		시험과목 : ${examOpenSubjectList.subjectName}
+	    	</span>
+	    	
+	    	<span style="float: right;">
+	    		${examOpenSubjectList.lectureSubject}
+	    	</span>
+	    </h2>
+    </div>   
+    <span>
+  	 	시험문제 제출자 : ${examOpenSubjectList.professorName}
+  	</span>
 	<div>
 		<c:forEach var="examList" items="${examList.examQuestionsList}" varStatus="status">
 			<input type="hidden" id="testPaperCode" value="${examList.testPaperCode}">

@@ -21,7 +21,7 @@
 		});		
 	});
 </script>
-
+<title>시커먼스</title>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
@@ -33,6 +33,7 @@
 				<h1>과제수정</h1>
 					<form id="taskResultUpdateForm" action="/taskResultUpdate" enctype="multipart/form-data" method="post">
 						<input type="hidden" value="${taskSubmitUpdateDetail.taskResultCode}" name="taskResultCode">						
+						<input type="hidden" value="${taskSubmitUpdateDetail.taskOriginFileName}" name="taskOriginFileName">						
 						<div class="form-group">
 							<label for="usr">제목:</label>
 							<input type="text" class="form-control" value="${taskSubmitUpdateDetail.taskResultTitle}" name="taskResultTitle">

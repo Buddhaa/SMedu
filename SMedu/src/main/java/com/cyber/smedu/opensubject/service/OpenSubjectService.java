@@ -41,5 +41,9 @@ public interface OpenSubjectService {
 	List<LectureDomain> lectureAcademicCalendarCodeSelect(String openSubjectCode);
 
 	Map<String, Object> selectAdminOpenSubject(String cardinalCode, String subjectName, String professorName);
+
+	String studentCodeCheck(String userCode);
+
+	OpenSubjectDomain examOpenSubjectList(String openSubjectCode, String lectureCode);
 	
 }

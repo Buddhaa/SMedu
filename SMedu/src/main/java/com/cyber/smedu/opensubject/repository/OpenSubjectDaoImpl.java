@@ -74,6 +74,13 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 
 		return sqlSession.selectOne(NS+".objectionInsertForm",openSubjectCode);
 	}
+	
+	@Override
+	public OpenSubjectDomain examOpenSubjectList(LectureDomain lectureDomain) {
+
+		return sqlSession.selectOne(NS+".examOpenSubjectList",lectureDomain);
+	}
+	
 	/*장용-----------------------------------------------------------*/
 	//수강신청 페이지 출력
 		@Override

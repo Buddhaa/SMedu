@@ -20,7 +20,7 @@
 		});
 	});
 </script>
-
+<title>시커먼스</title>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
@@ -31,7 +31,6 @@
 				<fieldset>
 				<h1>나의 학점 관리</h1>
 				</fieldset>
-				<!-- 본문 -->
 				<table class="table table-hover">
 					<thead>
 				      <tr>

@@ -49,7 +49,7 @@
   border-radius: .25em;
 }
 </style>
-
+<title>시커먼스</title>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
@@ -59,7 +59,7 @@
 			<div class="content three_quarter">
 				<fieldset>
 					<h1>과제 참여</h1>
-					<div class="col-md-4">
+					<div class="col-md-5" style="padding-left:0;">
 						<label>과목선택</label>
 						<select class="form-control" id="openSubject">
 							<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">

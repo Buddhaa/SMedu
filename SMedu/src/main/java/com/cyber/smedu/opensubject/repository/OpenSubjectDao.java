@@ -50,4 +50,6 @@ public interface OpenSubjectDao {
 
 	List<OpenSubjectDomain> selectAdminOpenSubject(Map<String, Object> map);
 
+	OpenSubjectDomain examOpenSubjectList(LectureDomain lectureDomain);
+
 }

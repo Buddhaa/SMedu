@@ -35,6 +35,7 @@
 		});		
 	});
 </script>
+<title>시커먼스</title>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	

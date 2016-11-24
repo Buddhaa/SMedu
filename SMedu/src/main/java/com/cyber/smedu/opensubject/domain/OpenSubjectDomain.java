@@ -16,9 +16,17 @@ public class OpenSubjectDomain {
 	
 	private String departmentCode;
 	private String subjectSort;
+	private String lectureSubject;
 	private int subjectPay;
 	private int subjectCredit;
 	
+	
+	public String getLectureSubject() {
+		return lectureSubject;
+	}
+	public void setLectureSubject(String lectureSubject) {
+		this.lectureSubject = lectureSubject;
+	}
 	public String getDepartmentCode() {
 		return departmentCode;
 	}

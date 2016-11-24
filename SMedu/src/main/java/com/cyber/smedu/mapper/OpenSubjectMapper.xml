@@ -204,6 +204,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		open_subject_code = #{openSubjectCode}
 	
 	</select>
+	
+	<select id="examOpenSubjectList"
+			parameterType="com.cyber.smedu.opensubject.domain.LectureDomain"
+			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+			
+	SELECT
+		o.open_subject_code AS openSubjectCode,
+		o.cardinal_code AS cardinalCode,
+		o.professor_code AS professorCode,
+		o.subject_code AS subjectCode,
+		o.book_code AS bookCode,
+		o.cardinal AS cardinal,
+		o.professor_name AS professorName,
+		o.subject_name AS subjectName,
+		o.book_name AS bookName,
+		o.register_date AS registerDate,
+		l.lecture_subject AS lectureSubject
+	FROM
+		open_subject AS o
+	INNER JOIN
+		lecture AS l
+	ON
+		o.open_subject_code = l.open_subject_code	
+	
+	WHERE o.open_subject_code = #{openSubjectCode} AND l.lecture_code = #{lectureCode}
+	
+	</select>
 	<!-- 장용 -->
 	<select id="selectOpenSubjectList"
 			parameterType="java.util.Map"

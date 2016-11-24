@@ -23,6 +23,7 @@ import com.cyber.smedu.exam.domain.ExamQuestionsDomain;
 import com.cyber.smedu.exam.domain.TestPaperDomain;
 import com.cyber.smedu.exam.service.ExamService;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
+import com.cyber.smedu.opensubject.service.OpenSubjectService;
 import com.cyber.smedu.user.domain.ProfessorDomain;
 import com.cyber.smedu.user.domain.UserDomain;
 
@@ -32,6 +33,8 @@ public class ExamController {
 
 	@Autowired
 	ExamService examService;
+	@Autowired
+	OpenSubjectService openSubjectService;
 	
 	//과목선택 폼
 	@RequestMapping(value="/professorSubjectSelectForExam")
@@ -142,6 +145,9 @@ public class ExamController {
 	}
 	//우영
 	
+	// -- 수정 --//
+	
+	//시험응시 버튼을 클릭시
 	@RequestMapping(value="/classroomExam", method=RequestMethod.GET)
 	public String examList(Model model
 								,@ModelAttribute(value="userInfo" ) UserDomain userDomain
@@ -151,7 +157,7 @@ public class ExamController {
 		String userCode = userDomain.getUserCode();
 		
 		model.addAttribute("examList", examService.examList(lectureCode));
-		model.addAttribute("openSubjectCode", openSubjectCode);
+		model.addAttribute("examOpenSubjectList", openSubjectService.examOpenSubjectList(openSubjectCode,lectureCode));
 		model.addAttribute("examCheck",examService.examCheck(userCode,openSubjectCode,lectureCode));
 		
 		return"student/classroom/classroom_exam";

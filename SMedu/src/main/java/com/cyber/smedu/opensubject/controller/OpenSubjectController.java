@@ -46,6 +46,7 @@ public class OpenSubjectController {
 	}
 	//의기
 	
+	// -- 수정 --  //
 	//나의 학사관리 페이지 이동 -- openSubject
 	@RequestMapping(value="/classroomAcademicActivity", method=RequestMethod.GET)
 	public String classroomAcademicaCtivity(Model model
@@ -54,23 +55,32 @@ public class OpenSubjectController {
 											,AttendDomain attendDomain){
 	String userCode = userDomain.getUserCode();
 		
-	System.out.println("-------------------------"+userCode);
-	//나의 학사관리 페이지 이동
-	model.addAttribute("openSubjectSelect", openSubjectService.classroomAcademicaCtivity(userCode));
+	//학생이 수강신청을 안했을 경우 수강신청 페이지로 이동
+	String studentCode = openSubjectService.studentCodeCheck(userCode);
+	
+	if(studentCode.equals("수강신청 안함")){
 		
-	//나의 학사관리에서 과목 선택시		
-	model.addAttribute("classroomAcademicaCtivityView", openSubjectService.classroomAcademicaCtivityView(openSubjectCode));
+		return "redirect:/smedu/classregistration/classregistrationOpenSubject";
+	}else{
 		
-	//나의 학사관리에서 과목 선택시 출석여부 확인
-	model.addAttribute("openSubjectAttendList",openSubjectService.openSubjectAttendList(userCode, attendDomain));
+		//나의 학사관리 페이지 이동
+		model.addAttribute("openSubjectSelect", openSubjectService.classroomAcademicaCtivity(userCode));
+			
+		//나의 학사관리에서 과목 선택시		
+		model.addAttribute("classroomAcademicaCtivityView", openSubjectService.classroomAcademicaCtivityView(openSubjectCode));
+			
+		//나의 학사관리에서 과목 선택시 출석여부 확인
+		model.addAttribute("openSubjectAttendList",openSubjectService.openSubjectAttendList(userCode, attendDomain));
+		
+		//selectbox 고정시키는 값
+		model.addAttribute("selectbox", openSubjectCode);
+		
+		System.out.println(model.toString());
+		return "student/classroom/classroom_academic_activity";
+	}
 	
-	//selectbox 고정시키는 값
-	model.addAttribute("selectbox", openSubjectCode);
-	
-	System.out.println(model.toString());
-	return"student/classroom/classroom_academic_activity";
-	}	
-	
+	}
+
 	//나의 학사관리 페이지에서 과목 수강하기 클릭시 팝업창에 해당 과목의 동영상 나오기
 	@RequestMapping(value="/classroomLecture", method=RequestMethod.GET)
 	public String classroomLecture(Model model

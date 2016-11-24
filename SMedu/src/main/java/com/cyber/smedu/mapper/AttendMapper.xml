@@ -136,10 +136,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	UPDATE attend
 		SET
 			attend_lecture_time=#{attendLectureTime},
-			attend_complete_confirmation=#{attendCompleteConfirmation}
+			attend_date=NOW(),
+			attend_complete_confirmation=#{attendCompleteConfirmation},
+			attend_score=#{attendScore}
 	WHERE 
 		attend_code=#{attendCode}
 </update>
 	<!-- 장용 -->
+
 
 </mapper>

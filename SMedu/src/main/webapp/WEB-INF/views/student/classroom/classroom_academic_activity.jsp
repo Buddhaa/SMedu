@@ -16,7 +16,7 @@
 		});
 	});
 </script>
-
+<title>시커먼스</title>
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />	
@@ -26,22 +26,18 @@
 			<div class="content three_quarter">
 				<fieldset>
 				<h2>나의 학사활동</h2>
-				<div class="col-md-4">
+				<div class="col-md-5" style="padding-left:0;">
 					<label class="control-label">과목선택</label>
-					<div class="">
-						<select class="form-control" id="openSubject">
-							<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
-								<c:if test="${status.count eq 1 }">
-									<option value="">${openSubjectSelect.year}년${openSubjectSelect.semester}학기${openSubjectSelect.cardinal}기</option>
-								</c:if>
-								<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
-							</c:forEach>
-						</select>
-					</div>
-				</div>
-				<br/>
-				<br/>		
-				<div>
+					<select class="form-control" id="openSubject">
+						<c:forEach var="openSubjectSelect" items="${openSubjectSelect}" varStatus="status">
+							<c:if test="${status.count eq 1 }">
+								<option value="">${openSubjectSelect.year}년${openSubjectSelect.semester}학기${openSubjectSelect.cardinal}기</option>
+							</c:if>
+							<option value="${openSubjectSelect.openSubjectCode}">${openSubjectSelect.subjectName}</option>
+						</c:forEach>
+					</select>
+				</div>	
+				<div style="margin-top: 15%">
 					<table>
 						<tr>
 						<c:forEach var="attendList" items="${openSubjectAttendList}" varStatus="status">
@@ -76,7 +72,7 @@
 					        	[${lectureList.academicCalendarStartDay}~${lectureList.academicCalendarEndDay}]
 					        <c:if test="${status.count %5 !=0 }">								
 					        	<a href="#"
-					        	 onclick="javascript:window.open('/classroomLecture?openSubjectCode=${lectureList.openSubjectCode}&lectureCode=${lectureList.lectureCode}', 'lectureCode' ,'left='+(screen.availWidth-1000)/2+',top='+(screen.availHeight-800)/2+', width=950, height=700')" style="float: right;">
+					        	 onclick="javascript:window.open('/classroomLecture?openSubjectCode=${lectureList.openSubjectCode}&lectureCode=${lectureList.lectureCode}', 'lectureCode' ,'left='+(screen.availWidth-1000)/2+',top='+(screen.availHeight-800)/2+', width=1000, height=650')" style="float: right;">
 								수강하기</a>
 					        </c:if>	
 					        

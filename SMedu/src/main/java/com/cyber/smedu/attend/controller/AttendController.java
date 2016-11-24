@@ -35,14 +35,15 @@ public class AttendController {
 	}
 	//우영
 	//학생 강의 출석저장
-		@RequestMapping(value="/lectureAttendUpdate", method=RequestMethod.GET)
-		public String lectureAttendUpdate(AttendDomain attendDomain){
+	@RequestMapping(value="/lectureAttendUpdate", method=RequestMethod.GET)
+	public String lectureAttendUpdate(AttendDomain attendDomain){
 
-			System.out.println(attendDomain.toString());
-			attendService.lectureAttendUpdate(attendDomain);
-		
-			return "student/classroom/close";	
+		System.out.println(attendDomain.toString());
+		attendService.lectureAttendUpdate(attendDomain);
+	
+		return "student/classroom/close";	
 	}
+		
 	//장용
 	
 }

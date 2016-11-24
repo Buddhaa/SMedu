@@ -246,5 +246,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		student_code = #{studentCode}
 	
 	</select>
+	<!-- 장용 -->
 
 </mapper>

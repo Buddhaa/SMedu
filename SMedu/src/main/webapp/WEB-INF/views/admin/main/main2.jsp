@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -17,20 +16,20 @@
 		    element: 'revenue-chart',
 		    resize: true,
 		    data: [
-		      {y: '2014 Q1', item1: 1999, item2: 2666},
-		      {y: '2014 Q2', item1: 1299, item2: 2294},
-		      {y: '2014 Q3', item1: 2199, item2: 1969},
-		      {y: '2014 Q4', item1: 1199, item2: 3597},
-		      {y: '2015 Q1', item1: 4199, item2: 1914},
-		      {y: '2015 Q2', item1: 4199, item2: 4293},
-		      {y: '2015 Q3', item1: 3199, item2: 3795},
-		      {y: '2015 Q4', item1: 2199, item2: 5967},
-		      {y: '2016 Q1', item1: 1199, item2: 4460},
-		      {y: '2016 Q2', item1: 6199, item2: 5713}
+		      {y: '2014 Q1', item1: 342},
+		      {y: '2014 Q2', item1: 255},
+		      {y: '2014 Q3', item1: 553},
+		      {y: '2014 Q4', item1: 132},
+		      {y: '2015 Q1', item1: 442},
+		      {y: '2015 Q2', item1: 899},
+		      {y: '2015 Q3', item1: 1001},
+		      {y: '2015 Q4', item1: 597},
+		      {y: '2016 Q1', item1: 777},
+		      {y: '2016 Q2', item1: 687}
 		    ],
 		    xkey: 'y',
-		    ykeys: ['item1', 'item2'],
-		    labels: ['2016년', '2015년'],
+		    ykeys: ['item1'],
+		    labels: ['가입자수'],
 		    lineColors: ['#a0d0e0', '#3c8dbc'],
 		    hideHover: 'auto'
 		  });
@@ -48,9 +47,39 @@
 		    ],
 		    hideHover: 'auto'
 		  });
+		var line = new Morris.Line({
+		    element: 'line-chart',
+		    resize: true,
+		    data: [
+		      {y: '2014 Q1', item1: 120},
+		      {y: '2014 Q2', item1: 220},
+		      {y: '2014 Q3', item1: 328},
+		      {y: '2014 Q4', item1: 265},
+		      {y: '2015 Q1', item1: 333},
+		      {y: '2015 Q2', item1: 844},
+		      {y: '2015 Q3', item1: 598},
+		      {y: '2015 Q4', item1: 1005},
+		      {y: '2016 Q1', item1: 689},
+		      {y: '2016 Q2', item1: 777}
+		    ],
+		    xkey: 'y',
+		    ykeys: ['item1'],
+		    labels: ['수강신청자수'],
+		    lineColors: ['#efefef'],
+		    lineWidth: 2,
+		    hideHover: 'auto',
+		    gridTextColor: "#fff",
+		    gridStrokeWidth: 0.4,
+		    pointSize: 4,
+		    pointStrokeColors: ["#efefef"],
+		    gridLineColor: "#efefef",
+		    gridTextFamily: "Open Sans",
+		    gridTextSize: 10
+		  });
 		
 		area.redraw();
-		donut.redraw();		  
+		donut.redraw();	
+		line.redraw();
 			 
 	});
 
@@ -154,96 +183,9 @@
               <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
             </div>
           </div>
-          <!-- /.nav-tabs-custom -->
+          <!-- /.nav-tabs-custom -->       
 
-          <!-- Chat box -->
-          <div class="box box-success">
-            <div class="box-header">
-              <i class="fa fa-comments-o"></i>
-
-              <h3 class="box-title">기수별 수강신청 통계(결제완료)</h3>
-
-              <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
-                <div class="btn-group" data-toggle="btn-toggle">
-                  <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i>
-                  </button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="box-body chat" id="chat-box">
-              <!-- chat item -->
-              <div class="item">
-                <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
-
-                <p class="message">
-                  <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-                    Mike Doe
-                  </a>
-                  I would like to meet you to discuss the latest news about
-                  the arrival of the new theme. They say it is going to be one the
-                  best themes on the market
-                </p>
-                <div class="attachment">
-                  <h4>Attachments:</h4>
-
-                  <p class="filename">
-                    Theme-thumbnail-image.jpg
-                  </p>
-
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat">Open</button>
-                  </div>
-                </div>
-                <!-- /.attachment -->
-              </div>
-              <!-- /.item -->
-              <!-- chat item -->
-              <div class="item">
-                <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
-
-                <p class="message">
-                  <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-                    Alexander Pierce
-                  </a>
-                  I would like to meet you to discuss the latest news about
-                  the arrival of the new theme. They say it is going to be one the
-                  best themes on the market
-                </p>
-              </div>
-              <!-- /.item -->
-              <!-- chat item -->
-              <div class="item">
-                <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
-
-                <p class="message">
-                  <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-                    Susan Doe
-                  </a>
-                  I would like to meet you to discuss the latest news about
-                  the arrival of the new theme. They say it is going to be one the
-                  best themes on the market
-                </p>
-              </div>
-              <!-- /.item -->
-            </div>
-            <!-- /.chat -->
-            <div class="box-footer">
-              <div class="input-group">
-                <input class="form-control" placeholder="Type message...">
-
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.box (chat box) -->
-
-          <!-- TO DO List -->
+          <!-- 최근가입자 목록 -->
           <div class="box box-primary">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
@@ -252,11 +194,7 @@
 
               <div class="box-tools pull-right">
                 <ul class="pagination pagination-sm inline">
-                  <li><a href="#">&laquo;</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">&raquo;</a></li>
+                 
                 </ul>
               </div>
             </div>
@@ -296,43 +234,103 @@
               </table>
             </div>
           </div>
-
-          <!-- quick email widget -->
-          <div class="box box-info">
+          <!-- 최근 게시글 목록 -->
+          <div class="box box-primary">
             <div class="box-header">
-              <i class="fa fa-envelope"></i>
+              <i class="ion ion-clipboard"></i>
 
-              <h3 class="box-title">Quick Email</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
-                  <i class="fa fa-times"></i></button>
+              <h3 class="box-title">최근 게시글 목록</h3>
+
+              <div class="box-tools pull-right">
+                <ul class="pagination pagination-sm inline">
+                 
+                </ul>
               </div>
-              <!-- /. tools -->
             </div>
+            <!-- /.box-header -->
             <div class="box-body">
-              <form action="#" method="post">
-                <div class="form-group">
-                  <input type="email" class="form-control" name="emailto" placeholder="Email to:">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject">
-                </div>
-                <div>
-                  <textarea class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                </div>
-              </form>
+              <table class="table table-bordered">
+                <tr>
+                  <th>회원코드</th>
+                  <th>이름</th>
+                  <th>학과</th>
+                  <th>권한</th>
+                  <th>가입일</th>
+                  <th>상태</th>
+                  <th></th>
+                </tr>
+                <c:forEach var="recentlyUser" items="${recentlyUserList}">
+	                <tr>
+	                  <td>${recentlyUser.userCode}</td>
+	                  <td>${recentlyUser.userName}</td>
+	                  <td>${recentlyUser.departmentName}</td>
+	                  <td>${recentlyUser.userLevel}</td>
+	                  <td>${recentlyUser.userJoinDate}</td>
+	                  <td>
+	                  <c:if test="${recentlyUser.userState=='정상'}">
+	                  	<span class="label label-success">정상</span>
+	                  </c:if>
+	                  <c:if test="${recentlyUser.userState=='승인대기'}">
+	                  	<span class="label label-warning">승인대기</span>
+	                  </c:if>
+	                  <c:if test="${recentlyUser.userState=='탈퇴'}">
+	                  	<span class="label label-danger">탈퇴</span>
+	                  </c:if>
+	                  </td>	   
+	                  <td><a href="/admin/user/userDetail?userCode=${recentlyUser.userCode}"><span class="label label-primary">상세보기</span></a></td>               
+	                </tr>
+                </c:forEach>                
+              </table>
             </div>
-            <div class="box-footer clearfix">
-              <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-                <i class="fa fa-arrow-circle-right"></i></button>
-            </div>
-          </div>
-
+          </div>       
         </section>
         <!-- /.Left col -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
         <section class="col-lg-5 connectedSortable">
+        <!-- 기수별 수강신청 통계 -->
+          <div class="box box-solid bg-teal-gradient">
+            <div class="box-header">
+              <i class="fa fa-th"></i>
+
+              <h3 class="box-title">기수별 수강신청 통계(결제완료)</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body border-radius-none">
+              <div class="chart" id="line-chart" style="height: 250px;"></div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-border">
+              <div class="row">
+                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+                  <div class="knob-label">Mail-Orders</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+                  <div class="knob-label">Online</div>
+                </div>
+                <!-- ./col -->
+                <div class="col-xs-4 text-center">
+                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+                  <div class="knob-label">In-Store</div>
+                </div>
+                <!-- ./col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
 			<!-- Calendar -->
           <div class="box box-solid bg-green-gradient">
             <div class="box-header">
@@ -424,7 +422,7 @@
               <i class="fa fa-map-marker"></i>
 
               <h3 class="box-title">
-                Visitors
+                Map
               </h3>
             </div>
             <div class="box-body">
@@ -452,51 +450,7 @@
               <!-- /.row -->
             </div>
           </div>
-          <!-- /.box -->			
-          <!-- solid sales graph -->
-          <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
-              <i class="fa fa-th"></i>
-
-              <h3 class="box-title">Sales Graph</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body border-radius-none">
-              <div class="chart" id="line-chart" style="height: 250px;"></div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                  <div class="knob-label">In-Store</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
+          <!-- /.box -->          		
         </section>
         <!-- right col -->
       </div>
