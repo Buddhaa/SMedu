@@ -52,4 +52,6 @@ public interface OpenSubjectDao {
 
 	OpenSubjectDomain examOpenSubjectList(LectureDomain lectureDomain);
 
+	List<OpenSubjectDomain> plannerStudnetListCardinalSelectOpenSubjectList(Map<String, Object> map);
+
 }

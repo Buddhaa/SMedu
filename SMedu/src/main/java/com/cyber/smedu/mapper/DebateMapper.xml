@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		open_subject_code = #{openSubjectCode}
 	AND 
-		pay_state = 'T'
+		pay_state = '결제완료'
 	ORDER BY
 		d.debate_register_date ASC
 	
@@ -165,6 +165,83 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	
 	</insert>
+	<!-- 토론 채점 버튼 클릭시 grade 테이블 update  -->
+	<update id="debateScoreAndParticipationUpdate"
+		parameterType="com.cyber.smedu.debate.domain.DebateScoreDomain">
+	UPDATE 
+		grade
+	SET
+		grade_score = #{debateScore},
+		participation_state = 'T'
+	WHERE 
+		open_subject_code = #{openSubjectCode}
+	AND
+		student_code = #{studentCode}
+	AND
+		grade_evaluation_category = '토론(15점)'
+	
+	</update>
+	
+	<!-- 토론 채점 버튼 클릭시 debate_score 테이블 insert -->
+	<insert id="debateMarkingInsert"
+		parameterType="com.cyber.smedu.debate.domain.DebateScoreDomain">
+	INSERT INTO debate_score
+		(
+		debate_score_code, 
+		professor_code, 
+		debate_code, 
+		student_code, 
+		debate_score, 
+		debate_score_date
+		)
+	VALUES 
+		(
+		CONCAT('debate_score_code',(SELECT COUNT(d.debate_score_code)+1 FROM debate_score d)), 
+		(SELECT professor_code FROM debate WHERE open_subject_code = #{openSubjectCode}), 
+		(SELECT debate_code FROM debate WHERE open_subject_code = #{openSubjectCode}) , 
+		#{studentCode}, 
+		#{debateScore}, 
+		NOW()
+		)
+	</insert>
+	
+	<!-- 토론 채점 클릭시 final_result_complete_confirmaition 테이블 update -->
+	<update id="finalGradeUpdateForDebate"
+		parameterType="com.cyber.smedu.debate.domain.DebateScoreDomain">
+	
+	UPDATE 
+		final_result_complete_confirmaition
+	SET
+		final_result = (SELECT SUM(grade_score) FROM grade WHERE student_code = #{studentCode} AND open_subject_code = #{openSubjectCode}),
+		complete_confirmation = 
+		IF((SELECT SUM(grade_score) FROM grade WHERE student_code = #{studentCode} AND open_subject_code = #{openSubjectCode})>=60,'T','F')
+	WHERE 
+		student_code = #{studentCode}
+	AND
+		open_subject_code = #{openSubjectCode}
+			
+	</update>
+	
+	<!-- 토론 채점 클릭시 debateScoreCode select 해서 보여지는 화면 다르게하기 -->
+	<select id="professorDebateScoreAndCodeSelect"
+		parameterType="com.cyber.smedu.grade.domain.GradeDomain"
+		resultType="com.cyber.smedu.debate.domain.DebateScoreDomain">
+		
+	SELECT 
+		ds.debate_score_code AS debateScoreCode,
+		ds.debate_score AS debateScore,
+		d.open_subject_code AS openSubjectCode
+	FROM 
+		debate_score ds
+	INNER JOIN
+		debate d
+	ON
+		ds.debate_code = d.debate_code
+	WHERE
+		ds.student_code = #{studentCode}
+	AND
+		d.open_subject_code = #{openSubjectCode}
+	</select>
 	<!-- 우영 -->
 	<select id="oneDebateList"
 		parameterType="String"

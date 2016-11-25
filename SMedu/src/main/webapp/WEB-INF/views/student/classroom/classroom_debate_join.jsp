@@ -60,17 +60,37 @@
 				   	<hr/>
 					<h1>토론장</h1>
 					<c:forEach var="debateResultList" items="${oneDebateList.debateResultList}">
-						<div><span>작성자 :${debateResultList.userName}</span></div> 
 						<input type="hidden" value="${debateResultList.userCode}"/>
-						<div>
-							${debateResultList.debateComment}
-						</div>
-						<div style="text-align: right;">
-						<span>작성일 :${debateResultList.debateRegisterDate}</span>
-						</div>				
+						<c:choose>
+							<c:when test="${debateResultList.userCode eq userInfo.userCode}">
+								<div style="font-weight:bold;">
+									<div>
+										<span>작성자 :${debateResultList.userName}</span>
+									</div> 	
+									<div>
+										${debateResultList.debateComment}
+									</div>
+									<div style="text-align: right;">
+										<span>작성일 :${debateResultList.debateRegisterDate}</span>
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${debateResultList.userCode ne userInfo.userCode}">
+								<div>
+									<div>
+										<span>작성자 :${debateResultList.userName}</span>
+									</div> 	
+									<div>
+										${debateResultList.debateComment}
+									</div>
+									<div style="text-align: right;">
+										<span>작성일 :${debateResultList.debateRegisterDate}</span>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>				
 					</c:forEach>
 					<hr/>
-					
 					<form id="debateResultAddForm" action="/debateResultAdd" method="post">
 						<input type="hidden" name="debateCode" value="${oneDebateList.oneDebateList.debateCode}">
 						<div class="form-group">

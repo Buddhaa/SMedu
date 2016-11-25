@@ -204,4 +204,16 @@ public class UserServiceImpl implements UserService {
 		userDao.userStateUpdate(userCode);
 		
 	}
+	
+	//교수 상세보기
+	@Override
+	public ProfessorDomain professorSelectInfo(String professorCode) {
+		System.out.println("professorCode serv:"+professorCode);
+		return userDao.professorSelectInfo(professorCode);
+	}
+	//아이디 중복체크
+	@Override
+	public UserDomain userIdCheck(String userId) {
+		return userDao.userIdCheck(userId);
+	}
 }

@@ -11,6 +11,15 @@ public class DebateScoreDomain {
 	private int debateScore;
 	private Date debateScoreDate;
 	
+	//11-24 추가
+	private String openSubjectCode;
+	
+	public String getOpenSubjectCode() {
+		return openSubjectCode;
+	}
+	public void setOpenSubjectCode(String openSubjectCode) {
+		this.openSubjectCode = openSubjectCode;
+	}
 	public String getStudentCode() {
 		return studentCode;
 	}
@@ -50,7 +59,8 @@ public class DebateScoreDomain {
 	@Override
 	public String toString() {
 		return "DebateScoreDomain [debateScoreCode=" + debateScoreCode + ", professorCode=" + professorCode
-				+ ", debateCode=" + debateCode + ", debateResultCode=" + ", debateScore="
-				+ debateScore + ", debateScoreDate=" + debateScoreDate + "]";
+				+ ", debateCode=" + debateCode + ", studentCode=" + studentCode + ", debateScore=" + debateScore
+				+ ", debateScoreDate=" + debateScoreDate + ", openSubjectCode=" + openSubjectCode + "]";
 	}
+
 }

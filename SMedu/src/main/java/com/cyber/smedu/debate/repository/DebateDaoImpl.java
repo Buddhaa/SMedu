@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
 import com.cyber.smedu.debate.domain.DebateScoreDomain;
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 @Repository
@@ -76,6 +77,23 @@ public class DebateDaoImpl implements DebateDao {
 	@Override
 	public void professorDebateInsert(DebateDomain debateDomain) {
 		sqlSession.insert(NS+".professorDebateInsert", debateDomain);
+	}
+	
+	@Override
+	public void debateScoreAndParticipationUpdate(DebateScoreDomain debateScoreDomain) {
+		sqlSession.update(NS+".debateScoreAndParticipationUpdate", debateScoreDomain);
+	}
+	@Override
+	public void debateMarkingInsert(DebateScoreDomain debateScoreDomain) {
+		sqlSession.insert(NS+".debateMarkingInsert", debateScoreDomain);
+	}
+	@Override
+	public void finalGradeUpdateForDebate(DebateScoreDomain debateScoreDomain) {
+		sqlSession.update(NS+".finalGradeUpdateForDebate", debateScoreDomain);
+	}
+	@Override
+	public DebateScoreDomain professorDebateScoreAndCodeSelect(GradeDomain gradeDomain) {
+		return sqlSession.selectOne(NS+".professorDebateScoreAndCodeSelect", gradeDomain);
 	}
 	//우영
 	

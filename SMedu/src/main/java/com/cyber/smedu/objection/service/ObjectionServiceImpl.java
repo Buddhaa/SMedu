@@ -1,6 +1,8 @@
 package com.cyber.smedu.objection.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +39,17 @@ public class ObjectionServiceImpl implements ObjectionService {
 	
 	//해당 과목의 성적이의신청을 한 학생들과 이의신청 정보 select
 	@Override
-	public List<ObjectionDomain> professorStudentObjectionInfoSelect(String openSubjectCode) {
+	public List<ObjectionDomain> professorStudentObjectionInfoSelect(String openSubjectCode, String searchWord) {
 		
-		System.out.println("02 professorStudentObjectionInfoSelect <-- ObjectionServiceImpl.java");
+		/*System.out.println("02 professorStudentObjectionInfoSelect <-- ObjectionServiceImpl.java");
+		System.out.println("openSubjectCode : " + openSubjectCode + "// searchWord : " + searchWord);*/
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("openSubjectCode", openSubjectCode);
+		map.put("searchWord", searchWord);
 		
 		List<ObjectionDomain> objectionDomain
-			= objectionDao.professorStudentObjectionInfoSelect(openSubjectCode);
+			= objectionDao.professorStudentObjectionInfoSelect(map);
 		
 		return objectionDomain;
 	}
@@ -50,8 +57,8 @@ public class ObjectionServiceImpl implements ObjectionService {
 	@Override
 	public ObjectionDomain professorStudentObjectionDetail(String objectionCode) {
 		
-		System.out.println("02 professorStudentObjectionDetail <-- ObjectionServiceImpl.java");
-		System.out.println("objectionCode : " + objectionCode);
+/*		System.out.println("02 professorStudentObjectionDetail <-- ObjectionServiceImpl.java");
+		System.out.println("objectionCode : " + objectionCode);*/
 		
 		ObjectionDomain objectionDomain
 			= objectionDao.professorStudentObjectionDetail(objectionCode);

@@ -82,13 +82,19 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int selectBoardTotalCount(String boardCode) {
         return sqlSession.selectOne(NS+".selectBoardTotalCount", boardCode);
-    }
+   	}
 	
 	//조회수 올리기
 	@Override
 	public int updateBoardArticleReadCount(String boardArticleCode) {
         return sqlSession.update(NS+".updateBoardArticleReadCount", boardArticleCode);
-    }
+   	}
+	//메인 공지사항, 수강후기
+	@Override
+	public List<BoardArticleDomain> selectMainBoardArticleList(Map<String, Object> map){
+		return sqlSession.selectList(NS+".selectMainBoardArticleList", map);
+	}
+	
 	/*현호*/
 
 }

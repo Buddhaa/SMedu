@@ -1,6 +1,7 @@
 package com.cyber.smedu.objection.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cyber.smedu.objection.domain.ObjectionDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
@@ -8,8 +9,6 @@ import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 public interface ObjectionDao {
 
 	List<OpenSubjectDomain> professorSubjectSelectForObjection(String professorCode);
-
-	List<ObjectionDomain> professorStudentObjectionInfoSelect(String openSubjectCode);
 
 	ObjectionDomain professorStudentObjectionDetail(String objectionCode);
 
@@ -24,6 +23,8 @@ public interface ObjectionDao {
 	void objectionAdd(ObjectionDomain objectionDomain);
 
 	ObjectionDomain objectionDetail(String objectionCode);
+
+	List<ObjectionDomain> professorStudentObjectionInfoSelect(Map<String, Object> map);
 
 
 }

@@ -67,6 +67,8 @@ public interface UserDao {
 
 	UserDomain userIdCheck(String userId);
 
+	ProfessorDomain professorSelectInfo(String professorCode);
+
 	
 
 	

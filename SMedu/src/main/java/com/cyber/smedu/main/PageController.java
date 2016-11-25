@@ -17,12 +17,10 @@ public class PageController {
 	
 	//메인 페이지 이동
 	@RequestMapping(value = "/smedu/main/main", method = RequestMethod.GET)
-	public String main(Model model,
-			@RequestParam(value="page", defaultValue="1") int page,
-			@RequestParam(value="word", required=false) String word) {
-		model.addAttribute("communityNoticeList", boardService.communityNoticeList(page, word));
-		model.addAttribute("communityLectureReviewList", boardService.communityLectureReviewList(page, word));
-		model.addAttribute("selectCommunityAcademiccalendarList", academicCalendarService.selectCommunityAcademiccalendarList(page));
+	public String main(Model model) {
+		model.addAttribute("communityNoticeList", boardService.mainCommunityNoticeList());
+		model.addAttribute("communityLectureReviewList", boardService.mainCommunityLectureReviewList());
+		model.addAttribute("selectMainAcademicCalendarList", academicCalendarService.selectMainAcademicCalendarList());
 		return "smedu/main/main";
 	}
 	

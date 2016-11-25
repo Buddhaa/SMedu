@@ -5,16 +5,22 @@ import java.sql.Date;
 public class PlanRecordDomain {
 	
 	private String planCode;
+	private String userName; // DB에없지만 추가
 	private String plannerStudentCode;
 	private String planContent;
 	private Date planDate;
 	private String specialNote;
-	
 	public String getPlanCode() {
 		return planCode;
 	}
 	public void setPlanCode(String planCode) {
 		this.planCode = planCode;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPlannerStudentCode() {
 		return plannerStudentCode;
@@ -40,10 +46,11 @@ public class PlanRecordDomain {
 	public void setSpecialNote(String specialNote) {
 		this.specialNote = specialNote;
 	}
-	
 	@Override
 	public String toString() {
-		return "PlanRecordDomain [planCode=" + planCode + ", plannerStudentCode=" + plannerStudentCode
-				+ ", planContent=" + planContent + ", planDate=" + planDate + ", specialNote=" + specialNote + "]";
+		return "PlanRecordDomain [planCode=" + planCode + ", userName=" + userName + ", plannerStudentCode="
+				+ plannerStudentCode + ", planContent=" + planContent + ", planDate=" + planDate + ", specialNote="
+				+ specialNote + "]";
 	}
+	
 }

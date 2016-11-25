@@ -40,23 +40,117 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- 의기 -->
 <select id="selectClassregistrationPayHistory" resultType="java.util.Map" parameterType="com.cyber.smedu.pay.domain.ClassRegistrationDomain">
-	select 
-		cr.class_registration_code as classRegistrationCode, 
-		cr.cardinal_code as cardinalCode, 
-		cr.student_code as studentCode, 
-		cr.open_subject_code as openSubjectCode, 
-		cr.class_registration_amount as classRegistrationAmount, 
-		cr.class_registration_date as classRegistrationDate, 
-		cr.pay_state as payState,
-		osc.subject_name as subjectName
-	from
-		class_registration as cr
-	inner join
-		open_subject as osc
-	on
-		cr.open_subject_code = osc.open_subject_code
-	where
-		cr.student_code = #{studentCode}
-	</select>
+select 
+	cr.class_registration_code as classRegistrationCode, 
+	cr.cardinal_code as cardinalCode, 
+	cr.student_code as studentCode, 
+	cr.open_subject_code as openSubjectCode, 
+	cr.class_registration_amount as classRegistrationAmount, 
+	cr.class_registration_date as classRegistrationDate, 
+	cr.pay_state as payState,
+	os.subject_name as subjectName,
+	s.subject_credit as subjectCredit,
+	s.subject_sort as subjectSort
+from
+	class_registration as cr
+inner join
+	open_subject as os
+on
+	cr.open_subject_code = os.open_subject_code
+inner join
+	subject as s
+on
+	s.subject_code = os.subject_code
+where
+	cr.student_code = #{studentCode}
+	AND cr.pay_state = '결제완료'
+</select>
+
+<select id="selectClassregistrationPaySubject" resultType="java.util.Map" parameterType="com.cyber.smedu.pay.domain.ClassRegistrationDomain">
+select 
+	cr.class_registration_code as classRegistrationCode, 
+	cr.cardinal_code as cardinalCode, 
+	cr.student_code as studentCode, 
+	cr.open_subject_code as openSubjectCode, 
+	cr.class_registration_amount as classRegistrationAmount, 
+	cr.class_registration_date as classRegistrationDate, 
+	cr.pay_state as payState,
+	os.subject_name as subjectName,
+	s.subject_credit as subjectCredit,
+	s.subject_sort as subjectSort
+from
+	class_registration as cr
+inner join
+	open_subject as os
+on
+	cr.open_subject_code = os.open_subject_code
+inner join
+	subject as s
+on
+	s.subject_code = os.subject_code
+where
+	cr.student_code = #{studentCode}
+	AND cr.pay_state = '결제대기'
+</select>
+<insert id="insertClassregistrationPaySubject" parameterType="java.util.Map">
+	INSERT INTO class_registration(
+	class_registration_code, 
+	cardinal_code, 
+	student_code, 
+	open_subject_code, 
+	class_registration_amount, 
+	class_registration_date
+	) VALUES (
+	CONCAT('class_registration_code',(SELECT COUNT(c.class_registration_code)+1 FROM class_registration c)),
+	#{cardinalCode},
+	#{studentCode},
+	#{openSubjectCode},
+	(SELECT s.subject_pay FROM subject s INNER JOIN open_subject os ON s.subject_code = os.subject_code WHERE os.open_subject_code = #{openSubjectCode}),
+	NOW()
+	)
+</insert>
+
+<update id="updateClassregistrationPaySubject" parameterType="java.util.Map">
+	UPDATE 
+		class_registration
+	SET
+		pay_state='결제취소'
+	WHERE 
+		class_registration_code= #{classRegistrationCode}
+</update>
 <!-- 현호 -->
+<select id="selectClassregistrationStudentList" resultType="java.util.Map" parameterType="com.cyber.smedu.user.domain.StudentDomain">
+	SELECT
+		cr.cardinal_code as cardinalCode,
+		cr.student_code as studentCode,
+		cr.open_subject_code as openSubjectCode,
+		u.user_name as userName,
+		d.department_name as departmentName,
+		c.year as year,
+		c.semester as semester,
+		c.cardinal as cardinal
+	FROM
+		class_registration cr
+	INNER JOIN
+		student s
+	ON
+		cr.student_code = s.student_code
+	INNER JOIN
+		user u 
+	ON
+		s.user_code = u.user_code
+	INNER JOIN
+		department d
+	ON
+		u.department_code = d.department_code
+	INNER JOIN
+		cardinal c
+	ON
+		cr.cardinal_code = c.cardinal_code
+	WHERE
+		cr.pay_state = '결제완료'
+	AND
+		cr.open_subject_code = #{openSubjectCode}	
+	</select>
+<!-- 진호 -->
 </mapper>

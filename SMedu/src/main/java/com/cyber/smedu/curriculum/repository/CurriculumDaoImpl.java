@@ -35,4 +35,9 @@ public class CurriculumDaoImpl implements CurriculumDao {
 	public List<SubjectDomain> selectSubjectList() {
 		return sqlSession.selectList(NS+".subjectList");
 	}
+	//과목 상세보기
+	@Override
+	public SubjectDomain subjectSelectInfo(String subjectCode) {	
+		return sqlSession.selectOne(NS+".subjectSelectInfo", subjectCode);
+	}
 }

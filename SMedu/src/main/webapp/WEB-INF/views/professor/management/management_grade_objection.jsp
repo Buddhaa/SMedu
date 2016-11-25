@@ -12,8 +12,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+
 		$("#professorSubjectSelect").val("${openSubjectCode }").attr("selected", "selected");
+		//$("#searchWord").val("${searchWord }").attr("selected", "selected");
+		
 		$("#professorSubjectSelect").change(function() {
 
 			if ($("#professorSubjectSelect").val() == "") {
@@ -23,6 +25,15 @@
 			}
 		});
 		
+		$('#searchBtn').click(function () {
+
+			$('#studentSearchForm').submit();
+
+		});
+		
+/* 		$('#returnBtn').click(function () {
+			history.go(-1);
+		}); */
 	});
 	
 </script>
@@ -106,9 +117,27 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-			</table>
+			</table>			
+			<div class="col-sm-4 col-sm-offset-2">
+				<div id="imaginary_container">
+					<form action="/professorStudentObjectionSelect" id="studentSearchForm" method="POST">
+						<div class="input-group stylish-input-group">
+							<input type="hidden" name="openSubjectCode" value="${openSubjectCode }">
+							<input type="text" class="form-control" placeholder="NameSearch" id="searchWord" name="searchWord"> 
+							<span class="input-group-addon">
+								<button type="button" id="searchBtn">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</form>	
+				</div>				
+			</div>		
+			<br/><br/>
+			<!-- <input type="button" id="returnBtn" class="btn btn-default" value="뒤로가기"> -->
 		
 		</div>
+
 	</div>
 
 	<jsp:include

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
+import com.cyber.smedu.debate.domain.DebateScoreDomain;
 import com.cyber.smedu.debate.repository.DebateDao;
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.grade.repository.GradeDao;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
@@ -78,6 +80,28 @@ public class DebateServiceImpl implements DebateService {
 	@Override
 	public void professorDebateInsert(DebateDomain debateDomain) {
 		debateDao.professorDebateInsert(debateDomain);
+	}
+	
+	@Override
+	public void debateScoreAndParticipationUpdate(DebateScoreDomain debateScoreDomain) {
+		debateDao.debateScoreAndParticipationUpdate(debateScoreDomain);
+	}
+	
+	@Override
+	public void debateMarkingInsert(DebateScoreDomain debateScoreDomain) {
+		debateDao.debateMarkingInsert(debateScoreDomain);
+	}
+	@Override
+	public void finalGradeUpdateForDebate(DebateScoreDomain debateScoreDomain) {
+		debateDao.finalGradeUpdateForDebate(debateScoreDomain);
+	}
+	@Override
+	public DebateScoreDomain professorDebateScoreAndCodeSelect(GradeDomain gradeDomain) {
+		
+		DebateScoreDomain debateScoreDomain
+			= debateDao.professorDebateScoreAndCodeSelect(gradeDomain);
+		
+		return debateScoreDomain;
 	}
 	//우영
 

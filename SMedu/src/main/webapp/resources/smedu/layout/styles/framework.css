@@ -167,3 +167,7 @@ background: #333333;
     border:0;
     background:transparent;
 }
+.span{
+	color: red; 
+	font: small;
+}

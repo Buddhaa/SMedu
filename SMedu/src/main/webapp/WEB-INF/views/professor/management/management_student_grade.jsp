@@ -22,6 +22,16 @@
 				$("#professorSubjectSelectForm").submit();
 			}
 		});
+		
+		$('#searchBtn').click(function () {
+
+				$('#studentSearchForm').submit();
+	
+		});
+		
+		
+		
+		
 	});
 	
 </script>
@@ -94,9 +104,27 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
+			<div class="col-sm-4 col-sm-offset-2">
+				<div id="imaginary_container">
+					<form action="/professorStudentInfoSelect" id="studentSearchForm" method="POST">
+						<div class="input-group stylish-input-group">
+							<input type="hidden" name="openSubjectCode" value="${openSubjectCode }">
+							<input type="text" class="form-control" placeholder="NameSearch" id="searchWord" name="searchWord"> 
+							<span class="input-group-addon">
+								<button type="button" id="searchBtn">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
+	
+
+		
+
 
 	<jsp:include
 		page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/foot.jsp" />

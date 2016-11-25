@@ -66,119 +66,135 @@ public class BoardServiceImpl implements BoardService {
 
 	/*장용*/
 	//게시판 카테고리
-		@Override
-		public Map<String, Object> selectBoardCategoryList() {
-			Map<String, Object> map = new HashMap<String, Object>();
-			List<BoardCategoryDomain> boardCategoryList = boardDao.selectBoardCategoryList();
-			map.put("boardCategoryList", boardCategoryList);
-			return map;
-		}
+	@Override
+	public Map<String, Object> selectBoardCategoryList() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BoardCategoryDomain> boardCategoryList = boardDao.selectBoardCategoryList();
+		map.put("boardCategoryList", boardCategoryList);
+		return map;
+	}
+	
+	//상담리스트
+	@Override
+	public List<BoardArticleDomain> selectBoardConsultingList(int page, String word) {
+		HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code5");
+		map.put("helperPaging", helperPaging);
+		map.put("word", word);
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//공지사항 리스트
+	@Override
+	public List<BoardArticleDomain> communityNoticeList(int page, String word) {
+		HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code1");
+		map.put("helperPaging", helperPaging);
+		map.put("word", word);
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//공지사항 상세보기
+	@Override
+	public BoardArticleDomain communityNoticeDetail(String boardArticleCode) {
+		BoardArticleDomain communityNoticeDetail = boardDao.selectBoardArticleDetail(boardArticleCode);
 		
-		//상담리스트
-		@Override
-		public List<BoardArticleDomain> selectBoardConsultingList(int page, String word) {
-			HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("boardCode", "board_code5");
-			map.put("helperPaging", helperPaging);
-			map.put("word", word);
-			List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
-			map.put("boardConsultingList", boardConsultingList);
-			return boardConsultingList;
-		}
-		
-		//공지사항 리스트
-		@Override
-		public List<BoardArticleDomain> communityNoticeList(int page, String word) {
-			System.out.println("boardDao"+boardDao);
-			
-			HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("boardCode", "board_code1");
-			map.put("helperPaging", helperPaging);
-			map.put("word", word);
-			List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
-			map.put("boardConsultingList", boardConsultingList);
-			return boardConsultingList;
-		}
-		
-		//공지사항 상세보기
-		@Override
-		public BoardArticleDomain communityNoticeDetail(String boardArticleCode) {
-			BoardArticleDomain communityNoticeDetail = boardDao.selectBoardArticleDetail(boardArticleCode);
-			
-			return communityNoticeDetail;
-		}
-		
-		//수강후기 리스트
-		@Override
-		public List<BoardArticleDomain> communityLectureReviewList(int page, String word) {
-			HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("boardCode", "board_code4");
-			map.put("helperPaging", helperPaging);
-			map.put("word", word);
-			List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
-			map.put("boardConsultingList", boardConsultingList);
-			return boardConsultingList;
-		}
-		
-		//수강후기 상세보기
-		@Override
-		public BoardArticleDomain communityLectureReviewDetail(String boardArticleCode) {
-			BoardArticleDomain communityLectureReviewDetail = boardDao.selectBoardArticleDetail(boardArticleCode);
-			return communityLectureReviewDetail;
-		}
-		
-		//FAQ 리스트
-		@Override
-		public List<BoardArticleDomain> communityFaq(String word) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("boardCode", "board_code2");
-			map.put("word", word);
-			List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
-			map.put("boardConsultingList", boardConsultingList);
-			return boardConsultingList;
-		}
-		
-		//자료실 리스트
-		@Override
-		public List<BoardArticleDomain> communityDataList(int page, String word) {
-			HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("boardCode", "board_code3");
-			map.put("helperPaging", helperPaging);
-			map.put("word", word);
-			List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
-			map.put("boardConsultingList", boardConsultingList);
-			return boardConsultingList;
-		}
-		
-		//수강후기 상세보기
-		@Override
-		public BoardArticleDomain communityDataDetail(String boardArticleCode) {
-			BoardArticleDomain communityDataDetail = boardDao.selectBoardArticleDetail(boardArticleCode);
-			return communityDataDetail;
-		}
-		
-		//페이징 <첫번째>
-		@Override
-		public int getStartPage(int page) {
-	        return (int)(Math.ceil((double)page/5)-1)*5 +1;
-		}
-		
-		//페이징 <마지막> 
-		@Override
-		public int getLastPage(String boardCode) {
-		    return (int)(Math.ceil((double)boardDao.selectBoardTotalCount(boardCode)/LINE_PER_PAGE));
-		}
-		//조회수 올리기
-		@Override
-		public int updateBoardArticleReadCount(String boardArticleCode) {
-			return boardDao.updateBoardArticleReadCount(boardArticleCode);
-		}
-		
-		
-		
+		return communityNoticeDetail;
+	}
+	
+	//메인 공지사항 리스트
+	@Override
+	public List<BoardArticleDomain> mainCommunityNoticeList() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code1");
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectMainBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//수강후기 리스트
+	@Override
+	public List<BoardArticleDomain> communityLectureReviewList(int page, String word) {
+		HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code4");
+		map.put("helperPaging", helperPaging);
+		map.put("word", word);
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//수강후기 상세보기
+	@Override
+	public BoardArticleDomain communityLectureReviewDetail(String boardArticleCode) {
+		BoardArticleDomain communityLectureReviewDetail = boardDao.selectBoardArticleDetail(boardArticleCode);
+		return communityLectureReviewDetail;
+	}
+	
+	//메인 수강후기 리스트
+	@Override
+	public List<BoardArticleDomain> mainCommunityLectureReviewList() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code4");
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectMainBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//FAQ 리스트
+	@Override
+	public List<BoardArticleDomain> communityFaq(String word) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code2");
+		map.put("word", word);
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//자료실 리스트
+	@Override
+	public List<BoardArticleDomain> communityDataList(int page, String word) {
+		HelperPaging helperPaging = new HelperPaging(page,LINE_PER_PAGE);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardCode", "board_code3");
+		map.put("helperPaging", helperPaging);
+		map.put("word", word);
+		List<BoardArticleDomain> boardConsultingList = boardDao.selectBoardArticleList(map);
+		map.put("boardConsultingList", boardConsultingList);
+		return boardConsultingList;
+	}
+	
+	//수강후기 상세보기
+	@Override
+	public BoardArticleDomain communityDataDetail(String boardArticleCode) {
+		BoardArticleDomain communityDataDetail = boardDao.selectBoardArticleDetail(boardArticleCode);
+		return communityDataDetail;
+	}
+	
+	//페이징 <첫번째>
+	@Override
+	public int getStartPage(int page) {
+        return (int)(Math.ceil((double)page/5)-1)*5 +1;
+	}
+	
+	//페이징 <마지막> 
+	@Override
+	public int getLastPage(String boardCode) {
+	    return (int)(Math.ceil((double)boardDao.selectBoardTotalCount(boardCode)/LINE_PER_PAGE));
+	}
+	//조회수 올리기
+	@Override
+	public int updateBoardArticleReadCount(String boardArticleCode) {
+		return boardDao.updateBoardArticleReadCount(boardArticleCode);
+	}	
+	
 	/*현호*/
 }

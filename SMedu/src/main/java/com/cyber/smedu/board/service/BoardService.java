@@ -44,4 +44,8 @@ public interface BoardService {
 
 	void lectureReviewAdd(UserDomain userDomain, BoardArticleDomain boardArticleDomain);
 
+	List<BoardArticleDomain> mainCommunityLectureReviewList();
+
+	List<BoardArticleDomain> mainCommunityNoticeList();
+
 }

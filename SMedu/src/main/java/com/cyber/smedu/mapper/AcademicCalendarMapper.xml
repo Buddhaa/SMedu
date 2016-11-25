@@ -122,5 +122,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND
 			recruit_end_day >= str_to_date(now(),'%Y-%m-%d')
 	</select>
+	
+	<select id="selectMainAcademicCalendarList" resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	SELECT
+		cardinal_code as cardinalCode,
+		year as year,
+		semester as semester,
+		cardinal as cardinal,
+		recruit_start_day as recruitStartDay,
+		recruit_end_day as recruitEndDay,
+		class_start_day as classStartDay,
+		class_end_day as classEndDay
+	FROM
+		cardinal
+	ORDER BY 
+		recruit_start_day DESC
+	LIMIT
+		5
+	</select>
 	<!-- 현호 -->
+	
+	<select id="plannerCardinalList" resultType="com.cyber.smedu.academiccalendar.domain.CardinalDomain">
+	SELECT
+		cardinal_code as cardinalCode,
+		year as year,
+		semester as semester,
+		cardinal as cardinal,
+		class_start_day as classStartDay,
+		class_end_day as classEndDay
+	FROM
+		cardinal
+	WHERE
+		str_to_date(now(),'%Y-%m-%d') >= class_start_day 
+	AND
+		class_end_day >= str_to_date(now(),'%Y-%m-%d')
+		
+	</select>
+	<!-- 진호 -->
 </mapper>

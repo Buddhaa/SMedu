@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.service.OpenSubjectService;
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
+import com.cyber.smedu.task.domain.TaskScoreDomain;
 import com.cyber.smedu.task.service.TaskService;
 import com.cyber.smedu.user.domain.ProfessorDomain;
 import com.cyber.smedu.user.domain.UserDomain;
@@ -30,12 +32,15 @@ public class TaskController {
 	
 	//교수 담당학생 과제제출물 상세보기 페이지로 이동(select)
 	@RequestMapping(value="/professorStudentTaskResultDetail")
-	public String professorStudentTaskResultDetail(Model model, String studentCode) {
+	public String professorStudentTaskResultDetail(Model model, String studentCode, GradeDomain gradeDomain) {
 		
 		System.out.println("01 professorStudentTaskResultDetail <-- TaskController.java");
 		//System.out.println("studentCode : " + studentCode);
+		//System.out.println("gradeDomain : " + gradeDomain);
 		
 		model.addAttribute("professorStudentTaskResult", taskService.professorStudentTaskResultDetail(studentCode));
+		
+		model.addAttribute("TaskScoreAndCode", taskService.professorTaskScoreAndCodeSelect(gradeDomain));
 
 		return "professor/management/management_task_submit_detail";	
 	}
@@ -92,6 +97,19 @@ public class TaskController {
 		taskService.professorTaskInsert(taskDomain);
 		
 		return "redirect:/professorSubjectSelectForTask";
+	}
+	
+	@RequestMapping(value="/professorTaskMarking", method=RequestMethod.POST)
+	public String professorTaskMarking(TaskScoreDomain taskScoreDomain) {
+		
+		System.out.println("01 professorTaskMarking <-- TaskController.java");
+		System.out.println("taskScoreDomain : " + taskScoreDomain);
+		
+		taskService.taskScoreAndParticipationUpdate(taskScoreDomain);
+		taskService.taskMarkingInsert(taskScoreDomain);
+		taskService.finalGradeUpdateForTask(taskScoreDomain);
+		
+		return "professor/management/close_jsp";	
 	}
 	//우영
 	

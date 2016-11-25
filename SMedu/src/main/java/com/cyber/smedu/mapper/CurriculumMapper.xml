@@ -72,5 +72,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON
 			s.department_code = d.department_code
 	</select>
+	
+	<select id="subjectSelectInfo" parameterType="String" resultType="com.cyber.smedu.curriculum.domain.SubjectDomain">
+		SELECT 
+			subject_code AS subjectCode, 
+			department_code AS departmentCode, 
+			subject_name AS subjectName, 
+			subject_sort AS subjectSort, 
+			subject_pay AS subjectPay, 
+			subject_credit AS subjectCredit, 
+			subject_summary AS subjectSummary, 
+			subject_goal AS subjectGoal
+		FROM 
+			subject
+		WHERE
+			subject_code = #{subjectCode}
+	</select>
 	<!-- 현호 -->
 </mapper>

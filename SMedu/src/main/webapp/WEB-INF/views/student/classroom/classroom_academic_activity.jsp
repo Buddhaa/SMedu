@@ -73,13 +73,14 @@
 					        <c:if test="${status.count %5 !=0 }">								
 					        	<a href="#"
 					        	 onclick="javascript:window.open('/classroomLecture?openSubjectCode=${lectureList.openSubjectCode}&lectureCode=${lectureList.lectureCode}', 'lectureCode' ,'left='+(screen.availWidth-1000)/2+',top='+(screen.availHeight-800)/2+', width=1000, height=650')" style="float: right;">
-								수강하기</a>
+					        	 <button>수강</button>
+								</a>
 					        </c:if>	
 					        
 					        <c:if test="${status.count %5 ==0 }">
 					        	<a href="#"
 					        	 onclick="javascript:window.open('/classroomExam?openSubjectCode=${lectureList.openSubjectCode}&lectureCode=${lectureList.lectureCode}', 'lectureCode' ,'left='+(screen.availWidth-1000)/2+',top='+(screen.availHeight-800)/2+', width=950, height=700')" style="float: right;">
-								시험응시</a>
+								<button>시험응시</button></a>
 					        </c:if> 	
 					        </p>
 					        <p class="panel-title">

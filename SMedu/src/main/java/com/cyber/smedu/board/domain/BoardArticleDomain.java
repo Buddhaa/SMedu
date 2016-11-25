@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BoardArticleDomain {
 	
+	private int boardArticleNum;
 	private String boardArticleCode;
 	private String userCode;
 	private String boardCode;
@@ -19,6 +20,13 @@ public class BoardArticleDomain {
 	private String userName;
 	private Date commentDate;
 	
+	
+	public int getBoardArticleNum() {
+		return boardArticleNum;
+	}
+	public void setBoardArticleNum(int boardArticleNum) {
+		this.boardArticleNum = boardArticleNum;
+	}
 	public String getBoardArticleCode() {
 		return boardArticleCode;
 	}

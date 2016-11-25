@@ -10,10 +10,11 @@
 
 		// 뒤로가기 버튼 click시 main 화면으로 이동
 		$("#returnBtn").click(function() {
-			location.href = "/";
+			location.href = "/smedu/main/main";
 		});
 		// 수정하기 버튼 click시 수정된 정보화면으로 이동
 		$("#plannerUpdateBtn").click(function() {
+			alert('회원정보 수정완료!')
 			$("#plannerUpdateForm").submit();
 		});
 	});
@@ -51,14 +52,14 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">비밀번호</label>
 							<div class="col-md-4">
-								<input name="userPw" type="password" value="${plannerInfo.userPw }"  class="form-control input-md">
+								<input name="userPw" type="password" value="${plannerInfo.userPw }"  readonly="readonly" class="form-control input-md">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">학과</label>
 							<div class="col-md-4">
-								<p class="form-control-static">${plannerInfo.departmentName }</p>
+								<p class="form-control-static">${plannerInfo.departmentName}</p>
 							</div>
 						</div>
 
@@ -120,15 +121,15 @@
 								</select>
 							</div>
 						</div>
-						<hr />
+
 						<div class="form-group">
 							<label class="col-md-4 control-label">카카오톡 아이디</label>
 							<div class="col-md-4">
 								<input name="plannerKakao" type="text" value= "${plannerInfo.plannerKakao}" class="form-control input-md">
 							</div>
 						</div>
+						<hr /> 
 						
-
 						<!-- Button -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="signup_recruiter"></label>

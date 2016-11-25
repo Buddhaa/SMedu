@@ -447,4 +447,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</update>
 	
+	<select id="professorSelectInfo"
+		parameterType="String"
+		resultType="com.cyber.smedu.user.domain.ProfessorDomain">
+		SELECT
+			u.user_code AS userCode,
+			p.professor_code AS professorCode,
+			d.department_name AS departmentName,
+			u.user_id AS userId,
+			u.user_name AS userName,
+			u.user_birth AS userBirth,
+			u.user_gender AS userGender,
+			u.user_address AS userAddress,
+			u.user_phone AS userPhone,
+			u.user_email AS userEmail,
+			p.professor_bachelor AS professorBachelor,
+			p.professor_master AS professorMaster,
+			p.professor_doctor AS professorDoctor,
+			p.professor_career AS professorCareer
+		FROM 
+			user u 
+		INNER JOIN
+			professor p
+		ON 
+			u.user_code = p.user_code
+		INNER JOIN 
+			department d
+		ON 
+			u.department_code = d.department_code
+		WHERE 
+			p.professor_code = #{professorCode}
+	</select>
+	
+	<select id="userIdCheck" parameterType="String" resultType="com.cyber.smedu.user.domain.UserDomain">
+		SELECT 
+			user_id as userId
+		FROM 
+			user
+		WHERE
+			user_id = #{userId}
+	</select>	
 </mapper>

@@ -1,11 +1,8 @@
 package com.cyber.smedu.grade.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +12,6 @@ import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.repository.AcademicCalendarDao;
 import com.cyber.smedu.attend.domain.AttendDomain;
 import com.cyber.smedu.attend.repository.AttendDao;
-import com.cyber.smedu.attend.repository.AttendDaoImpl;
-import com.cyber.smedu.curriculum.domain.DepartmentDomain;
 import com.cyber.smedu.curriculum.repository.CurriculumDao;
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
@@ -33,8 +28,6 @@ import com.cyber.smedu.opensubject.repository.OpenSubjectDao;
 import com.cyber.smedu.pay.domain.ClassRegistrationDomain;
 import com.cyber.smedu.pay.domain.PayDomain;
 import com.cyber.smedu.pay.repository.PayDao;
-import com.cyber.smedu.pay.repository.PayDaoImpl;
-import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
 import com.cyber.smedu.task.repository.TaskDao;
 import com.cyber.smedu.user.domain.StudentDomain;
@@ -161,7 +154,7 @@ public class GradeServiceImpl implements GradeService {
 	@Override
 	public List<OpenSubjectDomain> professorSubjectSelectForCheck(String professorCode) {
 		
-		System.out.println("02 professorSubjectSelectForCheck <-- GradeServiceImpl.java");
+		//System.out.println("02 professorSubjectSelectForCheck <-- GradeServiceImpl.java");
 		
 		List<OpenSubjectDomain> openSubjectDomain 
 			= gradeDao.professorSubjectSelectForCheck(professorCode);
@@ -171,17 +164,21 @@ public class GradeServiceImpl implements GradeService {
 	}
 	
 	@Override
-	public List<UserDomain> professorStudentInfoSelect(String openSubjectCode) {
+	public List<UserDomain> professorStudentInfoSelect(String openSubjectCode, String searchWord) {
 	
-		System.out.println("02 professorStudentInfoSelect <-- GradeServiceImpl.java");
-		//System.out.println("openSubjectCode : " + openSubjectCode);
+		//System.out.println("02 professorStudentInfoSelect <-- GradeServiceImpl.java");
+		//System.out.println("openSubjectCode : " + openSubjectCode + "// searchWord : " + searchWord);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("openSubjectCode", openSubjectCode);
+		map.put("searchWord", searchWord);
 		
 		List<UserDomain> userDomain
-			= gradeDao.professorStudentInfoSelect(openSubjectCode);
+			= gradeDao.professorStudentInfoSelect(map);
 		
 		return userDomain;
 		
-	}
+	}	
 	
 	@Override
 	public List<GradeDomain> professorStudentGradeSelect(String userCode) {
@@ -221,12 +218,17 @@ public class GradeServiceImpl implements GradeService {
 	}
 	
 	@Override
-	public List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode) {
+	public List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode, String searchWord) {
 		
 		System.out.println("02 professorStudentNameSelect <-- GradeServiceImpl.java");
+		System.out.println("openSubjectCode : " + openSubjectCode + "// searchWord : " + searchWord);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("openSubjectCode", openSubjectCode);
+		map.put("searchWord", searchWord);
 		
 		List<StudentDomain> studentDomain
-			= gradeDao.professorStudentNameAndCodeSelect(openSubjectCode);
+			= gradeDao.professorStudentNameAndCodeSelect(map);
 		
 		return studentDomain;
 		

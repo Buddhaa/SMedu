@@ -143,4 +143,13 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 	}
 	
 	//우영
+	
+	@Override
+	public List<OpenSubjectDomain> plannerStudnetListCardinalSelectOpenSubjectList(Map<String, Object> map) {
+
+		return sqlSession.selectList(NS+".plannerStudnetListCardinalSelectOpenSubjectList", map);
+		
+	}
+
+	//진호
 }

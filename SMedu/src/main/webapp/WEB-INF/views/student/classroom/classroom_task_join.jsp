@@ -83,46 +83,41 @@
 							    
 							    <label for="usr">내용:</label>
 							    <textarea class="form-control" rows="3" readonly="readonly" name="taskContent">${oneTaskView.taskList.taskContent}</textarea>
-							   	<hr/>
-							   	
-							    <div style="text-align: center;"><h1>과제제출하기</h1></div>
-							    
-							    <div class="form-group">
-							      <label for="usr">제목:</label>
-							      <input type="text" class="form-control" name="taskResultTitle" >
-							    </div>
-							    
-							    <label for="usr">내용:</label>
-							    <textarea class="form-control" rows="15" name="taskResultContent"></textarea>
-							   	<hr/>
-							   	<input type="file" name="taskFile" id="taskFile">
+								<hr/>
+							   	<div>
+							   		<c:if test="${oneTaskView.taskResultList eq null}">
+									    <div style="text-align: center;"><h1>과제제출하기</h1></div>
+									    <div class="form-group">
+									      <label for="usr">제목:</label>
+									      <input type="text" class="form-control" name="taskResultTitle" >
+									    </div>
+									    <label for="usr">내용:</label>
+									    <textarea class="form-control" rows="15" name="taskResultContent"></textarea>
+									   	<hr/>
+									   	<input type="file" name="taskFile" id="taskFile">
+									   	<button type="button" id="taskResultAdd" class="btn btn-primary btn-lg btn-block">과제 제출하기</button>
+								   	</c:if>
+							   	</div>
 						    </form>
-						    <button type="button" id="taskResultAdd" class="btn btn-primary btn-lg btn-block">과제 제출하기</button>
-						    <label for="usr"></label>
-							    <table class="table table-striped">
-							    	<thead>
-							    		<tr>
-							    			<th>과제제출 제목</th>
-							    			<th>과제제출 날짜</th>
-							    		</tr>
-							    	</thead>
-							    	<tbody>
-							    		<c:choose>
-							    			<c:when test="${oneTaskView.taskResultList eq null}">
-								          		<tr>
-							    					<td colspan="2" style="text-align: center;"> 제출한 과제가 없습니다.</td>
-							    				</tr>
-								      		</c:when>
-								       		<c:when test="${oneTaskView.taskResultList ne null}">
-								       			<tr>
-							    					<td><a href="/taskSubmitUpdate?taskResultCode=${oneTaskView.taskResultList.taskResultCode}">${oneTaskView.taskResultList.taskResultTitle}</a></td>
-							    					<td>${oneTaskView.taskResultList.taskResultDate}</td>
-							    				</tr>
-								       		</c:when>
-								       </c:choose>
-							    	</tbody>	
-							    </table>	
-						</c:if>			
+						</c:if>	
+					    <label for="usr"></label>
+					    <c:if test="${oneTaskView.taskResultList ne null}">
+						    <div style="text-align: center;"><h1>제출한 과제 목록</h1></div>
+						    <table class="table table-striped">
+						    	<thead>
+						    		<tr>
+						    			<th>과제제출 제목</th>
+						    			<th>과제제출 날짜</th>
+						    		</tr>
+						    	</thead>
+						    	<tbody>
+					       			<tr>
+				    					<td><a href="/taskSubmitUpdate?taskResultCode=${oneTaskView.taskResultList.taskResultCode}">${oneTaskView.taskResultList.taskResultTitle}</a></td>
+				    					<td>${oneTaskView.taskResultList.taskResultDate}</td>
+				    				</tr>
+						    	</tbody>	
+						    </table>
+					    </c:if>	
 					</div>
 				</fieldset>
 			</div>

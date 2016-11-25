@@ -17,4 +17,6 @@ public interface CurriculumDao {
 
 	List<SubjectDomain> adminSelectSubjectList(Map<String, Object> map);
 
+	SubjectDomain subjectSelectInfo(String subjectCode);
+
 }

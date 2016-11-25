@@ -10,6 +10,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
+		
+		<c:forEach var="lectureEvaluationCheck" items="${lectureEvaluationCheck}">
+			$('input:radio[name=${lectureEvaluationCheck.lectureEvaluationItemsCode}]:input[value=' + ${lectureEvaluationCheck.lectureEvaluationScore} + ']').attr("checked", true);
+			$("input[type='radio']").attr("disabled","disabled");
+		</c:forEach>
+		
 		$("#openSubject").val("${selectbox}");
 	
 		$("#openSubject").change(function(){
@@ -114,7 +120,6 @@
 					<br/>
 					<c:if test="${lectureEvaluationItemsList != null}">
 						<c:choose>
-						
 							<c:when test="${lectureEvaluationCheck == '[]' }">
 								<button type="button" id="evaluationButton" class="btn btn-default">평가하기</button>
 							</c:when>
@@ -122,7 +127,6 @@
 							<c:when test="${lectureEvaluationCheck != '' }">
 								<span>이미 평가를 했습니다.</span>
 							</c:when>
-							
 						</c:choose>
 					</c:if>
 				</fieldset>

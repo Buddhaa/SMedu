@@ -26,7 +26,7 @@
 		 
 	  		<c:forEach var="communityDataList" items="${communityDataList}">
 	  			<tr>
-			        <td>${communityDataList.boardArticleCode}</td>
+			        <td>${communityDataList.boardArticleNum}</td>
 			        <td>
 				        <a href="/smedu/community/communityDataDetail?boardArticleCode=${communityDataList.boardArticleCode}">
 				       		${communityDataList.boardArticleTitle}
@@ -38,11 +38,6 @@
 			     </tr>
 	  		</c:forEach>
 		  	</table>
-	   
-
-      <div class="fl_right">
-	   			<a href=""><input type="button" value="목록" class="btn btn-default"></a>
-	   		</div>
 	   		
 		   <nav class="pagination">
 	        <ul>

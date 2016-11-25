@@ -34,4 +34,6 @@ public interface UserService {
 	Map<String, Object> selectAdminUserDetail(String userCode);
 	Map<String, Object> selectAdminJoinRequestList();
 	Map<String, Object> selectAdminUserList(String departmentCode, String userLevel, String userName, String userState);
+	ProfessorDomain professorSelectInfo(String professorCode);
+	UserDomain userIdCheck(String userId);
 }

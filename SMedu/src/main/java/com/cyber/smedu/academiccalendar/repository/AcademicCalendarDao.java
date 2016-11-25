@@ -24,4 +24,8 @@ public interface AcademicCalendarDao {
 
 	List<CardinalDomain> selectOpenSubjectCardinalList();
 
+	List<CardinalDomain> selectMainAcademicCalendarList(Map<String, Object> map);
+
+	List<CardinalDomain> plannerCardinalList();
+
 }

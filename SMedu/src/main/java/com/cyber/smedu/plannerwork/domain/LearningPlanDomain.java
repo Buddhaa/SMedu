@@ -4,8 +4,10 @@ import java.sql.Date;
 
 public class LearningPlanDomain {
 
+	private String plannerCode;
 	private String learningPlanCode;
 	private String departmentCode;
+	private String departmentName; //DB에없지만 추가
 	private String applicantName;
 	private String applicantPhone;
 	private String inquireContent;
@@ -13,7 +15,12 @@ public class LearningPlanDomain {
 	private Date inquireDate;
 	private String inquireReplyContent;
 	private Date inquireReplyDate;
-	
+	public String getPlannerCode() {
+		return plannerCode;
+	}
+	public void setPlannerCode(String plannerCode) {
+		this.plannerCode = plannerCode;
+	}
 	public String getLearningPlanCode() {
 		return learningPlanCode;
 	}
@@ -25,6 +32,12 @@ public class LearningPlanDomain {
 	}
 	public void setDepartmentCode(String departmentCode) {
 		this.departmentCode = departmentCode;
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	public String getApplicantName() {
 		return applicantName;
@@ -70,10 +83,13 @@ public class LearningPlanDomain {
 	}
 	@Override
 	public String toString() {
-		return "LearningPlanDomain [learningPlanCode=" + learningPlanCode + ", departmentCode=" + departmentCode
-				+ ", applicantName=" + applicantName + ", applicantPhone=" + applicantPhone + ", inquireContent="
-				+ inquireContent + ", consultCompleteConfirmation=" + consultCompleteConfirmation + ", inquireDate="
-				+ inquireDate + ", inquireReplyContent=" + inquireReplyContent + ", inquireReplyDate="
-				+ inquireReplyDate + "]";
+		return "LearningPlanDomain [plannerCode=" + plannerCode + ", learningPlanCode=" + learningPlanCode
+				+ ", departmentCode=" + departmentCode + ", departmentName=" + departmentName + ", applicantName="
+				+ applicantName + ", applicantPhone=" + applicantPhone + ", inquireContent=" + inquireContent
+				+ ", consultCompleteConfirmation=" + consultCompleteConfirmation + ", inquireDate=" + inquireDate
+				+ ", inquireReplyContent=" + inquireReplyContent + ", inquireReplyDate=" + inquireReplyDate + "]";
 	}
+	
+	
+	
 }

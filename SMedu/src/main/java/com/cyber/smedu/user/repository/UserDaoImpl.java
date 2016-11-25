@@ -158,6 +158,13 @@ public class UserDaoImpl implements UserDao {
 		
 		sqlSession.update(NS+".userStateUpdate", userCode);
 	}
+	//교수 상세정보
+	@Override
+	public ProfessorDomain professorSelectInfo(String professorCode) {	
+		System.out.println("professorCode dat"+ professorCode);
+		return sqlSession.selectOne(NS+".professorSelectInfo", professorCode);
+	}
+	
 	//아이디 중복 체크
 	@Override
 	public UserDomain userIdCheck(String userId) {

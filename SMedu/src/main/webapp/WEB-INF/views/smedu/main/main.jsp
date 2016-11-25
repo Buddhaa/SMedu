@@ -82,7 +82,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="communityNoticeList" items="${communityNoticeList }" end="5">
+											<c:forEach var="communityNoticeList" items="${communityNoticeList }">
 											<tr id="tr_0">
 												<td valign="top" align="left">
 													<a href="/smedu/community/communityNoticeDetail?boardArticleCode=${communityNoticeList.boardArticleCode }">
@@ -113,20 +113,20 @@
 								                <th>수강 종료일</th>
 												<th style="width: 90px">
 													<a href="/smedu/community/communityAcademiccalendarList">
-														<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0">more</span>
+														<span class="glyphicon glyphicon-plus addBtn" id="addBtn_0"></span>
 													</a>
 												</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="selectCommunityAcademiccalendarList" items="${selectCommunityAcademiccalendarList}" end="5">
+											<c:forEach var="selectMainAcademicCalendarList" items="${selectMainAcademicCalendarList}">
 								                <tr id="tr_0">
-								                  <td>${selectCommunityAcademiccalendarList.year}년 ${selectCommunityAcademiccalendarList.semester}학기 ${selectCommunityAcademiccalendarList.cardinal}기수</td>
-								                  <td>${selectCommunityAcademiccalendarList.recruitStartDay}</td>
-								                  <td>${selectCommunityAcademiccalendarList.recruitEndDay}</td>
-								                  <td>${selectCommunityAcademiccalendarList.classStartDay}</td>
-								                  <td>${selectCommunityAcademiccalendarList.classEndDay}</td>
-								                  <td><a href="/smedu/community/communityAcademiccalendarDetail?cardinalCode=${selectCommunityAcademiccalendarList.cardinalCode}"><span class="label label-primary">일정확인</span></a></td>
+								                  <td>${selectMainAcademicCalendarList.year}년 ${selectMainAcademicCalendarList.semester}학기 ${selectMainAcademicCalendarList.cardinal}기수</td>
+								                  <td>${selectMainAcademicCalendarList.recruitStartDay}</td>
+								                  <td>${selectMainAcademicCalendarList.recruitEndDay}</td>
+								                  <td>${selectMainAcademicCalendarList.classStartDay}</td>
+								                  <td>${selectMainAcademicCalendarList.classEndDay}</td>
+								                  <td><a href="/smedu/community/communityAcademiccalendarDetail?cardinalCode=${selectMainAcademicCalendarList.cardinalCode}"><span class="label label-primary">일정확인</span></a></td>
 								                </tr>
 							                </c:forEach>
 										</tbody>
@@ -149,7 +149,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="communityLectureReviewList" items="${communityLectureReviewList }" end="5">
+											<c:forEach var="communityLectureReviewList" items="${communityLectureReviewList }">
 												<tr id="tr_0">
 													
 													<td valign="top" align="left">
@@ -183,25 +183,25 @@
 		<div class="one_third first">
          	<span>
          	<a href="/smedu/curriculum/curriculumComputer">
-         	<img src="/resources/smedu/images/demo/gallery/lec_comtuper_b.jpg" 
-			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_comtuper_a.JPG'"
-			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_comtuper_b.jpg'" border="0">
+         	<img src="/resources/smedu/images/demo/gallery/lec_comtuper_a.JPG" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_comtuper_b.jpg'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_comtuper_a.JPG'" border="0">
 			</a>
 			</span>&nbsp;
 			
 			<span>
 			<a href="/smedu/curriculum/curriculumCommunication">
-         	<img src="/resources/smedu/images/demo/gallery/lec_communication_b.png" 
-			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_communication_a.gif'"
-			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_communication_b.png'" border="0">
+         	<img src="/resources/smedu/images/demo/gallery/lec_communication_a.gif" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_communication_b.png'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_communication_a.gif'" border="0">
 			</a>
 			</span>&nbsp;
 
 			<span>
 			<a href="/smedu/curriculum/curriculumSecurity">
-         	<img src="/resources/smedu/images/demo/gallery/lec_security_b.jpg" 
-			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'"
-			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_b.jpg'" border="0">
+         	<img src="/resources/smedu/images/demo/gallery/lec_security_a.jpg" 
+			onmouseover="this.src='/resources/smedu/images/demo/gallery/lec_security_b.jpg'"
+			onmouseout="this.src='/resources/smedu/images/demo/gallery/lec_security_a.jpg'" border="0">
 			</a>
 			</span>
 		</div>

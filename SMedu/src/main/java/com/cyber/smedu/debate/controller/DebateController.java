@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
+import com.cyber.smedu.debate.domain.DebateScoreDomain;
 import com.cyber.smedu.debate.service.DebateService;
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.service.OpenSubjectService;
 import com.cyber.smedu.user.domain.ProfessorDomain;
 import com.cyber.smedu.user.domain.UserDomain;
@@ -28,7 +30,8 @@ public class DebateController {
 	
 	//토론 답변 상세보기
 	@RequestMapping(value="/professorStudentDebateResponseDetail")
-	public String professorStudentdebateResponseDetail(Model model, String openSubjectCode, String studentCode) {
+	public String professorStudentdebateResponseDetail(Model model, String openSubjectCode, 
+			String studentCode, GradeDomain gradeDomain) {
 		
 		System.out.println("01 professorStudentdebateResponseDetail <-- DebateController.java");
 		//System.out.println("openSubjectCode : " + openSubjectCode);
@@ -42,8 +45,10 @@ public class DebateController {
 		model.addAttribute("professorStudentDebateSubjectAndContent", 
 				debateService.professorStudentDebateSubjectAndContentSelect(openSubjectCode));
 		
-		return "professor/management/management_debate_response_detail";
-		
+		model.addAttribute("debateScoreAndCode", 
+				debateService.professorDebateScoreAndCodeSelect(gradeDomain));
+				
+		return "professor/management/management_debate_response_detail";		
 	}
 	
 	//토론관리를 위한 과목선택
@@ -86,6 +91,7 @@ public class DebateController {
 		
 	}
 	
+	//교수 토론 등록
 	@RequestMapping(value="/professorDebateInsert", method=RequestMethod.POST)
 	public String professorDebateInsert(DebateDomain debateDomain) {
 		
@@ -95,6 +101,19 @@ public class DebateController {
 		debateService.professorDebateInsert(debateDomain);
 		
 		return "redirect:/professorSubjectSelectForDebate";
+	}
+	
+	@RequestMapping(value="/professorDebateMarking", method=RequestMethod.POST)
+	public String professorDebateMarking(DebateScoreDomain debateScoreDomain) {
+		
+		System.out.println("01 professorDebateMarking <-- DebateController.java");
+		System.out.println("debateScoreDomain : " + debateScoreDomain);
+		
+		debateService.debateScoreAndParticipationUpdate(debateScoreDomain);
+		debateService.debateMarkingInsert(debateScoreDomain);
+		debateService.finalGradeUpdateForDebate(debateScoreDomain);
+		
+		return "professor/management/close_jsp";
 	}
 	//우영
 	

@@ -80,47 +80,49 @@ public class GradeController {
 	
 	/*의기---------------------------------------------------------------------------------------------------------------------*/
 	
-	/*교수 자신의 담당과목들을 select
-	value 값은 로그인 후 session 에 저장되있는 교수코드 값이 들어간다.*/
-	
+	//교수 자신의 담당과목들을 select	
 	@RequestMapping(value="/professorSubjectSelectForCheck")
 	public String professorSubjectSelectForCheck(
 			Model model, 
 			@ModelAttribute(value="userPlusInfo")ProfessorDomain professorDomain) {
 		
 		String professorCode = professorDomain.getProfessorCode();					
-		System.out.println("01 professorSubjectSelectForCheck <-- GradeController.java");
+		//System.out.println("01 professorSubjectSelectForCheck <-- GradeController.java");
 		//System.out.println("professorCode : " + professorCode);
 		
 		model.addAttribute("professorSubject", gradeService.professorSubjectSelectForCheck(professorCode));
 		
-		List<OpenSubjectDomain> openSubjectDomain =
+/*		List<OpenSubjectDomain> openSubjectDomain =
 				gradeService.professorSubjectSelectForCheck(professorCode);
 		
-		System.out.println(openSubjectDomain);
+		System.out.println(openSubjectDomain);*/
 		
 		return "professor/management/management_student_grade";		
 	}
 	
-	/*학생성적조회를 위한 교수의 학생 정보(이름, 전화번호, 이메일), 성적(출석,과제,토론,중간,기말)을 select
-	value 값은 로그인 후 session 에 저장되있는 교수코드 값이 들어간다.*/	
+	//학생성적조회를 위한 교수의 학생 정보(이름, 전화번호, 이메일), 성적(출석,과제,토론,중간,기말)을 select + 검색기능추가	
 	@RequestMapping(value="/professorStudentInfoSelect", method=RequestMethod.POST)
-	public String professorStudentInfoSelect(Model model, String openSubjectCode,
+	public String professorStudentInfoSelect(Model model, String openSubjectCode, String searchWord,
 			@ModelAttribute(value="userPlusInfo" )ProfessorDomain professorDomain) {
 		
 		String professorCode = professorDomain.getProfessorCode();
 		
-		System.out.println("---------------------------------------------"+professorCode);
-		System.out.println("01 professorStudentInfoSelect <-- GradeController.java");
-		//System.out.println("openSubjectCode : " + openSubjectCode);
+/*		System.out.println("---------------------------------------------"+professorCode);
+		System.out.println("openSubjectCode : " + openSubjectCode);
+		System.out.println("01 professorStudentInfoSelect <-- GradeController.java");*/
 		
 		model.addAttribute("openSubjectCode", openSubjectCode);
 		model.addAttribute("professorSubject", gradeService.professorSubjectSelectForCheck(professorCode));
-		model.addAttribute("professorStudentInfo", gradeService.professorStudentInfoSelect(openSubjectCode));		
+		model.addAttribute("professorStudentInfo", gradeService.professorStudentInfoSelect(openSubjectCode, searchWord));		
+		
+/*		List<UserDomain> userDomain = 
+				gradeService.professorStudentInfoSelect(openSubjectCode, searchWord);
+		System.out.println("userDomain : " + userDomain);*/
 		
 		return "professor/management/management_student_grade";		
 	}
 	
+	//성적조회 클릭시 학생의 성적과 최종성적을 select
 	@RequestMapping(value="/professorStudentGradeSelect")
 	public String professorStudentGradeSelect(Model model, String userCode) {
 		
@@ -153,18 +155,18 @@ public class GradeController {
 	
 	//과목 선택후 보여지는 학생리스트
 	@RequestMapping(value="/professorStudentGradeManageSelect", method=RequestMethod.POST)
-	public String professorStudentGradeManageSelect(Model model, String openSubjectCode,
+	public String professorStudentGradeManageSelect(Model model, String openSubjectCode, String searchWord,
 			@ModelAttribute(value="userPlusInfo" )ProfessorDomain professorDomain) {
 				
 		String professorCode = professorDomain.getProfessorCode();
-		
+	
 		System.out.println("01 professorStudentGradeManageSelect <-- GradeController.java");
 		//System.out.println("professorCode : " + professorCode);
 		//System.out.println("openSubjectCode : " + openSubjectCode);
-		
+
 		model.addAttribute("openSubjectCode", openSubjectCode);
 		model.addAttribute("professorSubject", gradeService.professorSubjectSelectForManage(professorCode));
-		model.addAttribute("professorStudentNameAndCode", gradeService.professorStudentNameAndCodeSelect(openSubjectCode));
+		model.addAttribute("professorStudentNameAndCode", gradeService.professorStudentNameAndCodeSelect(openSubjectCode, searchWord));
 				
 		return "professor/management/management_student_grade_list";
 		

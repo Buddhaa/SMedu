@@ -13,26 +13,33 @@ public interface PlannerWorkService {
 	public PlannerDomain getPlannerSelectOne(String userCode);
 	
 	void plannerUpdate(PlannerDomain plannerDomain);
-	
-	void getPlannerLearningPlanResponseUpdate(LearningPlanDomain learningPlanDomain);
-	
-	void getPlannerConsultInsert(PlanRecordDomain planRecordDomain);
-	
-	void getPlannerConsultUpdate(PlanRecordDomain planRecordDomain);
-	
-	public List<PlannerStudentDomain> getPlannerStudentDetail(String planStudentCode);
 
-	List<LearningPlanDomain> getPlannerLearningPlanNonresponse();
+	int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain);
 
-	List<LearningPlanDomain> getPlannerLearningPlanResponse();
+	List<LearningPlanDomain> getPlannerLearningPlanNonresponse(PlannerDomain plannerDomain);
 
-	List<PlannerStudentDomain> getPlannerStudentList();
+	LearningPlanDomain getApplicantSelectOne(String learningPlanCode);
+
+	List<LearningPlanDomain> getPlannerLearningPlanResponse(PlannerDomain plannerDomain);
+
+	int getPlannerConsultInsertSend(PlanRecordDomain planRecordDomain);
+
+	List<PlannerStudentDomain> getStudentSearchView(String plannerCode);
+
+	List<PlannerStudentDomain> sendStudentSearchView(PlanRecordDomain planRecordDomain);
+
+	PlanRecordDomain getPlannerConsultInfo(String planCode);
+
+	Map<String, Object> plannerStudnetListCardinalSelectOpenSubjectList(String cardinalCode, String openSubjectCode,
+			String departmentCode);
+
+	List<PlannerStudentDomain> selectStudentDetail(String userCode);
+
+	int getPlannerLearningPlanResponseUpdate(LearningPlanDomain learningPlanDomain);
 
 	List<PlanRecordDomain> getPlannerConsultList();
 
-	Map<String, Object> applicantSelectOne(String learningPlanCode);
-
-	int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain);
+	int getPlannerConsultUpdate(PlanRecordDomain planRecordDomain);
 	
 	
 }

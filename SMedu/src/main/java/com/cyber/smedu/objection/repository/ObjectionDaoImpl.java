@@ -1,6 +1,7 @@
 package com.cyber.smedu.objection.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +20,24 @@ public class ObjectionDaoImpl implements ObjectionDao {
 	@Override
 	public List<OpenSubjectDomain> professorSubjectSelectForObjection(String professorCode) {
 		
-		System.out.println("03 professorSubjectSelectForObjection <-- ObjectionDaoImpl.java");
+		//System.out.println("03 professorSubjectSelectForObjection <-- ObjectionDaoImpl.java");
 		
 		return sqlSession.selectList(NS+".professorSubjectSelectForObjection", professorCode);
 		
 	}
 	
 	@Override
-	public List<ObjectionDomain> professorStudentObjectionInfoSelect(String openSubjectCode) {
+	public List<ObjectionDomain> professorStudentObjectionInfoSelect(Map<String, Object> map) {
 		
-		System.out.println("03 professorStudentObjectionInfoSelect <-- ObjectionDaoImpl.java");
+		//System.out.println("03 professorStudentObjectionInfoSelect <-- ObjectionDaoImpl.java");
 		
-		return sqlSession.selectList(NS+".professorStudentObjectionInfoSelect", openSubjectCode);		
+		return sqlSession.selectList(NS+".professorStudentObjectionInfoSelect", map);		
 	}
 	
 	@Override
 	public ObjectionDomain professorStudentObjectionDetail(String objectionCode) {
 		
-		System.out.println("03 professorStudentObjectionDetail <-- ObjectionDaoImpl.java");
+		//System.out.println("03 professorStudentObjectionDetail <-- ObjectionDaoImpl.java");
 		//System.out.println("objectionCode : " + objectionCode);
 		
 		return sqlSession.selectOne(NS+".professorStudentObjectionDetail", objectionCode);		
@@ -51,7 +52,7 @@ public class ObjectionDaoImpl implements ObjectionDao {
 	@Override
 	public void professorStudentObjectionReply(ObjectionDomain objectionDomain) {
 		
-		System.out.println("03 professorStudentObjectionReply <-- ObjectionDaoImpl.java");
+		//System.out.println("03 professorStudentObjectionReply <-- ObjectionDaoImpl.java");
 		
 		sqlSession.update(NS+".professorStudentObjectionReply", objectionDomain);
 		

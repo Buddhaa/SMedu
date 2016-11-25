@@ -15,4 +15,6 @@ public interface AcademicCalendarService {
 
 	int getLastPage();
 
+	List<CardinalDomain> selectMainAcademicCalendarList();
+
 }

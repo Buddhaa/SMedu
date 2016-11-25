@@ -51,7 +51,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 7) == '[학점은행제]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}
@@ -86,7 +86,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 6) == '[회원정보]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}
@@ -121,7 +121,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 8) == '[맞춤학습설계]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}
@@ -156,7 +156,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 6) == '[수강신청]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}
@@ -191,7 +191,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 6) == '[결제방법]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}
@@ -226,7 +226,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 6) == '[학습방법]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}
@@ -261,7 +261,7 @@
 												<c:set var="communityFaqSubstr" value="${communityFaq.boardArticleTitle}" />
 												<c:if test="${fn:substring(communityFaqSubstr, 0, 6) == '[학습장애]'}">
 									  			<tr>
-											        <td>${communityFaq.boardArticleCode}</td>
+											        <td>${communityFaq.boardArticleNum}</td>
 											        <td>
 											        <a href="#${communityFaq.boardArticleCode}" data-toggle="collapse">
 											        ${communityFaq.boardArticleTitle}

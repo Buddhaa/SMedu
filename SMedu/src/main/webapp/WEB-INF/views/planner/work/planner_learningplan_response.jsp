@@ -13,32 +13,37 @@
 <body>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />
 <!-- 학습설계 답변완료 목록 -->
-<div>
-	<h2>학습설계 답변완료 목록</h2>
-	<form action="/planner/work/planner_learningplan_response"
+<div class="wrapper row3">
+		<div class="hoc container clear">
+			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
+    	<div class="content three_quarter"> 
+	<h1>학습설계 답변완료 목록</h1><hr/>
+	<form action="planner/work/planner_learningplan_response"
 	method="post" name="responseForm" id="responseForm">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<td>신청자이름</td>
-				<td>신청자연락처</td>
-				<td>문의내용</td>
-				<td>문의일자</td>
-				<td>답변내용</td>
-				<td>답변일자</td>
-				<td>학습설계완료여부</td>
+				<th>이름</th>
+				<th>연락처</th>
+				<th>학과</th>
+				<th>문의내용</th>
+				<th>문의일자</th>
+				<th>답변내용</th>
+				<th>답변일자</th>
+<!-- 				<th>답변여부</th> -->
 			</tr>
 			
 		<c:forEach var="r" items="${responseList}">
 			<tr>
 					<td>${r.applicantName}</td>
 				    <td>${r.applicantPhone}</td>
+				    <td>${r.departmentName}</td>
 				    <td>${r.inquireContent}</td>
-				    <td>${r.inquireDate}</td>
+					<td>${r.inquireDate}</td>
 				    <td>${r.inquireReplyContent}</td>
 				    <td>${r.inquireReplyDate}</td>
-				    <td>${r.consultCompleteConfirmation}</td> 
-				    <td></td>
+<%-- 				    <td>${r.consultCompleteConfirmation}</td>  --%>
+				    
 			</tr>
 		</c:forEach>
 	</table>
@@ -47,5 +52,8 @@
 	    <li><a href="/planner/work/planner_learningplan_nonresponse">이전</a></li> 
  	 </ul>
  	 </div>
+ 	 </div>
+ </div>
+ 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/foot.jsp" />
 </body>
 </html>

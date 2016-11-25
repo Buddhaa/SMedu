@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Page-Enter" content="BlendTrans(Duration=0.5)">
+<meta http-equiv="Page-exit" content="BlendTrans(Duration=0.5)">
 <link href="/resources/smedu/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- JAVASCRIPTS -->
@@ -96,6 +98,25 @@
 	      	<li>
 	      	<a href="/professorSubjectSelectForCheck">
 	      	<button class="btn btn-default" style="height: 30px; width: 140px;"><strong>교무관리</strong></button>
+	      	</a>
+	      	</li>
+	      </ul>
+	    </div>
+    </c:if>
+    <c:if test="${userInfo.userLevel=='관리자'}">
+	    <div class="fl_right">
+	      <ul>
+	        <li><a href="/smedu/main/main"><i class="fa fa-lg fa-home"></i>홈으로</a></li>
+	        <li><a href="/smedu/main/logOut">로그아웃</a></li>
+	        <li><a href="/professorInfo">마이페이지</a></li>
+	        <li><a href="/smedu/introduction/siteMap">사이트 맵</a></li>
+	      </ul>
+	      &nbsp;
+	      <ul>
+	      	<li>${userInfo.userLevel}님 환영합니다.</li>
+	      	<li>
+	      	<a href="/admin/main/main">
+	      	<button class="btn btn-default" style="height: 30px; width: 140px;"><strong>관리자페이지이동</strong></button>
 	      	</a>
 	      	</li>
 	      </ul>

@@ -166,8 +166,21 @@ public class UserController {
 	
 	//아이디 중복체크폼 페이지 이동
 	@RequestMapping(value = "/smedu/main/idCheckForm", method = RequestMethod.GET)
-	public String idCheckForm() {
-		return "/smedu/main/id_check";
+	public String idCheckForm(Model model,
+			@RequestParam(value="userLevel", defaultValue="student") String userLevel) {
+		System.out.println("id:"+userLevel);
+		model.addAttribute("userLevel", userLevel);
+		return "smedu/main/id_check";
+	}
+	//아이디 중복체크
+	@RequestMapping(value = "/smedu/main/idCheck", method = RequestMethod.POST)
+	public String idCheck(Model model,
+			@RequestParam(value="userId") String userId,
+			@RequestParam(value="userLevel", defaultValue="student") String userLevel) {
+		model.addAttribute("userIdCheck", userService.userIdCheck(userId));
+		model.addAttribute("userId", userId);
+		model.addAttribute("userLevel", userLevel);
+		return "smedu/main/id_check";
 	}
 	/*------------------------------------------------------------------------*/
 	

@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 교수 담당과목을 수강하는 학생의 정보를 select 하는 쿼리 -->
 	<select id="professorStudentInfoSelect"
-		parameterType="String"
+		parameterType="java.util.Map"
 		resultType="com.cyber.smedu.user.domain.UserDomain">
 	
 	SELECT
@@ -84,9 +84,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		open_subject_code = #{openSubjectCode}
 	AND 
-		pay_state = 'T'
+		pay_state = '결제완료'
+	<if test="searchWord != ''">
+		AND
+			u.user_name LIKE '%${searchWord}%'
+	</if>
+	
 
 	</select>
+
 
 	<!-- 교수 담당학생의 성적(중간,기말,과제,토론,출석) select 쿼리-->
 	<select id="professorStudentGradeSelect"
@@ -140,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="professorStudentNameAndCodeSelect"
-		parameterType="String"
+		parameterType="java.util.Map"
 		resultType="com.cyber.smedu.user.domain.StudentDomain">
 	
 	SELECT
@@ -161,7 +167,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE
 		open_subject_code = #{openSubjectCode}
 	AND 
-		pay_state = 'T'
+		pay_state = '결제완료'
+	<if test="searchWord != ''">
+		AND
+			u.user_name LIKE '%${searchWord}%'
+	</if>	
+	
 
 	</select>
 	<!-- 우영 -->

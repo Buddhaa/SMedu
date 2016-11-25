@@ -31,8 +31,20 @@ public class StudentDomain {
 	private String year;
 	private String semester;
 	private String cardinal;
+	
+	private String debateScoreCode;
 
 	
+	public String getDebateScoreCode() {
+		return debateScoreCode;
+	}
+
+
+	public void setDebateScoreCode(String debateScoreCode) {
+		this.debateScoreCode = debateScoreCode;
+	}
+
+
 	public String getUserCode() {
 		return userCode;
 	}

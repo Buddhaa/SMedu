@@ -13,15 +13,11 @@ public interface GradeService {
 
 	Map<String, Object> adminStudentGradeList(String departmentCode, String userName);
 
-	List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode);
-
 	List<OpenSubjectDomain> professorSubjectSelectForManage(String professorCode);
 
 	FinalGradeDomain professorStudentFinalGradeSelect(String userCode);
 
 	List<OpenSubjectDomain> professorSubjectSelectForCheck(String professorCode);
-
-	List<UserDomain> professorStudentInfoSelect(String openSubjectCode);
 
 	List<GradeDomain> professorStudentGradeSelect(String userCode);
 
@@ -30,5 +26,9 @@ public interface GradeService {
 	Map<String, Object> adminStudentGradeDetail(String userCode, String studentCode, String cardinalCode, String openSubjectCode);
 
 	List<GradeDomain> creditManage(String userCode);
+
+	List<UserDomain> professorStudentInfoSelect(String openSubjectCode, String searchWord);
+
+	List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode, String searchWord);
 
 }

@@ -35,7 +35,7 @@ public class ObjectionController {
 			Model model, 
 			@ModelAttribute(value="userPlusInfo")ProfessorDomain professorDomain ) {
 				
-		System.out.println("01 professorSubjectSelectForObjection <-- ObjectionController.java");
+		//System.out.println("01 professorSubjectSelectForObjection <-- ObjectionController.java");
 		
 		String professorCode = professorDomain.getProfessorCode();
 		//System.out.println("professorCode : " + professorCode);
@@ -48,20 +48,25 @@ public class ObjectionController {
 	//해당과목의 학생 성적이의신청 정보를 보여줌
 	@RequestMapping(value="/professorStudentObjectionSelect")
 	public String professorStudentObjectionSelect(
-			Model model, String openSubjectCode,
+			Model model, String openSubjectCode, String searchWord,
 			@ModelAttribute(value="userPlusInfo")ProfessorDomain professorDomain) {
 		
-		System.out.println("01 professorStudentObjectionSelect <-- ObjectionController.java");
+		//System.out.println("01 professorStudentObjectionSelect <-- ObjectionController.java");
 		
 		String professorCode = professorDomain.getProfessorCode();
 		
-		System.out.println("openSubjectCode : " + openSubjectCode + "//professorCode : " + professorCode);
+/*		System.out.println("openSubjectCode : " + openSubjectCode );
+		System.out.println("searchWord : " + searchWord);
+		System.out.println("professorCode : " + professorCode);*/
+		
+		//searchWord
+		//model.addAttribute("searchWord", searchWord);
 		//openSubjectCode
 		model.addAttribute("openSubjectCode", openSubjectCode);
 		//교수담당과목 정보
 		model.addAttribute("professorSubject", objectionService.professorSubjectSelectForObjection(professorCode));		
 		//성적이의신청 정보
-		model.addAttribute("professorStudentObjectionInfo", objectionService.professorStudentObjectionInfoSelect(openSubjectCode));
+		model.addAttribute("professorStudentObjectionInfo", objectionService.professorStudentObjectionInfoSelect(openSubjectCode, searchWord));
 		
 		return "professor/management/management_grade_objection";	
 	}
@@ -70,7 +75,7 @@ public class ObjectionController {
 	@RequestMapping(value="/professorStudentObjectionDetail")
 	public String professorStudentObjectionDetail(Model model, String objectionCode) {
 		
-		System.out.println("01 professorStudentObjectionDetail <-- ObjectionController.java");
+		//System.out.println("01 professorStudentObjectionDetail <-- ObjectionController.java");
 		//System.out.println("objectionCode : " + objectionCode);
 		
 		model.addAttribute("professorStudentObjection", objectionService.professorStudentObjectionDetail(objectionCode));

@@ -26,7 +26,7 @@
 		 
 	  		<c:forEach var="consultingList" items="${boardConsultingList}">
 	  			<tr>
-			        <td>${consultingList.boardArticleCode}</td>
+			        <td>${consultingList.boardArticleNum}</td>
 			        <td>${consultingList.boardArticleTitle}</td>
 			        <td>${consultingList.boardArticleDate}</td>
 			        <td>${consultingList.boardArticleWriter}</td>

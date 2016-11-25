@@ -7,9 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
+import com.cyber.smedu.task.domain.TaskScoreDomain;
 
 @Repository
 public class TaskDaoImpl implements TaskDao{
@@ -56,6 +58,26 @@ public class TaskDaoImpl implements TaskDao{
 	@Override
 	public void professorTaskInsert(TaskDomain taskDomain) {
 		sqlSession.insert(NS+".professorTaskInsert", taskDomain);
+	}
+	
+	@Override
+	public void taskScoreAndParticipationUpdate(TaskScoreDomain taskScoreDomain) {
+		sqlSession.update(NS+".taskScoreAndParticipationUpdate", taskScoreDomain);
+	}
+	
+	@Override
+	public void taskMarkingInsert(TaskScoreDomain taskScoreDomain) {
+		sqlSession.insert(NS+".taskMarkingInsert", taskScoreDomain);
+	}
+	
+	@Override
+	public void finalGradeUpdateForTask(TaskScoreDomain taskScoreDomain) {
+		sqlSession.update(NS+".finalGradeUpdateForTask", taskScoreDomain);
+	}
+	
+	@Override
+	public TaskScoreDomain professorTaskScoreAndCodeSelect(GradeDomain gradeDomain) {
+		return sqlSession.selectOne(NS+".professorTaskScoreAndCodeSelect", gradeDomain);	
 	}
 //우영---------------------------------------------------------------------------------------------
 	

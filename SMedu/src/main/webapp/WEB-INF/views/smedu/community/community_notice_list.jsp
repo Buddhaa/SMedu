@@ -26,7 +26,7 @@
 		 
 	  		<c:forEach var="boardCommunityNoticeList" items="${boardCommunityNoticeList}">
 	  			<tr>
-			        <td>${boardCommunityNoticeList.boardArticleCode}</td>
+			        <td>${boardCommunityNoticeList.boardArticleNum}</td>
 			        <td>
 			        <a href="/smedu/community/communityNoticeDetail?boardArticleCode=${boardCommunityNoticeList.boardArticleCode}">
 			        <img alt="" src="/resources/smedu/images/demo/backgrounds/ico_notice.gif">

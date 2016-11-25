@@ -20,6 +20,7 @@ import com.cyber.smedu.opensubject.domain.LectureDomain;
 import com.cyber.smedu.opensubject.service.OpenSubjectService;
 import com.cyber.smedu.user.domain.ProfessorDomain;
 import com.cyber.smedu.user.domain.UserDomain;
+import com.cyber.smedu.user.service.UserService;
 
 @Controller
 @SessionAttributes({"userInfo", "userPlusInfo"})
@@ -28,6 +29,7 @@ public class OpenSubjectController {
 	@Autowired CurriculumService curriculumService;
 	@Autowired AcademicCalendarService academicCalendarService;
 	@Autowired AttendService attendService;
+	@Autowired UserService userService;
 		
 	@RequestMapping(value="/admin/curriculum/openSubjectList", method=RequestMethod.GET)
 	public String adminOpenSubjectList(Model model,
@@ -99,21 +101,36 @@ public class OpenSubjectController {
 	}
 	//장용
 	//수강신청 페이지
-		@RequestMapping(value = "/smedu/classregistration/classregistrationOpenSubject", method = RequestMethod.GET)
-		public String classregistrationOpenSubject(Model model,
-				@RequestParam(value="departmentCode", defaultValue="") String departmentCode,
-				@RequestParam(value="cardinalCode", defaultValue="") String cardinalCode) {		
-			System.out.println("departmentCode : " + departmentCode);
-			Map<String, Object> map = openSubjectService.selectOpenSubjectList(departmentCode, cardinalCode);
-			model.addAttribute("cardinalList", map.get("cardinalList"));
-			model.addAttribute("openSubjectList", map.get("openSubjectList"));
-			Map<String, Object> map1 = curriculumService.selectDepartmentList();
-			model.addAttribute("departmentList", map1.get("departmentList"));			
-			model.addAttribute("departmentCode",departmentCode);
-			model.addAttribute("cardinalCode",map.get("cardinalCode"));
-			System.out.println(curriculumService.selectDepartmentList());
-			return "smedu/classregistration/classregistration_open_subject";
-		}
+	@RequestMapping(value = "/smedu/classregistration/classregistrationOpenSubject", method = RequestMethod.GET)
+	public String classregistrationOpenSubject(Model model,
+			@RequestParam(value="departmentCode", defaultValue="") String departmentCode,
+			@RequestParam(value="cardinalCode", defaultValue="") String cardinalCode) {		
+		System.out.println("departmentCode : " + departmentCode);
+		Map<String, Object> map = openSubjectService.selectOpenSubjectList(departmentCode, cardinalCode);
+		model.addAttribute("cardinalList", map.get("cardinalList"));
+		model.addAttribute("openSubjectList", map.get("openSubjectList"));
+		Map<String, Object> map1 = curriculumService.selectDepartmentList();
+		model.addAttribute("departmentList", map1.get("departmentList"));			
+		model.addAttribute("departmentCode",departmentCode);
+		model.addAttribute("cardinalCode",map.get("cardinalCode"));
+		System.out.println(curriculumService.selectDepartmentList());
+		return "smedu/classregistration/classregistration_open_subject";
+	}
+	//교수 상세보기
+	@RequestMapping(value = "/smedu/classregistration/classregistrationProfessorInfo", method = RequestMethod.GET)
+	public String classregistrationProfessorInfo(Model model,
+			@RequestParam(value="professorCode") String professorCode){
+		model.addAttribute("professorSelectInfo", userService.professorSelectInfo(professorCode));
+		System.out.println(userService.professorSelectInfo(professorCode));
+		return "smedu/classregistration/classregistration_professor_info";
+	}
+	//과목상세보기
+	@RequestMapping(value = "/smedu/classregistration/classregistrationSubjectInfo", method = RequestMethod.GET)
+	public String classregistrationSubjectInfo(Model model,
+			@RequestParam(value="subjectCode") String subjectCode){
+		model.addAttribute("subjectSelectInfo",curriculumService.subjectSelectInfo(subjectCode));
+		return "smedu/classregistration/classregistration_subject_info";
+	}
 	//현호
 		
 	//강의관리를 위한 담당개설과목 선택 화면으로 이동

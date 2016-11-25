@@ -14,6 +14,7 @@
 	$(document).ready(function() {
 		
 		$("#professorSubjectSelect").val("${openSubjectCode }").attr("selected", "selected");
+		
 		$("#professorSubjectSelect").change(function() {
 
 			if ($("#professorSubjectSelect").val() == "") {
@@ -22,7 +23,14 @@
 				$("#professorSubjectSelectForm").submit();
 			}
 		});
+		
+		$('#searchBtn').click(function () {
 
+			$('#studentSearchForm').submit();
+
+		});
+		
+		
 	});
 	
 </script>
@@ -61,6 +69,7 @@
 						</div>
 				</fieldset>
 			</form>
+			
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -78,7 +87,7 @@
 						<tr>
 							<td>${professorStudentNameAndCode.userName }</td>
 							<td><a href="#"
-							onclick="javascript:window.open('/professorStudentTaskResultDetail?studentCode=${professorStudentNameAndCode.studentCode }', 'studentTaskResult', 'left='+(screen.availWidth-600)/2+',top='+(screen.availHeight-560)/2+', width=600, height=530')">과제제출물</a></td>
+							onclick="javascript:window.open('/professorStudentTaskResultDetail?openSubjectCode=${professorStudentNameAndCode.openSubjectCode }&studentCode=${professorStudentNameAndCode.studentCode }', 'studentTaskResult', 'left='+(screen.availWidth-600)/2+',top='+(screen.availHeight-560)/2+', width=600, height=530')">과제제출물</a></td>
 							<td><a href="#"
 							onclick="javascript:window.open('/professorStudentDebateResponseDetail?openSubjectCode=${professorStudentNameAndCode.openSubjectCode }&studentCode=${professorStudentNameAndCode.studentCode }', 'studentDebateResponse', 'left='+(screen.availWidth-600)/2+',top='+(screen.availHeight-560)/2+', width=600, height=530')">토론답변</a></td>
 							<td><a href="#">답안지</a></td>
@@ -89,6 +98,23 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			<div class="col-sm-4 col-sm-offset-2">
+				<div id="imaginary_container">
+					<form action="/professorStudentGradeManageSelect" id="studentSearchForm"
+						method="POST">
+						<div class="input-group stylish-input-group">
+							<input type="hidden" name="openSubjectCode" value="${openSubjectCode }">
+							<input type="text" class="form-control" placeholder="NameSearch" id="searchWord" name="searchWord">
+							<span class="input-group-addon">
+								<button type="button" id="searchBtn">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 

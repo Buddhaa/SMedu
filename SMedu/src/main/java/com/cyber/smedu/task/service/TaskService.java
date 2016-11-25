@@ -5,9 +5,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
+import com.cyber.smedu.task.domain.TaskScoreDomain;
 
 public interface TaskService {
 
@@ -31,4 +33,12 @@ public interface TaskService {
 	void professorTaskInsert(TaskDomain taskDomain);
 
 	void taskResultAdd(String userCode, TaskResultDomain taskResultDomain, HttpServletRequest request);
+
+	void taskScoreAndParticipationUpdate(TaskScoreDomain taskScoreDomain);
+
+	void taskMarkingInsert(TaskScoreDomain taskScoreDomain);
+
+	void finalGradeUpdateForTask(TaskScoreDomain taskScoreDomain);
+
+	TaskScoreDomain professorTaskScoreAndCodeSelect(GradeDomain gradeDomain);
 }

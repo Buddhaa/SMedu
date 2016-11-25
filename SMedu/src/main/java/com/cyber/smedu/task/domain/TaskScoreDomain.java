@@ -11,6 +11,21 @@ public class TaskScoreDomain {
 	private int taskScore;
 	private Date taskScoreDate;
 	
+	private String studentCode;
+	private String openSubjectCode;
+	
+	public String getStudentCode() {
+		return studentCode;
+	}
+	public void setStudentCode(String studentCode) {
+		this.studentCode = studentCode;
+	}
+	public String getOpenSubjectCode() {
+		return openSubjectCode;
+	}
+	public void setOpenSubjectCode(String openSubjectCode) {
+		this.openSubjectCode = openSubjectCode;
+	}
 	public String getTaskScoreCode() {
 		return taskScoreCode;
 	}
@@ -47,11 +62,11 @@ public class TaskScoreDomain {
 	public void setTaskScoreDate(Date taskScoreDate) {
 		this.taskScoreDate = taskScoreDate;
 	}
+	
 	@Override
 	public String toString() {
 		return "TaskScoreDomain [taskScoreCode=" + taskScoreCode + ", taskResultCode=" + taskResultCode + ", taskCode="
 				+ taskCode + ", professorCode=" + professorCode + ", taskScore=" + taskScore + ", taskScoreDate="
-				+ taskScoreDate + "]";
+				+ taskScoreDate + ", studentCode=" + studentCode + ", openSubjectCode=" + openSubjectCode + "]";
 	}
-	
 }

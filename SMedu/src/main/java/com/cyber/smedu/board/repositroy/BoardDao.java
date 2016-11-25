@@ -34,4 +34,6 @@ public interface BoardDao {
 
 	void lectureReviewAdd(BoardArticleDomain boardArticleDomain);
 
+	List<BoardArticleDomain> selectMainBoardArticleList(Map<String, Object> map);
+
 }

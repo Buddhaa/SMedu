@@ -38,6 +38,13 @@
 <script>
   	$(document).ready(function(){
   		
+  		var check = "${examCheck.attendCompleteConfirmation}";
+  		
+  		if(check == 'T'){
+  			alert("이미 테스트를 한 시험입니다.");
+  			window.close();
+  		}
+  		
   		//F5 막기
   		window.onkeydown = function(){
   			if(event.keyCode == 116){ event.returnValue = false;
@@ -138,11 +145,6 @@
 			</div>
 		</c:forEach> 
 	</div>	
-	<c:if test="${examCheck.attendCompleteConfirmation eq 'F' }">
-		<button type="button" class="btn btn-primary btn-block" id="examAddBtn" >제출하기</button>	
-	</c:if>	
-	<c:if test="${examCheck.attendCompleteConfirmation eq 'T' }">
-		<button type="button" class="btn btn-primary btn-block" id="ss">이미 테스트를 한 시험입니다.</button>
-	</c:if>
+	<button type="button" class="btn btn-primary btn-block" id="examAddBtn" >제출하기</button>	
 </body>
 </html>

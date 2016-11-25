@@ -144,6 +144,86 @@ AND
 		)
 	
 	</insert>
+	
+	<!-- grade table update -->
+	<update id="taskScoreAndParticipationUpdate"
+		parameterType="com.cyber.smedu.task.domain.TaskScoreDomain">
+		
+	UPDATE 
+		grade
+	SET
+		grade_score = #{taskScore},
+		participation_state = 'T'
+	WHERE 
+		open_subject_code = #{openSubjectCode}
+	AND
+		student_code = #{studentCode}
+	AND
+		grade_evaluation_category = '과제(15점)'
+	
+	</update>
+	
+	<!-- task_score tabel insert -->
+	<insert id="taskMarkingInsert"
+		parameterType="com.cyber.smedu.task.domain.TaskScoreDomain">
+	INSERT INTO task_score
+		(
+		task_score_code, 
+		student_code, 
+		task_code, 
+		professor_code, 
+		task_score, 
+		task_score_date
+		)
+	VALUES 
+		(
+		CONCAT('task_score_code',(SELECT COUNT(t.task_score_code)+1 FROM task_score t)), 
+		#{studentCode}, 
+		(SELECT task_code FROM task WHERE open_subject_code = #{openSubjectCode}) , 
+		(SELECT professor_code FROM task WHERE open_subject_code = #{openSubjectCode}), 
+		#{taskScore}, 
+		NOW()
+		)
+	
+	</insert>
+	
+	<!-- final_result_complete_confirmaition table update -->
+	<update id="finalGradeUpdateForTask"
+		parameterType="com.cyber.smedu.task.domain.TaskScoreDomain">
+		
+	UPDATE 
+		final_result_complete_confirmaition
+	SET
+		final_result = (SELECT SUM(grade_score) FROM grade WHERE student_code = #{studentCode} AND open_subject_code = #{openSubjectCode}),
+		complete_confirmation = 
+		IF((SELECT SUM(grade_score) FROM grade WHERE student_code = #{studentCode} AND open_subject_code = #{openSubjectCode})>=60,'T','F')
+	WHERE 
+		student_code = #{studentCode}
+	AND
+		open_subject_code = #{openSubjectCode}
+	
+	</update>
+	<select id="professorTaskScoreAndCodeSelect"
+		parameterType="com.cyber.smedu.grade.domain.GradeDomain"
+		resultType="com.cyber.smedu.task.domain.TaskScoreDomain">
+	
+	SELECT 
+		ts.task_score_code AS taskScoreCode,
+		ts.task_score AS taskScore,
+		t.open_subject_code AS openSubjectCode
+	FROM 
+		task_score ts
+	INNER JOIN
+		task t
+	ON
+		ts.task_code = t.task_code
+	WHERE
+		ts.student_code = #{studentCode}
+	AND
+		t.open_subject_code = #{openSubjectCode}
+	
+	</select>
+	
 	<!-- 우영 -->
 <!-- 과제 참여에서 과목 선택시 주제 내용 받아오기 -->
 	<!-- 과제 참여에서 과목 선택시 주제 내용 받아오기 -->

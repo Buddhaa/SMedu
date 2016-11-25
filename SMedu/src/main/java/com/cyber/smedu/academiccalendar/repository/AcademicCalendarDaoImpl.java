@@ -50,4 +50,15 @@ public class AcademicCalendarDaoImpl implements AcademicCalendarDao{
 	public List<CardinalDomain> selectTodayCardinalList() {
 		return sqlSession.selectList(NS+".selectTodayCardinalList");
 	}
+	//의기
+	@Override
+	public List<CardinalDomain> selectMainAcademicCalendarList(Map<String, Object> map){
+		return sqlSession.selectList(NS+".selectMainAcademicCalendarList", map);
+	}
+	//현호
+	@Override
+	public List<CardinalDomain> plannerCardinalList() {
+		return sqlSession.selectList(NS+".plannerCardinalList");
+	}
+	//진호
 }

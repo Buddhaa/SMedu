@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.grade.repository.GradeDao;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.task.domain.TaskDomain;
 import com.cyber.smedu.task.domain.TaskResultDomain;
+import com.cyber.smedu.task.domain.TaskScoreDomain;
 import com.cyber.smedu.task.repository.TaskDao;
 
 @Service
@@ -30,8 +32,8 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public TaskResultDomain professorStudentTaskResultDetail(String studentCode) {
 		
-		System.out.println("02 professorStudentTaskResultDetail <-- TaskServiceImpl.java");
-		System.out.println("studentCode : " + studentCode);
+/*		System.out.println("02 professorStudentTaskResultDetail <-- TaskServiceImpl.java");
+		System.out.println("studentCode : " + studentCode);*/
 		
 		TaskResultDomain taskResultDomain
 			= taskDao.professorStudentTaskResultDetail(studentCode);
@@ -46,8 +48,7 @@ public class TaskServiceImpl implements TaskService{
 		List<OpenSubjectDomain> openSubjectCode
 			= taskDao.professorSubjectSelectForTask(professorCode);
 		
-		return openSubjectCode;
-		
+		return openSubjectCode;		
 	}
 	
 	@Override
@@ -56,9 +57,9 @@ public class TaskServiceImpl implements TaskService{
 		TaskDomain taskDomain
 			= taskDao.professorTaskSelect(openSubjectCode);
 		
-		return taskDomain;
-		
+		return taskDomain;		
 	}
+	
 	@Override
 	public void professorTaskUpdate(TaskDomain taskDomain) {
 		taskDao.professorTaskUpdate(taskDomain);
@@ -67,6 +68,28 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public void professorTaskInsert(TaskDomain taskDomain) {
 		taskDao.professorTaskInsert(taskDomain);
+	}
+	
+	@Override
+	public void taskScoreAndParticipationUpdate(TaskScoreDomain taskScoreDomain) {
+		taskDao.taskScoreAndParticipationUpdate(taskScoreDomain);
+	}
+	
+	@Override
+	public void taskMarkingInsert(TaskScoreDomain taskScoreDomain) {
+		taskDao.taskMarkingInsert(taskScoreDomain);
+	}
+	
+	@Override
+	public void finalGradeUpdateForTask(TaskScoreDomain taskScoreDomain) {
+		taskDao.finalGradeUpdateForTask(taskScoreDomain);
+	}
+	
+	@Override
+	public TaskScoreDomain professorTaskScoreAndCodeSelect(GradeDomain gradeDomain) {
+		TaskScoreDomain taskScoreDomain
+			= taskDao.professorTaskScoreAndCodeSelect(gradeDomain);
+		return taskScoreDomain;		
 	}
 	//우영
 	

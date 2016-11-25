@@ -9,8 +9,6 @@ public interface ObjectionService {
 
 	List<OpenSubjectDomain> professorSubjectSelectForObjection(String professorCode);
 
-	List<ObjectionDomain> professorStudentObjectionInfoSelect(String openSubjectCode);
-
 	ObjectionDomain professorStudentObjectionDetail(String objectionCode);
 
 	ObjectionDomain professorStudentObjectionReplyDetail(String objectionCode);
@@ -24,6 +22,8 @@ public interface ObjectionService {
 	void objectionAdd(String userCode, ObjectionDomain objectionDomain);
 
 	ObjectionDomain objectionDetail(String objectionCode);
+
+	List<ObjectionDomain> professorStudentObjectionInfoSelect(String openSubjectCode, String searchWord);
 
 
 }

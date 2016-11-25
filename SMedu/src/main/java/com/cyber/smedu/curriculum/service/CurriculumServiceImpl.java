@@ -38,6 +38,7 @@ public class CurriculumServiceImpl implements CurriculumService {
 		map.put("subjectList", subjectList);
 		return map;
 	}
+	//의기
 	
 	//과목 리스트
 	@Override
@@ -47,5 +48,11 @@ public class CurriculumServiceImpl implements CurriculumService {
 		List<SubjectDomain> subjectList = curriculumDao.selectSubjectList();
 		map.put("subjectList", subjectList);
 		return map;
+	}	
+	//과목 상세보기
+	@Override
+	public SubjectDomain subjectSelectInfo(String subjectCode) {	
+		return curriculumDao.subjectSelectInfo(subjectCode);
 	}
+	//현호
 }

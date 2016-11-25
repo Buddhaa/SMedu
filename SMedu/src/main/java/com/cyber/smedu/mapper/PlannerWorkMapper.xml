@@ -8,11 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 한명의 플래너 회원정보를 select하는 쿼리 -->
 
 <select id="plannerSelectOne" 
-			parameterType="java.util.Map" 
+			parameterType="String" 
 			resultType="com.cyber.smedu.user.domain.PlannerDomain">
 		SELECT	
 			u.user_code as userCode,
 			p.planner_code as plannerCode,
+			p.planner_kakao as plannerKakao,
+			u.department_code as departmentCode,
+			d.department_name as departmentName,
 			u.user_id as userId,
 			u.user_pw as userPw,
 			u.user_name as userName,
@@ -22,14 +25,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			u.user_phone as userPhone,
 			u.user_email as userEmail,
 			u.user_level as userLevel,
-			u.user_educational as userEducational,
-			p.planner_kakao as plannerKakao
+			u.user_educational as userEducational
+			
 		FROM 
 			user u 
 		INNER JOIN
 			planner p
 		ON 
 			u.user_code = p.user_code
+		INNER JOIN 
+			department d
+		ON 
+			u.department_code = d.department_code
+			
 		WHERE 
 			u.user_code = #{userCode}
 	</select>
@@ -37,199 +45,282 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 플래너 회원정보를 update 하는 쿼리 -->
 
 <update id="plannerUpdate"
-	parameterType="com.cyber.smedu.user.domain.PlannerDomain">
+		parameterType="com.cyber.smedu.user.domain.PlannerDomain">
 	
-	UPDATE
-		user u
-	INNER JOIN
-		planner p
-	ON
-		u.user_code = p.user_code
-	SET
-		u.user_address = #{userAddress},
-		u.user_phone = #{userPhone},
-		u.user_email = #{userEmail},
-		u.user_educational = #{userEducational},
-		p.planner_Kakao = #{plannerKakao}
-	WHERE 
-		u.user_code = #{userCode}
+		UPDATE
+			user u
+		INNER JOIN
+			planner p
+		ON
+			u.user_code = p.user_code
+		SET
+			u.user_address = #{userAddress},
+			u.user_phone = #{userPhone},
+			u.user_email = #{userEmail},
+			u.user_educational = #{userEducational},
+			p.planner_Kakao = #{plannerKakao}
+		WHERE 
+			u.user_code = #{userCode}
 	
 </update>
 
-<!-- 한명의 신청자가 학습설계를 신청한 내용  -->
+
+<!-- 학습설계 미답변 목록 -->
+<select id="selectPlannerLearningPlanNonresponse"
+			resultType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain"
+			parameterType="String">			
+		SELECT 
+			p.planner_code as plannerCode,
+			l.learning_plan_code as learningPlanCode,
+			d.department_name as departmentName,
+			l.applicant_name as applicantName, 
+			l.applicant_phone as applicantPhone, 
+			l.inquire_content as inquireContent, 
+			l.consult_complete_confirmation as consultCompleteConfirmation, 
+			l.inquire_date as inquireDate
+		FROM
+			planner p
+		INNER JOIN
+			user u
+		ON
+			p.user_code = u.user_code
+		INNER JOIN
+			department d
+		ON
+			u.department_code = d.department_code
+		INNER JOIN
+			learning_plan l
+		ON
+			d.department_code = l.department_code
+		WHERE
+			p.planner_Code = #{plannerCode}
+		AND
+			l.consult_complete_confirmation = 'F'
+					
+
+</select>
+
+<!-- 학습설계 신청내용  -->
+
 <select id="applicantSelectOne"
 		parameterType="String" 
 		resultType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain">
-	SELECT
-		learning_plan_code as learningPlanCode, <!--학습설계 코드 -->
-		department_code as departmentCode, <!-- 학과코드 -->
-		applicant_name as applicantName, <!-- 신청자이름 -->
-		applicant_phone as applicantPhone, <!-- 신청자연락처 -->
-		inquire_content as inquireContent <!-- 문의내용 -->
-	FROM
-		learning_plan 
-	WHERE
-		learning_plan_code = #{learningPlanCode}
+		SELECT
+			l.learning_plan_code as learningPlanCode, <!--학습설계 코드 -->
+			l.department_code as departmentCode, <!-- 학과코드 -->
+			l.applicant_name as applicantName, <!-- 신청자이름 -->
+			l.applicant_phone as applicantPhone, <!-- 신청자연락처 -->
+			l.inquire_content as inquireContent, <!-- 문의내용 -->
+			d.department_name as departmentName <!-- 학과명 --> 
+		FROM
+			learning_plan l 
+		INNER JOIN
+			department d
+		ON
+			l.department_code = d.department_code
+		WHERE
+			l.learning_plan_code = #{learningPlanCode}
 </select>
 		
 
-
-<!-- 학습설계 답변 등록 -->
+<!-- 학습설계 답변하기 -->
 <update id="plannerLearningPlanResponseUpdate"
 		parameterType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain">
 		
-		INSERT INTO learning_plan(
-			consult_complete_confirmation, <!-- 답변완료여부 -->
-			inquire_reply_content, <!-- 답변내용  -->
-			inquire_reply_date <!-- 답변일자  -->
-			
-			) VALUES (
-			 #{consultCompleteConfirmation},
-			 #{inquireReplyContent},
-			 #{inquireReplyDate}		
-			  
-			)
-	
-<!-- 			UPDATE  -->
-<!-- 				learning_plan 학습설계 테이블 -->
-<!-- 			SET -->
-<!-- 				consult_complete_confirmation = #{consultCompleteConfirmation}, 상담완료여부 -->
-<!-- 				inquire_reply_content = #{inquireReplyContent}, 답변내용 -->
-<!-- 				inquire_reply_date = #{inquireReplyDate}	답변일자 -->
-				
-<!-- 			WHERE -->
-<!-- 				learning_plan_code = #{learningPlanCode} 플랜코드 -->
+			UPDATE  
+ 				learning_plan <!-- 학습설계 테이블 -->
+			SET 
+				inquire_reply_content = #{inquireReplyContent}, <!-- 답변내용 -->
+				inquire_reply_date = #{inquireReplyDate}, <!-- 답변일자 -->
+				consult_complete_confirmation = 'T' <!-- 답변완료처리 -->
+			WHERE 
+ 				learning_plan_code = #{learningPlanCode} 
 							
 </update>
 
-<!-- 학습설계 결과리스트(답변) 검색-->
+<!-- 학습설계 답변목록-->
 <select id="selectPlannerLearningPlanResponse"
-			resultType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain"
-			parameterType="String">			
-			SELECT
-				learning_plan_code as learningPlanCode, <!-- 플랜코드 -->
-				department_code as departmentCode, <!-- 학과코드 -->
-				applicant_name as applicantName, <!-- 신청자이름 -->
-				applicant_phone as applicantPhone, <!-- 신청자연락처 -->
-				inquire_content as inquireContent, <!-- 문의내용 -->
-				consult_complete_confirmation as consultCompleteConfirmation, <!-- 상담완료여부 -->
-				inquire_date as inquireDate, <!-- 문의일자 -->
-				inquire_reply_content as inquireReplyContent, <!-- 답변내용 -->
-				inquire_reply_date as inquireReplyDate	<!-- 답변일자 -->
-			FROM
-				learning_plan 
-				
-			WHERE
-				consult_complete_confirmation = 'T'  <!-- 답변완료가 T 인 사람만 검색한다 -->		
+		resultType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain"
+		parameterType="String">			
+		SELECT 
+			p.planner_code as plannerCode,
+			d.department_name as departmentName,
+			l.learning_plan_code as learningPlanCode,
+			l.applicant_name as applicantName, 
+			l.applicant_phone as applicantPhone, 
+			l.inquire_content as inquireContent, 
+			l.consult_complete_confirmation as consultCompleteConfirmation, 
+			l.inquire_date as inquireDate, 
+			l.inquire_reply_content as inquireReplyContent, 
+			l.inquire_reply_date as inquireReplyDate
+		FROM
+			planner p
+		INNER JOIN
+			user u
+		ON
+			p.user_code = u.user_code
+		INNER JOIN
+			department d
+		ON
+			u.department_code = d.department_code
+		INNER JOIN
+			learning_plan l
+		ON
+			d.department_code = l.department_code
+		WHERE
+			p.planner_Code = #{plannerCode}
+		AND
+			l.consult_complete_confirmation = 'T'	
 </select>
 
-<!-- 학습설계 신청리스트(미답변) 검색-->
-<select id="selectPlannerLearningPlanNonresponse"
-			resultType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain">			
+
+<!-- 플래너 상담목록  -->
+<select id="selectPlannerConsultList" 
+			resultType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain"
+			parameterType="String">
 			SELECT
-				learning_plan_code as learningPlanCode, <!-- 플랜코드 -->
-				department_code as departmentCode, <!-- 학과코드 -->
-				applicant_name as applicantName, <!-- 신청자이름 -->
-				applicant_phone as applicantPhone, <!-- 신청자연락처 -->
-				inquire_content as inquireContent, <!-- 문의내용 -->
-				consult_complete_confirmation as consultCompleteConfirmation, <!-- 상담완료여부 -->
-				inquire_date as inquireDate, <!-- 문의일자 -->
-				inquire_reply_content as inquireReplyContent, <!-- 답변내용 -->
-				inquire_reply_date as inquireReplyDate	<!-- 답변일자 -->
+				p.plan_code as planCode, <!-- 상담코드 -->
+				p.planner_student_code as plannerStudentCode, <!-- 플래너 학생관리코드 -->
+				p.plan_content as planContent, <!-- 상담내용 -->
+				p.plan_date as planDate, <!-- 상담일자 -->
+				p.special_note as specialNote, <!-- 특이사항 -->
+				u.user_name as userName <!-- 회원이름 -->
 			FROM
-				learning_plan 
-				
-			WHERE
-				consult_complete_confirmation = 'F'  <!-- 답변완료가 F 인 사람만 검색한다 -->		
+				plan_record p	<!-- 플래너 상담기록 테이블 -->
+			INNER JOIN
+				planner_student ps <!-- 플래너 담당학생 테이블 -->
+			ON
+				p.planner_student_code = ps.planner_student_code
+			INNER JOIN
+				student s <!-- 학생 테이블 -->
+			ON
+				ps.student_code = s.student_code	
+			INNER JOIN
+				user u <!-- 회원 테이블 -->
+			ON
+				s.user_code = u.user_code
+
 </select>
 
-<!-- 플래너 상담 기록 입력 -->
-<insert id="plannerConsultInsert"
-			parameterType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain">
-		INSERT INTO plan_record( 
-			plan_code, <!-- 상담코드 -->
-			planner_student_code, <!-- 플래너 학생관리코드 -->
-			plan_content, <!-- 상담내용 -->
-			plan_date, <!-- 상담일자 -->
-			special_note <!-- 특이사항 -->
-		) VALUES (
-			#{planCode},
-			#{plannerStudentCode},
-			#{planContent},
-			#{planDate},
-			#{specialNote}			
-		)
+<!-- 플래너 상담등록 -->
+<insert id="plannerConsultInsertSend"
+			parameterType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain">		
+	INSERT INTO 
+		plan_record
+				(
+				plan_code, <!-- 상담코드 -->
+				planner_student_code, <!-- 담당학생 코드 -->
+				plan_content,  <!-- 상담내용 -->
+				plan_date,  <!-- 상담날짜 -->
+				special_note
+				)
+		VALUES 
+				(
+				CONCAT('plan_code',(SELECT COUNT(plan_code)+1 FROM plan_record as planRecord)),
+				#{plannerStudentCode},
+				#{planContent}, 
+				#{planDate}, 
+				#{specialNote}
+				)
 </insert>
 
+<!-- 플래너 상담등록 할 때 학생찾기  -->     
+ <select id="getStudentSearchView"
+			parameterType="String"
+			resultType="com.cyber.smedu.plannerwork.domain.PlannerStudentDomain">
+	
+		SELECT 
+			p.planner_code AS plannerCode,
+			u.user_name AS userName,
+			u.user_phone AS userPhone,
+			ps.planner_student_code AS plannerStudentCode,
+			c.cardinal AS cardinal
+		FROM
+			planner p
+		INNER JOIN
+			planner_student ps
+		ON
+			p.planner_code = ps.planner_code
+		INNER JOIN
+			student s
+		ON
+			ps.student_code = s.student_code
+		INNER JOIN
+			user u
+		ON
+			u.user_code = s.user_code
+		INNER JOIN
+			cardinal c
+		ON
+			c.cardinal_code = ps.cardinal_code
+		WHERE
+			p.planner_code = #{plannerCode}	
+</select> 
 
-<!-- 플래너 상담 기록 수정 -->
+<!-- 플래너 상담등록 할 때 학생찾고 값 전달 -->
+ <update id="sendStudentSearchView"
+		parameterType="com.cyber.smedu.plannerwork.domain.PlannerStudentDomain">
+		
+		UPDATE
+			planner p
+		INNER JOIN
+			user u
+		ON 
+			p.user_code = u.user_code
+		SET
+			u.user_name = #{userName}
+		WHERE 
+			p.planner_code = #{plannerCode}	
+</update> 
+
+ 
+
+
+
+<!-- 플래너 상담내역 가져오기 -->
+
+<select id="plannerConsultInfo"
+		parameterType="String" 
+		resultType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain">
+		SELECT
+			p.plan_code as planCode, <!-- 상담코드 -->
+			p.planner_student_code as plannerStudentCode, <!-- 플래너 학생관리코드 -->
+			u.user_name as userName <!-- 회원이름 -->
+		FROM
+			plan_record p <!-- 상담관리 테이블 -->
+		INNER JOIN
+			planner_student ps <!-- 담당학생관리 테이블 -->
+		ON
+			p.planner_student_code = ps.planner_student_code
+		INNER JOIN
+			student s <!-- 학생 테이블 -->
+		ON
+			ps.student_code = s.student_code
+		INNER JOIN
+			user u <!-- 회원 테이블 -->
+		ON
+			s.user_code = u.user_code
+		WHERE
+			p.plan_code = #{planCode}
+			
+</select>
+
+
+<!-- 플래너 상담내역 수정 -->
 <update id="plannerConsultUpdate" 
-			parameterType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain">
+		parameterType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain">
 		UPDATE 
 			plan_record <!-- 플래너 상담기록 테이블 -->
 		SET
 			plan_content = #{planContent}, <!-- 상담내용 -->
-			special_note = #{specialNote} <!-- 특이사항 -->
+			special_note = #{specialNote}, <!-- 특이사항 -->
+			plan_date = #{planDate} <!-- 상담일자 -->
 		WHERE
 			plan_code = #{planCode} <!-- 상담코드 -->
 			
 </update>
-
-
-<!-- 플래너 상담 리스트  -->
-<select id="selectPlannerConsultList" 
-			resultType="com.cyber.smedu.plannerwork.domain.PlanRecordDomain">
-			SELECT
-				plan_code as planCode, <!-- 상담코드 -->
-				planner_student_code as plannerStudentCode, <!-- 플래너 학생관리코드 -->
-				plan_content as planContent, <!-- 상담내용 -->
-				plan_date as planDate, <!-- 상담일자 -->
-				special_note as specialNote <!-- 특이사항 -->
-			FROM
-				plan_record	<!-- 플래너 상담기록 테이블 -->
-			WHERE
-				plan_code = #{planCode} 
-</select>
-
-<!-- 플래너 담당학생 리스트  -->
-<select id="selectPlannerStudentList" 
-			resultType="com.cyber.smedu.plannerwork.domain.PlannerStudentDomain">
-			SELECT
-				planner_student_code as plannerStudentCode, <!-- 플래너 학생관리코드 -->
-				planner_code as plannerCode, <!-- 플래너코드 -->
-				cardinal_code as cardinalCode, <!-- 기수코드 -->
-				student_code as studentCode <!-- 학생코드 -->
-			FROM
-				planner_student <!-- 플래너 담당학생 테이블 -->
-			WHERE
-				planner_student_code = #{plannerStudentCode}
-					
-</select>
-
-<!-- 플래너 담당학생 상세보기 -->  
-<select id="selectPlannerStudentDetail"
-			resultType="com.cyber.smedu.plannerwork.domain.PlannerStudentDomain"
-			parameterType="String">
-			SELECT	  
-			     (SELECT open_subject_code FROM attend WHERE student_code = p.student_code) AS open_subject_code,
-			     (SELECT task_result_title FROM task_result WHERE student_code = p.student_code) AS task_result_title,
-			     (SELECT debate_comment FROM debate_result WHERE student_code = p.student_code) AS debate_comment,
-			     (SELECT answer_question FROM answer_paper WHERE student_code = p.student_code) AS answer_question
-			FROM
-				planner p
-			INNER JOIN
-				user s
-			ON
-			 	p.user_code = u.user_code
-			INNER JOIN
-				student s	
-			ON
-				u.user_code = s.user_code
-			WHERE
-				p.student_code = #{studentCode}									
-
-</select>
 <!-- 진호 -->
+
 <insert id="insertConsultingLearningPlan" parameterType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain">
 	INSERT INTO learning_plan(
 		learning_plan_code, 

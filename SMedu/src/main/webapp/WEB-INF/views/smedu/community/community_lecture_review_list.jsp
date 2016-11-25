@@ -26,7 +26,7 @@
 		 
 	  		<c:forEach var="communityLectureReviewList" items="${communityLectureReviewList}">
 	  			<tr>
-			        <td>${communityLectureReviewList.boardArticleCode}</td>
+			        <td>${communityLectureReviewList.boardArticleNum}</td>
 			        <td>
 			        <a href="/smedu/community/communityLectureReviewDetail?boardArticleCode=${communityLectureReviewList.boardArticleCode}">
 			        ${communityLectureReviewList.boardArticleTitle}

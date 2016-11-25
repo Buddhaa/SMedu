@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.cyber.smedu.debate.domain.DebateDomain;
 import com.cyber.smedu.debate.domain.DebateResultDomain;
+import com.cyber.smedu.debate.domain.DebateScoreDomain;
+import com.cyber.smedu.grade.domain.GradeDomain;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 
 public interface DebateService {
@@ -24,5 +26,13 @@ public interface DebateService {
 	void professorDebateInsert(DebateDomain debateDomain);
 
 	void debateResultAdd(String userCode, DebateResultDomain debateResultDomain);
+
+	void debateScoreAndParticipationUpdate(DebateScoreDomain debateScoreDomain);
+
+	void finalGradeUpdateForDebate(DebateScoreDomain debateScoreDomain);
+
+	DebateScoreDomain professorDebateScoreAndCodeSelect(GradeDomain gradeDomain);
+
+	void debateMarkingInsert(DebateScoreDomain debateScoreDomain);
 
 }

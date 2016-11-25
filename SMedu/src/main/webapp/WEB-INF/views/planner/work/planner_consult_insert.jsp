@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,54 +8,101 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-	var page = "/planner/work/planner_consult_list";
-	$(document).ready(function() {
-		if($("#planContent").val() == "") {
-			$("#planContent").focus();
-		} else if("#specialNote") {
-			 $("#specialNote").focus();
-		} else {
-			alert("ok")
-		}
+
+	$(document).ready(function(){
+		$("#userName").val()
 		
-		$('#consultInsert').click(function() {
-			$('#consultInsertForm').submit();
-			$(location).attr('href',page);
+		$("#returnBtn").click(function() { //뒤로가기
+			location.href = "/planner/work/planner_consult_list";
+			});
+		
+			$('#consultInsert').click(function(){ //[등록] 클릭시
+			    if($('#userName').val() == "") {
+			    	alert('담당학생을 선택하세요');
+			    	$('#userName').focus();
+			    } else if($('#planContent').val() == "") {
+			    	alert('상담내용을 입력하세요');
+			    	$('#planContent').focus(); 		
+			    } else if($('#specialNote').val() == "") {
+			    	alert('특이사항을 입력하세요');
+			    	$('#specialNote').focus(); 	
+			    } else if($('#planDate').val() == "") {
+			    	alert('상담일자를 선택하세요');
+			    	$('#planDate').focus(); 	
+			    } else {
+			    	$('#consultInsertForm').submit();
+			    }
+			});
+			
+			$('#searchPopUp').click(function () {
+				window.open('/studentSearchView','userSearchPopUp','left='+(screen.availWidth-600)/2+',top='+(screen.availHeight-560)/2+', width=600, height=530')
+			});
 	});
-});
 
 </script>
 </head>
-<body class="container">
-								<!-- 상담입력 -->
-	<div>
-	<h2>상담입력</h2>
-	<form action="/planner/work/planner_consult_list" 
-		 method="post" name="consultInsertForm" id="consultInsertForm">
-	
-	<input type="hidden" id="srcPlanCode" name="srcPlanCode" value="${srcPlanCode}">
-		<table class="table table-bordered">
-			<tr>
-				<td>담당학생이름</td>
-				<td><input type="text" id="plannerStudentCode" name="plannerStudentCode" value="${plannerStudentCode}"></td>
-			</tr>
-			<tr>
-				<td>상담내용</td>
-				<td><input type="text" id="planContent" name="planContent" value="${planContent}"></td>
-			</tr>
-			<tr>
-				<td>특이사항</td>
-				<td><input type="text" id="specialNote" name="specialNote" value="${specialNote}"></td>
-			</tr>
-			<tr>
-				<td>상담일자</td>
-				<td><input type="date" id="planDate" name="planDate"  value="${planDate}"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input id="consultInsert" type="button"  value="상담입력" ></td>
-			</tr>
-		</table>
-	</form>
-	</div>
+<body>
+										<!-- 상담 등록 -->
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />
+
+	<div class="wrapper row3">
+		<div class="hoc container clear">
+			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
+    	<div class="content three_quarter">
+
+				<form action="/planner/work/planner_consult_list"  
+					id="consultInsertForm" class="form-horizontal" method="post">
+				
+			
+					<input type="hidden" name="plannerStudentCode" id="plannerStudentCode" value="${consultStudent.plannerStudentCode}"> 
+					<fieldset>
+						<legend>상담 등록</legend>
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label">담당학생이름</label>
+							 <div class="col-md-4">
+								<input type="text" name="userName" id="userName" class="form-control input-md" readonly="readonly">
+							</div>
+							
+							<input type="button"  id="searchPopUp"  class="btn btn-primary" value="검색"> 
+						</div>
+							
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label">상담내용</label>
+							<div class="col-md-4">
+								<textarea rows="5" cols="30" name="planContent" id="planContent" class="form-control input-md"></textarea>
+							</div>
+						</div>
+
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label">특이사항</label>
+							<div class="col-md-4">
+								<input name="specialNote" id="specialNote" type="text"  class="form-control input-md">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">상담일자</label>
+							<div class="col-md-4">
+								<input name="planDate" id="planDate" type="date"  class="form-control input-md">
+							</div>
+						</div>
+					
+						<!-- Button -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="signup_recruiter"></label>
+							<div class="col-md-4">
+								<input type="button" id="returnBtn" class="btn btn-default" value="이전">
+								<input type="button" id="consultInsert" class="btn btn-default" value="등록">
+							</div>
+						</div>	
+					</fieldset>
+					</form>	
+				</div>				
+			</div>
+		</div>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/foot.jsp" />
 </body>
 </html>

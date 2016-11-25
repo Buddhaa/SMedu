@@ -10,4 +10,10 @@ public interface PayService {
 
 	List<ClassRegistrationDomain> selectClassregistrationPayHistory(String studentCode);
 
+	List<ClassRegistrationDomain> selectClassregistrationPaySubject(String studentCode);
+
+	void updateClassregistrationPaySubject(List<String> classRegistrationCodeList);
+
+	void insertClassregistrationPaySubject(String studentCode, String cardinalCode, List<String> openSubjectCodeList);
+
 }

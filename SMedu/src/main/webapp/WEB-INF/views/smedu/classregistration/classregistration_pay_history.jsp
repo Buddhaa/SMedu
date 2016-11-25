@@ -17,22 +17,21 @@
 		  <h1>결제 이력</h1><hr>
 		  <table class="table">
 				<tr>
-					<td>강의명</td>
+					<td>구분</td>
+					<td>과목명</td>
+					<td>학점</td>
 					<td>수강료</td>
 					<td>수강신청날짜</td>
 					<td>결제상태</td>
 				</tr>
 		  <c:forEach var="payHistoryList" items="${payHistoryList}">
 		  		<tr>
+		  			<td>${payHistoryList.subjectSort}</td>
 					<td>${payHistoryList.subjectName}</td>
+					<td>${payHistoryList.subjectCredit}</td>
 					<td>${payHistoryList.classRegistrationAmount}</td>
 					<td>${payHistoryList.classRegistrationDate}</td>
-					<c:if test="${payHistoryList.payState == 'T'}">
-					<td>결제완료</td>
-					</c:if>
-					<c:if test="${payHistoryList.payState == 'F'}">
-					<td>결제대기</td>
-					</c:if>
+					<td>${payHistoryList.payState}</td>
 				</tr>
 		  </c:forEach>
 			</table>

@@ -14,6 +14,8 @@ public class ClassRegistrationDomain {
 	private Date classRegistrationDate;
 	private String payState;
 	
+	private int subjectCredit;
+	private String subjectSort;
 	
 	public String getSubjectName() {
 		return subjectName;
@@ -70,11 +72,26 @@ public class ClassRegistrationDomain {
 		this.payState = payState;
 	}
 	
+	public int getSubjectCredit() {
+		return subjectCredit;
+	}
+	public void setSubjectCredit(int subjectCredit) {
+		this.subjectCredit = subjectCredit;
+	}
+	public String getSubjectSort() {
+		return subjectSort;
+	}
+	public void setSubjectSort(String subjectSort) {
+		this.subjectSort = subjectSort;
+	}
+	
 	@Override
 	public String toString() {
 		return "ClassRegistrationDomain [classRegistrationCode=" + classRegistrationCode + ", cardinalCode="
 				+ cardinalCode + ", studentCode=" + studentCode + ", openSubjectCode=" + openSubjectCode
-				+ ", classRegistrationAmount=" + classRegistrationAmount + ", classRegistrationDate="
-				+ classRegistrationDate + ", payState=" + payState + "]";
-	}	
+				+ ", subjectCode=" + subjectCode + ", subjectName=" + subjectName + ", classRegistrationAmount="
+				+ classRegistrationAmount + ", classRegistrationDate=" + classRegistrationDate + ", payState="
+				+ payState + ", subjectCredit=" + subjectCredit + ", subjectSort=" + subjectSort + "]";
+	}
+	
 }

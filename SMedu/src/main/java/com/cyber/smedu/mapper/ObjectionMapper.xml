@@ -23,10 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 교수담당 학생들의 해당 과목에대한 성적이의신청 정보 select(학생이름/이의신청종류/제목/날짜/답변여부) -->
 	<select id="professorStudentObjectionInfoSelect"
-		parameterType="String"
+		parameterType="java.util.Map"
 		resultType="com.cyber.smedu.objection.domain.ObjectionDomain">
 		
-	SELECT
+	SELECT DISTINCT
 		o.objection_code AS objectionCode,
 		o.student_code AS studentCode,
 		u.user_name AS userName,
@@ -44,8 +44,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		user u
 	ON
 		u.user_code = s.user_code
+	INNER JOIN
+		class_registration c
+	ON
+		c.student_code = s.student_code
 	WHERE
 		o.open_subject_code = #{openSubjectCode}
+	AND
+		c.pay_state = '결제완료'
+	<if test="searchWord != ''">
+		AND
+			u.user_name LIKE '%${searchWord}%'
+	</if>
 			
 	</select>
 	

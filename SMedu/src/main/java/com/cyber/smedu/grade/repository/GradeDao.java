@@ -13,15 +13,11 @@ public interface GradeDao {
 
 	List<OpenSubjectDomain> professorSubjectSelectForCheck(String professorCode);
 
-	List<UserDomain> professorStudentInfoSelect(String openSubjectCode);
-
 	List<GradeDomain> professorStudentGradeSelect(String userCode);
 
 	FinalGradeDomain professorStudentFinalGradeSelect(String userCode);
 
 	List<OpenSubjectDomain> professorSubjectSelectForManage(String professorCode);
-
-	List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode);
 
 	StudentDomain studentCode(String userCode);
 
@@ -32,5 +28,9 @@ public interface GradeDao {
 	List<GradeDomain> adminStudentSubjectGrade(Map<String, Object> map);
 
 	List<GradeDomain> creditManage(String studentCode);
+
+	List<UserDomain> professorStudentInfoSelect(Map<String, Object> map);
+
+	List<StudentDomain> professorStudentNameAndCodeSelect(Map<String, Object> map);
 
 }

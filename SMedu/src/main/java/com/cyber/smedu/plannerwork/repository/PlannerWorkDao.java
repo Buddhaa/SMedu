@@ -14,23 +14,29 @@ public interface PlannerWorkDao {
 	void plannerUpdate(PlannerDomain plannerDomain);
 	
 	public int plannerLearningPlanResponseUpdate(LearningPlanDomain learningPlanDomain);
-
-	public List<LearningPlanDomain> selectPlannerLearningPlanResponse();
-
-	public int plannerConsultInsert(PlanRecordDomain planRecordDomain);
 	
 	public int plannerConsultUpdate(PlanRecordDomain planRecordDomain);
-	
-	public List<PlannerStudentDomain> selectPlannerStudentDetail(String planStudentCode);
-
-	List<LearningPlanDomain> selectPlannerLearningPlanNonresponse();
-
-	List<PlannerStudentDomain> selectPlannerStudentList();
 
 	List<PlanRecordDomain> selectPlannerConsultList();
 
 	LearningPlanDomain applicantSelectOne(String learningPlanCode);
 
 	int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain);
+
+	List<LearningPlanDomain> selectPlannerLearningPlanNonresponse(String plannerCode);
+
+	List<LearningPlanDomain> selectPlannerLearningPlanResponse(String plannerCode);
+
+	int plannerConsultInsertSend(PlanRecordDomain planRecordDomain);
+
+	List<PlannerStudentDomain> getStudentSearchView(String plannerCode);
+
+	List<PlannerStudentDomain> sendStudentSearchView(PlanRecordDomain planRecordDomain);
+
+	PlanRecordDomain plannerConsultInfo(String planCode);
+
+	PlannerStudentDomain plannerCardinalSelect(String cardinalCode);
+
+	List<PlannerStudentDomain> selectStudentDetail(String userCode);
 	
 }

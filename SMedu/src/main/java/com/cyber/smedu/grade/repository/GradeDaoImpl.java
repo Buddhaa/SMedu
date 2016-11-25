@@ -39,19 +39,19 @@ public class GradeDaoImpl implements GradeDao {
 	@Override
 	public List<OpenSubjectDomain> professorSubjectSelectForCheck(String professorCode) {
 		
-		System.out.println("03 professorSubjectSelectForCheck <-- GradeDaoImpl.java");
+		//System.out.println("03 professorSubjectSelectForCheck <-- GradeDaoImpl.java");
 		
 		return sqlSessionTemplate.selectList(NS+".professorSubjectSelect", professorCode);
 		
 	}
 	
 	@Override
-	public List<UserDomain> professorStudentInfoSelect(String openSubjectCode) {
+	public List<UserDomain> professorStudentInfoSelect(Map<String, Object> map) {
 		
-		System.out.println("03 professorStudentInfoSelect <-- GradeDaoImpl.java");
+		//System.out.println("03 professorStudentInfoSelect <-- GradeDaoImpl.java");
 		//System.out.println("openSubjectCode : " + openSubjectCode);
 		
-		return sqlSessionTemplate.selectList(NS+".professorStudentInfoSelect", openSubjectCode);
+		return sqlSessionTemplate.selectList(NS+".professorStudentInfoSelect", map);
 		
 	}
 	
@@ -85,11 +85,11 @@ public class GradeDaoImpl implements GradeDao {
 	}
 	
 	@Override
-	public List<StudentDomain> professorStudentNameAndCodeSelect(String openSubjectCode) {
+	public List<StudentDomain> professorStudentNameAndCodeSelect(Map<String, Object> map) {
 		
 		System.out.println("03 professorStudentNameAndCodeSelect <-- GradeDaoImpl.java");
 		
-		return sqlSessionTemplate.selectList(NS+".professorStudentNameAndCodeSelect", openSubjectCode);
+		return sqlSessionTemplate.selectList(NS+".professorStudentNameAndCodeSelect", map);
 	}
 	/*우영--------------------------------------------------------------------------------------------------------*/
 	//회원의 학생코드 받기
