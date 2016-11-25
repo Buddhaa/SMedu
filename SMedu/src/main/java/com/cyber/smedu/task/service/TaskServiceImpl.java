@@ -175,13 +175,13 @@ public class TaskServiceImpl implements TaskService{
 		taskResultDomain.setTaskFileType(taskFileType);
 		taskResultDomain.setStudentCode(studentCode);
 		taskResultDomain.setTaskOriginFileName(taskOriginFileName);
-		/*
+		
 		//파일 저장 서버 배포용
 		String uploadPath = request.getSession().getServletContext().getRealPath("/") +"resources/taskUpload/";
-		*/
 		
-		//파일 저장 개인 테스트용
-		String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";
+		
+		/*//파일 저장 개인 테스트용
+		String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";*/
 				
 		//파일 이름
 		String saveFileName= uploadPath + "\\" + taskOriginFileName;
@@ -229,11 +229,11 @@ public class TaskServiceImpl implements TaskService{
 				
 		//파일을 다시 업로드 시킬 경우 기존에 있던 파일은 삭제
 		if(!taskResultDomain.getTaskFile().getOriginalFilename().equals("")){
-			//파일 저장 개인 테스트
-			String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";
+			/*//파일 저장 개인 테스트
+			String uploadPath = "C:\\Users\\202-24\\git\\SMedu\\SMedu\\src\\main\\webapp\\resources\\taskUpload";*/
 			
 			//파일 저장 서버 배포용
-			//String uploadPath = request.getSession().getServletContext().getRealPath("/") +"resources/taskUpload/";
+			String uploadPath = request.getSession().getServletContext().getRealPath("/") +"resources/taskUpload/";
 			
 			//삭제할 파일이름을 가져온다.
 			String deleteOriginFileName = taskResultDomain.getTaskOriginFileName();

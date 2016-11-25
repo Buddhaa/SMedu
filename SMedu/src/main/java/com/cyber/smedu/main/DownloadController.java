@@ -5,6 +5,7 @@ import java.io.File;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -12,12 +13,17 @@ public class DownloadController {
 
 	
 	@RequestMapping(value="/fileDownload")
-	public ModelAndView download(@RequestParam(value="fileName") String fileName) {
+	public ModelAndView download(@RequestParam(value="fileName") String fileName,
+									MultipartHttpServletRequest request) {
 		
 		System.out.println("01 download <-- DownloadController.java");
 		System.out.println("fileName : " + fileName);
 		
-		String savePath = "C:\\Users\\ssolt\\git\\SMedu1118\\SMedu\\src\\main\\webapp\\resources\\taskUpload\\";
+		// download file save path 서버 배포용
+		String savePath = request.getSession().getServletContext().getRealPath("/") +"resources/taskUpload/";
+		
+		/*// download file save path 개인 테스트용
+		String savePath = "C:\\Users\\ssolt\\git\\SMedu1118\\SMedu\\src\\main\\webapp\\resources\\taskUpload\\";*/
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
