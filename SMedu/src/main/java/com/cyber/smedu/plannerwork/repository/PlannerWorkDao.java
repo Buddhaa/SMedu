@@ -37,6 +37,5 @@ public interface PlannerWorkDao {
 
 	PlannerStudentDomain plannerCardinalSelect(String cardinalCode);
 
-	List<PlannerStudentDomain> selectStudentDetail(String userCode);
 	
 }

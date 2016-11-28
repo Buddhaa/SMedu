@@ -34,7 +34,7 @@ ON
 INNER JOIN
 	task_score ts
 ON
-	tr.task_result_code = ts.task_result_code
+	tr.student_code = ts.student_code
 WHERE
 	tr.student_code = #{studentCode}
 AND

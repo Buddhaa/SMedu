@@ -54,4 +54,6 @@ public interface OpenSubjectDao {
 
 	List<OpenSubjectDomain> plannerStudnetListCardinalSelectOpenSubjectList(Map<String, Object> map);
 
+	OpenSubjectDomain selectOpenSubjectName(String openSubjectCode);
+
 }

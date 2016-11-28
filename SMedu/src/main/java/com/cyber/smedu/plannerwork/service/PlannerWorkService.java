@@ -33,13 +33,14 @@ public interface PlannerWorkService {
 	Map<String, Object> plannerStudnetListCardinalSelectOpenSubjectList(String cardinalCode, String openSubjectCode,
 			String departmentCode);
 
-	List<PlannerStudentDomain> selectStudentDetail(String userCode);
 
 	int getPlannerLearningPlanResponseUpdate(LearningPlanDomain learningPlanDomain);
 
 	List<PlanRecordDomain> getPlannerConsultList();
 
 	int getPlannerConsultUpdate(PlanRecordDomain planRecordDomain);
+
+	Map<String, Object> selectStudentDetail(String studentCode, String openSubjectCode, String cardinalCode);
 	
 	
 }

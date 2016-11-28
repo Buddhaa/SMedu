@@ -182,9 +182,18 @@ public class PlannerWorkController {
 	//플래너 담당학생 상세보기
 	@RequestMapping(value="/planner/work/planner_student_detail")
 	public String selectStudentDetail(Model model,
-			@RequestParam(value="studentCode") String userCode) {
+			@RequestParam(value="studentCode") String studentCode, 
+			@RequestParam(value="openSubjectCode") String openSubjectCode,
+			@RequestParam(value="cardinalCode") String cardinalCode) {
+		Map<String, Object> map = plannerWorkService.selectStudentDetail(studentCode, openSubjectCode, cardinalCode);
+		model.addAttribute("cardinalDomain", map.get("cardinalDomain"));
+		model.addAttribute("openSubjectDomain", map.get("openSubjectDomain"));
+		model.addAttribute("userDomain", map.get("userDomain"));
+		model.addAttribute("academicCalendarList", map.get("academicCalendarList"));
+		model.addAttribute("attendList", map.get("attendList"));
+		model.addAttribute("taskResultDomain", map.get("taskResultDomain"));
+		model.addAttribute("debateList", map.get("debateList"));		
 			
-		model.addAttribute("studentDetail", plannerWorkService.selectStudentDetail(userCode));	
 		return "planner/work/planner_student_detail";			
 	}
 		/*진호*/

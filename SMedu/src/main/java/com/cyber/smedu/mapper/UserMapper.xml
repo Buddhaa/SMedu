@@ -487,4 +487,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			user_id = #{userId}
 	</select>	
+	
+	<select id="selectStudentName"
+			parameterType="String" resultType="com.cyber.smedu.user.domain.UserDomain">
+		SELECT
+			u.user_name as userName
+		FROM
+			user u
+		INNER JOIN
+		  	student s
+		ON
+			u.user_code = s.user_code
+		WHERE
+			s.student_code = #{studentCode}
+		
+			
+			
+			
+	</select>
+	
+	<!-- 진호 -->
 </mapper>

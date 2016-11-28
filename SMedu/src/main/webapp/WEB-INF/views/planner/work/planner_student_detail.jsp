@@ -11,42 +11,101 @@
 </head>
 <body>
 					<!-- 담당학생 상세보기 -->
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/top.jsp" />					
-    
-    <div class="wrapper row3">
-		<div class="hoc container clear">
-			<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/smedu/module/sidebar.jsp" />
-    	<div class="content three_quarter"> 
-    
-        <h1>담당학생 상세보기</h1><hr/>
-        <form action="/planner/work/planner_student_detail" method="post">
-		<input type="hidden" name="studentCode" value="${s.studentCode}">
-   	<table class="table table-bordered">
-   	<thead>
-            <tr>
-                <th>이름</th>
-                <th>출석날짜</th>
-                <th>시험응시날짜</th>
-                <th>토론답변날짜</th>
-                <th>과제제출날짜</th>
-            </tr>   
-            <c:forEach var="s" items="${studentDetail}">
-				<tr>
-				    <td>${s.userName}</td>
-				    <td>${s.attendDate}</td>
-				    <td>${s.examDate}</td>
-				    <td>${s.debateRegisterDate}</td>
-				    <td>${s.taskResultDate}</td>
-				 </tr>
-			</c:forEach> 
-		</thead>	
-        </table>
-        </form>
-       		<ul class="pager">
-      	 		<li><a href="/planner/work/planner_student_list">이전</a></li>	   
-			</ul>
-    </div>
-    </div>
-   </div>
+	
+	<h3>기수 : ${cardinalDomain.year}년 ${cardinalDomain.semester}학기 ${cardinalDomain.cardinal}기수</h3>
+	<h3>과목 : ${openSubjectDomain.subjectName}</h3>
+	<h3>이름 : ${userDomain.userName }</h3>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>주차일정</th>
+				<c:forEach var="academicCalendar" items="${academicCalendarList }" begin="0" end="4" step="1">
+				<th>${academicCalendar.weeklySchedule}</th>
+				</c:forEach>				
+			</tr>	
+		</thead>
+		<tbody>
+			<tr>
+				<td>참여기간</td>
+				<c:forEach var="academicCalendar" items="${academicCalendarList }" begin="0" end="4" step="1">
+				<td>${academicCalendar.academicCalendarStartDay}~<br>${academicCalendar.academicCalendarEndDay}</td>
+				</c:forEach>
+			</tr>
+			<tr>
+				<td>출석여부</td>
+				<c:forEach var="attendList" items="${attendList }" begin="0" end="4" step="1">
+					<c:if test="${attendList.attendDate==null}">
+						<td>X</td>
+					</c:if>
+					<c:if test="${attendList.attendDate!=null}">
+						<td>O</td>
+					</c:if>
+				</c:forEach>
+			</tr>
+			<tr>
+				<td>출석날짜</td>
+				<c:forEach var="attendList" items="${attendList }" begin="0" end="4" step="1">
+				<td>${attendList.attendDate}</td>
+				</c:forEach>
+			</tr>
+		</tbody>	
+	</table>
+	<table class="table table-hover">
+		<thead>
+			
+			<tr>
+				<th>주차일정</th>
+				<c:forEach var="academicCalendar" items="${academicCalendarList }" begin="5" end="9" step="1">
+				<th>${academicCalendar.weeklySchedule}</th>
+				</c:forEach>				
+			</tr>	
+			<tr>
+				<td>참여기간</td>
+				<c:forEach var="academicCalendar" items="${academicCalendarList }" begin="5" end="9" step="1">
+				<td>${academicCalendar.academicCalendarStartDay}~<br>${academicCalendar.academicCalendarEndDay}</td>
+				</c:forEach>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>출석여부</td>
+				<c:forEach var="attendList" items="${attendList }" begin="5" end="9" step="1">
+					<c:if test="${attendList.attendDate==null}">
+						<td>X</td>
+					</c:if>
+					<c:if test="${attendList.attendDate!=null}">
+						<td>O</td>
+					</c:if>
+				</c:forEach>
+			</tr>
+			<tr>
+				<td>출석날짜</td>
+				<c:forEach var="attendList" items="${attendList }" begin="5" end="9" step="1">
+				<td>${attendList.attendDate}</td>
+				</c:forEach>
+			</tr>
+		</tbody>	
+	</table>
+	
+	<h3>과제 참여 여부</h3>
+	<c:if test="${taskResultDomain.taskResultDate!=null}">
+	참여 여부: O <br>
+	참여 날짜:${taskResultDomain.taskResultDate}
+	</c:if>
+	<c:if test="${taskResultDomain.taskResultDate==null}">
+	참여 여부: X
+	</c:if>
+	
+	<h3>토론 참여 여부</h3>
+	<c:if test="${debateList[0].debateRegisterDate!=null}">
+	참여 여부: O <br>
+	최초 참여 날짜:	${debateList[0].debateRegisterDate}
+	</c:if>
+	<c:if test="${debateList[0].debateRegisterDate==null}">
+	참여 여부: X
+	</c:if>
+	
+	
+	
 </body>
 </html>

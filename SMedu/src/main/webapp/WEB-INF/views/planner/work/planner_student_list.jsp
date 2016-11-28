@@ -100,7 +100,10 @@
 				<td>${student.year}년${student.semester}학기${student.cardinal}기수</td>
 				<td>${student.departmentName}</td>
 				<td>${student.userName}</td>				
-				<td><a href="/planner/work/planner_student_detail?studentCode="><button>조회</button></a></td>
+				<td><a href="#"
+							onclick="javascript:window.open('/planner/work/planner_student_detail?studentCode=${student.studentCode}&cardinalCode=${cardinalCode}&openSubjectCode=${openSubjectCode}','windowpopup', 'left='+(screen.availWidth-600)/2+',top='+(screen.availHeight-560)/2+', width=700, height=530')">조회</a>
+				</td>
+							
 			</tr>
 		</c:forEach>
 		</tbody>

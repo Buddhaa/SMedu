@@ -119,6 +119,8 @@ where
 		class_registration_code= #{classRegistrationCode}
 </update>
 <!-- 현호 -->
+
+
 <select id="selectClassregistrationStudentList" resultType="java.util.Map" parameterType="com.cyber.smedu.user.domain.StudentDomain">
 	SELECT
 		cr.cardinal_code as cardinalCode,

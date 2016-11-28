@@ -41,4 +41,6 @@ public interface DebateDao {
 
 	DebateScoreDomain professorDebateScoreAndCodeSelect(GradeDomain gradeDomain);
 
+	List<DebateResultDomain> selectPlannerStudentDebateList(Map<String, Object> map);
+
 }

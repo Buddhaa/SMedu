@@ -97,11 +97,7 @@ public class PlannerWorkDaoImpl implements PlannerWorkDao {
 			return sessionTemplate.selectOne(NS+".plannerCardinalSelect", cardinalCode);
 		}
 		
-		//플래너 담당학생 상세보기
-		@Override
-		public List<PlannerStudentDomain> selectStudentDetail(String userCode) {
-			return sessionTemplate.selectList(NS+".selectStudentDetail", userCode);
-		}	
+	
 		//진호
 		
 		//맞춤학습설계 등록

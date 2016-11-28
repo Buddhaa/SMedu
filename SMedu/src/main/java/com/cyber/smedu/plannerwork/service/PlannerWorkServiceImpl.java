@@ -7,8 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cyber.smedu.academiccalendar.domain.AcademicCalendarDomain;
 import com.cyber.smedu.academiccalendar.domain.CardinalDomain;
 import com.cyber.smedu.academiccalendar.repository.AcademicCalendarDao;
+import com.cyber.smedu.attend.domain.AttendDomain;
+import com.cyber.smedu.attend.repository.AttendDao;
+import com.cyber.smedu.debate.domain.DebateResultDomain;
+import com.cyber.smedu.debate.repository.DebateDao;
 import com.cyber.smedu.opensubject.domain.OpenSubjectDomain;
 import com.cyber.smedu.opensubject.repository.OpenSubjectDao;
 import com.cyber.smedu.pay.repository.PayDao;
@@ -16,8 +21,12 @@ import com.cyber.smedu.plannerwork.domain.LearningPlanDomain;
 import com.cyber.smedu.plannerwork.domain.PlanRecordDomain;
 import com.cyber.smedu.plannerwork.domain.PlannerStudentDomain;
 import com.cyber.smedu.plannerwork.repository.PlannerWorkDao;
+import com.cyber.smedu.task.domain.TaskResultDomain;
+import com.cyber.smedu.task.repository.TaskDao;
 import com.cyber.smedu.user.domain.PlannerDomain;
 import com.cyber.smedu.user.domain.StudentDomain;
+import com.cyber.smedu.user.domain.UserDomain;
+import com.cyber.smedu.user.repository.UserDao;
 
 @Service
 public class PlannerWorkServiceImpl implements PlannerWorkService {
@@ -29,6 +38,16 @@ public class PlannerWorkServiceImpl implements PlannerWorkService {
 	private OpenSubjectDao openSubjectDao;
 	@Autowired
 	private PayDao payDao;
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private AttendDao attendDao;
+	@Autowired
+	private TaskDao taskDao;
+	@Autowired
+	private DebateDao debateDao;
+
+	
 	
 	//한명의 플래너 회원정보 select
     @Override
@@ -141,12 +160,31 @@ public class PlannerWorkServiceImpl implements PlannerWorkService {
 
 	//플래너 담당학생 상세보기  
 	@Override
-	public List<PlannerStudentDomain> selectStudentDetail(String userCode) {
-		List<PlannerStudentDomain> studentDomain
-		= plannerWorkDao.selectStudentDetail(userCode);
-		return studentDomain;
+	public Map<String, Object> selectStudentDetail(String studentCode, String openSubjectCode, String cardinalCode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("studentCode", studentCode);
+		map.put("openSubjectCode", openSubjectCode);
+		map.put("cardinalCode", cardinalCode);
+		
+		CardinalDomain cardinalDomain = academicCalendarDao.selectCardinalDetail(cardinalCode); //기수 
+		map.put("cardinalDomain", cardinalDomain);
+		OpenSubjectDomain openSubjectDomain = openSubjectDao.selectOpenSubjectName(openSubjectCode); //과목
+		map.put("openSubjectDomain", openSubjectDomain);
+		UserDomain userDomain = userDao.selectStudentName(studentCode); //학생
+		map.put("userDomain", userDomain);
+		List<AcademicCalendarDomain> academicCalendarList = academicCalendarDao.selectAcademicCalendarDetail(cardinalCode); //주차별 학사일정
+		map.put("academicCalendarList", academicCalendarList);
+		List<AttendDomain> attendList = attendDao.adminStudentGradeAttendSelect(map); //출석
+		map.put("attendList", attendList);
+		TaskResultDomain taskResultDomain =  taskDao.adminStudentGradeTaskResult(map); //과제
+		map.put("taskResultDomain", taskResultDomain);
+		List<DebateResultDomain> debateList = debateDao.selectPlannerStudentDebateList(map);//토론
+		map.put("debateList", debateList);	
+	
+		return map;
 	}
 	//진호
+	
 	//상담설계 입력
 	@Override
 	public int insertConsultingLearningPlan(LearningPlanDomain LearningPlanDomain) {

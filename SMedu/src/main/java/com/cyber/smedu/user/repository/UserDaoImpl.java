@@ -170,4 +170,10 @@ public class UserDaoImpl implements UserDao {
 	public UserDomain userIdCheck(String userId) {
 		return sqlSession.selectOne(NS+".userIdCheck", userId);
 	}
+	
+	@Override
+	public UserDomain selectStudentName(String studentCode) {
+		return sqlSession.selectOne(NS+".selectStudentName",studentCode);
+	}
+	
 }

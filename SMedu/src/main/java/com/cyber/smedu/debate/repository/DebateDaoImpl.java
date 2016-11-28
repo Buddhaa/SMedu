@@ -122,4 +122,11 @@ public class DebateDaoImpl implements DebateDao {
 		sqlSession.insert(NS+".debateResultAdd", debateResultDomain);
 	}
 	//장용
+	
+	@Override
+	public List<DebateResultDomain> selectPlannerStudentDebateList(Map<String, Object> map) {
+		
+		return sqlSession.selectList(NS+".selectPlannerStudentDebateList", map);
+	}
+	//진호
 }

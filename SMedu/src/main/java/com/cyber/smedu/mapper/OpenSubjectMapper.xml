@@ -402,6 +402,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		l.open_subject_code = #{openSubjectCode}
 	</select>
 	<!-- 우영 -->
+
 	<select id="plannerStudnetListCardinalSelectOpenSubjectList"
 		parameterType="java.util.Map"
 		resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
@@ -424,5 +425,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	AND
 		d.department_code = #{departmentCode}
 	</select>
+	
+	<select id="selectOpenSubjectName"
+			parameterType="String"
+			resultType="com.cyber.smedu.opensubject.domain.OpenSubjectDomain">
+	SELECT
+		open_subject_code as openSubjectCode,
+		subject_name as subjectName
+	FROM
+		open_subject	
+	WHERE
+		open_subject_code = #{openSubjectCode}
+		
+	</select>
+	
+	
 	<!-- 진호 -->
 </mapper>

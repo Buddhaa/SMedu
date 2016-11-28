@@ -307,6 +307,22 @@ where
 			)	
 	</insert>
 <!-- 장용 -->
+	<select id="selectPlannerStudentDebateList"
+		parameterType="java.util.Map"
+		resultType="com.cyber.smedu.debate.domain.DebateResultDomain">
+	SELECT
+		dr.debate_register_date as debateRegisterDate
+	FROM
+		debate d
+	INNER JOIN
+		debate_result dr
+	ON
+		d.debate_code = dr.debate_code
+	WHERE
+		d.open_subject_code = #{openSubjectCode}
+	AND
+		dr.student_code = #{studentCode}
+	</select>
 	
 
 </mapper>

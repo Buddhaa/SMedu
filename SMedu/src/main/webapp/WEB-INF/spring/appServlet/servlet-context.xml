@@ -33,12 +33,11 @@
 	
 	<context:component-scan base-package="com.cyber.smedu"/>
 	
-	<!-- DB설정 -->
-	
+	<!-- DB설정 -->	
 	<!--  datasource -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/buddhaa?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="url" value="jdbc:mysql://buddhaa.cafe24.com/buddhaa?useUnicode=true&amp;characterEncoding=utf8" />
         <property name="username" value="buddhaa" />
         <property name="password" value="sickermans0" />
     </bean>
@@ -51,7 +50,7 @@
     <!-- 트랜젝션 태그를 사용 -->
     <tx:annotation-driven/>   
     
-    <!-- mybatis -->
+    <!-- Mybatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="mapperLocations" value="classpath:com/cyber/smedu/mapper/*.xml"/>

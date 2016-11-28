@@ -150,6 +150,10 @@ public class OpenSubjectDaoImpl implements OpenSubjectDao{
 		return sqlSession.selectList(NS+".plannerStudnetListCardinalSelectOpenSubjectList", map);
 		
 	}
+	@Override
+	public OpenSubjectDomain selectOpenSubjectName(String openSubjectCode) {
+		return sqlSession.selectOne(NS+".selectOpenSubjectName", openSubjectCode);
+	}
 
 	//진호
 }

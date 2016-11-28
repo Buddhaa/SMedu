@@ -319,7 +319,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			plan_code = #{planCode} <!-- 상담코드 -->
 			
 </update>
-<!-- 진호 -->
+<!-- 진호 -->	
 
 <insert id="insertConsultingLearningPlan" parameterType="com.cyber.smedu.plannerwork.domain.LearningPlanDomain">
 	INSERT INTO learning_plan(
@@ -337,6 +337,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{inquireContent},
 		NOW()
 	)
+	
+
 </insert>
+
+
+
+
 <!-- 현호 -->
 </mapper>
