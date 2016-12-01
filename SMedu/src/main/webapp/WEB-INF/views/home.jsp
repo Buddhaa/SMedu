@@ -25,7 +25,7 @@
 	<br>
 	bootstrap 3.3.6, Mybatis 3.2.8, Mysql 5.1.34, Mysql-Workbench 6.3, Servlet 3.1.0, jsp 2.1, jstl 1.2,
 	<br>
-	Apache Tomcat 8.0.36, Spring Tool Suite 3.7.3, JRebel for Eclipse 6.4.7, Git
+	Apache Tomcat 8.0.36, Spring Tool Suite 3.7.3, JRebel for Eclipse 6.4.7, GitHub
 	</p><br>
 	<h2>＊ 본 프로젝트는 Chrome에 최적화 되어있습니다.</h2>
 </div>
