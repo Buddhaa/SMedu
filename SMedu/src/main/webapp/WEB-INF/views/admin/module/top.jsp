@@ -359,7 +359,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">프로필</a>
+                  <a href="#" class="btn btn-default btn-flat">사용자 페이지 이동</a>
                 </div>
                 <div class="pull-right">
                 <!-- 로그아웃 -->

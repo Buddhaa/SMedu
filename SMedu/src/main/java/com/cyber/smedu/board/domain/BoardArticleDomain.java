@@ -18,8 +18,7 @@ public class BoardArticleDomain {
 	private Date boardArticleDate;
 	private String commentContent;
 	private String userName;
-	private Date commentDate;
-	
+	private Date commentDate;	
 	
 	public int getBoardArticleNum() {
 		return boardArticleNum;

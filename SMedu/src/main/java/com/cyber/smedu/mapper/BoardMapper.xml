@@ -214,35 +214,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectMainBoardArticleList" parameterType="java.util.Map" resultType="com.cyber.smedu.board.domain.BoardArticleDomain">
 		select 
-			board_article_code as boardArticleCode, 
-			user_code as userCode, 
-			board_code as boardCode, 
-			board_article_title as boardArticleTitle, 
-			board_article_writer as boardArticleWriter, 
-			board_article_content as boardArticleContent, 
-			board_article_date as boardArticleDate,
-			board_article_read_count as boardArticleReadCount
+			ba.board_article_code as boardArticleCode, 
+			ba.user_code as userCode, 
+			u.user_name as userName, 
+			ba.board_code as boardCode, 
+			ba.board_article_title as boardArticleTitle, 
+			ba.board_article_writer as boardArticleWriter, 
+			ba.board_article_content as boardArticleContent, 
+			ba.board_article_date as boardArticleDate,
+			ba.board_article_read_count as boardArticleReadCount
 		from 
-			board_article
+			board_article ba
+		inner join
+			user u
+		on
+			ba.user_code = u.user_code
 		<where>
 		    <if test='boardCode == "board_code1"'>
-		      	board_code = 'board_code1'
+		      	ba.board_code = 'board_code1'
 		    </if>
 		    <if test='boardCode == "board_code2"'>
-        		AND board_code = 'board_code2' 
+        		AND ba.board_code = 'board_code2' 
 		    </if>
 		    <if test='boardCode == "board_code3"'>
-        		AND board_code = 'board_code3' 
+        		AND ba.board_code = 'board_code3' 
 		    </if>
 		    <if test='boardCode == "board_code4"'>
-        		AND board_code = 'board_code4' 
+        		AND ba.board_code = 'board_code4' 
 		    </if>
 		    <if test='boardCode == "board_code5"'>
-        		AND board_code = 'board_code5' 
+        		AND ba.board_code = 'board_code5' 
 		    </if>
   		</where>
 		ORDER BY 
-			board_article_date DESC
+			ba.board_article_date DESC
 		LIMIT
 			5
 	</select>	

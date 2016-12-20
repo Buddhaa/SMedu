@@ -249,40 +249,107 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table class="table table-bordered">
-                <tr>
-                  <th>회원코드</th>
-                  <th>이름</th>
-                  <th>학과</th>
-                  <th>권한</th>
-                  <th>가입일</th>
-                  <th>상태</th>
-                  <th></th>
-                </tr>
-                <c:forEach var="recentlyUser" items="${recentlyUserList}">
-	                <tr>
-	                  <td>${recentlyUser.userCode}</td>
-	                  <td>${recentlyUser.userName}</td>
-	                  <td>${recentlyUser.departmentName}</td>
-	                  <td>${recentlyUser.userLevel}</td>
-	                  <td>${recentlyUser.userJoinDate}</td>
-	                  <td>
-	                  <c:if test="${recentlyUser.userState=='정상'}">
-	                  	<span class="label label-success">정상</span>
-	                  </c:if>
-	                  <c:if test="${recentlyUser.userState=='승인대기'}">
-	                  	<span class="label label-warning">승인대기</span>
-	                  </c:if>
-	                  <c:if test="${recentlyUser.userState=='탈퇴'}">
-	                  	<span class="label label-danger">탈퇴</span>
-	                  </c:if>
-	                  </td>	   
-	                  <td><a href="/admin/user/userDetail?userCode=${recentlyUser.userCode}"><span class="label label-primary">상세보기</span></a></td>               
-	                </tr>
-                </c:forEach>                
-              </table>
+            	 <div class="nav-tabs-custom">
+            	 	<ul class="nav nav-tabs pull-right">
+	            	 <li class="active"><a href="#board1" data-toggle="tab">공지사항</a></li>
+	              	 <li><a href="#board2" data-toggle="tab">수강후기</a></li>
+	              	 <li><a href="#board3" data-toggle="tab">상담게시판</a></li>
+	              	</ul>
+	              	<div class="tab-content">
+	              <div class="active tab-pane" id="board1">                        
+                <div class="row">
+			        <div class="col-xs-12 table-responsive">
+			          <table class="table table-striped">
+			            <thead>
+				            <tr>
+				              <th>글 번호</th>
+				              <th>글 제목</th>
+				              <th>글쓴이</th>
+				              <th>날짜</th>
+				              <th>조회수</th>
+				            </tr>
+			            </thead>
+			            <tbody>
+			            	<c:forEach var="notice" items="${noticeList}">		            	
+					            <tr>
+					              <td>${notice.boardArticleCode}</td>
+					              <td>${notice.boardArticleTitle}</td>
+					              <td>${notice.boardArticleWriter}</td>
+					              <td>${notice.boardArticleDate}</td>
+					              <td>${notice.boardArticleReadCount}</td>
+					            </tr>
+				            </c:forEach>					                     
+			            </tbody>			            
+			          </table>
+			        </div>
+			        <!-- /.col -->
+			      </div>
+			      <!-- /.row -->
+              </div>
+              <div class="tab-pane" id="board2">                        
+                <div class="row">
+			        <div class="col-xs-12 table-responsive">
+			          <table class="table table-striped">
+			            <thead>
+				            <tr>
+				              <th>글 번호</th>
+				              <th>글 제목</th>
+				              <th>글쓴이</th>
+				              <th>날짜</th>
+				              <th>조회수</th>
+				            </tr>
+			            </thead>
+			            <tbody>
+			            	<c:forEach var="registrationResult" items="${registrationResultList}">		            	
+					            <tr>
+					              <td>${registrationResult.boardArticleCode}</td>
+					              <td>${registrationResult.boardArticleTitle}</td>
+					              <td>${registrationResult.boardArticleWriter}</td>
+					              <td>${registrationResult.boardArticleDate}</td>
+					              <td>${registrationResult.boardArticleReadCount}</td>
+					            </tr>
+				            </c:forEach>					                     
+			            </tbody>			            
+			          </table>
+			        </div>
+			        <!-- /.col -->
+			      </div>
+			      <!-- /.row -->
+			      </div>
+			      <div class="tab-pane" id="board3">                        
+                <div class="row">
+			        <div class="col-xs-12 table-responsive">
+			          <table class="table table-striped">
+			            <thead>
+				            <tr>
+				              <th>글 번호</th>
+				              <th>글 제목</th>
+				              <th>글쓴이</th>
+				              <th>날짜</th>
+				              <th>조회수</th>
+				            </tr>
+			            </thead>
+			            <tbody>
+			            	<c:forEach var="counseling" items="${counselingList}">		            	
+					            <tr>
+					              <td>${counseling.boardArticleCode}</td>
+					              <td>${counseling.boardArticleTitle}</td>
+					              <td>${counseling.boardArticleWriter}</td>
+					              <td>${counseling.boardArticleDate}</td>
+					              <td>${counseling.boardArticleReadCount}</td>
+					            </tr>
+				            </c:forEach>					                     
+			            </tbody>			            
+			          </table>
+			        </div>
+			        <!-- /.col -->
+			      </div>
+			      <!-- /.row -->
+			      </div>
+              </div>              
             </div>
-          </div>       
+          </div>
+          </div> 
         </section>
         <!-- /.Left col -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->

@@ -26,6 +26,10 @@ public class StatsController {
 		model.addAttribute("monthStudentPay", map.get("monthStudentPay")); //이번 달 학생 수강신청 총 결제금액
 		model.addAttribute("recentlyUserList", map.get("recentlyUserList")); //최근가입자 목록
 		model.addAttribute("studentKnowPathPercent", map.get("studentKnowPathPercent")); //학생가입자 유입경로 백분율 통계
+		model.addAttribute("noticeList", map.get("noticeList")); //최근 게시글 리스트 - 공지사항
+		model.addAttribute("registrationResultList", map.get("registrationResultList")); //최근 게시글 리스트 - 수강후기
+		model.addAttribute("counselingList", map.get("counselingList")); //최근 게시글 리스트 - 상담게시판
+		
 		return "admin/main/main2";
 	}
 }

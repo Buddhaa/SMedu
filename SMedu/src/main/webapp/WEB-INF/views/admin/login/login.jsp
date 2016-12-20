@@ -76,8 +76,8 @@
 				</div>
 			</form>
 			<!-- /.social-auth-links -->
-			<a href="#">I forgot my password</a><br>
-			<a href="register.html" class="text-center">Register a new membership</a>
+			<a href="/">◀ 이전 페이지 이동</a><br>
+			<a href="/smedu/main/main" class="text-center">▶ 사용자 페이지 이동</a>
 		</div>
 		<!-- /.login-box-body -->
 	</div>
